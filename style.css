@@ -1316,7 +1316,7 @@ body.light-mode .gauge-bg { stroke: rgba(0, 0, 0, 0.08); }
 /* Services Section */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
 
@@ -1445,7 +1445,7 @@ body.light-mode .gauge-bg { stroke: rgba(0, 0, 0, 0.08); }
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
 }
 
@@ -1530,7 +1530,7 @@ body.light-mode .gauge-bg { stroke: rgba(0, 0, 0, 0.08); }
 /* Pricing Section */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
   align-items: stretch;
 }
@@ -2060,6 +2060,10 @@ body.light-mode .footer-heading {
     -webkit-overflow-scrolling: touch;
   }
   .portfolio-filter-tabs::-webkit-scrollbar { display: none; }
+
+  .services-grid, .portfolio-grid, .pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
 
   .portfolio-grid { grid-template-columns: 1fr; }
   .pricing-card.popular { transform: none; }
