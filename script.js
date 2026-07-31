@@ -72,6 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // 4b. Portfolio Filter Tab Handler
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+  if (filterTabs.length > 0 && portfolioCards.length > 0) {
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filterValue = tab.getAttribute('data-filter');
+
+        portfolioCards.forEach(card => {
+          const category = card.getAttribute('data-category') || '';
+          if (filterValue === 'all' || category.includes(filterValue)) {
+            card.style.display = 'flex';
+            card.style.animation = 'fadeIn 0.4s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
   // 5. Side-by-Side Website Battle Arena
   const battleForm = document.getElementById('battleForm');
   const battleResultsGrid = document.getElementById('battleResultsGrid');
