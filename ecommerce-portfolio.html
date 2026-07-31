@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Solutions | HRS Web Solutions</title>
+    <meta name="description" content="Premium E-commerce website templates and custom development. High-converting shopping experiences designed for modern retail.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery-header {
+            padding: 120px 0 60px;
+            background: var(--gradient-hero);
+            color: white;
+            text-align: center;
+        }
+        .gallery-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        .back-btn:hover {
+            background: var(--white);
+            color: var(--dark);
+        }
+        .template-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+        .template-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+        .template-img {
+            width: 100%;
+            display: block;
+        }
+        .template-info {
+            padding: 30px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .template-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+    </style>
+    <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+        <!-- Ultra Sleek Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo-wrap">
+                <div class="logo-icon-box">
+                    <img src="logo.png" alt="HRS Web Solutions Logo" class="logo-img">
+                </div>
+                <div class="logo-brand-name">
+                    HRS WEB <span class="logo-brand-accent">SOLUTIONS</span>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="why-us.html">Why Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <a href="https://wa.me/918808129388" class="btn-nav-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> <span>Let's Talk</span>
+                </a>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Drawer Overlay -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="services.html">Services <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="pricing.html">Pricing <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="portfolio.html">Portfolio <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="why-us.html">Why Us <i class="fas fa-chevron-right"></i></a></li>
+            <li><a href="contact.html">Contact <i class="fas fa-chevron-right"></i></a></li>
+        </ul>
+
+        <a href="https://wa.me/918808129388" class="btn-hero-primary" style="justify-content: center;" target="_blank">
+            <i class="fab fa-whatsapp"></i> <span>Let's Talk on WhatsApp</span>
+        </a>
+    </div>
+
+
+    <header class="page-header">
+        <div class="page-header-bg"></div>
+        <div class="container hero-glass slide-up">
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="portfolio.html">Portfolio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>E-Commerce Templates</span>
+            </nav>
+            <h1>E-Commerce Templates</h1>
+            <p>A selection of high-converting store layouts ready to be customized for your business.</p>
+        </div>
+    </header>
+
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="template-card slide-up">
+                <img src="ecommerce_template_1.png" alt="Clothing Store Template" class="template-img">
+                <div class="template-info">
+                    <div>
+                        <h2>Fashion & Clothing Layout</h2>
+                        <p>Perfect for boutique stores, offering clean grids and minimal typography.</p>
+                    </div>
+                    <a href="index.html#contact" class="btn btn-primary">Choose This Template</a>
+                </div>
+            </div>
+
+            <div class="template-card slide-up delay-1">
+                <img src="ecommerce_template_2.png" alt="Skincare Store Template" class="template-img">
+                <div class="template-info">
+                    <div>
+                        <h2>Skincare & Beauty Layout</h2>
+                        <p>Earthy tones and focused product pages designed to increase conversions.</p>
+                    </div>
+                    <a href="index.html#contact" class="btn btn-primary">Choose This Template</a>
+                </div>
+            </div>
+
+            <div class="template-card slide-up delay-2">
+                <img src="ecommerce_template_3.png" alt="Gadget Store Template" class="template-img">
+                <div class="template-info">
+                    <div>
+                        <h2>Tech & Gadget Layout</h2>
+                        <p>Modern and sleek design perfect for electronics and digital products.</p>
+                    </div>
+                    <a href="index.html#contact" class="btn btn-primary">Choose This Template</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+        
+    </div>
+
+    <footer class="full-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" style="display: inline-block; margin-bottom: 15px;"><img src="logo.png" alt="HRS Web Solutions" style="height: 60px; background: white; padding: 5px; border-radius: 8px;"></a>
+                    <p style="margin-top:-10px; margin-bottom: 20px;">Transforming ideas into high-converting digital realities. Your trusted digital partner.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/hrs_web_solutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="why-us.html">Why Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone-alt" style="margin-right: 10px; color:var(--primary);"></i> <a href="tel:+918808129388">+91 8808129388</a></li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px; color:var(--primary);"></i> <a href="mailto:hrswebsolution@gmail.com">hrswebsolution@gmail.com</a></li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px; color:var(--primary);"></i> Shuklaganj Kanpur Near Poni Road</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> HRS Web Solutions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

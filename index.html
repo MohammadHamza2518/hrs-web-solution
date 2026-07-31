@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRS Web Solutions | High-Converting Websites & Mobile Apps</title>
+  <meta name="description" content="HRS Web Solutions is a premier digital agency building high-performance websites, mobile apps, custom UI/UX designs, and instant website health audits.">
+  <meta name="keywords" content="HRS Web Solutions, Web Development Agency, Mobile App Development, Website Health Checker, SEO, Kanpur Web Design">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Grid Pattern & Ambient Glows -->
+  <div class="grid-bg-overlay"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Ultra Sleek Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo-wrap">
+        <div class="logo-icon-box">
+          <img src="logo.png" alt="HRS Web Solutions Logo" class="logo-img">
+        </div>
+        <div class="logo-brand-name">
+          HRS WEB <span class="logo-brand-accent">SOLUTIONS</span>
+        </div>
+      </a>
+      
+      <!-- Desktop Links -->
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#speed-compare">Speed & ROI</a></li>
+        <li><a href="#health-checker">Audit Tool</a></li>
+        <li><a href="#site-battle">Site Battle</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#tech-builder">Tech Stack</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Actions & Mobile Toggle -->
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        
+        <a href="https://wa.me/918808129388" class="btn-nav-whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> <span>Let's Talk</span>
+        </a>
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer Overlay -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <ul class="mobile-nav-links">
+      <li><a href="#home">Home <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#speed-compare">Speed & ROI <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#health-checker">Audit Tool <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#site-battle">Site Battle <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#services">Services <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#tech-builder">Tech Stack <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#portfolio">Portfolio <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#pricing">Pricing <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="#contact">Contact <i class="fas fa-chevron-right"></i></a></li>
+    </ul>
+
+    <a href="https://wa.me/918808129388" class="btn-hero-primary" style="justify-content: center;" target="_blank">
+      <i class="fab fa-whatsapp"></i> <span>Let's Talk on WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- 1. Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="container">
+      <div class="hero-badge">
+        <i class="fas fa-rocket"></i> <span>PREMIER DIGITAL DEVELOPMENT AGENCY</span>
+      </div>
+      
+      <h1 class="hero-title">
+        High-Converting Websites & Mobile Apps<br class="hide-mobile">Built For Unstoppable Business Growth
+      </h1>
+      
+      <p class="hero-subtitle">
+        We engineer ultra-fast 0.5s websites, custom mobile applications, and high-converting digital platforms that turn casual site visitors into loyal paying customers.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#contact" class="btn-hero-primary">
+          <span>Get Free Consultation</span> <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#health-checker" class="btn-hero-secondary">
+          <i class="fas fa-search-plus"></i> <span>Test Your Site Health</span>
+        </a>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">150+</div>
+          <div class="stat-label">Websites & Apps Delivered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">99.8%</div>
+          <div class="stat-label">Client Satisfaction Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">0.5s</div>
+          <div class="stat-label">Average Page Load Speed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Dedicated WhatsApp Support</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WOW FEATURE 1: Before vs After Speed Showcase & Revenue ROI Calculator -->
+  <section class="comparison-section" id="speed-compare">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-tachometer-alt"></i> Performance Difference</div>
+        <h2 class="section-title">Standard Web Design vs. HRS Engineering</h2>
+        <p class="section-subtitle">
+          See why slow websites lose 70% of potential leads, and how HRS speed optimization boosts sales.
+        </p>
+      </div>
+
+      <!-- Side-by-Side Comparison -->
+      <div class="comparison-grid">
+        <!-- Typical Competitor Site -->
+        <div class="comp-card old-site">
+          <span class="comp-badge">Typical Agency Site</span>
+          <h3>Slow & Outdated Website</h3>
+          <ul class="comp-metrics-list">
+            <li class="comp-metric-item"><span>Page Load Speed</span> <strong style="color: var(--score-red);">4.8 Seconds</strong></li>
+            <li class="comp-metric-item"><span>Google PageSpeed Rank</span> <strong style="color: var(--score-red);">34 / 100</strong></li>
+            <li class="comp-metric-item"><span>Mobile Responsiveness</span> <strong style="color: var(--score-red);">Poor & Overlapping</strong></li>
+            <li class="comp-metric-item"><span>Visitor Conversion Rate</span> <strong style="color: var(--score-red);">1.5%</strong></li>
+          </ul>
+        </div>
+
+        <!-- HRS Engineered Site -->
+        <div class="comp-card hrs-site">
+          <span class="comp-badge">HRS Engineered Site</span>
+          <h3>Ultra-Fast Growth Engine</h3>
+          <ul class="comp-metrics-list">
+            <li class="comp-metric-item"><span>Page Load Speed</span> <strong style="color: var(--score-green);">0.4 Seconds ⚡</strong></li>
+            <li class="comp-metric-item"><span>Google PageSpeed Rank</span> <strong style="color: var(--score-green);">98 / 100 🔥</strong></li>
+            <li class="comp-metric-item"><span>Mobile Responsiveness</span> <strong style="color: var(--score-green);">100% Perfect UI ✨</strong></li>
+            <li class="comp-metric-item"><span>Visitor Conversion Rate</span> <strong style="color: var(--score-green);">8.5% (+400% Sales)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Interactive Revenue ROI Calculator -->
+      <div class="roi-calculator-wrap">
+        <div class="roi-inputs">
+          <h3 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800;">
+            <i class="fas fa-calculator" style="color: var(--primary);"></i> Revenue ROI Calculator
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Drag the sliders below to calculate how much extra revenue a fast, high-converting HRS website will generate for your business.
+          </p>
+
+          <div class="range-group">
+            <div class="range-label-row">
+              <span>Monthly Website Visitors</span>
+              <span id="visitorValText" style="color: var(--primary);">5,000 visitors / mo</span>
+            </div>
+            <input type="range" id="visitorSlider" class="roi-range-slider" min="1000" max="50000" step="1000" value="5000">
+          </div>
+
+          <div class="range-group">
+            <div class="range-label-row">
+              <span>Average Order / Service Price</span>
+              <span id="orderValText" style="color: var(--accent-cyan);">₹2,500</span>
+            </div>
+            <input type="range" id="orderSlider" class="roi-range-slider" min="500" max="25000" step="500" value="2500">
+          </div>
+        </div>
+
+        <div class="roi-result-card">
+          <div class="roi-result-num" id="roiRevenueDisplay">+₹562,500</div>
+          <div class="roi-result-lbl">Estimated Extra Monthly Revenue</div>
+          <a href="#contact" class="btn-hero-primary" style="width: 100%; justify-content: center;">
+            <span>Claim Your Growth Plan</span> <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Integrated Website Health Checker Section -->
+  <section class="checker-section" id="health-checker">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-laptop-code"></i> Free Interactive Tool</div>
+        <h2 class="section-title">Instant Website Health & SEO Checker</h2>
+        <p class="section-subtitle">
+          Enter your website URL below to run a 30-second live technical audit across Speed, SEO, Mobile Readability, and SSL Security.
+        </p>
+      </div>
+
+      <!-- Audit Input Wrap -->
+      <div id="checkerHeroWrap">
+        <div class="audit-box-wrap">
+          <form class="audit-form" id="auditForm">
+            <div class="input-icon-wrap">
+              <i class="fas fa-globe"></i>
+              <input type="text" id="urlInput" class="url-input" placeholder="Enter website URL (e.g. mybusiness.com)" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn-submit-audit">
+              <span>Check Health Now</span> <i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <div class="sample-urls">
+            <span class="sample-title">Quick Test Samples:</span>
+            <button class="sample-pill" data-url="myshopify.com">myshopify.com</button>
+            <button class="sample-pill" data-url="realestatehub.in">realestatehub.in</button>
+            <button class="sample-pill" data-url="localclinic.org">localclinic.org</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scanning Progress Animation Screen -->
+      <div class="scanning-container" id="scanningContainer">
+        <div class="scan-radar">
+          <div class="radar-ring"></div>
+          <i class="fas fa-laptop-code radar-icon"></i>
+        </div>
+        
+        <div class="scan-url-display" id="scanUrlDisplay">website.com</div>
+        <div class="scan-status-text" id="scanStatusText">Connecting to server & resolving DNS...</div>
+        
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+
+        <div class="scan-steps-list">
+          <div class="step-item" id="step0"><div class="step-icon"><i class="fas fa-check"></i></div><span>DNS Resolution & Server Ping</span></div>
+          <div class="step-item" id="step1"><div class="step-icon"><i class="fas fa-check"></i></div><span>Page Speed & Performance Audit</span></div>
+          <div class="step-item" id="step2"><div class="step-icon"><i class="fas fa-check"></i></div><span>SEO Meta Tags & Header Analysis</span></div>
+          <div class="step-item" id="step3"><div class="step-icon"><i class="fas fa-check"></i></div><span>Mobile Responsiveness Check</span></div>
+          <div class="step-item" id="step4"><div class="step-icon"><i class="fas fa-check"></i></div><span>SSL Encryption & Security Protocol Audit</span></div>
+        </div>
+      </div>
+
+      <!-- Results Dashboard Container -->
+      <div class="results-container" id="resultsContainer">
+        <div class="print-certificate-header">
+          <h2>OFFICIAL TECHNICAL WEBSITE AUDIT CERTIFICATE</h2>
+          <p>Issued by HRS Web Solutions (Kanpur, India) | Phone: +91 8808129388</p>
+        </div>
+
+        <div class="results-header">
+          <div class="scanned-site-meta">
+            <div class="site-favicon" id="scannedFavicon">W</div>
+            <div>
+              <div class="scanned-url" id="scannedUrlText">example.com</div>
+              <div class="scan-timestamp">Audit report generated by HRS Web Solutions</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn-secondary" id="reAuditBtn"><i class="fas fa-redo"></i> Audit Another Site</button>
+            <button class="btn-secondary" id="printReportBtn"><i class="fas fa-file-pdf"></i> Download PDF Report</button>
+          </div>
+        </div>
+
+        <!-- Overall Score Card -->
+        <div class="overall-score-card">
+          <div class="score-gauge-wrap">
+            <svg class="gauge-svg" viewBox="0 0 200 200">
+              <circle class="gauge-bg" cx="100" cy="100" r="90"></circle>
+              <circle class="gauge-fill" id="gaugeFillCircle" cx="100" cy="100" r="90"></circle>
+            </svg>
+            <div class="gauge-center-text">
+              <div class="gauge-number" id="overallGaugeNumber">0</div>
+              <div class="gauge-label">Health Score</div>
+            </div>
+          </div>
+
+          <div>
+            <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Website Health Summary</h2>
+            <div class="health-status-badge" id="healthStatusBadge">Needs Optimization</div>
+            <p id="healthStatusDesc" style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
+              Your site has critical speed bottlenecks and missing SEO tags costing you client conversions.
+            </p>
+
+            <button class="btn-hero-primary trigger-lead-modal" style="border: none; cursor: pointer;">
+              <span>Let HRS Fix These Issues</span> <i class="fas fa-wrench"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Category Cards -->
+        <div class="category-grid" id="categoryGrid"></div>
+
+        <!-- Recommended Fixes -->
+        <div class="recommendations-section">
+          <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">
+            <i class="fas fa-wrench" style="color: var(--primary);"></i> Recommended Action Items
+          </h3>
+          <div class="recommendation-list" id="recommendationList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIDE-BY-SIDE WEBSITE BATTLE ARENA -->
+  <section class="section-padding" id="site-battle" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-shield-alt"></i> Speed Battle Arena</div>
+        <h2 class="section-title">Your Site vs. Competitor Battle</h2>
+        <p class="section-subtitle">
+          Enter your website URL and your top competitor's URL to see who wins on Google Speed & SEO.
+        </p>
+      </div>
+
+      <div class="battle-container">
+        <form id="battleForm">
+          <div class="battle-inputs-grid">
+            <div class="form-group">
+              <label style="font-weight: 700; font-size: 1rem;"><i class="fas fa-user-shield" style="color: var(--primary);"></i> Your Website URL</label>
+              <input type="text" id="myUrlInput" class="form-control" placeholder="yoursite.com" required>
+            </div>
+
+            <div class="form-group">
+              <label style="font-weight: 700; font-size: 1rem;"><i class="fas fa-skull-crossbones" style="color: var(--score-red);"></i> Competitor Website URL</label>
+              <input type="text" id="compUrlInput" class="form-control" placeholder="competitor.com" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-hero-primary" style="width: 100%; justify-content: center; border: none; cursor: pointer;">
+            <span>Fight & Compare Speed Score</span> <i class="fas fa-bolt"></i>
+          </button>
+        </form>
+
+        <div class="battle-results-grid" id="battleResultsGrid">
+          <div class="battle-card winner">
+            <span class="winner-crown-badge">🏆 HRS Target Winner</span>
+            <h4 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;" id="myBattleUrl">yoursite.com</h4>
+            <div style="font-size: 2.8rem; font-weight: 900; color: var(--score-green);" id="myBattleScore">98/100</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">HRS Optimized Page Load Speed: <strong id="myBattleSpeed" style="color: var(--score-green);">0.4s</strong></p>
+            <a href="#contact" class="btn-hero-primary" style="margin-top: 1rem; padding: 0.6rem 1.2rem; font-size: 0.85rem;">Outrank Competitor Now</a>
+          </div>
+
+          <div class="battle-card" style="border-color: var(--score-red);">
+            <h4 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;" id="compBattleUrl">competitor.com</h4>
+            <div style="font-size: 2.8rem; font-weight: 900; color: var(--score-red);" id="compBattleScore">42/100</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Competitor Page Load Speed: <strong id="compBattleSpeed" style="color: var(--score-red);">4.2s</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Services Section -->
+  <section class="section-padding" id="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-layer-group"></i> Our Core Expertise</div>
+        <h2 class="section-title">End-to-End Digital Solutions</h2>
+        <p class="section-subtitle">
+          From custom business websites to full-featured mobile applications, we engineer solutions designed to scale your brand.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3 class="service-title">Website Development</h3>
+          <p class="service-desc">Custom-built, ultra-fast websites engineered with modern HTML5, CSS3, and JavaScript for maximum conversion.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> 100% Mobile Responsive</li>
+            <li><i class="fas fa-check"></i> Under 1s Load Speed</li>
+            <li><i class="fas fa-check"></i> SEO & Schema Optimized</li>
+          </ul>
+          <a href="#contact" class="btn-service-link"><span>Request Custom Quote</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3 class="service-title">Mobile App Development</h3>
+          <p class="service-desc">High-performance iOS and Android mobile applications featuring smooth animations and intuitive user interfaces.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Cross-Platform Native Performance</li>
+            <li><i class="fas fa-check"></i> Push Notifications & Analytics</li>
+            <li><i class="fas fa-check"></i> Secure Payment Gateway</li>
+          </ul>
+          <a href="#contact" class="btn-service-link"><span>Discuss App Project</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+          <h3 class="service-title">E-Commerce Platforms</h3>
+          <p class="service-desc">High-converting online shopping stores with automated inventory, order tracking, and seamless checkout flows.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-check"></i> Unlimited Products & Categories</li>
+            <li><i class="fas fa-check"></i> Razorpay, UPI & Credit Card Ready</li>
+            <li><i class="fas fa-check"></i> WhatsApp Direct Order System</li>
+          </ul>
+          <a href="#contact" class="btn-service-link"><span>Build Online Store</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE TECH STACK & FEATURE BUILDER -->
+  <section class="section-padding" id="tech-builder" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-cogs"></i> Custom Feature Builder</div>
+        <h2 class="section-title">Build Your Custom Tech Stack</h2>
+        <p class="section-subtitle">
+          Select custom features below to calculate live cost, delivery timeline, and Google performance score.
+        </p>
+      </div>
+
+      <div class="tech-builder-section" style="background: rgba(7, 13, 30, 0.85); border: 1px solid var(--border-glow); border-radius: var(--radius-lg); padding: 2.5rem;">
+        <div class="tech-builder-grid">
+          <div class="tech-checkbox-card checked" data-title="Modern HTML5 / Vanilla JS Core" data-price="4999" data-days="4">
+            <div class="tech-card-left"><i class="fas fa-code"></i> <span>HTML5 / Vanilla JS Core</span></div>
+            <div class="tech-check-icon"><i class="fas fa-check"></i></div>
+          </div>
+
+          <div class="tech-checkbox-card" data-title="Razorpay / UPI Payment Gateway" data-price="2500" data-days="2">
+            <div class="tech-card-left"><i class="fas fa-credit-card"></i> <span>Razorpay / UPI Payments</span></div>
+            <div class="tech-check-icon"><i class="fas fa-check"></i></div>
+          </div>
+
+          <div class="tech-checkbox-card" data-title="WhatsApp Automated Ordering" data-price="1500" data-days="1">
+            <div class="tech-card-left"><i class="fab fa-whatsapp"></i> <span>WhatsApp Order Engine</span></div>
+            <div class="tech-check-icon"><i class="fas fa-check"></i></div>
+          </div>
+
+          <div class="tech-checkbox-card" data-title="Custom Admin Dashboard" data-price="4500" data-days="3">
+            <div class="tech-card-left"><i class="fas fa-user-cog"></i> <span>Admin Analytics Panel</span></div>
+            <div class="tech-check-icon"><i class="fas fa-check"></i></div>
+          </div>
+
+          <div class="tech-checkbox-card" data-title="iOS & Android Mobile App" data-price="12000" data-days="7">
+            <div class="tech-card-left"><i class="fas fa-mobile-alt"></i> <span>Android & iOS App</span></div>
+            <div class="tech-check-icon"><i class="fas fa-check"></i></div>
+          </div>
+
+          <div class="tech-checkbox-card" data-title="Complete SEO & Schema Package" data-price="2000" data-days="1">
+            <div class="tech-card-left"><i class="fas fa-search-dollar"></i> <span>SEO Schema Package</span></div>
+            <div class="tech-check-icon"><i class="fas fa-check"></i></div>
+          </div>
+        </div>
+
+        <div class="tech-summary-panel">
+          <div class="tech-summary-stats">
+            <div class="tech-stat-item">
+              <span class="tech-stat-label">Selected Tech Stack Cost</span>
+              <span id="techCostDisplay" style="font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--score-green);">₹4,999</span>
+            </div>
+
+            <div class="tech-stat-item">
+              <span class="tech-stat-label">Estimated Delivery</span>
+              <span id="techDaysDisplay" style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--primary);">4 Days</span>
+            </div>
+
+            <div class="tech-stat-item">
+              <span class="tech-stat-label">Google Speed Projection</span>
+              <span id="techSpeedDisplay" style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--accent-cyan);">98 / 100</span>
+            </div>
+          </div>
+
+          <button id="techWhatsAppBtn" class="btn-hero-primary" style="border: none; cursor: pointer;">
+            <span>Get Official Proposal on WhatsApp</span> <i class="fab fa-whatsapp"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Filterable Portfolio Section -->
+  <section class="section-padding" id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-briefcase"></i> Recent Work & Showcase</div>
+        <h2 class="section-title">Websites & Mobile Apps We Built</h2>
+        <p class="section-subtitle">
+          Explore recent live websites, mobile apps, and custom web platforms engineered by HRS Web Solutions.
+        </p>
+      </div>
+
+      <div class="portfolio-filter-tabs">
+        <button class="filter-tab active" data-filter="all">All Work</button>
+        <button class="filter-tab" data-filter="apps">Mobile Apps</button>
+        <button class="filter-tab" data-filter="websites">Websites</button>
+        <button class="filter-tab" data-filter="ecommerce">E-Commerce</button>
+        <button class="filter-tab" data-filter="fintech">Fintech & Crypto</button>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-card" data-category="apps">
+          <div class="portfolio-img-wrap">
+            <img src="food_app.jpg" alt="QuickBite Food Delivery Mobile App" class="portfolio-img">
+            <span class="portfolio-category-badge">Mobile App</span>
+          </div>
+          <div class="portfolio-content">
+            <h3 class="portfolio-title">QuickBite Food Delivery App</h3>
+            <p class="portfolio-desc">iOS & Android app featuring live GPS driver tracking, instant menu ordering, and UPI payments.</p>
+            <div class="portfolio-actions">
+              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar App <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="apps fintech">
+          <div class="portfolio-img-wrap">
+            <img src="fintech_app.jpg" alt="CryptoX Wallet Mobile App" class="portfolio-img">
+            <span class="portfolio-category-badge">Fintech App</span>
+          </div>
+          <div class="portfolio-content">
+            <h3 class="portfolio-title">CryptoX Banking & Wallet App</h3>
+            <p class="portfolio-desc">Sleek dark-mode financial mobile app with real-time stock graphs and biometric login.</p>
+            <div class="portfolio-actions">
+              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar App <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="websites ecommerce">
+          <div class="portfolio-img-wrap">
+            <img src="fashion_web.jpg" alt="Vogue Fashion E-Commerce Store" class="portfolio-img">
+            <span class="portfolio-category-badge">E-Commerce Web</span>
+          </div>
+          <div class="portfolio-content">
+            <h3 class="portfolio-title">Vogue Luxury Fashion Web Store</h3>
+            <p class="portfolio-desc">High-aesthetic fashion web portal with dynamic video banners and 0.4s page load speed.</p>
+            <div class="portfolio-actions">
+              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar Website <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Pricing Plans Section -->
+  <section class="section-padding" id="pricing" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-dollar-sign"></i> Transparent Packages</div>
+        <h2 class="section-title">Simple, Affordable Pricing</h2>
+        <p class="section-subtitle">
+          Choose the perfect web development package tailored to your business stage and growth goals.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-name">Starter Website</div>
+          <div class="plan-subtitle">Ideal for local businesses & personal portfolios</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price">₹4,999 <span>/ one-time</span></div>
+          </div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> Up to 5 Responsive Pages</li>
+            <li><i class="fas fa-check"></i> Free Mobile Optimization</li>
+            <li><i class="fas fa-check"></i> Direct WhatsApp Lead Button</li>
+          </ul>
+          <a href="#contact" class="btn-pricing btn-pricing-outline">Select Starter Plan</a>
+        </div>
+
+        <div class="pricing-card popular">
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-name">Business Growth</div>
+          <div class="plan-subtitle">Perfect for expanding companies & E-commerce</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price">₹9,999 <span>/ one-time</span></div>
+          </div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> Up to 12 Custom Pages / Store</li>
+            <li><i class="fas fa-check"></i> E-Commerce Payment Gateway</li>
+            <li><i class="fas fa-check"></i> Speed Optimization (<1s Load)</li>
+          </ul>
+          <a href="#contact" class="btn-pricing btn-pricing-primary">Get Started Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Contact & Lead Form Section -->
+  <section class="section-padding" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-envelope"></i> Let's Build Together</div>
+        <h2 class="section-title">Ready To Scale Your Business?</h2>
+        <p class="section-subtitle">
+          Contact our team today for a free project estimation and custom proposal.
+        </p>
+      </div>
+
+      <div class="contact-section-wrap">
+        <div class="contact-info-column">
+          <a href="tel:+918808129388" class="contact-info-card">
+            <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="contact-card-text">
+              <h4>Call Us Directly</h4>
+              <p>+91 8808129388</p>
+            </div>
+          </a>
+
+          <a href="mailto:hrswebsolution@gmail.com" class="contact-info-card">
+            <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-card-text">
+              <h4>Email Us</h4>
+              <p>hrswebsolution@gmail.com</p>
+            </div>
+          </a>
+
+          <a href="https://wa.me/918808129388" class="contact-info-card" target="_blank">
+            <div class="contact-card-icon" style="color: #25D366; background: rgba(37, 211, 102, 0.15);"><i class="fab fa-whatsapp"></i></div>
+            <div class="contact-card-text">
+              <h4>Instant WhatsApp Chat</h4>
+              <p>Fastest response & quote</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="contact-form-card">
+          <h3>Send Us a Message</h3>
+          <p>Tell us about your project requirements and we'll reach out within 24 hours.</p>
+
+          <form class="main-contact-form" id="mainContactForm">
+            <div class="form-group">
+              <label for="mainName">Your Full Name *</label>
+              <input type="text" id="mainName" class="form-control" placeholder="e.g. Amit Verma" required>
+            </div>
+
+            <div class="form-group">
+              <label for="mainPhone">Phone / WhatsApp Number *</label>
+              <input type="tel" id="mainPhone" class="form-control" placeholder="+91 98765 43210" required>
+            </div>
+
+            <div class="form-group">
+              <label for="mainEmail">Email Address *</label>
+              <input type="email" id="mainEmail" class="form-control" placeholder="amit@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="mainService">Required Service *</label>
+              <select id="mainService" class="form-control">
+                <option value="New Website Development">New Website Development</option>
+                <option value="Mobile App Development">Mobile App Development</option>
+                <option value="Website Redesign & Speed Fix">Website Redesign & Speed Fix</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-form-submit-main">
+              <span>Submit & Connect on WhatsApp</span> <i class="fab fa-whatsapp"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Modal -->
+  <div class="modal-overlay" id="leadModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModalBtn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+      <div style="margin-bottom: 1.5rem;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem;">Get Free Expert Assistance</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Fill out the form below to get a custom fix quote from HRS Web Solutions.</p>
+      </div>
+
+      <form id="leadForm" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div class="form-group">
+          <label>Your Full Name *</label>
+          <input type="text" id="leadNameInput" class="form-control" placeholder="e.g. Rahul Sharma" required>
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp Number *</label>
+          <input type="tel" id="leadPhoneInput" class="form-control" placeholder="+91 98765 43210" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="leadEmailInput" class="form-control" placeholder="rahul@example.com" required>
+        </div>
+
+        <button type="submit" class="btn-hero-primary" style="width: 100%; border: none; padding: 0.9rem; justify-content: center; cursor: pointer; margin-top: 0.5rem;">
+          <span>Connect via WhatsApp Now</span> <i class="fab fa-whatsapp"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ULTRA SLEEK FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/918808129388" class="floating-whatsapp-badge" target="_blank">
+    <i class="fab fa-whatsapp"></i> <span>Chat on WhatsApp</span>
+  </a>
+
+  <!-- Full Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="logo-wrap">
+            <div class="logo-icon-box">
+              <img src="logo.png" alt="HRS Web Solutions Logo" class="logo-img">
+            </div>
+            <span class="logo-brand-name">HRS WEB <span class="logo-brand-accent">SOLUTIONS</span></span>
+          </a>
+          <p>
+            Websites & Apps that grow your business. We build ultra-fast, high-converting digital experiences tailored for businesses worldwide.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#speed-compare">Speed & ROI</a></li>
+            <li><a href="#health-checker">Audit Tool</a></li>
+            <li><a href="#site-battle">Site Battle</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#tech-builder">Tech Stack</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact Details</h4>
+          <ul class="footer-contact-list">
+            <li><i class="fas fa-phone-alt"></i> <a href="tel:+918808129388" style="color: var(--text-muted); text-decoration: none;">+91 8808129388</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:hrswebsolution@gmail.com" style="color: var(--text-muted); text-decoration: none;">hrswebsolution@gmail.com</a></li>
+            <li><i class="fas fa-map-marker-alt"></i> <span>Shuklaganj Kanpur Near Poni Road</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span id="year">2026</span> HRS Web Solutions. All Rights Reserved.</div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/hrs_web_solutions/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/918808129388" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="tel:+918808129388"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
