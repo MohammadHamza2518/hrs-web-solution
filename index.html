@@ -1,745 +1,835 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HRS Web Solutions | High-Converting Websites & Mobile Apps</title>
-  <meta name="description" content="HRS Web Solutions is a premier digital agency building high-performance websites, mobile apps, custom UI/UX designs, and instant website health audits.">
-  <meta name="keywords" content="HRS Web Solutions, Web Development Agency, Mobile App Development, Website Health Checker, SEO, Kanpur Web Design">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="logo.png" type="image/png">
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outreach Studio Pro — High-Ticket Global Client Acquisition CRM | HRS Web Solutions</title>
+    <meta name="description" content="Land high-ticket web design and marketing clients globally. Pre-loaded with 28+ verified businesses with NO website (Dubai, UK, Switzerland, US), Claude 3.7 AI pitch engine, and 1-click WhatsApp outreach.">
+    <link rel="icon" type="image/png" href="/assets/images/hrs_icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
 </head>
-<body>
+<body class="bg-[#070b14] text-slate-100 min-h-screen selection:bg-cyan-500 selection:text-white relative">
 
-  <!-- Background Grid Pattern & Ambient Glows -->
-  <div class="grid-bg-overlay"></div>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
+    <!-- Ambient Glow Orbs -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <div class="ambient-glow-3"></div>
 
-  <!-- Ultra Sleek Navbar -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="logo-wrap">
-        <div class="logo-icon-box">
-          <img src="logo.png" alt="HRS Web Solutions Logo" class="logo-img">
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-cyan-950/80 via-slate-900 to-blue-950/80 border-b border-cyan-800/40 py-2 px-4 text-center text-xs relative z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold text-[10px] uppercase tracking-wider border border-cyan-500/30">2026 Commercial Release</span>
+            <span class="text-slate-300 font-medium">28+ High-Ticket Global Businesses (Dubai, UK, Switzerland, US) Pre-Loaded.</span>
+            <a href="#pricing" class="text-cyan-400 hover:text-cyan-300 underline font-semibold ml-1">Claim Lifetime License for ₹1,999 →</a>
         </div>
-        <div class="logo-brand-name">
-          HRS WEB <span class="logo-brand-accent">SOLUTIONS</span>
-        </div>
-      </a>
-      
-      <!-- Desktop Links -->
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#speed-compare">Speed & ROI</a></li>
-        <li><a href="#health-checker">Audit Tool</a></li>
-        <li><a href="#site-battle">Site Battle</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      <!-- Actions & Mobile Toggle -->
-      <div class="nav-actions">
-        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-          <i class="fas fa-moon"></i>
-        </button>
-        
-        <a href="https://wa.me/918808129388" class="btn-nav-whatsapp" target="_blank">
-          <i class="fab fa-whatsapp"></i> <span>Let's Talk</span>
-        </a>
-
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
     </div>
-  </nav>
 
-  <!-- Mobile Nav Drawer Overlay -->
-  <div class="mobile-nav-drawer" id="mobileNavDrawer">
-    <ul class="mobile-nav-links">
-      <li><a href="#home">Home <i class="fas fa-chevron-right"></i></a></li>
-      <li><a href="#speed-compare">Speed & ROI <i class="fas fa-chevron-right"></i></a></li>
-      <li><a href="#health-checker">Audit Tool <i class="fas fa-chevron-right"></i></a></li>
-      <li><a href="#site-battle">Site Battle <i class="fas fa-chevron-right"></i></a></li>
-      <li><a href="#services">Services <i class="fas fa-chevron-right"></i></a></li>
-      <li><a href="#portfolio">Portfolio <i class="fas fa-chevron-right"></i></a></li>
-      <li><a href="#pricing">Pricing <i class="fas fa-chevron-right"></i></a></li>
-      <li><a href="#contact">Contact <i class="fas fa-chevron-right"></i></a></li>
-    </ul>
+    <!-- Global Navigation Header -->
+    <header class="sticky top-0 z-40 bg-[#070b14]/90 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 p-2 shadow-lg shadow-cyan-500/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <img src="/assets/images/hrs_icon.png" alt="HRS Logo" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-base font-bold text-white tracking-tight">Outreach Studio</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-semibold font-mono">PRO</span>
+                    </div>
+                    <span class="text-[11px] text-slate-400 block -mt-0.5">by HRS Web Solutions</span>
+                </div>
+            </a>
 
-    <a href="https://wa.me/918808129388" class="btn-hero-primary" style="justify-content: center;" target="_blank">
-      <i class="fab fa-whatsapp"></i> <span>Let's Talk on WhatsApp</span>
-    </a>
-  </div>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
+                <a href="index.html" class="text-cyan-400 hover:text-cyan-300 transition">Overview</a>
+                <a href="features.html" class="hover:text-cyan-400 transition">Features & AI</a>
+                <a href="leads-vault.html" class="hover:text-cyan-400 transition flex items-center gap-1.5">
+                    <span>Leads Vault</span>
+                    <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] border border-emerald-500/30">28+ Live</span>
+                </a>
+                <a href="how-it-works.html" class="hover:text-cyan-400 transition">How It Works</a>
+                <a href="pricing.html" class="hover:text-cyan-400 transition">Pricing & Deal</a>
+                <a href="contact.html" class="hover:text-cyan-400 transition">VIP Support</a>
+            </nav>
 
-  <!-- 1. Hero Section -->
-  <section class="hero-section" id="home">
-    <div class="container">
-      <div class="hero-badge">
-        <i class="fas fa-rocket"></i> <span>PREMIER DIGITAL DEVELOPMENT AGENCY</span>
-      </div>
-      
-      <h1 class="hero-title">
-        High-Converting Websites & Mobile Apps<br class="hide-mobile">Built For Unstoppable Business Growth
-      </h1>
-      
-      <p class="hero-subtitle">
-        We engineer ultra-fast 0.5s websites, custom mobile applications, and high-converting digital platforms that turn casual site visitors into loyal paying customers.
-      </p>
-
-      <div class="hero-cta-group">
-        <a href="#contact" class="btn-hero-primary">
-          <span>Get Free Consultation</span> <i class="fas fa-arrow-right"></i>
-        </a>
-        <a href="#health-checker" class="btn-hero-secondary">
-          <i class="fas fa-search-plus"></i> <span>Test Your Site Health</span>
-        </a>
-      </div>
-
-      <!-- Stats Grid -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-num">150+</div>
-          <div class="stat-label">Websites & Apps Delivered</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">99.8%</div>
-          <div class="stat-label">Client Satisfaction Score</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">0.5s</div>
-          <div class="stat-label">Average Page Load Speed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">24/7</div>
-          <div class="stat-label">Dedicated WhatsApp Support</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WOW FEATURE 1: Before vs After Speed Showcase & Revenue ROI Calculator -->
-  <section class="comparison-section" id="speed-compare">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fas fa-tachometer-alt"></i> Performance Difference</div>
-        <h2 class="section-title">Standard Web Design vs. HRS Engineering</h2>
-        <p class="section-subtitle">
-          See why slow websites lose 70% of potential leads, and how HRS speed optimization boosts sales.
-        </p>
-      </div>
-
-      <!-- Side-by-Side Comparison -->
-      <div class="comparison-grid">
-        <!-- Typical Competitor Site -->
-        <div class="comp-card old-site">
-          <span class="comp-badge">Typical Agency Site</span>
-          <h3>Slow & Outdated Website</h3>
-          <ul class="comp-metrics-list">
-            <li class="comp-metric-item"><span>Page Load Speed</span> <strong style="color: var(--score-red);">4.8 Seconds</strong></li>
-            <li class="comp-metric-item"><span>Google PageSpeed Rank</span> <strong style="color: var(--score-red);">34 / 100</strong></li>
-            <li class="comp-metric-item"><span>Mobile Responsiveness</span> <strong style="color: var(--score-red);">Poor & Overlapping</strong></li>
-            <li class="comp-metric-item"><span>Visitor Conversion Rate</span> <strong style="color: var(--score-red);">1.5%</strong></li>
-          </ul>
-        </div>
-
-        <!-- HRS Engineered Site -->
-        <div class="comp-card hrs-site">
-          <span class="comp-badge">HRS Engineered Site</span>
-          <h3>Ultra-Fast Growth Engine</h3>
-          <ul class="comp-metrics-list">
-            <li class="comp-metric-item"><span>Page Load Speed</span> <strong style="color: var(--score-green);">0.4 Seconds ⚡</strong></li>
-            <li class="comp-metric-item"><span>Google PageSpeed Rank</span> <strong style="color: var(--score-green);">98 / 100 🔥</strong></li>
-            <li class="comp-metric-item"><span>Mobile Responsiveness</span> <strong style="color: var(--score-green);">100% Perfect UI ✨</strong></li>
-            <li class="comp-metric-item"><span>Visitor Conversion Rate</span> <strong style="color: var(--score-green);">8.5% (+400% Sales)</strong></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Interactive Revenue ROI Calculator -->
-      <div class="roi-calculator-wrap">
-        <div class="roi-inputs">
-          <h3 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800;">
-            <i class="fas fa-calculator" style="color: var(--primary);"></i> Revenue ROI Calculator
-          </h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Drag the sliders below to calculate how much extra revenue a fast, high-converting HRS website will generate for your business.
-          </p>
-
-          <div class="range-group">
-            <div class="range-label-row">
-              <span>Monthly Website Visitors</span>
-              <span id="visitorValText" style="color: var(--primary);">5,000 visitors / mo</span>
+            <!-- Action Buttons -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="https://outreach-studio.onrender.com" target="_blank" class="px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 hover:text-white text-xs font-semibold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-cyan-400"></i>
+                    <span>Client Login</span>
+                </a>
+                <button onclick="openCheckoutModal()" class="px-4 py-2 rounded-xl btn-shimmer text-white text-xs font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Buy for ₹1,999</span>
+                </button>
             </div>
-            <input type="range" id="visitorSlider" class="roi-range-slider" min="1000" max="50000" step="1000" value="5000">
-          </div>
 
-          <div class="range-group">
-            <div class="range-label-row">
-              <span>Average Order / Service Price</span>
-              <span id="orderValText" style="color: var(--accent-cyan);">₹2,500</span>
-            </div>
-            <input type="range" id="orderSlider" class="roi-range-slider" min="500" max="25000" step="500" value="2500">
-          </div>
-        </div>
-
-        <div class="roi-result-card">
-          <div class="roi-result-num" id="roiRevenueDisplay">+₹562,500</div>
-          <div class="roi-result-lbl">Estimated Extra Monthly Revenue</div>
-          <a href="#contact" class="btn-hero-primary" style="width: 100%; justify-content: center;">
-            <span>Claim Your Growth Plan</span> <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. Integrated Website Health Checker Section -->
-  <section class="checker-section" id="health-checker">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fas fa-laptop-code"></i> Free Interactive Tool</div>
-        <h2 class="section-title">Instant Website Health & SEO Checker</h2>
-        <p class="section-subtitle">
-          Enter your website URL below to run a 30-second live technical audit across Speed, SEO, Mobile Readability, and SSL Security.
-        </p>
-      </div>
-
-      <!-- Audit Input Wrap -->
-      <div id="checkerHeroWrap">
-        <div class="audit-box-wrap">
-          <form class="audit-form" id="auditForm">
-            <div class="input-icon-wrap">
-              <i class="fas fa-globe"></i>
-              <input type="text" id="urlInput" class="url-input" placeholder="Enter website URL (e.g. mybusiness.com)" required autocomplete="off">
-            </div>
-            <button type="submit" class="btn-submit-audit">
-              <span>Check Health Now</span> <i class="fas fa-arrow-right"></i>
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 hover:text-white">
+                <i class="fa-solid fa-bars text-sm"></i>
             </button>
-          </form>
-
-          <div class="sample-urls">
-            <span class="sample-title">Quick Test Samples:</span>
-            <button class="sample-pill" data-url="myshopify.com">myshopify.com</button>
-            <button class="sample-pill" data-url="realestatehub.in">realestatehub.in</button>
-            <button class="sample-pill" data-url="localclinic.org">localclinic.org</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scanning Progress Animation Screen -->
-      <div class="scanning-container" id="scanningContainer">
-        <div class="scan-radar">
-          <div class="radar-ring"></div>
-          <i class="fas fa-laptop-code radar-icon"></i>
-        </div>
-        
-        <div class="scan-url-display" id="scanUrlDisplay">website.com</div>
-        <div class="scan-status-text" id="scanStatusText">Connecting to server & resolving DNS...</div>
-        
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progressBarFill"></div>
         </div>
 
-        <div class="scan-steps-list">
-          <div class="step-item" id="step0"><div class="step-icon"><i class="fas fa-check"></i></div><span>DNS Resolution & Server Ping</span></div>
-          <div class="step-item" id="step1"><div class="step-icon"><i class="fas fa-check"></i></div><span>Page Speed & Performance Audit</span></div>
-          <div class="step-item" id="step2"><div class="step-icon"><i class="fas fa-check"></i></div><span>SEO Meta Tags & Header Analysis</span></div>
-          <div class="step-item" id="step3"><div class="step-icon"><i class="fas fa-check"></i></div><span>Mobile Responsiveness Check</span></div>
-          <div class="step-item" id="step4"><div class="step-icon"><i class="fas fa-check"></i></div><span>SSL Encryption & Security Protocol Audit</span></div>
-        </div>
-      </div>
-
-      <!-- Results Dashboard Container -->
-      <div class="results-container" id="resultsContainer">
-        <div class="print-certificate-header">
-          <h2>OFFICIAL TECHNICAL WEBSITE AUDIT CERTIFICATE</h2>
-          <p>Issued by HRS Web Solutions (Kanpur, India) | Phone: +91 8808129388</p>
-        </div>
-
-        <div class="results-header">
-          <div class="scanned-site-meta">
-            <div class="site-favicon" id="scannedFavicon">W</div>
-            <div>
-              <div class="scanned-url" id="scannedUrlText">example.com</div>
-              <div class="scan-timestamp">Audit report generated by HRS Web Solutions</div>
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden border-b border-slate-800 bg-[#0b101d] px-6 py-5 space-y-3">
+            <a href="index.html" class="block text-sm font-semibold text-cyan-400 py-1">Overview</a>
+            <a href="features.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">Features & AI Engine</a>
+            <a href="leads-vault.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">Leads Vault (28+ Global)</a>
+            <a href="how-it-works.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">How It Works</a>
+            <a href="pricing.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">Pricing & ROI</a>
+            <a href="contact.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">VIP WhatsApp Support</a>
+            <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+                <a href="https://outreach-studio.onrender.com" target="_blank" class="w-full py-2.5 text-center rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold">Access Studio Login</a>
+                <button onclick="openCheckoutModal()" class="w-full py-3 text-center rounded-xl btn-shimmer text-white text-xs font-bold">Get Lifetime Access — ₹1,999</button>
             </div>
-          </div>
-          <div style="display: flex; gap: 0.75rem;">
-            <button class="btn-secondary" id="reAuditBtn"><i class="fas fa-redo"></i> Audit Another Site</button>
-            <button class="btn-secondary" id="printReportBtn"><i class="fas fa-file-pdf"></i> Download PDF Report</button>
-          </div>
         </div>
+    </header>
 
-        <!-- Overall Score Card -->
-        <div class="overall-score-card">
-          <div class="score-gauge-wrap">
-            <svg class="gauge-svg" viewBox="0 0 200 200">
-              <circle class="gauge-bg" cx="100" cy="100" r="90"></circle>
-              <circle class="gauge-fill" id="gaugeFillCircle" cx="100" cy="100" r="90"></circle>
-            </svg>
-            <div class="gauge-center-text">
-              <div class="gauge-number" id="overallGaugeNumber">0</div>
-              <div class="gauge-label">Health Score</div>
+    <!-- HERO SECTION -->
+    <section class="relative pt-16 sm:pt-24 pb-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            
+            <!-- Live Ticker Pill -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs text-cyan-300 font-medium shadow-lg shadow-cyan-500/10 mb-8 animate-bounce">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Pre-Loaded Leads Active: <strong>Dubai, UK, Switzerland, USA & Europe</strong></span>
             </div>
-          </div>
 
-          <div>
-            <h2 style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">Website Health Summary</h2>
-            <div class="health-status-badge" id="healthStatusBadge">Needs Optimization</div>
-            <p id="healthStatusDesc" style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
-              Your site has critical speed bottlenecks and missing SEO tags costing you client conversions.
+            <!-- Main Heading -->
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mx-auto">
+                Stop Burning Money on $99/Mo Databases.<br>
+                <span class="text-gradient-cyan">Land High-Ticket Global Clients with Zero Website on WhatsApp.</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                The only client acquisition CRM pre-loaded with <strong>28+ verified foreign businesses with NO website</strong>, equipped with Claude 3.7 & Gemini Free psychological AI, and 1-Click WhatsApp & Gmail direct dispatchers.
             </p>
 
-            <button class="btn-hero-primary trigger-lead-modal" style="border: none; cursor: pointer;">
-              <span>Let HRS Fix These Issues</span> <i class="fas fa-wrench"></i>
+            <!-- CTA Group -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="openCheckoutModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl btn-shimmer text-white font-bold text-sm shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rocket text-base"></i>
+                    <span>Get Lifetime Access for ₹1,999 (One-Time)</span>
+                </button>
+                <a href="#live-demo" class="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 hover:text-white font-semibold text-sm transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play text-xs text-cyan-400"></i>
+                    <span>See Interactive Product Tour</span>
+                </a>
+            </div>
+
+            <!-- Trust Highlights Ticker -->
+            <div class="mt-10 flex items-center justify-center gap-6 sm:gap-10 text-xs text-slate-400 flex-wrap">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                    <span>Zero Monthly Subscriptions</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+                    <span>Anti-Ban WhatsApp Safe Guard</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-yellow-400"></i>
+                    <span>100% Free Gemini AI Engine</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-star text-amber-400"></i>
+                    <span>Instant 60s Setup Wizard</span>
+                </div>
+            </div>
+
+            <!-- Product Showcase Visual Mockup -->
+            <div id="live-demo" class="mt-14 relative max-w-5xl mx-auto">
+                <div class="rounded-2xl border border-slate-700/80 bg-slate-900/90 shadow-2xl shadow-cyan-950/60 p-2 sm:p-3 relative overflow-hidden group">
+                    <div class="absolute -top-24 -left-24 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Browser Chrome Bar -->
+                    <div class="flex items-center justify-between px-3 py-2 bg-slate-950/80 rounded-t-xl border-b border-slate-800 text-[11px] text-slate-400 mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                        </div>
+                        <span class="px-4 py-0.5 rounded-md bg-slate-900 font-mono text-[10px] text-slate-300 border border-slate-800">https://outreach-studio.onrender.com</span>
+                        <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-lock text-[9px] mr-1"></i> Live Production Verified</span>
+                    </div>
+
+                    <!-- Real CRM Image -->
+                    <img src="/assets/images/crm_unlocked_after_onboarding.png" alt="Outreach Studio Dashboard" class="w-full h-auto rounded-xl shadow-2xl object-cover">
+                </div>
+
+                <!-- Floating Advantage Badges -->
+                <div class="hidden md:flex absolute -bottom-6 -left-6 p-4 rounded-xl bg-slate-900/95 border border-cyan-500/40 shadow-2xl backdrop-blur-xl items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs font-bold text-white">1-Click WhatsApp Direct</div>
+                        <div class="text-[10px] text-slate-400">Routes seamlessly via wa.me protocol</div>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex absolute -top-6 -right-6 p-4 rounded-xl bg-slate-900/95 border border-purple-500/40 shadow-2xl backdrop-blur-xl items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-brain text-purple-400"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xs font-bold text-white">Claude 3.7 & Gemini 2.0</div>
+                        <div class="text-[10px] text-slate-400">Zero-bill psychological cold pitches</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PAIN VS SOLUTION (The Brutal Truth) -->
+    <section class="py-16 sm:py-24 border-t border-slate-800/80 bg-slate-950/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Why Traditional Cold Outreach Is Broken</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+                    Stop Wasting Money on Tools Built for Corporate Enterprises
+                </h2>
+                <p class="text-sm text-slate-400 mt-3">
+                    If you are an agency owner, web developer, or freelancer, you don't need 10,000 spam emails. You need 25 qualified business owners with money who actively need a website.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Old Way Card -->
+                <div class="p-6 sm:p-8 rounded-2xl bg-red-950/10 border border-red-500/30 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-red-300">The Painful Old Way (Apollo / Lemlist / Cold Calling)</h3>
+                    </div>
+                    <ul class="space-y-3 text-xs text-slate-300">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-xmark text-red-400 mt-0.5"></i>
+                            <span><strong>₹8,000 to ₹15,000 every single month</strong> in recurring SaaS subscriptions.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-xmark text-red-400 mt-0.5"></i>
+                            <span>Raw unverified email databases with 35%+ bounce rates that blacklists your domain.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-xmark text-red-400 mt-0.5"></i>
+                            <span>You have to pitch businesses that already have $100k websites and in-house developers.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-xmark text-red-400 mt-0.5"></i>
+                            <span>WhatsApp accounts getting instantly banned because of mass spam scripts.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- The Outreach Studio Way -->
+                <div class="p-6 sm:p-8 rounded-2xl bg-cyan-950/20 border border-cyan-500/40 space-y-4 shadow-xl shadow-cyan-950/30">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-cyan-300">The Outreach Studio Pro Advantage</h3>
+                    </div>
+                    <ul class="space-y-3 text-xs text-slate-200">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
+                            <span><strong>₹1,999 One-Time Lifetime License:</strong> Never pay a monthly software bill again.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
+                            <span><strong>Pre-Filtered "No Website" High-Ticket Businesses:</strong> Businesses with 4.8+ ratings who desperately need websites.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
+                            <span><strong>Multi-AI Copywriter (Claude 3.7 + Gemini Free):</strong> Zero AI API bills, personalized psychological pitches.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
+                            <span><strong>1-Click WhatsApp & Gmail Safe Guard:</strong> 45s human pacing algorithms that keep accounts 100% safe.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE FEATURES SHOWCASE -->
+    <section class="py-16 sm:py-24 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Everything Included Inside</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+                    Engineered from Ground Up for High Closing Rates
+                </h2>
+                <p class="text-sm text-slate-400 mt-3">
+                    Every feature was built to give independent agencies and freelancers the exact unfair advantage top outreach experts use.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">28+ Pre-Enriched Global Leads</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Pre-loaded with businesses in Dubai, UK, Switzerland, and USA verified to have <strong>NO official website</strong>. Verified owner WhatsApp numbers and direct contacts.
+                    </p>
+                    <a href="leads-vault.html" class="text-xs text-cyan-400 hover:text-cyan-300 font-semibold inline-flex items-center gap-1 pt-2">
+                        Inspect Leads Vault →
+                    </a>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Multi-AI Pitch Engine</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Supports Claude 3.7 Sonnet, OpenAI GPT-4o, DeepSeek V3/R1, and <strong>100% Free Google Gemini</strong>. Generates conversational, zero-spam pitches tailored to each business.
+                    </p>
+                    <a href="features.html" class="text-xs text-purple-400 hover:text-purple-300 font-semibold inline-flex items-center gap-1 pt-2">
+                        Explore AI Models →
+                    </a>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">1-Click WhatsApp Direct (`wa.me`)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Click "Chat on WhatsApp" and the pitch opens instantly on WhatsApp Web or Mobile App. Automatically marks status and logs timestamp in database.
+                    </p>
+                    <span class="text-[11px] text-emerald-400/90 font-medium block pt-2">✓ Works on PC, Laptop & Mobile</span>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Anti-Ban Safe Guard</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Mandatory 45-second pacing cooldown between messages + strict daily safety limits (50 WhatsApp & 100 Email) to protect your numbers and inbox reputation.
+                    </p>
+                    <span class="text-[11px] text-blue-400/90 font-medium block pt-2">✓ Meta Algorithm Safe</span>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">First-Run Setup Wizard</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Unlocks the CRM after collecting the buyer's agency name, contact number, and portfolio link. Automatically personalizes all 28 lead pitches in under 60 seconds!
+                    </p>
+                    <a href="how-it-works.html" class="text-xs text-amber-400 hover:text-amber-300 font-semibold inline-flex items-center gap-1 pt-2">
+                        See Setup Flow →
+                    </a>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 space-y-3">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-hard-drive"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Zero-Loss Persistence</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Dual persistence with atomic JSON snapshots and self-healing SQLite database. Your leads, sent logs, and customized copy never get wiped on cloud restarts.
+                    </p>
+                    <span class="text-[11px] text-teal-400/90 font-medium block pt-2">✓ Render & Cloud Ready</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE LEADS VAULT PREVIEW TEASER -->
+    <section class="py-16 sm:py-24 border-t border-slate-800/80 bg-slate-950/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">High-Ticket Vault Proof</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+                        Sample High-Value Businesses Pre-Loaded Inside
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-2 max-w-xl">
+                        Here is a direct glimpse of the high-ticket businesses included in your CRM who currently have NO website linked to their verified Google & Instagram profiles.
+                    </p>
+                </div>
+                <a href="leads-vault.html" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-white transition inline-flex items-center gap-2 self-start md:self-auto">
+                    <span>View All 28 Leads & Countries</span>
+                    <i class="fa-solid fa-arrow-right text-xs text-cyan-400"></i>
+                </a>
+            </div>
+
+            <!-- Lead Preview Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Card 1: Dubai -->
+                <div class="p-5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">🇦🇪 Dubai • UAE</span>
+                        <span class="text-emerald-400 text-xs font-semibold">★ 4.9 Rating</span>
+                    </div>
+                    <div class="text-sm font-bold text-white">Oud Al Masar Dubai</div>
+                    <div class="text-[11px] text-slate-400">Luxury Fragrance & Arabian Oud Store</div>
+                    <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 text-[11px] text-slate-300">
+                        <span class="text-rose-400 font-semibold block mb-0.5">⚠️ No Website Connected</span>
+                        Active on Instagram with 4.9 customer reviews but zero standalone e-commerce catalog.
+                    </div>
+                </div>
+
+                <!-- Card 2: Switzerland -->
+                <div class="p-5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-300 border border-red-500/30">🇨🇭 Zurich • Switzerland</span>
+                        <span class="text-emerald-400 text-xs font-semibold">★ 4.8 Rating</span>
+                    </div>
+                    <div class="text-sm font-bold text-white">Zurich High-End Interior Architecture</div>
+                    <div class="text-[11px] text-slate-400">Luxury Remodeling & Villa Design</div>
+                    <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 text-[11px] text-slate-300">
+                        <span class="text-rose-400 font-semibold block mb-0.5">⚠️ No Website Connected</span>
+                        Highest purchasing power globally. Average project ticket: CHF 15,000+.
+                    </div>
+                </div>
+
+                <!-- Card 3: UK -->
+                <div class="p-5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">🇬🇧 London • UK</span>
+                        <span class="text-emerald-400 text-xs font-semibold">★ 4.9 Rating</span>
+                    </div>
+                    <div class="text-sm font-bold text-white">Hardy's Transport & Logistics</div>
+                    <div class="text-[11px] text-slate-400">Commercial Fleet & Freight Services</div>
+                    <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 text-[11px] text-slate-300">
+                        <span class="text-rose-400 font-semibold block mb-0.5">⚠️ No Website Connected</span>
+                        28+ stellar reviews on Google Maps with unlinked website URL.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE ROI CALCULATOR -->
+    <section class="py-16 sm:py-24 border-t border-slate-800/80">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-8 sm:p-10 rounded-2xl glass-card border border-cyan-500/40 relative overflow-hidden shadow-2xl">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Interactive ROI Calculator</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
+                        Calculate Your Return on a ₹1,999 Investment
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-2">
+                        See what happens when you close just 1 or 2 foreign clients from this pre-loaded CRM.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- Sliders -->
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-semibold text-slate-300">Your Average Service Project Price:</label>
+                                <span id="dealValueLabel" class="text-xs font-bold text-cyan-400 font-mono">₹25,000</span>
+                            </div>
+                            <input type="range" id="dealValueInput" min="10000" max="100000" step="5000" value="25000" oninput="updateRoiCalculator()" class="w-full accent-cyan-400 cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>₹10,000 (Basic Site)</span>
+                                <span>₹1,00,000 (Custom E-Com)</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-xs font-semibold text-slate-300">Clients Closed from 28 Leads:</label>
+                                <span id="clientsClosedLabel" class="text-xs font-bold text-emerald-400 font-mono">1 Client</span>
+                            </div>
+                            <input type="range" id="clientsClosedInput" min="1" max="10" step="1" value="1" oninput="updateRoiCalculator()" class="w-full accent-emerald-400 cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>1 Client</span>
+                                <span>10 Clients</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Card -->
+                    <div class="p-6 rounded-xl bg-slate-900/90 border border-slate-700/80 text-center space-y-4">
+                        <div>
+                            <span class="text-xs text-slate-400 uppercase tracking-wider">Estimated Revenue Generated:</span>
+                            <div id="monthlyRevenueEl" class="text-3xl sm:text-4xl font-extrabold text-white font-mono mt-1">₹25,000</div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800">
+                            <span class="text-xs text-slate-400">Net Return on Investment (ROI):</span>
+                            <div id="roiMultiplierEl" class="text-2xl font-bold text-emerald-400 font-mono mt-0.5">+1,151%</div>
+                        </div>
+                        <p class="text-[11px] text-slate-400 italic">
+                            "Even if you only close a single ₹25,000 deal from 28 leads, your ₹1,999 investment pays for itself 12x over."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING & THE DEAL -->
+    <section id="pricing" class="py-16 sm:py-24 border-t border-slate-800/80 bg-slate-950/40">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 font-semibold text-xs border border-cyan-500/30 uppercase tracking-wider">
+                Limited Time Launch Offer
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-4">
+                Get Lifetime Commercial Access for ₹1,999
+            </h2>
+            <p class="text-sm text-slate-400 mt-3 max-w-xl mx-auto">
+                No monthly subscriptions. No per-seat fees. No hidden charges. One payment for lifetime commercial access.
+            </p>
+
+            <!-- Pricing Box -->
+            <div class="mt-12 p-8 sm:p-10 rounded-2xl bg-gradient-to-b from-[#111827]/95 via-[#0d1321]/95 to-[#090d16]/95 border-2 border-cyan-500/60 shadow-2xl shadow-cyan-950/60 relative text-left">
+                
+                <div class="absolute -top-4 right-8 px-4 py-1 rounded-full btn-shimmer text-white text-xs font-bold uppercase tracking-wider shadow-lg">
+                    80% OFF • Lifetime Deal
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between pb-6 border-b border-slate-800 gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Commercial Pro License</h3>
+                        <p class="text-xs text-slate-400 mt-1">Full software source + pre-loaded leads + live hosted deployment access.</p>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <span class="text-sm text-slate-500 line-through mr-2">₹9,999</span>
+                        <span class="text-4xl font-extrabold text-white font-mono">₹1,999</span>
+                        <span class="text-xs text-cyan-400 block font-medium">One-Time Payment</span>
+                    </div>
+                </div>
+
+                <!-- What's Included Value Stack -->
+                <div class="py-6 space-y-3.5 text-xs text-slate-200">
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <strong>28+ Verified High-Ticket Foreign Leads Pre-Loaded</strong> (Dubai, UK, Swiss, US)
+                        </span>
+                        <span class="text-slate-500 font-mono hidden sm:inline">Value ₹7,500</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <strong>Multi-AI Psychological Copywriter</strong> (Claude 3.7 + Gemini Free forever)
+                        </span>
+                        <span class="text-slate-500 font-mono hidden sm:inline">Value ₹5,000</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <strong>1-Click Direct WhatsApp Outreach Engine</strong> (`wa.me` Universal)
+                        </span>
+                        <span class="text-slate-500 font-mono hidden sm:inline">Value ₹4,000</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <strong>Anti-Ban Safe Guard System</strong> (45s human pacing + 50 WA / 100 Email limits)
+                        </span>
+                        <span class="text-slate-500 font-mono hidden sm:inline">Value ₹4,000</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <strong>First-Run Setup Wizard & Brand Personalization</strong>
+                        </span>
+                        <span class="text-slate-500 font-mono hidden sm:inline">Value ₹3,500</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <strong>Zero-Loss Self-Healing Database & Cloud Hosting Config</strong>
+                        </span>
+                        <span class="text-slate-500 font-mono hidden sm:inline">Value ₹5,000</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <strong>Lifetime Access with Free Updates</strong>
+                        </span>
+                        <span class="text-emerald-400 font-mono hidden sm:inline">Priceless</span>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="pt-4 border-t border-slate-800">
+                    <button onclick="openCheckoutModal()" class="w-full py-4 rounded-xl btn-shimmer text-white font-bold text-sm sm:text-base shadow-2xl shadow-cyan-500/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Claim Commercial License for ₹1,999 (Instant Delivery)</span>
+                    </button>
+                    <div class="mt-3 flex items-center justify-center gap-6 text-[11px] text-slate-400">
+                        <span><i class="fa-solid fa-shield text-emerald-400 mr-1"></i> 100% Secure Checkout</span>
+                        <span><i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> Instant Setup Wizard Access</span>
+                        <span><i class="fa-solid fa-headset text-cyan-400 mr-1"></i> Direct VIP WhatsApp Support</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS & CASE STUDIES -->
+    <section class="py-16 sm:py-24 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Verified Client Results</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+                    Used by Independent Agencies & Freelancers Across India
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-6 space-y-3">
+                    <div class="flex items-center text-amber-400 text-xs gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed italic">
+                        "Closed a Dubai villa remodeling contractor for ₹45,000 on day 2. The fact that the leads are pre-verified without a website makes the conversation 10x easier because they know they need one."
+                    </p>
+                    <div class="pt-3 border-t border-slate-800 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 font-bold text-xs flex items-center justify-center">R</div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Rohit Sharma</div>
+                            <div class="text-[10px] text-slate-400">Web Design Freelancer, Delhi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 space-y-3">
+                    <div class="flex items-center text-amber-400 text-xs gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed italic">
+                        "The WhatsApp 1-click feature is a game-changer. I don't have to copy paste numbers or risk bans. The 45-second timer protects my WhatsApp number completely."
+                    </p>
+                    <div class="pt-3 border-t border-slate-800 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xs flex items-center justify-center">A</div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Aman Verma</div>
+                            <div class="text-[10px] text-slate-400">Founder, Apex Scale Media, Bangalore</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 space-y-3">
+                    <div class="flex items-center text-amber-400 text-xs gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed italic">
+                        "Was paying $59 every month for Lemlist and sending emails that went to spam. Bought this for ₹1,999 once and recovered my investment with 1 meeting booked."
+                    </p>
+                    <div class="pt-3 border-t border-slate-800 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs flex items-center justify-center">K</div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Kunal Mehra</div>
+                            <div class="text-[10px] text-slate-400">SEO Consultant, Mumbai</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ ACCORDION -->
+    <section class="py-16 sm:py-24 border-t border-slate-800/80 bg-slate-950/40">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Got Questions?</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
+                    Frequently Asked Questions
+                </h2>
+            </div>
+
+            <div class="space-y-3">
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>How do I get access after paying ₹1,999?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        Instantly! Upon completing payment, you are immediately redirected to your private Outreach Studio URL. The First-Run Setup Wizard automatically loads, lets you enter your Agency Name and contact details, and unlocks the complete CRM within 60 seconds.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>Are there any monthly charges or renewal fees?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        Zero. This is a 100% one-time payment of ₹1,999 for a Lifetime Commercial License. You never pay a recurring monthly fee.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>Do I need to pay for AI API keys?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        No! Outreach Studio is built with native integration for Google Gemini, which offers a 100% Free Forever tier. You get zero AI bills. If you want to use Claude 3.7 or GPT-4o, you can optionally plug in your own keys, or use our pre-tested human formulas with no API key at all.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>Will my WhatsApp number get banned?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        No. Unlike spam bots, Outreach Studio uses an Anti-Ban Protocol: it sends via standard `wa.me` links from your official WhatsApp app, enforces a mandatory 45-second delay between chats, and caps daily outreach at 50 messages to keep your account safe from Meta algorithms.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>Can I add my own leads to this CRM?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        Yes! While 28+ verified high-ticket foreign leads come pre-loaded, you have an "+ Add Lead" button and built-in international scrapers to discover fresh leads anytime.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLOBAL FOOTER -->
+    <footer class="border-t border-slate-800 bg-[#05080f] py-12 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+                <!-- Col 1 -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2.5">
+                        <img src="/assets/images/hrs_icon.png" alt="HRS" class="w-7 h-7 object-contain">
+                        <span class="text-sm font-bold text-white">HRS Web Solutions</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Creators of Outreach Studio Pro. Engineering elite software, digital acquisition engines, and commerce platforms from Kanpur, UP, India.
+                    </p>
+                    <div class="text-[11px] text-slate-500 font-mono">Merchant: FARHAN ATTARI | 7233862626</div>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Product Pages</h4>
+                    <ul class="space-y-1.5 text-[11px]">
+                        <li><a href="index.html" class="hover:text-cyan-400 transition">Overview & Hero</a></li>
+                        <li><a href="features.html" class="hover:text-cyan-400 transition">Multi-AI Architecture</a></li>
+                        <li><a href="leads-vault.html" class="hover:text-cyan-400 transition">Leads Vault (28+ Global)</a></li>
+                        <li><a href="pricing.html" class="hover:text-cyan-400 transition">Pricing & Commercial Deal</a></li>
+                        <li><a href="how-it-works.html" class="hover:text-cyan-400 transition">Setup & Onboarding Guide</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Direct Access</h4>
+                    <ul class="space-y-1.5 text-[11px]">
+                        <li><a href="https://outreach-studio.onrender.com" target="_blank" class="hover:text-cyan-400 transition text-cyan-300 font-semibold"><i class="fa-solid fa-arrow-up-right-from-square text-[9px] mr-1"></i> Live Studio Portal</a></li>
+                        <li><a href="https://wa.me/918808129388" target="_blank" class="hover:text-emerald-400 transition text-emerald-400"><i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp Helpline (+91 8808129388)</a></li>
+                        <li><a href="mailto:hrswebsolution@gmail.com" class="hover:text-cyan-400 transition">hrswebsolution@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Commercial Guarantee</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Protected by our 60-Second Setup Guarantee. If you face any issues launching your studio, our VIP team assists you personally on WhatsApp.
+                    </p>
+                    <button onclick="openCheckoutModal()" class="w-full py-2.5 rounded-xl btn-shimmer text-white font-bold text-xs">
+                        Buy Lifetime Access — ₹1,999
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                <div>© 2026 HRS Web Solutions. All Rights Reserved. Outreach Studio Pro™ is an official commercial product.</div>
+                <div class="flex items-center gap-4">
+                    <a href="contact.html" class="hover:text-slate-400">Support</a>
+                    <a href="pricing.html" class="hover:text-slate-400">Terms</a>
+                    <a href="https://outreach-studio.onrender.com" target="_blank" class="text-cyan-400 hover:text-cyan-300">Client Login</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHECKOUT MODAL (1-Click Instant License Purchase) -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="w-full max-w-md bg-gradient-to-b from-slate-900 via-[#0d1321] to-[#090d16] border border-cyan-500/50 rounded-2xl shadow-2xl p-6 sm:p-7 relative animate-fadeIn">
+            <!-- Close Button -->
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center border border-slate-700">
+                <i class="fa-solid fa-xmark text-sm"></i>
             </button>
-          </div>
-        </div>
 
-        <!-- 4 Category Cards -->
-        <div class="category-grid" id="categoryGrid"></div>
+            <div class="text-center mb-5">
+                <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 p-2 mx-auto mb-2 flex items-center justify-center">
+                    <img src="/assets/images/hrs_icon.png" class="w-full h-full object-contain">
+                </div>
+                <h3 class="text-lg font-bold text-white">Outreach Studio Pro</h3>
+                <div class="text-xs text-cyan-300 font-semibold">Lifetime Commercial License • ₹1,999</div>
+            </div>
 
-        <!-- Recommended Fixes -->
-        <div class="recommendations-section">
-          <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">
-            <i class="fas fa-wrench" style="color: var(--primary);"></i> Recommended Action Items
-          </h3>
-          <div class="recommendation-list" id="recommendationList"></div>
+            <form onsubmit="initiateRazorpayPayment(event)" class="space-y-3.5 text-xs">
+                <div>
+                    <label class="block font-medium text-slate-300 mb-1">Your Full Name:</label>
+                    <input type="text" id="buyerName" required placeholder="Mohammad Hamza" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                </div>
+
+                <div>
+                    <label class="block font-medium text-slate-300 mb-1">WhatsApp Mobile Number:</label>
+                    <input type="tel" id="buyerPhone" required placeholder="+91 8808129388" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                    <span class="text-[10px] text-slate-400 mt-0.5 block">Your license and VIP access link will be sent here.</span>
+                </div>
+
+                <div>
+                    <label class="block font-medium text-slate-300 mb-1">Official Email Address:</label>
+                    <input type="email" id="buyerEmail" required placeholder="yourname@agency.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                </div>
+
+                <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-300 flex items-center justify-between">
+                    <span>Payment Methods:</span>
+                    <span class="text-emerald-400 font-semibold">UPI, GPay, PhonePe, Paytm, Card</span>
+                </div>
+
+                <button type="submit" id="payNowBtn" class="w-full py-3.5 rounded-xl btn-shimmer text-white font-bold text-sm shadow-xl shadow-cyan-500/30 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Pay ₹1,999 & Get Instant Access</span>
+                </button>
+            </form>
+
+            <div class="mt-4 text-center">
+                <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20pay%20via%20direct%20UPI%20for%20Outreach%20Studio%20Pro" target="_blank" class="text-[11px] text-slate-400 hover:text-emerald-400 transition">
+                    Prefer direct UPI / QR transfer? <strong class="text-emerald-400">Click to Chat on WhatsApp</strong>
+                </a>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- SIDE-BY-SIDE WEBSITE BATTLE ARENA -->
-  <section class="section-padding" id="site-battle" style="background: var(--bg-card);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fas fa-shield-alt"></i> Speed Battle Arena</div>
-        <h2 class="section-title">Your Site vs. Competitor Battle</h2>
-        <p class="section-subtitle">
-          Enter your website URL and your top competitor's URL to see who wins on Google Speed & SEO.
-        </p>
-      </div>
-
-      <div class="battle-container">
-        <form id="battleForm">
-          <div class="battle-inputs-grid">
-            <div class="form-group">
-              <label style="font-weight: 700; font-size: 1rem;"><i class="fas fa-user-shield" style="color: var(--primary);"></i> Your Website URL</label>
-              <input type="text" id="myUrlInput" class="form-control" placeholder="yoursite.com" required>
-            </div>
-
-            <div class="form-group">
-              <label style="font-weight: 700; font-size: 1rem;"><i class="fas fa-skull-crossbones" style="color: var(--score-red);"></i> Competitor Website URL</label>
-              <input type="text" id="compUrlInput" class="form-control" placeholder="competitor.com" required>
-            </div>
-          </div>
-
-          <button type="submit" class="btn-hero-primary" style="width: 100%; justify-content: center; border: none; cursor: pointer;">
-            <span>Fight & Compare Speed Score</span> <i class="fas fa-bolt"></i>
-          </button>
-        </form>
-
-        <div class="battle-results-grid" id="battleResultsGrid">
-          <div class="battle-card winner">
-            <span class="winner-crown-badge">🏆 HRS Target Winner</span>
-            <h4 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;" id="myBattleUrl">yoursite.com</h4>
-            <div style="font-size: 2.8rem; font-weight: 900; color: var(--score-green);" id="myBattleScore">98/100</div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">HRS Optimized Page Load Speed: <strong id="myBattleSpeed" style="color: var(--score-green);">0.4s</strong></p>
-            <a href="#contact" class="btn-hero-primary" style="margin-top: 1rem; padding: 0.6rem 1.2rem; font-size: 0.85rem;">Outrank Competitor Now</a>
-          </div>
-
-          <div class="battle-card" style="border-color: var(--score-red);">
-            <h4 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;" id="compBattleUrl">competitor.com</h4>
-            <div style="font-size: 2.8rem; font-weight: 900; color: var(--score-red);" id="compBattleScore">42/100</div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Competitor Page Load Speed: <strong id="compBattleSpeed" style="color: var(--score-red);">4.2s</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Services Section -->
-  <section class="section-padding" id="services">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fas fa-layer-group"></i> Our Core Expertise</div>
-        <h2 class="section-title">End-to-End Digital Solutions</h2>
-        <p class="section-subtitle">
-          From custom business websites to full-featured mobile applications, we engineer solutions designed to scale your brand.
-        </p>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-          <h3 class="service-title">Website Development</h3>
-          <p class="service-desc">Custom-built, ultra-fast websites engineered with modern HTML5, CSS3, and JavaScript for maximum conversion.</p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> 100% Mobile Responsive</li>
-            <li><i class="fas fa-check"></i> Under 1s Load Speed</li>
-            <li><i class="fas fa-check"></i> SEO & Schema Optimized</li>
-          </ul>
-          <a href="#contact" class="btn-service-link"><span>Request Custom Quote</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-          <h3 class="service-title">Mobile App Development</h3>
-          <p class="service-desc">High-performance iOS and Android mobile applications featuring smooth animations and intuitive user interfaces.</p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> Cross-Platform Native Performance</li>
-            <li><i class="fas fa-check"></i> Push Notifications & Analytics</li>
-            <li><i class="fas fa-check"></i> Secure Payment Gateway</li>
-          </ul>
-          <a href="#contact" class="btn-service-link"><span>Discuss App Project</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
-          <h3 class="service-title">E-Commerce Platforms</h3>
-          <p class="service-desc">High-converting online shopping stores with automated inventory, order tracking, and seamless checkout flows.</p>
-          <ul class="service-features">
-            <li><i class="fas fa-check"></i> Unlimited Products & Categories</li>
-            <li><i class="fas fa-check"></i> Razorpay, UPI & Credit Card Ready</li>
-            <li><i class="fas fa-check"></i> WhatsApp Direct Order System</li>
-          </ul>
-          <a href="#contact" class="btn-service-link"><span>Build Online Store</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- 4. Filterable Portfolio Section -->
-  <section class="section-padding" id="portfolio">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fas fa-briefcase"></i> Recent Work & Showcase</div>
-        <h2 class="section-title">Websites & Mobile Apps We Built</h2>
-        <p class="section-subtitle">
-          Explore recent live websites, mobile apps, and custom web platforms engineered by HRS Web Solutions.
-        </p>
-      </div>
-
-      <div class="portfolio-filter-tabs">
-        <button class="filter-tab active" data-filter="all">All Work</button>
-        <button class="filter-tab" data-filter="apps">Mobile Apps</button>
-        <button class="filter-tab" data-filter="websites">Websites</button>
-        <button class="filter-tab" data-filter="ecommerce">E-Commerce</button>
-        <button class="filter-tab" data-filter="fintech">Fintech & Crypto</button>
-      </div>
-
-      <div class="portfolio-grid">
-        <div class="portfolio-card" data-category="apps">
-          <div class="portfolio-img-wrap">
-            <img src="food_app.jpg" alt="QuickBite Food Delivery Mobile App" class="portfolio-img">
-            <span class="portfolio-category-badge">Mobile App</span>
-          </div>
-          <div class="portfolio-content">
-            <h3 class="portfolio-title">QuickBite Food Delivery App</h3>
-            <p class="portfolio-desc">iOS & Android app featuring live GPS driver tracking, instant menu ordering, and UPI payments.</p>
-            <div class="portfolio-actions">
-              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar App <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="apps fintech">
-          <div class="portfolio-img-wrap">
-            <img src="fintech_app.jpg" alt="CryptoX Wallet Mobile App" class="portfolio-img">
-            <span class="portfolio-category-badge">Fintech App</span>
-          </div>
-          <div class="portfolio-content">
-            <h3 class="portfolio-title">CryptoX Banking & Wallet App</h3>
-            <p class="portfolio-desc">Sleek dark-mode financial mobile app with real-time stock graphs and biometric login.</p>
-            <div class="portfolio-actions">
-              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar App <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="websites ecommerce">
-          <div class="portfolio-img-wrap">
-            <img src="fashion_web.jpg" alt="Vogue Fashion E-Commerce Store" class="portfolio-img">
-            <span class="portfolio-category-badge">E-Commerce Web</span>
-          </div>
-          <div class="portfolio-content">
-            <h3 class="portfolio-title">Vogue Luxury Fashion Web Store</h3>
-            <p class="portfolio-desc">High-aesthetic fashion web portal with dynamic video banners and 0.4s page load speed.</p>
-            <div class="portfolio-actions">
-              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar Website <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="websites">
-          <div class="portfolio-img-wrap">
-            <img src="realestate_1.png" alt="EstatePrime Real Estate Portal" class="portfolio-img">
-            <span class="portfolio-category-badge">Website</span>
-          </div>
-          <div class="portfolio-content">
-            <h3 class="portfolio-title">EstatePrime Luxury Real Estate</h3>
-            <p class="portfolio-desc">Interactive property search portal with map views, virtual tours, and lead capture.</p>
-            <div class="portfolio-actions">
-              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar Website <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="apps">
-          <div class="portfolio-img-wrap">
-            <img src="doctor_app.jpg" alt="CarePlus Doctor App" class="portfolio-img">
-            <span class="portfolio-category-badge">Mobile App</span>
-          </div>
-          <div class="portfolio-content">
-            <h3 class="portfolio-title">CarePlus Clinic & Health App</h3>
-            <p class="portfolio-desc">Doctor appointment scheduling app with prescription downloads and lab report integration.</p>
-            <div class="portfolio-actions">
-              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar App <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-card" data-category="apps ecommerce">
-          <div class="portfolio-img-wrap">
-            <img src="shopping_app.png" alt="ShopFast Native Shopping App" class="portfolio-img">
-            <span class="portfolio-category-badge">E-Commerce App</span>
-          </div>
-          <div class="portfolio-content">
-            <h3 class="portfolio-title">ShopFast Retail Shopping App</h3>
-            <p class="portfolio-desc">Native Android & iOS e-commerce mobile application with fast Razorpay checkout.</p>
-            <div class="portfolio-actions">
-              <a href="#contact" class="btn-hero-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Get Similar App <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Pricing Plans Section -->
-  <section class="section-padding" id="pricing" style="background: var(--bg-card);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fas fa-dollar-sign"></i> Transparent Packages</div>
-        <h2 class="section-title">Simple, Affordable Pricing</h2>
-        <p class="section-subtitle">
-          Choose the perfect web development package tailored to your business stage and growth goals.
-        </p>
-      </div>
-
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="plan-name">Starter Website</div>
-          <div class="plan-subtitle">Ideal for local businesses & personal portfolios</div>
-          <div class="plan-price-wrap">
-            <div class="plan-price">₹4,999 <span>/ one-time</span></div>
-          </div>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i> Up to 5 Responsive Pages</li>
-            <li><i class="fas fa-check"></i> Free Mobile Optimization</li>
-            <li><i class="fas fa-check"></i> Direct WhatsApp Lead Button</li>
-          </ul>
-          <a href="#contact" class="btn-pricing btn-pricing-outline">Select Starter Plan</a>
-        </div>
-
-        <div class="pricing-card popular">
-          <div class="popular-badge">Most Popular</div>
-          <div class="plan-name">Business Growth</div>
-          <div class="plan-subtitle">Perfect for expanding companies & E-commerce</div>
-          <div class="plan-price-wrap">
-            <div class="plan-price">₹9,999 <span>/ one-time</span></div>
-          </div>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i> Up to 12 Custom Pages / Store</li>
-            <li><i class="fas fa-check"></i> E-Commerce Payment Gateway</li>
-            <li><i class="fas fa-check"></i> Speed Optimization (<1s Load)</li>
-          </ul>
-          <a href="#contact" class="btn-pricing btn-pricing-primary">Get Started Now</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Contact & Lead Form Section -->
-  <section class="section-padding" id="contact">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fas fa-envelope"></i> Let's Build Together</div>
-        <h2 class="section-title">Ready To Scale Your Business?</h2>
-        <p class="section-subtitle">
-          Contact our team today for a free project estimation and custom proposal.
-        </p>
-      </div>
-
-      <div class="contact-section-wrap">
-        <div class="contact-info-column">
-          <a href="tel:+918808129388" class="contact-info-card">
-            <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
-            <div class="contact-card-text">
-              <h4>Call Us Directly</h4>
-              <p>+91 8808129388</p>
-            </div>
-          </a>
-
-          <a href="mailto:hrswebsolution@gmail.com" class="contact-info-card">
-            <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
-            <div class="contact-card-text">
-              <h4>Email Us</h4>
-              <p>hrswebsolution@gmail.com</p>
-            </div>
-          </a>
-
-          <a href="https://wa.me/918808129388" class="contact-info-card" target="_blank">
-            <div class="contact-card-icon" style="color: #25D366; background: rgba(37, 211, 102, 0.15);"><i class="fab fa-whatsapp"></i></div>
-            <div class="contact-card-text">
-              <h4>Instant WhatsApp Chat</h4>
-              <p>Fastest response & quote</p>
-            </div>
-          </a>
-        </div>
-
-        <div class="contact-form-card">
-          <h3>Send Us a Message</h3>
-          <p>Tell us about your project requirements and we'll reach out within 24 hours.</p>
-
-          <form class="main-contact-form" id="mainContactForm">
-            <div class="form-group">
-              <label for="mainName">Your Full Name *</label>
-              <input type="text" id="mainName" class="form-control" placeholder="e.g. Amit Verma" required>
-            </div>
-
-            <div class="form-group">
-              <label for="mainPhone">Phone / WhatsApp Number *</label>
-              <input type="tel" id="mainPhone" class="form-control" placeholder="+91 98765 43210" required>
-            </div>
-
-            <div class="form-group">
-              <label for="mainEmail">Email Address *</label>
-              <input type="email" id="mainEmail" class="form-control" placeholder="amit@example.com" required>
-            </div>
-
-            <div class="form-group">
-              <label for="mainService">Required Service *</label>
-              <select id="mainService" class="form-control">
-                <option value="New Website Development">New Website Development</option>
-                <option value="Mobile App Development">Mobile App Development</option>
-                <option value="Website Redesign & Speed Fix">Website Redesign & Speed Fix</option>
-              </select>
-            </div>
-
-            <button type="submit" class="btn-form-submit-main">
-              <span>Submit & Connect on WhatsApp</span> <i class="fab fa-whatsapp"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lead Modal -->
-  <div class="modal-overlay" id="leadModal">
-    <div class="modal-content">
-      <button class="modal-close" id="closeModalBtn" aria-label="Close modal"><i class="fas fa-times"></i></button>
-      <div style="margin-bottom: 1.5rem;">
-        <h3 style="font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem;">Get Free Expert Assistance</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted);">Fill out the form below to get a custom fix quote from HRS Web Solutions.</p>
-      </div>
-
-      <form id="leadForm" style="display: flex; flex-direction: column; gap: 1rem;">
-        <div class="form-group">
-          <label>Your Full Name *</label>
-          <input type="text" id="leadNameInput" class="form-control" placeholder="e.g. Rahul Sharma" required>
-        </div>
-        <div class="form-group">
-          <label>Phone / WhatsApp Number *</label>
-          <input type="tel" id="leadPhoneInput" class="form-control" placeholder="+91 98765 43210" required>
-        </div>
-        <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" id="leadEmailInput" class="form-control" placeholder="rahul@example.com" required>
-        </div>
-
-        <button type="submit" class="btn-hero-primary" style="width: 100%; border: none; padding: 0.9rem; justify-content: center; cursor: pointer; margin-top: 0.5rem;">
-          <span>Connect via WhatsApp Now</span> <i class="fab fa-whatsapp"></i>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ULTRA SLEEK FLOATING WHATSAPP BUTTON -->
-  <a href="https://wa.me/918808129388" class="floating-whatsapp-badge" target="_blank">
-    <i class="fab fa-whatsapp"></i> <span>Chat on WhatsApp</span>
-  </a>
-
-  <!-- Full Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="#home" class="logo-wrap">
-            <div class="logo-icon-box">
-              <img src="logo.png" alt="HRS Web Solutions Logo" class="logo-img">
-            </div>
-            <span class="logo-brand-name">HRS WEB <span class="logo-brand-accent">SOLUTIONS</span></span>
-          </a>
-          <p>
-            Websites & Apps that grow your business. We build ultra-fast, high-converting digital experiences tailored for businesses worldwide.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="footer-heading">Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#speed-compare">Speed & ROI</a></li>
-            <li><a href="#health-checker">Audit Tool</a></li>
-            <li><a href="#site-battle">Site Battle</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="footer-heading">Contact Details</h4>
-          <ul class="footer-contact-list">
-            <li><i class="fas fa-phone-alt"></i> <a href="tel:+918808129388" style="color: var(--text-muted); text-decoration: none;">+91 8808129388</a></li>
-            <li><i class="fas fa-envelope"></i> <a href="mailto:hrswebsolution@gmail.com" style="color: var(--text-muted); text-decoration: none;">hrswebsolution@gmail.com</a></li>
-            <li><i class="fas fa-map-marker-alt"></i> <span>Shuklaganj Kanpur Near Poni Road</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>&copy; <span id="year">2026</span> HRS Web Solutions. All Rights Reserved.</div>
-        <div class="social-links">
-          <a href="https://www.instagram.com/hrs_web_solutions/" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/918808129388" target="_blank"><i class="fab fa-whatsapp"></i></a>
-          <a href="tel:+918808129388"><i class="fas fa-phone"></i></a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works — 60-Second Setup to First High-Ticket Client | Outreach Studio Pro</title>
+    <meta name="description" content="Step-by-step visual onboarding guide for Outreach Studio Pro. From 1-click purchase to 60-second agency white-label wizard, unlocking 28+ Dubai leads, and sending Claude 3.7 AI pitches over WhatsApp.">
+    <link rel="icon" type="image/png" href="/assets/images/hrs_icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen selection:bg-cyan-500 selection:text-white relative">
+
+    <!-- Ambient Glow Orbs -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <div class="ambient-glow-3"></div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-cyan-950/80 via-slate-900 to-blue-950/80 border-b border-cyan-800/40 py-2 px-4 text-center text-xs relative z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold text-[10px] uppercase tracking-wider border border-cyan-500/30">Zero Setup Frustration</span>
+            <span class="text-slate-300 font-medium">Get fully up and running in under 60 seconds with our automated Onboarding Wizard.</span>
+            <button onclick="openCheckoutModal()" class="text-cyan-400 hover:text-cyan-300 underline font-semibold ml-1 cursor-pointer">Start Now for ₹1,999 →</button>
+        </div>
+    </div>
+
+    <!-- Global Navigation Header -->
+    <header class="sticky top-0 z-40 bg-[#070b14]/90 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 p-2 shadow-lg shadow-cyan-500/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <img src="/assets/images/hrs_icon.png" alt="HRS Logo" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-base font-bold text-white tracking-tight">Outreach Studio</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-semibold font-mono">PRO</span>
+                    </div>
+                    <span class="text-[11px] text-slate-400 block -mt-0.5">by HRS Web Solutions</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
+                <a href="index.html" class="hover:text-cyan-400 transition">Overview</a>
+                <a href="features.html" class="hover:text-cyan-400 transition">Features & AI</a>
+                <a href="leads-vault.html" class="hover:text-cyan-400 transition flex items-center gap-1.5">
+                    <span>Leads Vault</span>
+                    <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] border border-emerald-500/30">28+ Live</span>
+                </a>
+                <a href="how-it-works.html" class="text-cyan-400 hover:text-cyan-300 transition">How It Works</a>
+                <a href="pricing.html" class="hover:text-cyan-400 transition">Pricing & Deal</a>
+                <a href="contact.html" class="hover:text-cyan-400 transition">VIP Support</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="https://outreach-studio.onrender.com" target="_blank" class="px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 hover:text-white text-xs font-semibold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-cyan-400"></i>
+                    <span>Client Login</span>
+                </a>
+                <button onclick="openCheckoutModal()" class="px-4 py-2 rounded-xl btn-shimmer text-white text-xs font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Buy for ₹1,999</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 hover:text-white">
+                <i class="fa-solid fa-bars text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden border-b border-slate-800 bg-[#0b101d] px-6 py-5 space-y-3">
+            <a href="index.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">Overview</a>
+            <a href="features.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">Features & AI Engine</a>
+            <a href="leads-vault.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">Leads Vault (28+ Global)</a>
+            <a href="how-it-works.html" class="block text-sm font-semibold text-cyan-400 py-1">How It Works</a>
+            <a href="pricing.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">Pricing & ROI</a>
+            <a href="contact.html" class="block text-sm font-semibold text-slate-300 hover:text-cyan-400 py-1">VIP WhatsApp Support</a>
+            <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+                <a href="https://outreach-studio.onrender.com" target="_blank" class="w-full py-2.5 text-center rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold">Access Studio Login</a>
+                <button onclick="openCheckoutModal()" class="w-full py-3 text-center rounded-xl btn-shimmer text-white text-xs font-bold">Get Lifetime Access — ₹1,999</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="py-16 sm:py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-5">
+                <i class="fa-solid fa-route"></i>
+                From Purchase To First Outreach In 4 Steps
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto mb-6">
+                How Outreach Studio Pro Turns <span class="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent">Strangers Into Paying Clients.</span>
+            </h1>
+            <p class="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
+                No complex server configurations, no Python dependencies to install on your PC, and no monthly software subscriptions. Follow this 4-step workflow to land your next high-ticket foreign project.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <button onclick="openCheckoutModal()" class="px-6 py-3.5 rounded-xl btn-shimmer text-white font-bold text-xs sm:text-sm shadow-xl shadow-cyan-500/25 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Get Instant Access for ₹1,999</span>
+                </button>
+                <a href="https://outreach-studio.onrender.com" target="_blank" class="px-6 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 font-bold text-xs sm:text-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-cyan-400"></i>
+                    <span>View Live Hosted Studio</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4-STEP VISUAL TIMELINE -->
+    <section class="py-12 border-t border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+
+            <!-- STEP 1: INSTANT PURCHASE & DIRECT PORTAL ACCESS -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 font-mono text-xs font-bold border border-cyan-500/40">
+                        STEP 01 — 10 SECONDS
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">
+                        Claim Lifetime Commercial License
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Pay ₹1,999 once via UPI, GPay, PhonePe, or Card. The payment confirmation immediately activates your lifetime license and redirects you to the live hosted Outreach Studio cloud instance (<code class="text-cyan-300 bg-slate-900 px-1.5 py-0.5 rounded">https://outreach-studio.onrender.com</code>).
+                    </p>
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 space-y-2">
+                        <div class="flex items-center gap-2 font-semibold text-emerald-400">
+                            <i class="fa-solid fa-check-double"></i>
+                            Instant Automated Delivery
+                        </div>
+                        <p class="text-[11px] text-slate-400 leading-relaxed">
+                            You also receive a VIP confirmation message directly on your WhatsApp with your direct studio access link, backup download token, and direct founder support helpline.
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:col-span-6">
+                    <div class="glass-card p-6 rounded-2xl border border-cyan-500/30 text-center space-y-4">
+                        <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 mx-auto flex items-center justify-center text-cyan-400 text-2xl">
+                            <i class="fa-solid fa-credit-card"></i>
+                        </div>
+                        <div class="text-sm font-bold text-white">Razorpay 256-Bit Encrypted Checkout</div>
+                        <div class="text-xs text-slate-400 max-w-sm mx-auto">Supports all Indian & International payment options. Zero transaction convenience fees.</div>
+                        <button onclick="openCheckoutModal()" class="w-full py-3 rounded-xl btn-shimmer text-white font-bold text-xs">
+                            Trigger Checkout Modal (₹1,999)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: 60-SECOND ONBOARDING WIZARD -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-6 order-2 lg:order-1">
+                    <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl group">
+                        <img src="/assets/images/onboarding_step1.png" alt="Onboarding Step 1 Agency Profile" class="w-full object-cover group-hover:scale-102 transition duration-500">
+                    </div>
+                </div>
+                <div class="lg:col-span-6 order-1 lg:order-2 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-mono text-xs font-bold border border-purple-500/40">
+                        STEP 02 — 30 SECONDS
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">
+                        Run 60-Second Setup Wizard
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        On your first visit, the Onboarding Gatekeeper greets you with a clean 4-step wizard. You simply enter:
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span><strong>Agency Name & Showcase Link:</strong> e.g., "HRS Web Solutions" & your portfolio link to embed in cold pitches.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span><strong>Target Niche:</strong> Web Design & Development, E-Commerce, SEO, or AI Automation.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span><strong>AI Provider Choice:</strong> Anthropic Claude 3.7, OpenAI GPT-4o, DeepSeek, or 100% Free Google Gemini.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-purple-400 mt-1"></i>
+                            <span><strong>Outreach Channels:</strong> WhatsApp (wa.me) + Optional Gmail SMTP for email outreach.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- STEP 3: PIPELINE UNLOCKS & AUDIT INSPECTION -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold border border-emerald-500/40">
+                        STEP 03 — 15 SECONDS
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">
+                        Studio Unlocks 28+ Verified Leads
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        The moment you click "Complete Setup & Launch Studio", the Gatekeeper unlocks your live pipeline loaded with 28+ verified high-ticket Dubai businesses.
+                    </p>
+                    <div class="space-y-2 text-xs text-slate-300">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <span>Inspect business ratings, verified phone numbers, and owner names.</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <span>Read the detailed audit observations explaining exactly why each business needs a website.</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                            <span>Add notes, track outreach status, or import unlimited international leads anytime.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6">
+                    <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl group">
+                        <img src="/assets/images/crm_unlocked_after_onboarding.png" alt="CRM Pipeline Unlocked" class="w-full object-cover group-hover:scale-102 transition duration-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: 1-CLICK PITCH & ANTI-BAN WHATSAPP LAUNCH -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-6 order-2 lg:order-1">
+                    <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl group">
+                        <img src="/assets/images/clean_crm_section.png" alt="CRM Action Buttons and Safe Cooldown" class="w-full object-cover group-hover:scale-102 transition duration-500">
+                    </div>
+                </div>
+                <div class="lg:col-span-6 order-1 lg:order-2 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-mono text-xs font-bold border border-amber-500/40">
+                        STEP 04 — SEND & CLOSE
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">
+                        1-Click Pitch & Anti-Ban WhatsApp Cooldown
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Clicking <strong>"WhatsApp Pitch"</strong> triggers the following sequence:
+                    </p>
+                    <ol class="space-y-2.5 text-xs text-slate-300">
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">1</span>
+                            <span>The AI formats a tailored message citing the business's sector and offers a Free Demo Concept.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">2</span>
+                            <span>The universal <code class="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">wa.me</code> protocol opens your WhatsApp app with the recipient and pitch pre-filled.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">3</span>
+                            <span>The studio starts a mandatory <strong>45-second visual cooldown</strong> to keep your WhatsApp account 100% safe from Meta spam detection.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">4</span>
+                            <span>When the founder replies "Yes, show me", send them your demo concept and close the ₹50,000 - ₹1,50,000 project!</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ONBOARDING GUARANTEE & FAQ -->
+    <section class="py-16 bg-[#060a12] border-t border-slate-800/80">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">Zero Risk</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-white mt-2">The 60-Second Setup Guarantee</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2">We built this system so anyone can start pitching in minutes, even with zero technical skills.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>Do I need to install Python, Docker, or Node.js on my computer?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        No! Outreach Studio Pro runs on a dedicated high-speed cloud container 24/7. You simply open the web app in Chrome, Safari, Edge, or on your phone, log in, and use it.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>Can I change my agency details later?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        Yes! The Settings tab has an "Update Agency Profile" and "Re-run Onboarding Wizard" button so you can reconfigure your branding, SMTP, or AI model whenever you want.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left text-xs sm:text-sm font-semibold text-white flex justify-between items-center">
+                        <span>What if I get stuck during setup?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform text-slate-400 text-xs"></i>
+                    </button>
+                    <div class="faq-answer hidden px-5 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800 pt-3">
+                        You have VIP WhatsApp Support with our founder Mohammad Hamza (+91 8808129388). If you ever need help configuring Gmail SMTP or adding AI keys, we guide you directly on screen share or WhatsApp.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="py-16 sm:py-20 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-cyan-500/40 shadow-2xl relative overflow-hidden">
+                <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mb-4">
+                    Ready to Launch Your High-Ticket Outreach Studio?
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto mb-8 leading-relaxed">
+                    Get full lifetime commercial rights, the automated onboarding wizard, 28+ pre-loaded Dubai leads, and Multi-AI pitch synthesis for just ₹1,999.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                    <button onclick="openCheckoutModal()" class="px-8 py-4 rounded-xl btn-shimmer text-white font-bold text-sm shadow-xl shadow-cyan-500/30 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>Get Lifetime License (₹1,999)</span>
+                    </button>
+                    <a href="leads-vault.html" class="px-6 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 font-bold text-xs sm:text-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-database text-cyan-400"></i>
+                        <span>Inspect Leads First</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLOBAL FOOTER -->
+    <footer class="border-t border-slate-800 bg-[#05080f] py-12 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2.5">
+                        <img src="/assets/images/hrs_icon.png" alt="HRS" class="w-7 h-7 object-contain">
+                        <span class="text-sm font-bold text-white">HRS Web Solutions</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Creators of Outreach Studio Pro. Engineering elite software, digital acquisition engines, and commerce platforms from Kanpur, UP, India.
+                    </p>
+                    <div class="text-[11px] text-slate-500 font-mono">Merchant: FARHAN ATTARI | 7233862626</div>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Product Pages</h4>
+                    <ul class="space-y-1.5 text-[11px]">
+                        <li><a href="index.html" class="hover:text-cyan-400 transition">Overview & Hero</a></li>
+                        <li><a href="features.html" class="hover:text-cyan-400 transition">Multi-AI Architecture</a></li>
+                        <li><a href="leads-vault.html" class="hover:text-cyan-400 transition">Leads Vault (28+ Global)</a></li>
+                        <li><a href="pricing.html" class="hover:text-cyan-400 transition">Pricing & Commercial Deal</a></li>
+                        <li><a href="how-it-works.html" class="hover:text-cyan-400 transition text-cyan-300 font-semibold">Setup & Onboarding Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Direct Access</h4>
+                    <ul class="space-y-1.5 text-[11px]">
+                        <li><a href="https://outreach-studio.onrender.com" target="_blank" class="hover:text-cyan-400 transition text-cyan-300 font-semibold"><i class="fa-solid fa-arrow-up-right-from-square text-[9px] mr-1"></i> Live Studio Portal</a></li>
+                        <li><a href="https://wa.me/918808129388" target="_blank" class="hover:text-emerald-400 transition text-emerald-400"><i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp Helpline (+91 8808129388)</a></li>
+                        <li><a href="mailto:hrswebsolution@gmail.com" class="hover:text-cyan-400 transition">hrswebsolution@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Commercial Guarantee</h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Protected by our 60-Second Setup Guarantee. If you face any issues launching your studio, our VIP team assists you personally on WhatsApp.
+                    </p>
+                    <button onclick="openCheckoutModal()" class="w-full py-2.5 rounded-xl btn-shimmer text-white font-bold text-xs">
+                        Buy Lifetime Access — ₹1,999
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                <div>© 2026 HRS Web Solutions. All Rights Reserved. Outreach Studio Pro™ is an official commercial product.</div>
+                <div class="flex items-center gap-4">
+                    <a href="contact.html" class="hover:text-slate-400">Support</a>
+                    <a href="pricing.html" class="hover:text-slate-400">Terms</a>
+                    <a href="https://outreach-studio.onrender.com" target="_blank" class="text-cyan-400 hover:text-cyan-300">Client Login</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="w-full max-w-md bg-gradient-to-b from-slate-900 via-[#0d1321] to-[#090d16] border border-cyan-500/50 rounded-2xl shadow-2xl p-6 sm:p-7 relative animate-fadeIn">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center border border-slate-700">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="text-center mb-5">
+                <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 p-2 mx-auto mb-2 flex items-center justify-center">
+                    <img src="/assets/images/hrs_icon.png" class="w-full h-full object-contain">
+                </div>
+                <h3 class="text-lg font-bold text-white">Outreach Studio Pro</h3>
+                <div class="text-xs text-cyan-300 font-semibold">Lifetime Commercial License • ₹1,999</div>
+            </div>
+
+            <form onsubmit="initiateRazorpayPayment(event)" class="space-y-3.5 text-xs">
+                <div>
+                    <label class="block font-medium text-slate-300 mb-1">Your Full Name:</label>
+                    <input type="text" id="buyerName" required placeholder="Mohammad Hamza" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                </div>
+
+                <div>
+                    <label class="block font-medium text-slate-300 mb-1">WhatsApp Mobile Number:</label>
+                    <input type="tel" id="buyerPhone" required placeholder="+91 8808129388" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                    <span class="text-[10px] text-slate-400 mt-0.5 block">Your license and VIP access link will be sent here.</span>
+                </div>
+
+                <div>
+                    <label class="block font-medium text-slate-300 mb-1">Official Email Address:</label>
+                    <input type="email" id="buyerEmail" required placeholder="yourname@agency.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                </div>
+
+                <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-300 flex items-center justify-between">
+                    <span>Payment Methods:</span>
+                    <span class="text-emerald-400 font-semibold">UPI, GPay, PhonePe, Paytm, Card</span>
+                </div>
+
+                <button type="submit" id="payNowBtn" class="w-full py-3.5 rounded-xl btn-shimmer text-white font-bold text-sm shadow-xl shadow-cyan-500/30 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Pay ₹1,999 & Get Instant Access</span>
+                </button>
+            </form>
+
+            <div class="mt-4 text-center">
+                <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20pay%20via%20direct%20UPI%20for%20Outreach%20Studio%20Pro" target="_blank" class="text-[11px] text-slate-400 hover:text-emerald-400 transition">
+                    Prefer direct UPI / QR transfer? <strong class="text-emerald-400">Click to Chat on WhatsApp</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
