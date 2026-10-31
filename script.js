@@ -74,20 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const tabContentMap = {
     'crm': {
-      src: 'assets/images/crm_unlocked_after_onboarding.png',
-      label: 'CRM Workspace &bull; Pre-Loaded Leads &bull; Status Pipeline'
+      src: 'assets/images/hero_clean_dashboard.png',
+      label: 'CRM Workspace &bull; Global Leads Pipeline &bull; Local SQLite Engine'
     },
     'ai': {
-      src: 'assets/images/settings_modal_screenshot.png',
-      label: 'Multi-AI Configuration &bull; Claude 3.7 &bull; GPT-4o &bull; Gemini'
+      src: 'assets/images/hero_ai_modal.png',
+      label: 'Multi-AI Setup &bull; Claude 3.7 Sonnet &bull; GPT-4o &bull; Gemini'
     },
     'leads': {
-      src: 'assets/images/clean_crm_section.png',
-      label: 'Verified Lead Records &bull; Country Filters &bull; 1-Click WhatsApp'
+      src: 'assets/images/hero_leads_table.png',
+      label: 'Verified Prospects &bull; Dubai, UK &amp; Europe &bull; 1-Click WhatsApp'
     },
     'filters': {
-      src: 'assets/images/clean_header_screenshot.png',
-      label: 'Smart Discovery Toolbar &bull; Live Scraper Integration'
+      src: 'assets/images/hero_scraper_modal.png',
+      label: 'Global Lead Scraper &bull; Google Maps &amp; Meta Ads Engine'
     }
   };
 
