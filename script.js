@@ -173,7 +173,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (roiMultiplierDisplay && !roiPctText) {
       roiMultiplierDisplay.textContent = `${roiPercentage.toLocaleString('en-IN')}% Net ROI`;
     }
+
+    // Dynamic glowing track fill
+    const dealsPct = ((deals - dealsSlider.min) / (dealsSlider.max - dealsSlider.min)) * 100;
+    dealsSlider.style.background = 'linear-gradient(to right, #3B82F6 0%, #6366F1 ' + dealsPct + '%, #1E293B ' + dealsPct + '%, #1E293B 100%)';
+
+    const feePct = ((feeInINR - feeSlider.min) / (feeSlider.max - feeSlider.min)) * 100;
+    feeSlider.style.background = 'linear-gradient(to right, #10B981 0%, #06B6D4 ' + feePct + '%, #1E293B ' + feePct + '%, #1E293B 100%)';
   }
+
+  window.changeDeals = function(delta) {
+    if (!dealsSlider) return;
+    let val = parseInt(dealsSlider.value, 10) + delta;
+    if (val < parseInt(dealsSlider.min, 10)) val = parseInt(dealsSlider.min, 10);
+    if (val > parseInt(dealsSlider.max, 10)) val = parseInt(dealsSlider.max, 10);
+    dealsSlider.value = val;
+    updateAgencyROI();
+  };
+
+  window.changeFee = function(delta) {
+    if (!feeSlider) return;
+    let val = parseInt(feeSlider.value, 10) + delta;
+    if (val < parseInt(feeSlider.min, 10)) val = parseInt(feeSlider.min, 10);
+    if (val > parseInt(feeSlider.max, 10)) val = parseInt(feeSlider.max, 10);
+    feeSlider.value = val;
+    updateAgencyROI();
+  };
 
   window.setROIPreset = function(deals, fee, btn) {
     if (dealsSlider && feeSlider) {
