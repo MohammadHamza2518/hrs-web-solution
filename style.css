@@ -1,14 +1,14 @@
 /* ==========================================================================
-   HRS WEB SOLUTIONS — ULTRA-LUXURY 2026 DIGITAL ENGINEERING SYSTEM
-   Obsidian Minimalist Aesthetic | Hairline Glass Borders | Pure Performance
+   OUTREACH STUDIO PRO — ULTRA-LUXURY SAAS SALES DESIGN SYSTEM
+   by HRS Web Solutions | Obsidian Minimalist Aesthetic | Silicon Valley Grade
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   --bg-dark: #040711;
-  --bg-card: rgba(13, 19, 36, 0.72);
-  --bg-card-hover: rgba(18, 26, 48, 0.9);
+  --bg-card: rgba(13, 19, 36, 0.75);
+  --bg-card-hover: rgba(18, 26, 48, 0.95);
   --border-glass: rgba(255, 255, 255, 0.08);
   --border-glass-hover: rgba(59, 130, 246, 0.45);
   
@@ -17,7 +17,6 @@
   --primary-violet: #8B5CF6;
   --accent-cyan: #06B6D4;
   --accent-emerald: #10B981;
-  --accent-rose: #F43F5E;
   --accent-amber: #F59E0B;
   
   --text-main: #F8FAFC;
@@ -108,10 +107,10 @@ h1, h2, h3, h4, h5, h6 {
 .glass-panel-hover:hover {
   transform: translateY(-4px);
   border-color: var(--border-glass-hover);
-  box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.22);
 }
 
-/* Subtle Architectural Grid Background */
+/* Background Grids */
 .bg-mesh-grid {
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
@@ -125,9 +124,9 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 900px;
-  height: 500px;
-  background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.16) 0%, rgba(99, 102, 241, 0.08) 45%, transparent 70%);
+  width: 1000px;
+  height: 550px;
+  background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.18) 0%, rgba(99, 102, 241, 0.1) 45%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -138,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 5%;
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.07) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
@@ -149,12 +148,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 20px -3px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 0 25px -3px rgba(37, 99, 235, 0.45);
   transition: all 0.25s ease;
 }
 .btn-primary-glow:hover {
   background: linear-gradient(135deg, #1D4ED8 0%, #4338CA 100%);
-  box-shadow: 0 0 30px -2px rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 35px -2px rgba(59, 130, 246, 0.65);
   transform: translateY(-2px);
 }
 
@@ -237,43 +236,9 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.15);
 }
 
-/* Radar Animation for Health Audit */
-.radar-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px solid rgba(59, 130, 246, 0.4);
-  animation: radar-expand 2s infinite ease-out;
-}
-.radar-ring:nth-child(2) {
-  animation-delay: 0.6s;
-}
-.radar-ring:nth-child(3) {
-  animation-delay: 1.2s;
-}
-
-@keyframes radar-expand {
-  0% { width: 40px; height: 40px; opacity: 1; }
-  100% { width: 220px; height: 220px; opacity: 0; }
-}
-
-/* Circular Gauge Animation */
-.gauge-svg {
-  transform: rotate(-90deg);
-}
-.gauge-circle-bg {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.08);
-  stroke-width: 12;
-}
-.gauge-circle-fill {
-  fill: none;
-  stroke: #10B981;
-  stroke-width: 12;
-  stroke-linecap: round;
-  stroke-dasharray: 565;
-  stroke-dashoffset: 565;
-  transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.5s ease;
+/* Checkout Modal */
+.checkout-modal-backdrop {
+  background: rgba(4, 7, 17, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }

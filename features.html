@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-AI &amp; Features Breakdown | Outreach Studio Pro</title>
+  <meta name="description" content="Explore the technical capabilities of Outreach Studio Pro: Multi-AI cold pitch engine, 1-click WhatsApp outreach, live lead scrapers, and zero-loss persistence.">
+  <link rel="icon" type="image/png" href="assets/images/hrs_icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#040711',
+              card: 'rgba(13, 19, 36, 0.75)',
+              blue: '#3B82F6',
+              indigo: '#6366F1',
+              emerald: '#10B981',
+              cyan: '#06B6D4'
+            }
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#040711] text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white relative bg-mesh-grid">
+
+  <div class="ambient-glow-top"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#040711]/85 backdrop-blur-xl border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-blue-500/30 p-2 shadow-lg shadow-blue-500/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <img src="assets/images/hrs_icon.png" alt="Outreach Studio Pro" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-base font-extrabold tracking-tight text-white font-heading">Outreach Studio</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">PRO</span>
+          </div>
+          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">by HRS Web Solutions</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
+        <a href="index.html" class="hover:text-blue-400 transition">Overview</a>
+        <a href="leads-vault.html" class="hover:text-blue-400 transition">Leads Vault (28+)</a>
+        <a href="features.html" class="text-blue-400 transition font-bold">Multi-AI &amp; Features</a>
+        <a href="how-it-works.html" class="hover:text-blue-400 transition">How It Works</a>
+        <a href="pricing.html" class="hover:text-blue-400 transition">Pricing &amp; ROI</a>
+        <a href="contact.html" class="hover:text-blue-400 transition">VIP Support</a>
+      </nav>
+
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://wa.me/918808129388" target="_blank" class="px-3.5 py-2 rounded-xl btn-glass text-xs font-semibold flex items-center gap-1.5">
+          <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span>Ask Question</span>
+        </a>
+        <button onclick="openCheckoutModal()" class="px-4 py-2 rounded-xl btn-primary-glow text-xs font-bold cursor-pointer">
+          <span>Get CRM for &#8377;1,999</span>
+        </button>
+      </div>
+
+      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300">
+        <i class="fas fa-bars text-lg"></i>
+      </button>
+    </div>
+
+    <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
+      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Overview</a>
+      <a href="leads-vault.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Leads Vault (28+ Global)</a>
+      <a href="features.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Multi-AI &amp; Features</a>
+      <a href="how-it-works.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">How It Works</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing &amp; ROI</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">VIP Support</a>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="py-16 sm:py-24 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 mb-6">
+        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Under The Hood</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mb-4">
+        Multi-AI Engine &amp; Automation Architecture
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Everything you need to source, audit, pitch, and close high-ticket clients without third-party subscriptions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Feature 1: Multi-AI Provider Engine -->
+  <section class="py-16 border-t border-white/[0.06]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-mono font-bold text-blue-400 uppercase">Provider Agnostic</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-heading">
+            Connect Claude 3.7, GPT-4o, Gemini, or DeepSeek
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Unlike closed SaaS tools that force you into their expensive AI credits, Outreach Studio Pro gives you a provider-agnostic engine. Use your own free Google Gemini API key, OpenAI key, Anthropic Claude, or DeepSeek.
+          </p>
+          <ul class="space-y-3 text-xs text-slate-400">
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-emerald-400"></i> Zero markup on AI tokens &bull; Pay $0.001 per pitch or use free tiers</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-emerald-400"></i> Dropdown selection between fast flash models and reasoning models</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-emerald-400"></i> Automatic fallback to Gemini if your primary API limit hits</li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="glass-panel p-2 rounded-2xl overflow-hidden border border-white/[0.12] shadow-2xl">
+            <img src="assets/images/settings_modal_screenshot.png" alt="Multi-AI Settings Modal" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 2: 1-Click WhatsApp & Safety Guard -->
+  <section class="py-16 border-t border-white/[0.06] bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="glass-panel p-2 rounded-2xl overflow-hidden border border-white/[0.12] shadow-2xl">
+            <img src="assets/images/clean_crm_section.png" alt="Clean CRM Leads Table" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
+          <span class="text-xs font-mono font-bold text-emerald-400 uppercase">100% Ban-Safe Outreach</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-heading">
+            1-Click WhatsApp Direct &amp; Anti-Spam Safety Guards
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Third-party WhatsApp automation bots get your phone number banned in 24 hours. Outreach Studio Pro uses a native WhatsApp Web URL protocol that triggers your official browser session.
+          </p>
+          <ul class="space-y-3 text-xs text-slate-400">
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-emerald-400"></i> Zero risk of WhatsApp bans &bull; Uses genuine user browser actions</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-emerald-400"></i> Automated cooling intervals (15s to 45s randomized delays)</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-emerald-400"></i> Daily quota capping to stay strictly within legitimate business thresholds</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 3: Zero-Loss Persistence -->
+  <section class="py-16 border-t border-white/[0.06]">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-mono font-bold text-cyan-400 uppercase">Dual-Layer Storage</span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-heading mt-2 mb-4">
+        Zero-Loss Dual-Layer Persistence
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10">
+        Your leads and outreach history are your agency's most valuable asset. Outreach Studio Pro saves every change simultaneously into a robust SQLite database and a human-readable JSON store.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+        <div class="glass-panel p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <i class="fas fa-database text-cyan-400 text-lg"></i>
+            <h3 class="text-base font-bold text-white font-mono">SQLite (leads.db)</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Ultra-fast ACID-compliant indexing. Instant searches, filtering by city, status, and country across tens of thousands of prospects with zero lag.
+          </p>
+        </div>
+
+        <div class="glass-panel p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <i class="fas fa-file-code text-indigo-400 text-lg"></i>
+            <h3 class="text-base font-bold text-white font-mono">Auto-Sync JSON (crm_persistent_store.json)</h3>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Automatic background mirror. Even if you move computers or redeploy to a cloud container, your leads, pitches, and notes are never wiped.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Box -->
+  <section class="py-16 border-t border-white/[0.06] bg-slate-950/50">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-heading mb-3">
+        Ready to Own The Complete Software?
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-400 mb-8">
+        Get the full Python source code, 1-click BAT launcher, 28+ pre-loaded leads, and lifetime updates for &#8377;1,999.
+      </p>
+      <button onclick="openCheckoutModal()" class="px-8 py-3.5 rounded-xl btn-primary-glow text-xs font-bold cursor-pointer">
+        Get Lifetime Access for &#8377;1,999 &rarr;
+      </button>
+    </div>
+  </section>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 checkout-modal-backdrop">
+    <div class="glass-panel p-6 sm:p-8 max-w-lg w-full border-blue-500/40 relative shadow-2xl shadow-blue-600/30 bg-[#090d1a]">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-2 cursor-pointer">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="text-center mb-6">
+        <span class="inline-block px-3 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold font-mono uppercase mb-2">
+          Instant Commercial Activation
+        </span>
+        <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">Get Outreach Studio Pro</h3>
+        <div class="text-3xl font-black text-emerald-400 font-heading my-2">&#8377;1,999</div>
+      </div>
+      <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20buy%20Outreach%20Studio%20Pro%20Lifetime%20License%20for%20Rs%201999." target="_blank" class="w-full py-3.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center justify-center gap-2">
+        <i class="fab fa-whatsapp text-base"></i>
+        <span>Pay &#8377;1,999 via UPI &amp; Get Instant ZIP Link</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.08] bg-[#020409] py-12 text-xs text-slate-400 text-center">
+    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Multi-AI Engine Architecture.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

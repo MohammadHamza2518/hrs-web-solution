@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transparent Pricing Plans | HRS Web Solutions</title>
-  <meta name="description" content="Fixed-price, transparent development packages for websites, e-commerce stores, and custom mobile apps. Zero hidden fees. Guaranteed sub-second speed.">
-  <link rel="icon" type="image/png" href="logo.png">
+  <title>Lifetime Pricing &amp; Comparison | Outreach Studio Pro (&#8377;1,999)</title>
+  <meta name="description" content="Invest &#8377;1,999 once. Land high-ticket clients forever. Zero monthly fees. Compare Outreach Studio Pro against $1,800/yr SaaS subscriptions.">
+  <link rel="icon" type="image/png" href="assets/images/hrs_icon.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,7 +19,7 @@
           colors: {
             brand: {
               dark: '#040711',
-              card: 'rgba(13, 19, 36, 0.72)',
+              card: 'rgba(13, 19, 36, 0.75)',
               blue: '#3B82F6',
               indigo: '#6366F1',
               emerald: '#10B981',
@@ -47,30 +47,33 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3.5 group">
         <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-blue-500/30 p-2 shadow-lg shadow-blue-500/10 flex items-center justify-center group-hover:scale-105 transition-transform">
-          <img src="logo.png" alt="HRS Web Solutions Logo" class="w-full h-full object-contain">
+          <img src="assets/images/hrs_icon.png" alt="Outreach Studio Pro" class="w-full h-full object-contain">
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="text-base font-extrabold tracking-tight text-white font-heading">HRS WEB</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">SOLUTIONS</span>
+            <span class="text-base font-extrabold tracking-tight text-white font-heading">Outreach Studio</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">PRO</span>
           </div>
-          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">Digital Engineering Studio</span>
+          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">by HRS Web Solutions</span>
         </div>
       </a>
 
       <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
-        <a href="index.html" class="hover:text-blue-400 transition">Home</a>
-        <a href="services.html" class="hover:text-blue-400 transition">Services</a>
-        <a href="portfolio.html" class="hover:text-blue-400 transition">Portfolio</a>
-        <a href="pricing.html" class="text-blue-400 transition">Pricing</a>
-        <a href="why-us.html" class="hover:text-blue-400 transition">Why Us</a>
-        <a href="contact.html" class="hover:text-blue-400 transition">Contact</a>
+        <a href="index.html" class="hover:text-blue-400 transition">Overview</a>
+        <a href="leads-vault.html" class="hover:text-blue-400 transition">Leads Vault (28+)</a>
+        <a href="features.html" class="hover:text-blue-400 transition">Multi-AI &amp; Features</a>
+        <a href="how-it-works.html" class="hover:text-blue-400 transition">How It Works</a>
+        <a href="pricing.html" class="text-blue-400 transition font-bold">Pricing &amp; ROI</a>
+        <a href="contact.html" class="hover:text-blue-400 transition">VIP Support</a>
       </nav>
 
       <div class="hidden sm:flex items-center gap-3">
-        <a href="https://wa.me/918808129388" target="_blank" class="px-4 py-2 rounded-xl btn-whatsapp-glow text-xs flex items-center gap-2">
-          <i class="fab fa-whatsapp text-sm"></i> <span>WhatsApp Us</span>
+        <a href="https://wa.me/918808129388" target="_blank" class="px-3.5 py-2 rounded-xl btn-glass text-xs font-semibold flex items-center gap-1.5">
+          <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span>Ask Question</span>
         </a>
+        <button onclick="openCheckoutModal()" class="px-4 py-2 rounded-xl btn-primary-glow text-xs font-bold cursor-pointer">
+          <span>Get CRM for &#8377;1,999</span>
+        </button>
       </div>
 
       <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300">
@@ -79,127 +82,202 @@
     </div>
 
     <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
-      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Home</a>
-      <a href="services.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Services</a>
-      <a href="portfolio.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Portfolio</a>
-      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Pricing</a>
-      <a href="why-us.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Why Us</a>
-      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Contact</a>
+      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Overview</a>
+      <a href="leads-vault.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Leads Vault (28+ Global)</a>
+      <a href="features.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Multi-AI &amp; Features</a>
+      <a href="how-it-works.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">How It Works</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Pricing &amp; ROI</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">VIP Support</a>
     </div>
   </header>
 
   <!-- Hero Header -->
   <section class="py-16 sm:py-24 text-center">
     <div class="max-w-4xl mx-auto px-4">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 mb-6">
-        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Zero Hidden Fees</span>
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 mb-6">
+        <span class="text-xs font-semibold text-emerald-300 uppercase font-mono tracking-wider">Single One-Time Fee &bull; Save 80%</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mb-4">
-        Clear, Predictable Development Plans
+        Invest &#8377;1,999 Once. Land High-Ticket Clients Forever.
       </h1>
       <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-        Invest in code that works as an asset. Fixed deliverables, rapid turnaround, and direct founder support.
+        Stop paying $149/month for SaaS scrapers that hand you generic info@ emails. Get 28+ verified high-ticket Dubai businesses with no website and the complete AI outreach engine for a single one-time fee.
       </p>
     </div>
   </section>
 
-  <!-- Pricing Cards -->
-  <section class="pb-24">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Pricing Card Main -->
+  <section class="pb-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-20">
-        
-        <!-- Starter Launchpad -->
-        <div class="glass-panel p-8 flex flex-col justify-between">
-          <div>
-            <div class="text-xs font-mono font-bold text-slate-400 uppercase mb-2">Starter Launchpad</div>
-            <h3 class="text-xl font-bold text-white mb-3 font-heading">High-Impact Landing Page</h3>
-            <p class="text-xs text-slate-400 mb-6">Ideal for local businesses, consultants, and startups needing immediate brand credibility.</p>
-            
-            <div class="mb-6 pb-6 border-b border-white/[0.08]">
-              <div class="text-3xl sm:text-4xl font-black text-white font-heading">&#8377;4,999</div>
-              <span class="text-xs text-slate-400">One-time investment &bull; Delivered in 4-6 days</span>
-            </div>
-
-            <ul class="space-y-3 text-xs text-slate-300">
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Up to 5 Custom Responsive Sections</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Under 0.8s Load Speed Guarantee</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Direct WhatsApp Lead Button &amp; Contact Form</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Basic SEO Meta &amp; Social Card Setup</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> 1 Year Free SSL &amp; Cloud Deployment</li>
-            </ul>
-          </div>
-
-          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20the%20Starter%20Package" target="_blank" class="mt-8 w-full py-3 rounded-xl btn-glass text-xs font-bold text-center block">
-            Select Starter Package &rarr;
-          </a>
+      <div class="glass-panel p-8 sm:p-12 border-blue-500/50 relative shadow-2xl shadow-blue-500/20">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-blue-600 text-white font-mono text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-blue-500/50">
+          Lifetime Commercial License
         </div>
 
-        <!-- Growth & E-Commerce Pro -->
-        <div class="glass-panel p-8 flex flex-col justify-between border-blue-500/50 relative shadow-2xl shadow-blue-500/15">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-blue-600 text-white font-mono text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-blue-500/40">
-            Most Popular Choice
+        <div class="text-center pb-8 border-b border-white/[0.08]">
+          <div class="flex items-center justify-center gap-3 mb-2">
+            <span class="text-sm line-through text-slate-500 font-mono">&#8377;9,999</span>
+            <span class="text-4xl sm:text-5xl font-black text-white font-heading">&#8377;1,999</span>
+            <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold">SAVE 80%</span>
           </div>
-
-          <div>
-            <div class="text-xs font-mono font-bold text-blue-400 uppercase mb-2">Growth &amp; E-Commerce</div>
-            <h3 class="text-xl font-bold text-white mb-3 font-heading">Full Business Platform</h3>
-            <p class="text-xs text-slate-400 mb-6">Engineered for expanding brands, e-commerce stores, and high-ticket service companies.</p>
-            
-            <div class="mb-6 pb-6 border-b border-white/[0.08]">
-              <div class="text-3xl sm:text-4xl font-black text-white font-heading">&#8377;14,999</div>
-              <span class="text-xs text-blue-400 font-semibold">One-time investment &bull; Delivered in 7-10 days</span>
-            </div>
-
-            <ul class="space-y-3 text-xs text-slate-300">
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Up to 12 Custom Pages / Full E-Commerce Store</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> 1-Click Razorpay, UPI &amp; Cards Gateway</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Custom Admin Portal (Manage Orders &amp; Content)</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Sub-Second Speed Optimization (0.4s)</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Automated WhatsApp Order Confirmations</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> 30 Days Free Post-Launch Priority Support</li>
-            </ul>
-          </div>
-
-          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20the%20Business%20Growth%20Package" target="_blank" class="mt-8 w-full py-3.5 rounded-xl btn-primary-glow text-xs font-bold text-center block">
-            Claim Growth Package &rarr;
-          </a>
+          <span class="text-xs text-blue-300 font-medium">One-time payment &bull; Zero monthly subscriptions &bull; Instant activation</span>
         </div>
 
-        <!-- Custom Enterprise & Mobile App -->
-        <div class="glass-panel p-8 flex flex-col justify-between">
-          <div>
-            <div class="text-xs font-mono font-bold text-slate-400 uppercase mb-2">Bespoke Enterprise</div>
-            <h3 class="text-xl font-bold text-white mb-3 font-heading">Custom App &amp; AI Platform</h3>
-            <p class="text-xs text-slate-400 mb-6">For scalable startups, SaaS platforms, and native iOS &amp; Android mobile applications.</p>
-            
-            <div class="mb-6 pb-6 border-b border-white/[0.08]">
-              <div class="text-3xl sm:text-4xl font-black text-white font-heading">&#8377;29,999<span class="text-sm font-normal text-slate-400">+</span></div>
-              <span class="text-xs text-slate-400">Custom Scope &bull; Rapid Milestone Sprints</span>
+        <div class="py-8 space-y-4 text-xs sm:text-sm text-slate-300">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-emerald-400 mt-1"></i>
+            <div>
+              <strong class="text-white">28+ Pre-Loaded Verified "NO WEBSITE" Leads</strong>
+              <p class="text-xs text-slate-400">High-ticket prospects across Dubai, UK &amp; Switzerland with verified WhatsApp numbers.</p>
             </div>
-
-            <ul class="space-y-3 text-xs text-slate-300">
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Cross-Platform iOS &amp; Android Mobile App</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Full-Stack Web App (React / Node / MongoDB)</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Custom AI Workflows &amp; Automation APIs</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> High-Concurrency Database Architecture</li>
-              <li class="flex items-center gap-2.5"><i class="fas fa-check text-blue-400"></i> Dedicated Priority Founder Support Channel</li>
-            </ul>
           </div>
 
-          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20need%20a%20Custom%20Enterprise%20App" target="_blank" class="mt-8 w-full py-3 rounded-xl btn-glass text-xs font-bold text-center block">
-            Discuss Enterprise Scope &rarr;
-          </a>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-emerald-400 mt-1"></i>
+            <div>
+              <strong class="text-white">Multi-AI Cold Pitch Engine</strong>
+              <p class="text-xs text-slate-400">Claude 3.7 Sonnet, OpenAI GPT-4o, Google Gemini &amp; DeepSeek integration.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-emerald-400 mt-1"></i>
+            <div>
+              <strong class="text-white">1-Click WhatsApp Direct Outreach</strong>
+              <p class="text-xs text-slate-400">Automated WhatsApp Web message triggers with zero ban risk.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-emerald-400 mt-1"></i>
+            <div>
+              <strong class="text-white">Live Google Maps &amp; Meta Ads Scraper</strong>
+              <p class="text-xs text-slate-400">Find unlimited fresh leads in any country whenever you want.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-emerald-400 mt-1"></i>
+            <div>
+              <strong class="text-white">100% Full Source Code &amp; 1-Click BAT Launcher</strong>
+              <p class="text-xs text-slate-400">Run locally on Windows or Mac, or deploy to your own private server.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <i class="fas fa-check-circle text-emerald-400 mt-1"></i>
+            <div>
+              <strong class="text-white">30-Day 100% Money-Back Guarantee</strong>
+              <p class="text-xs text-slate-400">If you don't find high-ticket leads that need a website, we refund 100% of your fee.</p>
+            </div>
+          </div>
         </div>
 
+        <button onclick="openCheckoutModal()" class="w-full py-4 rounded-xl btn-primary-glow text-sm font-bold text-center block cursor-pointer shadow-xl shadow-blue-600/30">
+          <i class="fas fa-bolt text-amber-300 mr-2"></i>
+          <span>Get Instant Lifetime Access for &#8377;1,999 &rarr;</span>
+        </button>
+
+        <p class="text-[11px] text-slate-400 text-center mt-4">
+          Instant download link delivered immediately via WhatsApp &amp; Email after payment.
+        </p>
       </div>
 
     </div>
   </section>
 
+  <!-- Competitor Table -->
+  <section class="py-20 border-t border-white/[0.06] bg-slate-950/40">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">Zero Hidden Subscriptions</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-heading mt-1">
+          Outreach Studio Pro vs Industry Giants
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2">
+          Why top agency owners are switching away from bloated $1,800/year subscriptions.
+        </p>
+      </div>
+
+      <div class="glass-panel rounded-2xl overflow-hidden border border-white/[0.1]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-slate-900/90 border-b border-white/[0.08] text-slate-300">
+                <th class="p-4 sm:p-5 font-bold">Feature / Metric</th>
+                <th class="p-4 sm:p-5 font-bold text-blue-400 bg-blue-950/30">Outreach Studio Pro</th>
+                <th class="p-4 sm:p-5 font-bold text-slate-400">Apollo.io</th>
+                <th class="p-4 sm:p-5 font-bold text-slate-400">Instantly.ai</th>
+                <th class="p-4 sm:p-5 font-bold text-slate-400">D7 Lead Finder</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/[0.06] text-slate-300">
+              <tr class="hover:bg-slate-900/40">
+                <td class="p-4 sm:p-5 text-white font-semibold">Pricing Model</td>
+                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">&#8377;1,999 (~$24) Lifetime</td>
+                <td class="p-4 sm:p-5 text-rose-400 font-mono">$99 / month</td>
+                <td class="p-4 sm:p-5 text-rose-400 font-mono">$149 / month</td>
+                <td class="p-4 sm:p-5 text-rose-400 font-mono">$59 / month</td>
+              </tr>
+              <tr class="hover:bg-slate-900/40">
+                <td class="p-4 sm:p-5 text-white font-semibold">Pre-Loaded "NO WEBSITE" Leads</td>
+                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">28+ Verified Global</td>
+                <td class="p-4 sm:p-5 text-slate-400">Zero (Generic emails)</td>
+                <td class="p-4 sm:p-5 text-slate-400">Zero (Sending tool only)</td>
+                <td class="p-4 sm:p-5 text-slate-400">Zero (Raw unverified)</td>
+              </tr>
+              <tr class="hover:bg-slate-900/40">
+                <td class="p-4 sm:p-5 text-white font-semibold">Multi-AI Pitch Engine</td>
+                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">Claude 3.7 + GPT-4o + Gemini</td>
+                <td class="p-4 sm:p-5 text-slate-400">Basic template tokens</td>
+                <td class="p-4 sm:p-5 text-slate-400">Basic AI rewrite ($ extra)</td>
+                <td class="p-4 sm:p-5 text-slate-400">No AI engine</td>
+              </tr>
+              <tr class="hover:bg-slate-900/40">
+                <td class="p-4 sm:p-5 text-white font-semibold">1-Click WhatsApp Direct Sender</td>
+                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">Included &bull; 100% Ban-Safe</td>
+                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> No WhatsApp</td>
+                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> No WhatsApp</td>
+                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> No WhatsApp</td>
+              </tr>
+              <tr class="hover:bg-slate-900/40">
+                <td class="p-4 sm:p-5 text-white font-semibold">Annual Cost (Year 1)</td>
+                <td class="p-4 sm:p-5 text-emerald-400 font-black text-base bg-blue-950/40">&#8377;1,999 (~$24)</td>
+                <td class="p-4 sm:p-5 text-rose-400 font-mono">$1,188 (~&#8377;98,000)</td>
+                <td class="p-4 sm:p-5 text-rose-400 font-mono">$1,788 (~&#8377;1,49,000)</td>
+                <td class="p-4 sm:p-5 text-rose-400 font-mono">$708 (~&#8377;59,000)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 checkout-modal-backdrop">
+    <div class="glass-panel p-6 sm:p-8 max-w-lg w-full border-blue-500/40 relative shadow-2xl shadow-blue-600/30 bg-[#090d1a]">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-2 cursor-pointer">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="text-center mb-6">
+        <span class="inline-block px-3 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold font-mono uppercase mb-2">Instant Activation</span>
+        <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">Get Outreach Studio Pro</h3>
+        <div class="text-3xl font-black text-emerald-400 font-heading my-2">&#8377;1,999</div>
+      </div>
+      <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20buy%20Outreach%20Studio%20Pro%20for%20Rs%201999." target="_blank" class="w-full py-3.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center justify-center gap-2">
+        <i class="fab fa-whatsapp text-base"></i>
+        <span>Pay &#8377;1,999 via UPI &amp; Get Instant ZIP Link</span>
+      </a>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="border-t border-white/[0.08] bg-[#020409] py-12 text-xs text-slate-400 text-center">
-    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Transparent pricing, zero compromises.</p>
+    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Transparent &#8377;1,999 Lifetime License.</p>
   </footer>
 
   <script src="script.js"></script>

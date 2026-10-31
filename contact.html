@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us &amp; Book Consultation | HRS Web Solutions</title>
-  <meta name="description" content="Get in touch with founders Mohammad Hamza and Farhan Attari. Direct WhatsApp support, project estimations, and technical roadmaps.">
-  <link rel="icon" type="image/png" href="logo.png">
+  <title>VIP Support &amp; License Activation | Outreach Studio Pro</title>
+  <meta name="description" content="Direct WhatsApp support and instant license key activation for Outreach Studio Pro. Contact founders Mohammad Hamza and Farhan Attari.">
+  <link rel="icon" type="image/png" href="assets/images/hrs_icon.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,7 +19,7 @@
           colors: {
             brand: {
               dark: '#040711',
-              card: 'rgba(13, 19, 36, 0.72)',
+              card: 'rgba(13, 19, 36, 0.75)',
               blue: '#3B82F6',
               indigo: '#6366F1',
               emerald: '#10B981',
@@ -47,30 +47,33 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3.5 group">
         <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-blue-500/30 p-2 shadow-lg shadow-blue-500/10 flex items-center justify-center group-hover:scale-105 transition-transform">
-          <img src="logo.png" alt="HRS Web Solutions Logo" class="w-full h-full object-contain">
+          <img src="assets/images/hrs_icon.png" alt="Outreach Studio Pro" class="w-full h-full object-contain">
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="text-base font-extrabold tracking-tight text-white font-heading">HRS WEB</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">SOLUTIONS</span>
+            <span class="text-base font-extrabold tracking-tight text-white font-heading">Outreach Studio</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">PRO</span>
           </div>
-          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">Digital Engineering Studio</span>
+          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">by HRS Web Solutions</span>
         </div>
       </a>
 
       <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
-        <a href="index.html" class="hover:text-blue-400 transition">Home</a>
-        <a href="services.html" class="hover:text-blue-400 transition">Services</a>
-        <a href="portfolio.html" class="hover:text-blue-400 transition">Portfolio</a>
-        <a href="pricing.html" class="hover:text-blue-400 transition">Pricing</a>
-        <a href="why-us.html" class="hover:text-blue-400 transition">Why Us</a>
-        <a href="contact.html" class="text-blue-400 transition">Contact</a>
+        <a href="index.html" class="hover:text-blue-400 transition">Overview</a>
+        <a href="leads-vault.html" class="hover:text-blue-400 transition">Leads Vault (28+)</a>
+        <a href="features.html" class="hover:text-blue-400 transition">Multi-AI &amp; Features</a>
+        <a href="how-it-works.html" class="hover:text-blue-400 transition">How It Works</a>
+        <a href="pricing.html" class="hover:text-blue-400 transition">Pricing &amp; ROI</a>
+        <a href="contact.html" class="text-blue-400 transition font-bold">VIP Support</a>
       </nav>
 
       <div class="hidden sm:flex items-center gap-3">
-        <a href="https://wa.me/918808129388" target="_blank" class="px-4 py-2 rounded-xl btn-whatsapp-glow text-xs flex items-center gap-2">
-          <i class="fab fa-whatsapp text-sm"></i> <span>WhatsApp Us</span>
+        <a href="https://wa.me/918808129388" target="_blank" class="px-3.5 py-2 rounded-xl btn-glass text-xs font-semibold flex items-center gap-1.5">
+          <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span>WhatsApp Us</span>
         </a>
+        <button onclick="openCheckoutModal()" class="px-4 py-2 rounded-xl btn-primary-glow text-xs font-bold cursor-pointer">
+          <span>Get CRM for &#8377;1,999</span>
+        </button>
       </div>
 
       <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300">
@@ -79,12 +82,12 @@
     </div>
 
     <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
-      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Home</a>
-      <a href="services.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Services</a>
-      <a href="portfolio.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Portfolio</a>
-      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing</a>
-      <a href="why-us.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Why Us</a>
-      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Contact</a>
+      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Overview</a>
+      <a href="leads-vault.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Leads Vault (28+ Global)</a>
+      <a href="features.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Multi-AI &amp; Features</a>
+      <a href="how-it-works.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">How It Works</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing &amp; ROI</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">VIP Support</a>
     </div>
   </header>
 
@@ -92,116 +95,103 @@
   <section class="py-16 sm:py-24 text-center">
     <div class="max-w-4xl mx-auto px-4">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 mb-6">
-        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Start The Conversation</span>
+        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Direct Founder Line</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mb-4">
-        Direct Founder Consultation
+        VIP WhatsApp Support &amp; Instant Activation
       </h1>
       <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-        Reach out directly to Mohammad Hamza and Farhan Attari. We typically respond within 15 minutes.
+        Need assistance with your license key, ZIP download, or custom setup? Reach out directly to founders Mohammad Hamza and Farhan Attari.
       </p>
     </div>
   </section>
 
   <!-- Contact Grid -->
   <section class="pb-24">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         
-        <!-- Contact Cards -->
-        <div class="lg:col-span-5 space-y-4">
-          
-          <a href="https://wa.me/918808129388" target="_blank" class="glass-panel p-5 flex items-center gap-4 glass-panel-hover block">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl">
-              <i class="fab fa-whatsapp"></i>
-            </div>
-            <div>
-              <span class="text-xs text-slate-400 block">WhatsApp Founder Line</span>
-              <span class="text-sm font-bold text-white font-mono">+91 8808129388</span>
-            </div>
-          </a>
-
-          <a href="tel:+917233862626" class="glass-panel p-5 flex items-center gap-4 glass-panel-hover block">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <div>
-              <span class="text-xs text-slate-400 block">Direct Phone Line</span>
-              <span class="text-sm font-bold text-white font-mono">+91 7233862626</span>
-            </div>
-          </a>
-
-          <div class="glass-panel p-5 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 text-xl">
-              <i class="fas fa-location-dot"></i>
-            </div>
-            <div>
-              <span class="text-xs text-slate-400 block">Engineering Studio</span>
-              <span class="text-sm font-semibold text-white">Kanpur, UP, India &bull; Serving Global</span>
-            </div>
+        <!-- Hamza -->
+        <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20need%20support%20or%20activation%20for%20Outreach%20Studio%20Pro" target="_blank" class="glass-panel p-6 sm:p-8 flex items-center gap-5 glass-panel-hover block">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shrink-0">
+            <i class="fab fa-whatsapp"></i>
           </div>
+          <div>
+            <span class="text-[11px] font-mono font-bold text-emerald-400 uppercase tracking-wider block">Lead Developer &bull; Founder</span>
+            <h3 class="text-lg font-bold text-white font-heading">Mohammad Hamza</h3>
+            <span class="text-xs font-mono text-slate-300 block mt-1">+91 8808129388</span>
+            <span class="text-[11px] text-slate-500 block mt-1">Typical reply: &lt; 15 mins on WhatsApp</span>
+          </div>
+        </a>
 
-          <div class="glass-panel p-6 bg-gradient-to-br from-blue-950/40 to-slate-900/60 border-blue-500/20">
-            <span class="text-xs font-bold text-white uppercase tracking-wider font-mono block mb-2">Business Hours</span>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Monday &ndash; Sunday &bull; 9:00 AM &ndash; 11:00 PM IST<br>
-              Urgent client emergency SLA: 24/7 on WhatsApp
+        <!-- Farhan -->
+        <a href="https://wa.me/917233862626?text=Hi%20Farhan%2C%20I%20want%20to%20activate%20Outreach%20Studio%20Pro" target="_blank" class="glass-panel p-6 sm:p-8 flex items-center gap-5 glass-panel-hover block">
+          <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl shrink-0">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-mono font-bold text-blue-400 uppercase tracking-wider block">Merchant &bull; Commercial Operations</span>
+            <h3 class="text-lg font-bold text-white font-heading">Farhan Attari</h3>
+            <span class="text-xs font-mono text-slate-300 block mt-1">+91 7233862626</span>
+            <span class="text-[11px] text-slate-500 block mt-1">UPI &amp; Corporate Invoicing Support</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- FAQ Card -->
+      <div class="glass-panel p-8">
+        <h3 class="text-lg font-bold text-white mb-4 font-heading">Frequently Asked Questions</h3>
+        
+        <div class="space-y-4 text-xs sm:text-sm text-slate-300">
+          <div>
+            <strong class="text-white block mb-1">How will I receive the software after paying &#8377;1,999?</strong>
+            <p class="text-xs text-slate-400">
+              Immediately upon completing your payment via UPI or WhatsApp, our automated bot sends you the direct ZIP download link and license activation key.
             </p>
           </div>
 
-        </div>
+          <div class="pt-3 border-t border-white/[0.06]">
+            <strong class="text-white block mb-1">Can I run this on Windows and Mac?</strong>
+            <p class="text-xs text-slate-400">
+              Yes! The software includes a 1-click executable batch file (<code class="text-blue-300">LAUNCH_GLOBAL_OUTREACH_STUDIO.bat</code>) for Windows, and standard Python support for macOS &amp; Linux.
+            </p>
+          </div>
 
-        <!-- Consultation Form -->
-        <div class="lg:col-span-7">
-          <div class="glass-panel p-6 sm:p-8">
-            <h3 class="text-lg font-bold text-white mb-2 font-heading">Submit Project Details</h3>
-            <p class="text-xs text-slate-400 mb-6">Tell us about your project and we will prepare a technical breakdown and estimate.</p>
-            
-            <form action="https://wa.me/918808129388" method="GET" target="_blank" class="space-y-4">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">Your Name</label>
-                  <input type="text" name="name" placeholder="Mohammad Hamza" required class="w-full px-4 py-3 bg-slate-900/90 border border-white/[0.1] rounded-xl text-white text-xs focus:outline-none focus:border-blue-500 transition">
-                </div>
-                <div>
-                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">Phone / WhatsApp</label>
-                  <input type="text" name="phone" placeholder="+91 8808129388" required class="w-full px-4 py-3 bg-slate-900/90 border border-white/[0.1] rounded-xl text-white text-xs focus:outline-none focus:border-blue-500 transition">
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Project Type</label>
-                <select name="service" class="w-full px-4 py-3 bg-slate-900/90 border border-white/[0.1] rounded-xl text-white text-xs focus:outline-none focus:border-blue-500 transition">
-                  <option value="Custom Website Development">Custom Website Development (0.4s Speed)</option>
-                  <option value="High-Converting E-Commerce Store">High-Converting E-Commerce Store</option>
-                  <option value="Mobile App Development">Mobile App (iOS &amp; Android)</option>
-                  <option value="Website Speed Optimization">Website Speed Optimization (Fix Slow Site)</option>
-                  <option value="AI & Automation Integration">AI &amp; Automation Integration</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Brief Project Description</label>
-                <textarea rows="3" name="details" placeholder="Tell us about your requirements, current website, or target launch date..." class="w-full px-4 py-3 bg-slate-900/90 border border-white/[0.1] rounded-xl text-white text-xs focus:outline-none focus:border-blue-500 transition"></textarea>
-              </div>
-
-              <button type="submit" class="w-full py-3.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp text-sm"></i>
-                <span>Submit &amp; Open WhatsApp Chat &rarr;</span>
-              </button>
-            </form>
+          <div class="pt-3 border-t border-white/[0.06]">
+            <strong class="text-white block mb-1">Do I have to pay for AI API keys?</strong>
+            <p class="text-xs text-slate-400">
+              You can use Google's completely free Gemini API key tier (zero cost), or plug in your existing OpenAI, Claude, or DeepSeek keys.
+            </p>
           </div>
         </div>
-
       </div>
 
     </div>
   </section>
 
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 checkout-modal-backdrop">
+    <div class="glass-panel p-6 sm:p-8 max-w-lg w-full border-blue-500/40 relative shadow-2xl shadow-blue-600/30 bg-[#090d1a]">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-2 cursor-pointer">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="text-center mb-6">
+        <span class="inline-block px-3 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold font-mono uppercase mb-2">Instant Activation</span>
+        <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">Get Outreach Studio Pro</h3>
+        <div class="text-3xl font-black text-emerald-400 font-heading my-2">&#8377;1,999</div>
+      </div>
+      <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20buy%20Outreach%20Studio%20Pro%20for%20Rs%201999." target="_blank" class="w-full py-3.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center justify-center gap-2">
+        <i class="fab fa-whatsapp text-base"></i>
+        <span>Pay &#8377;1,999 via UPI &amp; Get Instant ZIP Link</span>
+      </a>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="border-t border-white/[0.08] bg-[#020409] py-12 text-xs text-slate-400 text-center">
-    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Direct founder access.</p>
+    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Direct Founder VIP Support.</p>
   </footer>
 
   <script src="script.js"></script>
