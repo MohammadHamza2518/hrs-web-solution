@@ -504,3 +504,53 @@ h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF;
   box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
 }
+
+
+/* ==========================================================================
+   MINIMAL PROFESSIONAL COMPARISON & ANIMATIONS
+   ========================================================================== */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 35px -5px rgba(59, 130, 246, 0.35), inset 0 0 20px -10px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 55px 0px rgba(99, 102, 241, 0.45), inset 0 0 30px -10px rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.7);
+  }
+}
+
+.glow-border-pulse {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes btn-shimmer {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  50%, 100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.btn-shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: translateX(-150%) skewX(-20deg);
+  animation: btn-shimmer 3.5s infinite;
+  pointer-events: none;
+}
+
+.comparison-row {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.comparison-row:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
