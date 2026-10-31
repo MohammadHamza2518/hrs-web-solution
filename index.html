@@ -1018,27 +1018,46 @@
     </div>
   </section>
 
-  <!-- 8. INTERACTIVE AGENCY ROI CALCULATOR -->
-  <section class="py-20 border-t border-white/[0.06] bg-slate-950/40">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- 8. INTERACTIVE AGENCY ROI CALCULATOR (1 CLIENT = 100x ROI) -->
+  <section class="py-20 border-t border-white/[0.06] bg-slate-950/40 relative overflow-hidden scroll-mt-24" id="roi">
+    <!-- Ambient Backdrop Lighting -->
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 blur-[110px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Revenue Calculator</span>
-        <h2 class="text-2xl sm:text-4xl font-black text-white mt-2 font-heading">
-          Calculate Your Client Acquisition ROI
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider mb-3">
+          <i class="fas fa-calculator text-emerald-400"></i> The "1 Client = 100x ROI" Formula
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-black text-white font-heading tracking-tight leading-snug">
+          Close Just 1 Foreign Client &amp; 100x Your &#8377;1,999 Investment
         </h2>
-        <p class="text-xs sm:text-sm text-slate-400 mt-2">
-          Adjust the sliders below to see your net profit from closing just a fraction of the 28 pre-loaded businesses.
+        <p class="text-xs sm:text-sm text-slate-400 mt-2.5 max-w-2xl mx-auto leading-relaxed">
+          See how closing even a single client at $1,000 to $2,500 from Dubai, the UK, or the US completely wipes out software costs and turns Outreach Studio Pro into an automated profit engine.
         </p>
+
+        <!-- Quick Scenario Presets -->
+        <div class="flex items-center justify-center gap-2 sm:gap-3 mt-6 flex-wrap">
+          <button type="button" onclick="setROIPreset(1, 80000, this)" class="roi-preset-btn">
+            <span>&#9889; Solo Closer: 1 Client (&#8377;80k / ~$960)</span>
+          </button>
+          <button type="button" onclick="setROIPreset(2, 80000, this)" class="roi-preset-btn active">
+            <span>&#128293; Growth: 2 Clients (&#8377;1.6L / ~$1,920)</span>
+          </button>
+          <button type="button" onclick="setROIPreset(5, 120000, this)" class="roi-preset-btn">
+            <span>&#128640; Agency Scale: 5 Clients (&#8377;6.0L / ~$7,200)</span>
+          </button>
+        </div>
       </div>
 
-      <div class="glass-panel p-6 sm:p-10 border-white/[0.1] relative">
+      <div class="glass-panel p-6 sm:p-10 border-white/[0.1] relative shadow-2xl shadow-emerald-950/20">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
+          <!-- Left: Interactive Sliders -->
           <div class="lg:col-span-7 space-y-6">
             <div>
               <div class="flex justify-between text-xs font-semibold mb-2">
-                <span class="text-slate-300">Clients Closed from Pre-Loaded 28 Leads</span>
+                <span class="text-slate-300">Foreign Clients Closed</span>
                 <span id="dealsValText" class="text-blue-400 font-mono font-bold">2 Clients Closed</span>
               </div>
               <input type="range" id="dealsSlider" min="1" max="10" step="1" value="2" class="roi-slider">
@@ -1046,31 +1065,240 @@
 
             <div>
               <div class="flex justify-between text-xs font-semibold mb-2">
-                <span class="text-slate-300">Your Average Service / Retainer Fee</span>
-                <span id="feeValText" class="text-emerald-400 font-mono font-bold">&#8377;80,000 (~$1,000)</span>
+                <span class="text-slate-300">Average Retainer / Project Fee (per Client)</span>
+                <span id="feeValText" class="text-emerald-400 font-mono font-bold">&#8377;80,000 <span class="text-slate-400 font-normal text-xs">(~$960 USD)</span></span>
               </div>
               <input type="range" id="feeSlider" min="25000" max="300000" step="5000" value="80000" class="roi-slider">
             </div>
 
             <p class="text-[11px] text-slate-400 leading-relaxed italic">
-              Standard pricing: A basic retainer for a Dubai, UK, or European firm sells easily for &#8377;80,000 to &#8377;1,50,000 ($1,000 - $1,800).
+              <i class="fas fa-info-circle text-blue-400 mr-1"></i> Industry benchmark: A basic web or lead-gen retainer for a Dubai, UK, or European firm sells easily for &#8377;80,000 to &#8377;1,80,000 ($1,000 - $2,200 USD).
             </p>
           </div>
 
-          <div class="lg:col-span-5 bg-slate-900/90 p-6 rounded-2xl border border-white/[0.08] text-center">
-            <span class="text-xs text-slate-400 uppercase font-mono block">Estimated Gross Revenue</span>
-            <div id="totalRevenueDisplay" class="text-3xl sm:text-4xl font-black text-emerald-400 my-2 font-heading">
-              +&#8377;1,60,000
+          <!-- Right: Visual Net Profit Breakdown -->
+          <div class="lg:col-span-5 bg-[#070c1b]/95 p-6 sm:p-7 rounded-2xl border border-blue-500/25 text-left relative overflow-hidden shadow-2xl shadow-blue-950/40">
+            <div class="absolute -top-12 -right-12 w-36 h-36 bg-emerald-500/10 blur-[50px] rounded-full pointer-events-none"></div>
+            
+            <div class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center justify-between">
+              <span>Net Profit Breakdown</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px]">Instant Math</span>
             </div>
-            <div class="inline-block px-3 py-1 rounded-full text-xs font-bold font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 mb-4" id="roiMultiplierDisplay">
-              7,904% Net ROI
+
+            <div class="space-y-2.5 pb-4 border-b border-white/[0.08] text-xs">
+              <div class="flex items-center justify-between text-slate-300">
+                <span>Gross Revenue:</span>
+                <span id="grossRevenueText" class="font-mono font-bold text-white text-xs sm:text-sm">+&#8377;1,60,000 <span class="text-slate-400 font-normal text-[11px]">(~$1,916)</span></span>
+              </div>
+              <div class="flex items-center justify-between text-slate-300">
+                <span>Software License:</span>
+                <span class="font-mono font-bold text-rose-400 text-xs">-&#8377;1,999 <span class="text-slate-400 font-normal text-[11px]">(One-Time)</span></span>
+              </div>
             </div>
-            <button onclick="openCheckoutModal()" class="w-full py-3 rounded-xl btn-primary-glow text-xs font-bold block cursor-pointer">
-              Invest &#8377;1,999 Once &rarr;
+
+            <div class="py-4">
+              <span class="text-[11px] text-slate-400 uppercase font-mono block">Your Pure Net Profit</span>
+              <div id="netProfitDisplay" class="text-3xl sm:text-4xl font-black text-emerald-400 my-1 font-heading tracking-tight leading-none">
+                +&#8377;1,58,001
+              </div>
+              <div id="usdProfitDisplay" class="text-xs text-slate-400 font-mono mt-1">
+                ~$1,895 USD Net In Pocket
+              </div>
+            </div>
+
+            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 mb-4 w-full justify-center" id="roiMultiplierDisplay">
+              <i class="fas fa-arrow-trend-up text-emerald-400"></i>
+              <span id="roiPctText">7,904% Net ROI (79x Return)</span>
+            </div>
+
+            <button onclick="openCheckoutModal()" class="w-full py-3.5 rounded-xl btn-primary-glow text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-blue-600/30 hover:scale-[1.02] transition-all">
+              <i class="fas fa-bolt text-amber-300"></i>
+              <span>Claim Lifetime Access (&#8377;1,999) &rarr;</span>
             </button>
+
+            <div class="text-[10px] text-slate-400 text-center mt-3 flex items-center justify-center gap-1.5">
+              <i class="fas fa-shield-halved text-emerald-400"></i>
+              <span>30-Day 100% Money-Back Guarantee</span>
+            </div>
           </div>
 
         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. OBJECTION-KILLING FAQ ACCORDION -->
+  <section class="py-20 border-t border-white/[0.06] bg-slate-950/60 scroll-mt-24" id="faq">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">Zero Objections Left</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-white mt-2 font-heading">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2.5 leading-relaxed">
+          Everything you need to know before securing your &#8377;1,999 Lifetime Commercial License.
+        </p>
+      </div>
+
+      <div class="space-y-3.5" id="faqAccordion">
+        
+        <!-- FAQ 1: Compatibility -->
+        <div class="faq-item active">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-mono font-bold">01</span>
+              <span>Will Outreach Studio Pro run on my Windows or Mac laptop? Do I need coding skills?</span>
+            </span>
+            <div class="faq-icon-pod">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="mb-2.5">
+              <strong class="text-white">Zero coding required!</strong> Outreach Studio Pro is built specifically for non-technical agency owners, consultants, and freelancers:
+            </p>
+            <ul class="space-y-1.5 pl-4 list-disc text-slate-300 mb-3">
+              <li><strong class="text-emerald-400">Windows:</strong> Double-click the included <code class="text-blue-300 font-mono bg-blue-950/50 px-1.5 py-0.5 rounded">LAUNCH_GLOBAL_OUTREACH_STUDIO.bat</code> file. It spins up the local server and opens your browser dashboard automatically in under 45 seconds.</li>
+              <li><strong class="text-purple-400">Mac &amp; Linux:</strong> Simply open Terminal and run <code class="text-blue-300 font-mono bg-blue-950/50 px-1.5 py-0.5 rounded">python server.py</code> to launch immediately.</li>
+            </ul>
+            <p>
+              You also receive an easy video installation guide, plus direct 1-on-1 founder WhatsApp support from Mohammad Hamza if you need any setup assistance.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2: WhatsApp Ban Safety -->
+        <div class="faq-item">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-mono font-bold">02</span>
+              <span>Is there any risk of my WhatsApp number getting banned or flagged?</span>
+            </span>
+            <div class="faq-icon-pod">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="mb-2.5">
+              <strong class="text-emerald-400">Zero Ban Risk.</strong> Unlike shady bulk spamming tools that blast thousands of messages from unauthorized APIs, Outreach Studio Pro works through direct browser automation with official WhatsApp Web:
+            </p>
+            <ul class="space-y-1.5 pl-4 list-disc text-slate-300 mb-2">
+              <li><strong class="text-white">Human Delay Jitter:</strong> Automatically inserts randomized 45s to 90s natural pauses between outgoing chats to mimic human behavior.</li>
+              <li><strong class="text-white">Daily Safe Limits:</strong> Built-in limiter capping dispatches at 40&ndash;50 verified prospects daily to stay well under Meta's safety thresholds.</li>
+              <li><strong class="text-white">Dynamic AI Personalization:</strong> No two pitches are identical. Every message contains unique business hooks and context, eliminating copy-paste spam triggers.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FAQ 3: Instant Delivery -->
+        <div class="faq-item">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-mono font-bold">03</span>
+              <span>How fast do I receive the software after making payment?</span>
+            </span>
+            <div class="faq-icon-pod">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="mb-2">
+              <strong class="text-white">Instant delivery in under 60 seconds.</strong> As soon as your &#8377;1,999 UPI / QR code payment is confirmed, you instantly receive:
+            </p>
+            <ul class="space-y-1.5 pl-4 list-disc text-slate-300 mb-2">
+              <li>High-speed direct Google Drive download link for the complete ZIP archive.</li>
+              <li>100% Unencrypted Python Flask source code + modern dark CRM web app.</li>
+              <li>Pre-loaded verified global commercial leads database (<code class="text-blue-300 font-mono bg-blue-950/50 px-1 py-0.5 rounded">leads.db</code>) with high-ticket prospects.</li>
+              <li>1-Click BAT launcher &amp; step-by-step video setup guide.</li>
+              <li>Lifetime Commercial License certificate with lifetime free updates.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FAQ 4: AI API Keys & Extra Costs -->
+        <div class="faq-item">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-mono font-bold">04</span>
+              <span>Do I need to pay extra for AI API keys (Claude, GPT-4o, Gemini)?</span>
+            </span>
+            <div class="faq-icon-pod">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="mb-2">
+              <strong class="text-white">Zero recurring fees to us ever.</strong> You have complete freedom and direct ownership of your AI keys:
+            </p>
+            <ul class="space-y-1.5 pl-4 list-disc text-slate-300 mb-2">
+              <li><strong class="text-emerald-400">Google Gemini:</strong> Has a generous <strong>100% FREE tier</strong> that works out of the box at ₹0 cost!</li>
+              <li><strong class="text-blue-400">Claude 3.7 &amp; GPT-4o:</strong> Direct official API pricing is extremely cheap—generating 500 hyper-personalized pitches costs just &#8377;40 to &#8377;60 (~$0.60 USD) total.</li>
+              <li>You will never be locked into monthly SaaS markups of $99&ndash;$149/month charged by traditional scrapers.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FAQ 5: 30-Day Money-Back Guarantee -->
+        <div class="faq-item">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-mono font-bold">05</span>
+              <span>What is your 30-Day Money-Back Guarantee policy?</span>
+            </span>
+            <div class="faq-icon-pod">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="mb-2">
+              <strong class="text-white">100% Risk-Free Guarantee.</strong> We stand behind Outreach Studio Pro with absolute confidence:
+            </p>
+            <p class="mb-2">
+              Try the CRM for a full 30 days. Explore the pre-loaded global prospects, run the AI pitch generator, and send targeted outreach. If you do not feel the software saves you at least 20 hours a month or gives you a massive advantage in pitching clients, message Mohammad Hamza on WhatsApp for a prompt 100% refund.
+            </p>
+            <p class="text-emerald-400 font-semibold">
+              No questions asked. No hidden conditions.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6: Customization & Team Rights -->
+        <div class="faq-item">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-mono font-bold">06</span>
+              <span>Can I customize, white-label, or use this for my entire agency team?</span>
+            </span>
+            <div class="faq-icon-pod">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </button>
+          <div class="faq-content">
+            <p class="mb-2">
+              <strong class="text-white">Yes, 100%!</strong> You receive uncompiled, clean source code with full commercial usage rights:
+            </p>
+            <ul class="space-y-1.5 pl-4 list-disc text-slate-300">
+              <li>Add your own agency branding, logo, and color themes.</li>
+              <li>Customize lead fields for any niche: Real Estate, Dental Clinics, E-commerce, Gyms, or SaaS.</li>
+              <li>Host the web app on Render, AWS, DigitalOcean, or a private VPS for your remote team without paying monthly per-user SaaS licenses.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQ Bottom Callout -->
+      <div class="mt-10 p-6 rounded-2xl bg-blue-950/20 border border-blue-500/20 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-left">
+          <h4 class="text-sm font-bold text-white font-heading">Have a unique question not listed here?</h4>
+          <p class="text-xs text-slate-400 mt-0.5">Chat directly with founders Mohammad Hamza &amp; Farhan Attari on WhatsApp.</p>
+        </div>
+        <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20have%20a%20question%20about%20Outreach%20Studio%20Pro" target="_blank" class="px-5 py-2.5 rounded-xl btn-glass text-xs font-semibold flex items-center gap-2 flex-shrink-0 hover:text-emerald-400 transition">
+          <i class="fab fa-whatsapp text-emerald-400 text-sm"></i>
+          <span>Ask on WhatsApp &rarr;</span>
+        </a>
       </div>
 
     </div>
@@ -1253,7 +1481,8 @@
           <ul class="space-y-2.5">
             <li><a href="index.html" class="hover:text-white transition">Product Overview</a></li>
             <li><a href="#reviews" class="hover:text-white transition">Verified Agency Reviews</a></li>
-            <li><a href="features.html" class="hover:text-white transition">Multi-AI Pitch Engine</a></li>
+            <li><a href="#roi" class="hover:text-white transition">100x ROI Calculator</a></li>
+            <li><a href="#faq" class="hover:text-white transition">Frequently Asked Questions</a></li>
             <li><a href="how-it-works.html" class="hover:text-white transition">Agency Playbook</a></li>
             <li><a href="pricing.html" class="hover:text-white transition">&#8377;1,999 Deal vs Apollo</a></li>
           </ul>

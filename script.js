@@ -122,6 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const feeValText = document.getElementById('feeValText');
   const totalRevenueDisplay = document.getElementById('totalRevenueDisplay');
   const roiMultiplierDisplay = document.getElementById('roiMultiplierDisplay');
+  const grossRevenueText = document.getElementById('grossRevenueText');
+  const netProfitDisplay = document.getElementById('netProfitDisplay');
+  const usdProfitDisplay = document.getElementById('usdProfitDisplay');
+  const roiPctText = document.getElementById('roiPctText');
 
   function formatINR(number) {
     return new Intl.NumberFormat('en-IN', {
@@ -136,20 +140,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const deals = parseInt(dealsSlider.value, 10);
     const feeInINR = parseInt(feeSlider.value, 10);
 
-    dealsValText.textContent = `${deals} Client${deals > 1 ? 's' : ''} Closed`;
-    feeValText.textContent = formatINR(feeInINR);
+    const approxUSDPerFee = Math.round(feeInINR / 83.5);
+    if (dealsValText) {
+      dealsValText.textContent = `${deals} Client${deals > 1 ? 's' : ''} Closed`;
+    }
+    if (feeValText) {
+      feeValText.innerHTML = `${formatINR(feeInINR)} <span class="text-slate-400 font-normal text-xs">(~$${approxUSDPerFee.toLocaleString()} USD)</span>`;
+    }
 
     const grossRevenue = deals * feeInINR;
     const netProfit = grossRevenue - 1999;
     const roiPercentage = Math.round((netProfit / 1999) * 100);
+    const roiMultiplier = Math.round(netProfit / 1999);
+    const approxUSDNet = Math.round(netProfit / 83.5);
+    const approxUSDGross = Math.round(grossRevenue / 83.5);
 
+    if (grossRevenueText) {
+      grossRevenueText.innerHTML = `+${formatINR(grossRevenue)} <span class="text-slate-400 font-normal text-[11px]">(~$${approxUSDGross.toLocaleString()})</span>`;
+    }
+    if (netProfitDisplay) {
+      netProfitDisplay.textContent = `+${formatINR(netProfit)}`;
+    }
+    if (usdProfitDisplay) {
+      usdProfitDisplay.textContent = `~$${approxUSDNet.toLocaleString()} USD Net In Pocket`;
+    }
+    if (roiPctText) {
+      roiPctText.textContent = `${roiPercentage.toLocaleString('en-IN')}% Net ROI (${roiMultiplier}x Return)`;
+    }
     if (totalRevenueDisplay) {
       totalRevenueDisplay.textContent = `+${formatINR(grossRevenue)}`;
     }
-    if (roiMultiplierDisplay) {
+    if (roiMultiplierDisplay && !roiPctText) {
       roiMultiplierDisplay.textContent = `${roiPercentage.toLocaleString('en-IN')}% Net ROI`;
     }
   }
+
+  window.setROIPreset = function(deals, fee, btn) {
+    if (dealsSlider && feeSlider) {
+      dealsSlider.value = deals;
+      feeSlider.value = fee;
+      updateAgencyROI();
+    }
+    document.querySelectorAll('.roi-preset-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  };
 
   if (dealsSlider && feeSlider) {
     dealsSlider.addEventListener('input', updateAgencyROI);
@@ -224,4 +258,211 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+// 9. FAQ Accordion Toggle
+  window.toggleFaq = function(button) {
+    const item = button.closest('.faq-item');
+    if (!item) return;
+    const isActive = item.classList.contains('active');
+    
+    // Close other FAQ items for a clean, focused accordion effect
+    const allItems = document.querySelectorAll('.faq-item');
+    allItems.forEach(i => {
+      if (i !== item) i.classList.remove('active');
+    });
+
+    if (isActive) {
+      item.classList.remove('active');
+    } else {
+      item.classList.add('active');
+    }
+  };
+
+  // 10. Live FOMO / Social Proof Sales Ticker
+  const fomoEvents = [
+    {
+      name: "Rohan S.",
+      city: "Noida, UP",
+      action: "Claimed Lifetime Commercial License",
+      time: "3m ago",
+      badge: "Verified Buyer",
+      icon: "fa-bolt",
+      colorClass: "amber"
+    },
+    {
+      name: "Priya M.",
+      city: "Mumbai",
+      action: "Closed $2,200 aesthetic clinic client in Dubai",
+      time: "11m ago",
+      badge: "Agency Win",
+      icon: "fa-trophy",
+      colorClass: "emerald"
+    },
+    {
+      name: "Farhan A.",
+      city: "Kanpur",
+      action: "Extracted 140 fresh leads using Maps Scraper",
+      time: "18m ago",
+      badge: "Lead Discovery",
+      icon: "fa-bullseye",
+      colorClass: "blue"
+    },
+    {
+      name: "Arjun K.",
+      city: "Bengaluru",
+      action: "Dispatched 45 AI-personalized pitches (0 bans)",
+      time: "24m ago",
+      badge: "WhatsApp Safe",
+      icon: "fa-shield-halved",
+      colorClass: "cyan"
+    },
+    {
+      name: "Vikram D.",
+      city: "Delhi NCR",
+      action: "Booked 2 website redesign discovery calls",
+      time: "31m ago",
+      badge: "Discovery Call",
+      icon: "fa-calendar-check",
+      colorClass: "emerald"
+    },
+    {
+      name: "Sameer P.",
+      city: "Hyderabad",
+      action: "Claimed 1-Click BAT Lifetime Access (₹1,999)",
+      time: "42m ago",
+      badge: "Verified Buyer",
+      icon: "fa-bolt",
+      colorClass: "amber"
+    },
+    {
+      name: "Ananya R.",
+      city: "Pune",
+      action: "Closed £1,800 UK dental clinic retainer",
+      time: "52m ago",
+      badge: "Agency Win",
+      icon: "fa-trophy",
+      colorClass: "emerald"
+    },
+    {
+      name: "Launch Batch Alert",
+      city: "India",
+      action: "Only 7 Lifetime Licenses left at ₹1,999 launch price",
+      time: "Live Deal",
+      badge: "Limited Stock",
+      icon: "fa-fire",
+      colorClass: "rose"
+    }
+  ];
+
+  function initFomoTicker() {
+    let container = document.querySelector('.fomo-ticker-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'fomo-ticker-container';
+      container.innerHTML = `
+        <div id="fomoToast" class="fomo-toast">
+          <div id="fomoToastIcon" class="fomo-toast-icon amber">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <div class="fomo-toast-content">
+            <div class="fomo-toast-title">
+              <span id="fomoToastName">Rohan S.</span>
+              <span class="text-slate-400 font-normal text-[11px]" id="fomoToastCity">(Noida, UP)</span>
+              <i class="fas fa-check-circle text-emerald-400 text-[10px] ml-0.5"></i>
+            </div>
+            <div class="fomo-toast-action" id="fomoToastAction">Claimed Lifetime Commercial License</div>
+            <div class="fomo-toast-meta">
+              <span id="fomoToastTime">3m ago</span>
+              <span>&bull;</span>
+              <span class="text-emerald-400 font-medium" id="fomoToastBadge">Verified Buyer</span>
+            </div>
+          </div>
+          <button type="button" class="fomo-close-btn" id="fomoCloseBtn" title="Dismiss">&times;</button>
+        </div>
+      `;
+      document.body.appendChild(container);
+    }
+
+    const toast = document.getElementById('fomoToast');
+    const toastIcon = document.getElementById('fomoToastIcon');
+    const toastName = document.getElementById('fomoToastName');
+    const toastCity = document.getElementById('fomoToastCity');
+    const toastAction = document.getElementById('fomoToastAction');
+    const toastTime = document.getElementById('fomoToastTime');
+    const toastBadge = document.getElementById('fomoToastBadge');
+    const closeBtn = document.getElementById('fomoCloseBtn');
+
+    if (!toast) return;
+
+    let currentIndex = 0;
+    let isPaused = false;
+    let hideTimeout = null;
+    let nextTimeout = null;
+
+    toast.addEventListener('mouseenter', () => { isPaused = true; });
+    toast.addEventListener('mouseleave', () => { isPaused = false; });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hideToast();
+        clearTimeout(nextTimeout);
+        nextTimeout = setTimeout(showNextToast, 35000);
+      });
+    }
+
+    function showToast(event) {
+      if (!event) return;
+      if (toastName) toastName.textContent = event.name;
+      if (toastCity) toastCity.textContent = `(${event.city})`;
+      if (toastAction) toastAction.textContent = event.action;
+      if (toastTime) toastTime.textContent = event.time;
+      if (toastBadge) toastBadge.textContent = event.badge;
+
+      if (toastIcon) {
+        toastIcon.className = `fomo-toast-icon ${event.colorClass}`;
+        toastIcon.innerHTML = `<i class="fas ${event.icon}"></i>`;
+      }
+
+      toast.classList.add('show');
+
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        if (!isPaused) {
+          hideToast();
+        } else {
+          const unpauseInterval = setInterval(() => {
+            if (!isPaused) {
+              clearInterval(unpauseInterval);
+              hideToast();
+            }
+          }, 1000);
+        }
+      }, 5500);
+    }
+
+    function hideToast() {
+      toast.classList.remove('show');
+    }
+
+    function showNextToast() {
+      currentIndex = (currentIndex + 1) % fomoEvents.length;
+      showToast(fomoEvents[currentIndex]);
+      scheduleNext();
+    }
+
+    function scheduleNext() {
+      clearTimeout(nextTimeout);
+      const delay = Math.floor(Math.random() * 8000) + 18000;
+      nextTimeout = setTimeout(showNextToast, delay);
+    }
+
+    // First appearance after 3.5 seconds
+    setTimeout(() => {
+      showToast(fomoEvents[0]);
+      scheduleNext();
+    }, 3500);
+  }
+
+  // Initialize FOMO Ticker
+  initFomoTicker();
 });
