@@ -1,20 +1,19 @@
 /* ==========================================================================
-   OUTREACH STUDIO PRO — ULTRA-LUXURY SAAS SALES DESIGN SYSTEM
-   by HRS Web Solutions | Obsidian Minimalist Aesthetic | Silicon Valley Grade
+   OUTREACH STUDIO PRO — NEXT-GEN B2B CLIENT ACQUISITION CRM
+   by HRS Web Solutions | Ultra-Refined Obsidian Aesthetic | Modern SaaS Standard
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   --bg-dark: #040711;
-  --bg-card: rgba(13, 19, 36, 0.75);
+  --bg-card: rgba(13, 19, 36, 0.72);
   --bg-card-hover: rgba(18, 26, 48, 0.95);
   --border-glass: rgba(255, 255, 255, 0.08);
-  --border-glass-hover: rgba(59, 130, 246, 0.45);
+  --border-glass-hover: rgba(59, 130, 246, 0.4);
   
   --primary-blue: #3B82F6;
   --primary-indigo: #6366F1;
-  --primary-violet: #8B5CF6;
   --accent-cyan: #06B6D4;
   --accent-emerald: #10B981;
   --accent-amber: #F59E0B;
@@ -23,8 +22,8 @@
   --text-muted: #94A3B8;
   --text-sub: #64748B;
   
-  --font-heading: 'Outfit', -apple-system, sans-serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -51,10 +50,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Scrollbar */
+/* Custom Smooth Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #040711;
@@ -62,7 +61,6 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
@@ -77,7 +75,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #FFFFFF 20%, #CBD5E1 60%, #94A3B8 100%);
+  background: linear-gradient(135deg, #FFFFFF 25%, #E2E8F0 60%, #94A3B8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -94,39 +92,39 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-text-fill-color: transparent;
 }
 
-/* Luxury Glass Cards */
+/* Luxury Glassmorphic Panels */
 .glass-panel {
   background: var(--bg-card);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-glass);
   border-radius: 20px;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-hover:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--border-glass-hover);
-  box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.22);
+  box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.2);
 }
 
-/* Background Grids */
+/* Background Blueprint Mesh */
 .bg-mesh-grid {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-/* Ambient Radial Glows */
+/* Refined Radial Lighting */
 .ambient-glow-top {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 1000px;
-  height: 550px;
-  background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.18) 0%, rgba(99, 102, 241, 0.1) 45%, transparent 70%);
+  width: 900px;
+  height: 480px;
+  background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.16) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 75%);
   pointer-events: none;
   z-index: 0;
 }
@@ -135,21 +133,21 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 35%;
   right: 5%;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 65%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Primary Button Styling */
+/* High-Ticket Buttons */
 .btn-primary-glow {
   background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
   color: #FFFFFF;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 25px -3px rgba(37, 99, 235, 0.45);
-  transition: all 0.25s ease;
+  box-shadow: 0 0 25px -4px rgba(37, 99, 235, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-primary-glow:hover {
   background: linear-gradient(135deg, #1D4ED8 0%, #4338CA 100%);
@@ -188,18 +186,18 @@ h1, h2, h3, h4, h5, h6 {
 .status-dot-pulse {
   position: relative;
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background-color: #10B981;
 }
 .status-dot-pulse::after {
   content: '';
   position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 16px;
-  height: 16px;
+  top: -3.5px;
+  left: -3.5px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background-color: rgba(16, 185, 129, 0.4);
   animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
@@ -214,7 +212,7 @@ h1, h2, h3, h4, h5, h6 {
 .roi-slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 8px;
+  height: 7px;
   border-radius: 4px;
   background: #1e293b;
   outline: none;
@@ -223,8 +221,8 @@ h1, h2, h3, h4, h5, h6 {
 .roi-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #3B82F6;
   border: 3px solid #FFFFFF;
@@ -238,7 +236,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Checkout Modal */
 .checkout-modal-backdrop {
-  background: rgba(4, 7, 17, 0.85);
+  background: rgba(4, 7, 17, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+}
+
+/* Soft Image Transitions */
+.tab-img-fade {
+  transition: opacity 0.3s ease-in-out;
 }
