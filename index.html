@@ -944,76 +944,351 @@
   </section>
 
   <!-- 7. COMPETITOR COMPARISON: Why &#8377;1,999 Kills $149/mo Subscriptions -->
-  <section class="py-20 border-t border-white/[0.06]" id="comparison">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-24 border-t border-white/[0.06] relative overflow-hidden bg-gradient-to-b from-transparent via-blue-950/10 to-transparent" id="comparison">
+    <!-- Ambient subtle background lighting -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-600/10 blur-[130px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">Subscription Killer</span>
-        <h2 class="text-2xl sm:text-4xl font-black text-white mt-2 font-heading">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 text-xs font-mono font-bold uppercase tracking-wider mb-4">
+          <i class="fas fa-shield-alt text-blue-400"></i> The Ultimate Subscription Killer
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black text-white font-heading tracking-tight leading-tight">
           Outreach Studio Pro vs Industry Giants
         </h2>
-        <p class="text-sm sm:text-base text-slate-400 mt-3">
-          Why smart freelancers and agency owners are cancelling their $1,800/year subscriptions.
+        <p class="text-sm sm:text-base text-slate-400 mt-3 max-w-2xl mx-auto leading-relaxed">
+          Why smart freelancers and agency founders are cancelling their <strong class="text-white">$1,800/yr (&#8377;1.5 Lakh+) recurring bills</strong> and switching to our lifetime CRM.
         </p>
       </div>
 
-      <div class="glass-panel rounded-2xl overflow-hidden border border-white/[0.1] max-w-5xl mx-auto">
+      <!-- Comparison Glass Table Container -->
+      <div class="glass-panel rounded-3xl overflow-hidden border border-white/[0.12] shadow-2xl shadow-black/60 max-w-6xl mx-auto bg-[#070b18]/80 backdrop-blur-xl">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr class="bg-slate-900/90 border-b border-white/[0.08] text-slate-300">
-                <th class="p-4 sm:p-5 font-bold">Feature / Metric</th>
-                <th class="p-4 sm:p-5 font-bold text-blue-400 bg-blue-950/30">Outreach Studio Pro</th>
-                <th class="p-4 sm:p-5 font-bold text-slate-400">Apollo.io</th>
-                <th class="p-4 sm:p-5 font-bold text-slate-400">Instantly.ai</th>
-                <th class="p-4 sm:p-5 font-bold text-slate-400">D7 Lead Finder</th>
+              <tr class="bg-slate-900/95 border-b border-white/[0.1] text-slate-300">
+                <th class="p-4 sm:p-6 font-bold text-slate-400 uppercase text-[11px] tracking-wider w-1/4">
+                  Feature / Capability
+                </th>
+                
+                <!-- Highlight Column: Outreach Studio Pro -->
+                <th class="p-4 sm:p-6 font-bold bg-gradient-to-b from-blue-600/25 to-blue-950/40 border-x border-blue-500/40 relative w-[28%]">
+                  <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-[10px] font-bold uppercase tracking-wider mb-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Winner &bull; Lifetime Deal</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <img src="assets/images/hrs_icon.png" class="w-5 h-5 object-contain" alt="HRS">
+                    <span class="text-white font-extrabold text-base tracking-tight font-heading">
+                      Outreach Studio <span class="text-blue-400">PRO</span>
+                    </span>
+                  </div>
+                  <div class="text-[11px] text-emerald-400 font-medium mt-0.5">&#8377;1,999 One-Time &bull; No Subscriptions</div>
+                </th>
+
+                <!-- Competitor 1: Apollo.io -->
+                <th class="p-4 sm:p-6 font-bold text-slate-300 border-r border-white/[0.06] w-[16%]">
+                  <div class="text-slate-200 font-bold text-sm">Apollo.io</div>
+                  <div class="text-[11px] text-rose-400/90 font-mono mt-0.5">$99 / month</div>
+                  <div class="text-[10px] text-slate-500">($1,188 / year)</div>
+                </th>
+
+                <!-- Competitor 2: Instantly.ai -->
+                <th class="p-4 sm:p-6 font-bold text-slate-300 border-r border-white/[0.06] w-[16%]">
+                  <div class="text-slate-200 font-bold text-sm">Instantly.ai</div>
+                  <div class="text-[11px] text-rose-400/90 font-mono mt-0.5">$149 / month</div>
+                  <div class="text-[10px] text-slate-500">($1,788 / year)</div>
+                </th>
+
+                <!-- Competitor 3: D7 Lead Finder -->
+                <th class="p-4 sm:p-6 font-bold text-slate-300 w-[16%]">
+                  <div class="text-slate-200 font-bold text-sm">D7 Lead Finder</div>
+                  <div class="text-[11px] text-rose-400/90 font-mono mt-0.5">$59 / month</div>
+                  <div class="text-[10px] text-slate-500">($708 / year)</div>
+                </th>
               </tr>
             </thead>
+
             <tbody class="divide-y divide-white/[0.06] text-slate-300">
-              <tr class="hover:bg-slate-900/40">
-                <td class="p-4 sm:p-5 text-white font-semibold">Pricing Model</td>
-                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">&#8377;1,999 (~$24) Lifetime</td>
-                <td class="p-4 sm:p-5 text-rose-400 font-mono">$99 / month</td>
-                <td class="p-4 sm:p-5 text-rose-400 font-mono">$149 / month</td>
-                <td class="p-4 sm:p-5 text-rose-400 font-mono">$59 / month</td>
+              
+              <!-- Row 1: Pricing Model -->
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="p-4 sm:p-5 text-white font-semibold">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xs">
+                      <i class="fas fa-tag"></i>
+                    </span>
+                    <span>Pricing Model</span>
+                  </div>
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-blue-950/30 to-blue-900/10 border-x border-blue-500/30">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-xs whitespace-nowrap">
+                    <i class="fas fa-check-circle text-emerald-400"></i>
+                    <span>&#8377;1,999 One-Time Lifetime</span>
+                  </div>
+                  <div class="text-[11px] text-slate-400 mt-1">Never pay another rupee. Zero monthly lock-in.</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <span class="inline-flex items-center gap-1 text-rose-400 font-mono text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-redo-alt text-[10px]"></i> $99/mo ($1,188/yr)
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Recurring monthly fee</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <span class="inline-flex items-center gap-1 text-rose-400 font-mono text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-redo-alt text-[10px]"></i> $149/mo ($1,788/yr)
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Recurring monthly fee</div>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="inline-flex items-center gap-1 text-rose-400 font-mono text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-redo-alt text-[10px]"></i> $59/mo ($708/yr)
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Recurring monthly fee</div>
+                </td>
               </tr>
-              <tr class="hover:bg-slate-900/40">
-                <td class="p-4 sm:p-5 text-white font-semibold">Pre-Loaded Global Prospects</td>
-                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">28+ Verified Global</td>
-                <td class="p-4 sm:p-5 text-slate-400">Zero (Generic emails)</td>
-                <td class="p-4 sm:p-5 text-slate-400">Zero (Sending tool only)</td>
-                <td class="p-4 sm:p-5 text-slate-400">Zero (Raw unverified)</td>
+
+              <!-- Row 2: Pre-Loaded Leads -->
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="p-4 sm:p-5 text-white font-semibold">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xs">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Pre-Loaded Leads</span>
+                  </div>
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-blue-950/30 to-blue-900/10 border-x border-blue-500/30">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-500/15 border border-blue-500/30 text-blue-200 font-bold text-xs whitespace-nowrap">
+                    <i class="fas fa-check-circle text-blue-400"></i>
+                    <span>28+ Verified Global Prospects</span>
+                  </div>
+                  <div class="text-[11px] text-slate-300 mt-1">High-budget Dubai, UK &amp; Swiss businesses with ratings &ge; 4.8&#9733; &amp; NO website.</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <div class="text-xs text-slate-400 flex items-center gap-1.5">
+                    <i class="fas fa-times-circle text-rose-400/80"></i> Zero included
+                  </div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Scrapes generic emails only</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <div class="text-xs text-slate-400 flex items-center gap-1.5">
+                    <i class="fas fa-times-circle text-rose-400/80"></i> Zero leads
+                  </div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Sending engine only</div>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <div class="text-xs text-slate-400 flex items-center gap-1.5">
+                    <i class="fas fa-times-circle text-rose-400/80"></i> Raw data only
+                  </div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">High bounce &amp; unverified</div>
+                </td>
               </tr>
-              <tr class="hover:bg-slate-900/40">
-                <td class="p-4 sm:p-5 text-white font-semibold">Multi-AI Pitch Engine</td>
-                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">Claude 3.7 + GPT-4o + Gemini</td>
-                <td class="p-4 sm:p-5 text-slate-400">Basic template tokens</td>
-                <td class="p-4 sm:p-5 text-slate-400">Basic AI rewrite ($ extra)</td>
-                <td class="p-4 sm:p-5 text-slate-400">No AI engine</td>
+
+              <!-- Row 3: Multi-AI Pitch Engine -->
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="p-4 sm:p-5 text-white font-semibold">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xs">
+                      <i class="fas fa-brain"></i>
+                    </span>
+                    <span>Multi-AI Pitch Engine</span>
+                  </div>
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-blue-950/30 to-blue-900/10 border-x border-blue-500/30">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-200 font-bold text-xs whitespace-nowrap">
+                    <i class="fas fa-check-circle text-indigo-400"></i>
+                    <span>Claude 3.7 + GPT-4o + Gemini</span>
+                  </div>
+                  <div class="text-[11px] text-slate-300 mt-1">Generates bespoke 3-second psychological audit hooks tailored to each client.</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <div class="text-xs text-slate-400">Basic template tokens</div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Generic {{FirstName}} tags</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <div class="text-xs text-slate-400">Basic AI rewrites</div>
+                  <div class="text-[10px] text-rose-400/80 mt-0.5">Costs extra per month</div>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <div class="text-xs text-rose-400/80 flex items-center gap-1">
+                    <i class="fas fa-times"></i> No AI capabilities
+                  </div>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Manual pitching only</div>
+                </td>
               </tr>
-              <tr class="hover:bg-slate-900/40">
-                <td class="p-4 sm:p-5 text-white font-semibold">1-Click WhatsApp Direct Sender</td>
-                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">Included &bull; 100% Ban-Safe</td>
-                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> No WhatsApp</td>
-                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> No WhatsApp</td>
-                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> No WhatsApp</td>
+
+              <!-- Row 4: 1-Click WhatsApp Direct Sender -->
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="p-4 sm:p-5 text-white font-semibold">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs">
+                      <i class="fab fa-whatsapp"></i>
+                    </span>
+                    <span>WhatsApp Direct Closer</span>
+                  </div>
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-blue-950/30 to-blue-900/10 border-x border-blue-500/30">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-xs whitespace-nowrap">
+                    <i class="fas fa-shield-alt text-emerald-400"></i>
+                    <span>Included &bull; 100% Anti-Ban Guard</span>
+                  </div>
+                  <div class="text-[11px] text-slate-300 mt-1">Direct to decision maker's phone with human-paced delay &amp; zero Meta bans.</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-times"></i> No WhatsApp
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Email only (1-2% open rate)</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-times"></i> No WhatsApp
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Email only (High spam risk)</div>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-times"></i> No WhatsApp
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Zero outreach tooling</div>
+                </td>
               </tr>
-              <tr class="hover:bg-slate-900/40">
-                <td class="p-4 sm:p-5 text-white font-semibold">Source Code &amp; Local Ownership</td>
-                <td class="p-4 sm:p-5 text-emerald-400 font-bold bg-blue-950/20">100% Full Source Code</td>
-                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> Closed SaaS Lock-in</td>
-                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> Closed SaaS Lock-in</td>
-                <td class="p-4 sm:p-5 text-rose-400"><i class="fas fa-times"></i> Closed SaaS Lock-in</td>
+
+              <!-- Row 5: Source Code & Local Ownership -->
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="p-4 sm:p-5 text-white font-semibold">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xs">
+                      <i class="fas fa-code"></i>
+                    </span>
+                    <span>Full Source Code &amp; Privacy</span>
+                  </div>
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-blue-950/30 to-blue-900/10 border-x border-blue-500/30">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-200 font-bold text-xs whitespace-nowrap">
+                    <i class="fas fa-check-circle text-cyan-400"></i>
+                    <span>100% Full Source Code</span>
+                  </div>
+                  <div class="text-[11px] text-slate-300 mt-1">Runs 100% local on your machine via SQLite. Zero cloud data leaks or surveillance.</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-lock"></i> Closed SaaS Lock-in
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Data hosted on US servers</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-lock"></i> Closed SaaS Lock-in
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Account ban = lose everything</div>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-lock"></i> Closed SaaS Lock-in
+                  </span>
+                  <div class="text-[10px] text-slate-500 mt-0.5">Zero code access</div>
+                </td>
               </tr>
-              <tr class="hover:bg-slate-900/40 bg-slate-900/60 font-semibold">
-                <td class="p-4 sm:p-5 text-white">Year 1 Total Cost</td>
-                <td class="p-4 sm:p-5 text-emerald-400 font-black text-base bg-blue-950/40">&#8377;1,999 (~$24)</td>
-                <td class="p-4 sm:p-5 text-rose-400 font-mono">$1,188 (~&#8377;98,000)</td>
-                <td class="p-4 sm:p-5 text-rose-400 font-mono">$1,788 (~&#8377;1,49,000)</td>
-                <td class="p-4 sm:p-5 text-rose-400 font-mono">$708 (~&#8377;59,000)</td>
+
+              <!-- Row 6: Year 1 Total Cost -->
+              <tr class="bg-slate-900/60 font-semibold border-t-2 border-white/[0.1]">
+                <td class="p-4 sm:p-5 text-white">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xs">
+                      <i class="fas fa-wallet"></i>
+                    </span>
+                    <span class="text-white font-bold text-sm">Year 1 Total Cost</span>
+                  </div>
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-blue-950/50 to-blue-900/30 border-x border-blue-500/40">
+                  <div class="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">&#8377;1,999</div>
+                  <div class="text-[11px] text-emerald-300 font-bold uppercase tracking-wider mt-0.5">One-Time &bull; Lifetime Access</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <div class="text-base sm:text-lg font-bold text-rose-400 font-mono">$1,188</div>
+                  <div class="text-xs text-slate-400 font-mono">(~&#8377;98,000 INR)</div>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06]">
+                  <div class="text-base sm:text-lg font-bold text-rose-400 font-mono">$1,788</div>
+                  <div class="text-xs text-slate-400 font-mono">(~&#8377;1,49,000 INR)</div>
+                </td>
+                <td class="p-4 sm:p-5">
+                  <div class="text-base sm:text-lg font-bold text-rose-400 font-mono">$708</div>
+                  <div class="text-xs text-slate-400 font-mono">(~&#8377;59,000 INR)</div>
+                </td>
               </tr>
+
+              <!-- Row 7: Direct Savings -->
+              <tr class="bg-emerald-950/20 border-t border-emerald-500/20 font-semibold">
+                <td class="p-4 sm:p-5 text-emerald-300">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xs">
+                      <i class="fas fa-piggy-bank"></i>
+                    </span>
+                    <span class="font-bold text-sm text-emerald-300">Net Money Saved in Yr 1</span>
+                  </div>
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-emerald-950/40 to-blue-950/40 border-x border-blue-500/40">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/25 border border-emerald-500/40 text-emerald-200 font-black text-xs font-mono">
+                    <i class="fas fa-check-double text-emerald-400"></i> YOU KEEP &#8377;57,000 &ndash; &#8377;1,47,000
+                  </span>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06] text-rose-400/90 text-xs">
+                  -&#8377;96,000 recurring loss
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06] text-rose-400/90 text-xs">
+                  -&#8377;1,47,000 recurring loss
+                </td>
+                <td class="p-4 sm:p-5 text-rose-400/90 text-xs">
+                  -&#8377;57,000 recurring loss
+                </td>
+              </tr>
+
             </tbody>
+
+            <!-- Table Footer Action -->
+            <tfoot>
+              <tr class="bg-slate-900/90 border-t border-white/[0.1]">
+                <td class="p-4 sm:p-5 text-slate-400 text-xs font-medium">
+                  Instant Commercial Activation
+                </td>
+                <td class="p-4 sm:p-5 bg-gradient-to-b from-blue-950/40 to-blue-900/30 border-x border-blue-500/40">
+                  <button onclick="openCheckoutModal()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-blue-500/30 transition transform hover:scale-[1.02] flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fas fa-bolt text-amber-300"></i>
+                    <span>Get Lifetime Access &bull; &#8377;1,999</span>
+                  </button>
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06] text-center text-[11px] text-slate-500">
+                  Credit Card Required
+                </td>
+                <td class="p-4 sm:p-5 border-r border-white/[0.06] text-center text-[11px] text-slate-500">
+                  Credit Card Required
+                </td>
+                <td class="p-4 sm:p-5 text-center text-[11px] text-slate-500">
+                  Credit Card Required
+                </td>
+              </tr>
+            </tfoot>
           </table>
+        </div>
+      </div>
+
+      <!-- Trust Badges Under Table -->
+      <div class="mt-8 flex items-center justify-center gap-6 sm:gap-10 text-xs text-slate-400 flex-wrap">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-check-circle text-emerald-400"></i>
+          <span>Zero Monthly Fees Forever</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fas fa-shield-alt text-blue-400"></i>
+          <span>30-Day Money-Back Guarantee</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="fab fa-whatsapp text-emerald-400"></i>
+          <span>Instant WhatsApp &amp; Email Delivery</span>
         </div>
       </div>
 
