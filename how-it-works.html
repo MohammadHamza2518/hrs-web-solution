@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agency Workflow Playbook | Outreach Studio Pro</title>
-  <meta name="description" content="Step-by-step agency playbook to landing $2,500+ clients using Outreach Studio Pro and the pre-loaded 28+ verified global prospects.">
+  <title>How It Works &bull; Agency Closing Playbook | Outreach Studio Pro</title>
+  <meta name="description" content="Step-by-step agency playbook to landing $1,500 - $3,500 high-ticket client retainers using Outreach Studio Pro.">
   <link rel="icon" type="image/png" href="assets/images/hrs_icon.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,154 +41,340 @@
 <body class="bg-[#040711] text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white relative bg-mesh-grid">
 
   <div class="ambient-glow-top"></div>
+  <div class="ambient-glow-secondary"></div>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 bg-[#040711]/85 backdrop-blur-xl border-b border-white/[0.08]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3.5 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-blue-500/30 p-2 shadow-lg shadow-blue-500/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+  <!-- 1. Sleek Top Announcement Bar -->
+  <div class="relative z-50 bg-[#060a16] border-b border-white/[0.06] py-2 px-4 text-center">
+    <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 sm:gap-3 text-xs flex-wrap">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 font-bold text-[10px] border border-amber-500/30 uppercase tracking-wider">
+        <i class="fas fa-bolt text-amber-400"></i> Lifetime Deal
+      </span>
+      <span class="text-slate-300 font-medium">
+        High-Ticket B2B Client Acquisition CRM &bull; <strong class="text-white">Zero Monthly Fees</strong>
+      </span>
+      <span class="text-slate-600 hidden sm:inline">&bull;</span>
+      <button onclick="openCheckoutModal()" class="text-blue-400 hover:text-blue-300 font-semibold cursor-pointer underline hover:no-underline transition flex items-center gap-1">
+        <span>Get Lifetime License for &#8377;1,999 (Save 80%) &rarr;</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. Sticky Glass Navigation -->
+  <header class="sticky top-0 z-40 bg-[#040711]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 flex-shrink-0 group">
+        <div class="nav-logo-icon group-hover:scale-105 transition-transform">
           <img src="assets/images/hrs_icon.png" alt="Outreach Studio Pro" class="w-full h-full object-contain">
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-base font-extrabold tracking-tight text-white font-heading">Outreach Studio</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">PRO</span>
+        <div class="flex items-center gap-2">
+          <div class="text-base sm:text-lg font-black tracking-tight font-heading whitespace-nowrap">
+            <span class="text-white">Outreach</span><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Studio</span>
           </div>
-          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">by HRS Web Solutions</span>
+          <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold tracking-wider bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-purple-500/20 text-blue-300 border border-blue-500/40 shadow-sm shadow-blue-500/20 uppercase">
+            PRO
+          </span>
         </div>
       </a>
 
-      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
-        <a href="index.html" class="hover:text-blue-400 transition">Overview</a>
-        <a href="features.html" class="hover:text-blue-400 transition">Multi-AI &amp; Features</a>
-        <a href="how-it-works.html" class="text-blue-400 transition font-bold">How It Works</a>
-        <a href="pricing.html" class="hover:text-blue-400 transition">Pricing &amp; ROI</a>
-        <a href="contact.html" class="hover:text-blue-400 transition">VIP Support</a>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-slate-300">
+        <a href="index.html#features" class="whitespace-nowrap hover:text-white transition-colors">Features</a>
+        <a href="index.html#reviews" class="whitespace-nowrap hover:text-white transition-colors">Reviews</a>
+        <a href="how-it-works.html" class="whitespace-nowrap text-blue-400 font-bold transition-colors">How It Works</a>
+        <a href="index.html#comparison" class="whitespace-nowrap hover:text-white transition-colors">Why Pro?</a>
+        <a href="pricing.html" class="whitespace-nowrap hover:text-white transition-colors">Pricing</a>
       </nav>
 
-      <div class="hidden sm:flex items-center gap-3">
-        <a href="https://wa.me/918808129388" target="_blank" class="px-3.5 py-2 rounded-xl btn-glass text-xs font-semibold flex items-center gap-1.5">
-          <i class="fab fa-whatsapp text-emerald-400 text-sm"></i> <span>Ask Question</span>
+      <!-- Action Buttons -->
+      <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
+        <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20know%20more%20about%20Outreach%20Studio%20Pro" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 hover:border-emerald-500/40 text-emerald-400 hover:text-emerald-300 text-xs font-semibold flex items-center gap-1.5 transition whitespace-nowrap">
+          <i class="fab fa-whatsapp text-sm"></i>
+          <span>WhatsApp</span>
         </a>
-        <button onclick="openCheckoutModal()" class="px-4 py-2 rounded-xl btn-primary-glow text-xs font-bold cursor-pointer">
-          <span>Get CRM for &#8377;1,999</span>
+        <button onclick="openCheckoutModal()" class="btn-nav-cta">
+          <span class="w-4 h-4 rounded-full bg-amber-400/20 border border-amber-400/30 flex items-center justify-center text-amber-300 text-[10px]">
+            <i class="fas fa-bolt"></i>
+          </span>
+          <span>Get Lifetime Access</span>
+          <span class="px-1.5 py-0.5 rounded-md bg-white/20 text-white text-[10px] font-mono font-bold border border-white/20">
+            &#8377;1,999
+          </span>
         </button>
       </div>
 
-      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300">
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300 hover:text-white flex-shrink-0">
         <i class="fas fa-bars text-lg"></i>
       </button>
     </div>
 
+    <!-- Mobile Drawer Menu -->
     <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
-      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Overview</a>
-      <a href="features.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Multi-AI &amp; Features</a>
+      <a href="index.html#features" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Features Breakdown</a>
+      <a href="index.html#reviews" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Agency Reviews (4.9 &#9733;)</a>
       <a href="how-it-works.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">How It Works</a>
-      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing &amp; ROI</a>
-      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">VIP Support</a>
+      <a href="index.html#comparison" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">&#8377;1,999 vs SaaS Comparison</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing &amp; License Details</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-emerald-400 hover:text-emerald-300 py-1 flex items-center gap-2">
+        <i class="fab fa-whatsapp"></i> VIP WhatsApp Support
+      </a>
+      <div class="pt-3 border-t border-white/[0.08]">
+        <button onclick="openCheckoutModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xs text-center block">
+          Get Lifetime Access &bull; &#8377;1,999
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Hero Header -->
-  <section class="py-16 sm:py-24 text-center">
-    <div class="max-w-4xl mx-auto px-4">
+  <!-- 3. Hero Header Section -->
+  <section class="pt-16 sm:pt-24 pb-14 text-center relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 mb-6">
-        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Step-by-Step Execution</span>
+        <i class="fas fa-play-circle text-blue-400 text-xs"></i>
+        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Step-by-Step Execution Engine</span>
       </div>
-      <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mb-4">
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white font-heading tracking-tight leading-tight mb-5">
         The 4-Step Agency Closing Playbook
       </h1>
-      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-        How agencies, consultants, and B2B closers turn Outreach Studio Pro into $2,500 - $10,000 monthly client retainers.
+      <p class="text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+        How Indian agency founders, consultants, and freelance closers use Outreach Studio Pro to discover high-budget commercial clients, generate AI hooks, and close <strong class="text-white">$1,500 &ndash; $3,500 retainers</strong> on WhatsApp.
       </p>
+
+      <!-- Quick Metrics Strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
+        <div class="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-center">
+          <div class="text-xl sm:text-2xl font-black text-white font-mono">60s</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">Instant Setup</div>
+        </div>
+        <div class="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-center">
+          <div class="text-xl sm:text-2xl font-black text-emerald-400 font-mono">98%</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">WhatsApp Open Rate</div>
+        </div>
+        <div class="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-center">
+          <div class="text-xl sm:text-2xl font-black text-blue-400 font-mono">38%</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">Meeting Booking Rate</div>
+        </div>
+        <div class="p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-center">
+          <div class="text-xl sm:text-2xl font-black text-amber-400 font-mono">&#8377;0</div>
+          <div class="text-[11px] text-slate-400 mt-0.5">Monthly SaaS Fees</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 4 Steps Roadmap -->
-  <section class="pb-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+  <!-- 4. Interactive 4-Step Roadmap -->
+  <section class="py-12 pb-24 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative">
       
-      <!-- Step 1 -->
-      <div class="glass-panel p-8 relative flex flex-col md:flex-row gap-6 items-start">
-        <div class="w-12 h-12 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center font-bold text-lg text-blue-400 font-mono shrink-0">
-          01
-        </div>
-        <div class="space-y-3">
-          <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">Step 1 &bull; Instant Access</span>
-          <h3 class="text-xl font-bold text-white font-heading">Open The Pre-Loaded Global Prospects Vault</h3>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Double click <code class="text-blue-300">LAUNCH_GLOBAL_OUTREACH_STUDIO.bat</code>. Your workspace opens instantly pre-seeded with 28+ verified high-budget commercial businesses in Dubai, UK, and Switzerland who do high-ticket trade and are prime targets for services.
-          </p>
-          <div class="p-3 bg-slate-900/80 rounded-xl border border-white/[0.06] text-xs font-mono text-slate-400">
-            &bull; Niche Breakdown: Luxury Horology, Artisanal Oud, Modest Fashion, Aesthetic Clinics, Private Family Offices.
+      <!-- Step 1: Discover & Target -->
+      <div class="feature-card-clean p-7 sm:p-8 relative overflow-hidden group">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <!-- Step Number Pod -->
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-black text-xl text-white font-mono shadow-lg shadow-blue-500/25 shrink-0 group-hover:scale-105 transition-transform">
+            01
+          </div>
+          
+          <div class="space-y-3 flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">
+                Phase 1 &bull; Discovery &amp; Targeting
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 text-[10px] font-mono border border-blue-500/20">
+                Zero Credit Scraper
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">
+              Launch &amp; Discover High-Ticket Commercial Prospects
+            </h3>
+            
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Double-click <code class="text-cyan-300 bg-white/[0.05] px-1.5 py-0.5 rounded font-mono">run.bat</code> to launch your CRM instantly on localhost. Use the built-in high-speed scraper to find commercial businesses on Google Maps &amp; Meta Ads across Dubai, UK, US, or India with verified owner phone numbers.
+            </p>
+
+            <!-- Micro Preview HUD -->
+            <div class="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] text-xs font-mono text-slate-300 space-y-1.5">
+              <div class="flex items-center justify-between text-slate-400 text-[11px] pb-1 border-b border-white/[0.05]">
+                <span><i class="fas fa-radar text-cyan-400 mr-1.5"></i> Scraper HUD Target</span>
+                <span class="text-emerald-400 font-bold">&#10003; 100+ Verified Contacts</span>
+              </div>
+              <div class="text-slate-400 text-[11px]">
+                &bull; Target Niches: Luxury Spas, Private Clinics, High-End Boutiques, Real Estate, Consulting Firms.
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Step 2 -->
-      <div class="glass-panel p-8 relative flex flex-col md:flex-row gap-6 items-start">
-        <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center font-bold text-lg text-indigo-400 font-mono shrink-0">
-          02
-        </div>
-        <div class="space-y-3">
-          <span class="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider">Step 2 &bull; 3-Second Intelligence</span>
-          <h3 class="text-xl font-bold text-white font-heading">Generate A Tailored Cold Pitch with Claude 3.7</h3>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Click "Generate AI Pitch". The engine analyzes the company's niche, identifies the exact revenue they are losing by not having an online store, and drafts a compelling, personalized cold hook.
-          </p>
-          <div class="p-3 bg-slate-900/80 rounded-xl border border-white/[0.06] text-xs font-mono text-slate-400">
-            &bull; No generic "Dear sir" emails &bull; Ultra-specific commercial problem identification that founders actually reply to.
+      <!-- Step 2: Multi-AI Pitch Generation -->
+      <div class="feature-card-clean p-7 sm:p-8 relative overflow-hidden group">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center font-black text-xl text-white font-mono shadow-lg shadow-violet-500/25 shrink-0 group-hover:scale-105 transition-transform">
+            02
+          </div>
+          
+          <div class="space-y-3 flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <span class="text-xs font-mono font-bold text-violet-400 uppercase tracking-wider">
+                Phase 2 &bull; 3-Second AI Intelligence
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full bg-violet-500/10 text-violet-300 text-[10px] font-mono border border-violet-500/20">
+                Claude 3.7 + GPT-4o
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">
+              Generate A Tailored Commercial Audit &amp; Hook
+            </h3>
+            
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Click <strong class="text-white">&ldquo;Generate AI Pitch&rdquo;</strong>. The engine connects with Claude 3.7 Sonnet or GPT-4o to analyze the prospect&rsquo;s business gaps, calculating the exact inquiries they lose after-hours, and drafts a custom hook that sounds like 2 hours of human research.
+            </p>
+
+            <!-- Micro Preview HUD -->
+            <div class="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] text-xs font-mono text-slate-300 space-y-1.5">
+              <div class="flex items-center justify-between text-slate-400 text-[11px] pb-1 border-b border-white/[0.05]">
+                <span><i class="fas fa-sparkles text-violet-400 mr-1.5"></i> Personalized Audit Pitch</span>
+                <span class="text-violet-300">Generated in 1.8s</span>
+              </div>
+              <div class="text-slate-300 text-[11px] leading-relaxed">
+                &ldquo;Dr. Laurent, noticed Swiss Alpine Clinic has 4.9&#9733; in Zurich but zero online booking funnel &mdash; losing ~CHF 8,000/mo in walkaways...&rdquo;
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Step 3 -->
-      <div class="glass-panel p-8 relative flex flex-col md:flex-row gap-6 items-start">
-        <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 border border-emerald-500/40 flex items-center justify-center font-bold text-lg text-emerald-400 font-mono shrink-0">
-          03
-        </div>
-        <div class="space-y-3">
-          <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Step 3 &bull; 1-Click Outreach</span>
-          <h3 class="text-xl font-bold text-white font-heading">1-Click WhatsApp Direct Message (100% Ban-Safe)</h3>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Click the green WhatsApp button next to any prospect. WhatsApp Web automatically opens on your browser with the verified owner number and the custom pitch pre-filled. You just hit Enter.
-          </p>
-          <div class="p-3 bg-slate-900/80 rounded-xl border border-white/[0.06] text-xs font-mono text-slate-400">
-            &bull; Built-in randomized cooling intervals (15s - 45s) ensure your account is never flagged for spam.
+      <!-- Step 3: 1-Click WhatsApp Closer -->
+      <div class="feature-card-clean p-7 sm:p-8 relative overflow-hidden group">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center font-black text-xl text-white font-mono shadow-lg shadow-emerald-500/25 shrink-0 group-hover:scale-105 transition-transform">
+            03
+          </div>
+          
+          <div class="space-y-3 flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                Phase 3 &bull; 1-Click Direct Outreach
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 text-[10px] font-mono border border-emerald-500/20">
+                100% Ban-Safe API
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">
+              1-Click WhatsApp Direct Sender (Zero Contacts to Save)
+            </h3>
+            
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Click the green WhatsApp button next to any prospect. WhatsApp Web opens instantly in your browser with the verified owner number and the custom pitch pre-filled. You simply hit Send.
+            </p>
+
+            <!-- Micro Preview HUD -->
+            <div class="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] text-xs font-mono text-slate-300 space-y-1.5">
+              <div class="flex items-center justify-between text-slate-400 text-[11px] pb-1 border-b border-white/[0.05]">
+                <span><i class="fab fa-whatsapp text-emerald-400 mr-1.5"></i> Direct Browser Protocol</span>
+                <span class="text-emerald-400 font-bold">&#10003;&#10003; 38% Avg Response Rate</span>
+              </div>
+              <div class="text-slate-400 text-[11px]">
+                &bull; Built-in randomized delay timers (45s&ndash;90s) prevent account spam flags permanently.
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Step 4 -->
-      <div class="glass-panel p-8 relative flex flex-col md:flex-row gap-6 items-start">
-        <div class="w-12 h-12 rounded-xl bg-amber-600/20 border border-amber-500/40 flex items-center justify-center font-bold text-lg text-amber-400 font-mono shrink-0">
-          04
-        </div>
-        <div class="space-y-3">
-          <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">Step 4 &bull; Close Retainer</span>
-          <h3 class="text-xl font-bold text-white font-heading">Close $1,500 - $3,500 Web Development Retainer</h3>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            The business owner responds asking for a demo or quote. You build their Shopify or Next.js store using modern templates in 5-7 days and collect your retainer in foreign currency.
-          </p>
-          <div class="p-3 bg-slate-900/80 rounded-xl border border-white/[0.06] text-xs font-mono text-emerald-400 font-semibold">
-            &bull; Average deal size: &#8377;80,000 to &#8377;2,50,000+ ($1,000 - $3,000) per closed client.
+      <!-- Step 4: Monetize & Close -->
+      <div class="feature-card-clean p-7 sm:p-8 relative overflow-hidden group">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center font-black text-xl text-white font-mono shadow-lg shadow-amber-500/25 shrink-0 group-hover:scale-105 transition-transform">
+            04
+          </div>
+          
+          <div class="space-y-3 flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
+                Phase 4 &bull; Retainer Monetization
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-[10px] font-mono border border-amber-500/20">
+                High-Ticket ROI
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">
+              Close $1,500 &ndash; $3,500 High-Ticket Client Retainers
+            </h3>
+            
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              The business owner replies asking for details. Whether you offer Web Development, SEO, Paid Ads, AI Chatbots, or Sales Funnels &mdash; present your solution and collect your retainer in foreign currency ($ / AED / &pound;) directly to your bank account.
+            </p>
+
+            <!-- Micro Preview HUD -->
+            <div class="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] text-xs font-mono text-emerald-400 space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] pb-1 border-b border-white/[0.05]">
+                <span><i class="fas fa-check-circle text-emerald-400 mr-1.5"></i> Typical Deal Size</span>
+                <span class="text-white font-bold">&#8377;80,000 to &#8377;2,50,000+ ($1,000 - $3,000)</span>
+              </div>
+              <div class="text-slate-400 text-[11px]">
+                &bull; Just 1 closed client generates 100x+ ROI on your one-time &#8377;1,999 software purchase.
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Bottom CTA -->
-    <div class="max-w-2xl mx-auto px-4 text-center mt-12">
-      <button onclick="openCheckoutModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl btn-primary-glow text-xs font-bold cursor-pointer">
-        Get Outreach Studio Pro &bull; &#8377;1,999 Lifetime &rarr;
-      </button>
+    <!-- 5. Big Bottom ROI Action Banner -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <div class="p-7 sm:p-9 rounded-3xl bg-gradient-to-r from-blue-950/40 via-slate-900/80 to-purple-950/40 border border-blue-500/25 relative overflow-hidden shadow-2xl shadow-blue-950/30">
+        <div class="absolute -top-24 -right-24 w-72 h-72 bg-blue-500/10 blur-[90px] rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>100x ROI Potential &bull; Zero Monthly SaaS Fees</span>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-extrabold text-white font-heading tracking-tight leading-snug mb-2.5">
+              Ready to execute this playbook for your agency?
+            </h4>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+              Get the entire CRM software, unlimited scraper, 4 AI engines (Claude 3.7 &amp; GPT-4o), and 100% full source code for a one-time price.
+            </p>
+            <div class="flex items-center gap-4 text-xs text-slate-300 flex-wrap">
+              <span class="flex items-center gap-1.5"><i class="fas fa-shield-halved text-emerald-400"></i> 30-Day Money-Back Guarantee</span>
+              <span class="flex items-center gap-1.5"><i class="fas fa-infinity text-blue-400"></i> Lifetime Free Updates</span>
+              <span class="flex items-center gap-1.5"><i class="fas fa-bolt text-amber-400"></i> Instant 60s Setup</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end gap-3.5 w-full lg:w-auto flex-shrink-0">
+            <div class="text-left sm:text-right">
+              <div class="text-xs text-slate-400">Lifetime License &bull; <span class="line-through text-slate-400">&#8377;9,999</span></div>
+              <div class="text-3xl sm:text-4xl font-black text-white font-mono leading-none mt-1">
+                &#8377;1,999 <span class="text-xs font-normal text-emerald-400 font-sans">One-Time Fee</span>
+              </div>
+            </div>
+            <button onclick="openCheckoutModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 cursor-pointer">
+              <i class="fas fa-bolt text-amber-300"></i>
+              <span>Get Instant Lifetime Access &rarr;</span>
+            </button>
+            <div class="text-[11px] text-slate-400 text-center sm:text-right flex items-center justify-center sm:justify-end gap-1.5">
+              <i class="fas fa-lock text-emerald-400"></i>
+              <span>Secure 256-Bit SSL Checkout</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Checkout Modal -->
   <div id="checkoutModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 checkout-modal-backdrop">
-    <div class="glass-panel p-6 sm:p-8 max-w-lg w-full border-blue-500/40 relative shadow-2xl shadow-blue-600/30 bg-[#090d1a]">
+    <div class="glass-panel p-6 sm:p-8 max-w-lg w-full border-blue-500/40 relative shadow-2xl shadow-blue-600/30 bg-[#090d1a] rounded-2xl">
       <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg p-2 cursor-pointer">
         <i class="fas fa-times"></i>
       </button>
@@ -196,8 +382,9 @@
         <span class="inline-block px-3 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold font-mono uppercase mb-2">Instant Activation</span>
         <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">Get Outreach Studio Pro</h3>
         <div class="text-3xl font-black text-emerald-400 font-heading my-2">&#8377;1,999</div>
+        <p class="text-xs text-slate-400">Lifetime license &bull; Full source code &bull; 1-click launcher</p>
       </div>
-      <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20buy%20Outreach%20Studio%20Pro%20for%20Rs%201999." target="_blank" class="w-full py-3.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center justify-center gap-2">
+      <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20buy%20Outreach%20Studio%20Pro%20for%20Rs%201999." target="_blank" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30 transition">
         <i class="fab fa-whatsapp text-base"></i>
         <span>Pay &#8377;1,999 via UPI &amp; Get Instant ZIP Link</span>
       </a>
@@ -206,7 +393,14 @@
 
   <!-- Footer -->
   <footer class="border-t border-white/[0.08] bg-[#020409] py-12 text-xs text-slate-400 text-center">
-    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Client Acquisition CRM.</p>
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-center gap-2 mb-3">
+        <span class="text-white font-bold font-heading">Outreach Studio PRO</span>
+        <span class="text-slate-500">&bull;</span>
+        <span>By HRS Web Solutions</span>
+      </div>
+      <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; High-Ticket Client Acquisition CRM.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
