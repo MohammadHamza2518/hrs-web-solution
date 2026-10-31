@@ -346,6 +346,28 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('osp_payment_id', paymentId);
       localStorage.setItem('osp_buyer_name', customer.name);
       localStorage.setItem('osp_buyer_phone', customer.phone);
+
+      // Record in Admin Orders Database
+      const randomKey = `OSP-PRO-${Math.floor(1000+Math.random()*9000)}-${Math.floor(1000+Math.random()*9000)}-LIVE`;
+      let allOrders = [];
+      try {
+        allOrders = JSON.parse(localStorage.getItem('osp_orders_db')) || [];
+      } catch(err) { allOrders = []; }
+
+      const newOrder = {
+        id: `ORD-${Date.now().toString().slice(-4)}`,
+        name: customer.name,
+        phone: customer.phone,
+        email: customer.email || 'N/A',
+        amount: 1999,
+        gateway: 'Razorpay Live',
+        paymentId: paymentId,
+        licenseKey: randomKey,
+        date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        status: 'PAID'
+      };
+      allOrders.unshift(newOrder);
+      localStorage.setItem('osp_orders_db', JSON.stringify(allOrders));
     } catch(e) {}
 
     const formView = document.getElementById('checkoutFormView');
