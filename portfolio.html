@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Portfolio &amp; Case Studies | HRS Web Solutions</title>
+  <meta name="description" content="Explore live websites, e-commerce stores, and mobile applications built by HRS Web Solutions. See how our sub-second speeds drive 300%+ revenue growth.">
+  <link rel="icon" type="image/png" href="logo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#040711',
+              card: 'rgba(13, 19, 36, 0.72)',
+              blue: '#3B82F6',
+              indigo: '#6366F1',
+              emerald: '#10B981',
+              cyan: '#06B6D4'
+            }
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#040711] text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white relative bg-mesh-grid">
+
+  <div class="ambient-glow-top"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#040711]/85 backdrop-blur-xl border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-blue-500/30 p-2 shadow-lg shadow-blue-500/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <img src="logo.png" alt="HRS Web Solutions Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-base font-extrabold tracking-tight text-white font-heading">HRS WEB</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">SOLUTIONS</span>
+          </div>
+          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">Digital Engineering Studio</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
+        <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+        <a href="services.html" class="hover:text-blue-400 transition">Services</a>
+        <a href="portfolio.html" class="text-blue-400 transition">Portfolio</a>
+        <a href="pricing.html" class="hover:text-blue-400 transition">Pricing</a>
+        <a href="why-us.html" class="hover:text-blue-400 transition">Why Us</a>
+        <a href="contact.html" class="hover:text-blue-400 transition">Contact</a>
+      </nav>
+
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://wa.me/918808129388" target="_blank" class="px-4 py-2 rounded-xl btn-whatsapp-glow text-xs flex items-center gap-2">
+          <i class="fab fa-whatsapp text-sm"></i> <span>WhatsApp Us</span>
+        </a>
+      </div>
+
+      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300">
+        <i class="fas fa-bars text-lg"></i>
+      </button>
+    </div>
+
+    <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
+      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Home</a>
+      <a href="services.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Services</a>
+      <a href="portfolio.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Portfolio</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing</a>
+      <a href="why-us.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Why Us</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="py-16 sm:py-24 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 mb-6">
+        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Proven Track Record</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mb-4">
+        Our Work &amp; Case Studies
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        High-performance websites, custom platforms, and mobile apps built for measurable business growth.
+      </p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid Section -->
+  <section class="pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Filter Tabs -->
+      <div class="flex items-center justify-center gap-2 flex-wrap mb-12">
+        <button class="portfolio-filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white border border-blue-500 transition" data-filter="all">All Projects</button>
+        <button class="portfolio-filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white/[0.03] text-slate-400 border border-white/[0.08] hover:text-white transition" data-filter="ecommerce">E-Commerce</button>
+        <button class="portfolio-filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white/[0.03] text-slate-400 border border-white/[0.08] hover:text-white transition" data-filter="apps">Mobile Apps</button>
+        <button class="portfolio-filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white/[0.03] text-slate-400 border border-white/[0.08] hover:text-white transition" data-filter="realestate">Real Estate</button>
+        <button class="portfolio-filter-tab px-4 py-2 rounded-xl text-xs font-semibold bg-white/[0.03] text-slate-400 border border-white/[0.08] hover:text-white transition" data-filter="fintech">Fintech &amp; SaaS</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Vogue Fashion -->
+        <div class="portfolio-card-item glass-panel overflow-hidden glass-panel-hover" data-category="ecommerce">
+          <div class="relative h-56 overflow-hidden bg-slate-900">
+            <img src="fashion_web.jpg" alt="Vogue Luxury Fashion Web Store" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/70 text-emerald-300 border border-emerald-500/30 backdrop-blur-md">
+              0.4s Speed &bull; E-Commerce
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-white mb-2 font-heading">Vogue Luxury Fashion D2C Store</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              High-aesthetic fashion web portal with dynamic video hero banners, instant Razorpay checkout, and live WhatsApp cart integration.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+              <span class="text-[11px] text-slate-400 font-mono">React &bull; Tailwind &bull; Node.js</span>
+              <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20a%20store%20like%20Vogue%20Fashion" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+                Get Similar Store &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Estate -->
+        <div class="portfolio-card-item glass-panel overflow-hidden glass-panel-hover" data-category="realestate">
+          <div class="relative h-56 overflow-hidden bg-slate-900">
+            <img src="real_estate.png" alt="EstatePrime Real Estate Portal" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/70 text-blue-300 border border-blue-500/30 backdrop-blur-md">
+              Real Estate Portal
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-white mb-2 font-heading">EstatePrime Luxury Property Portal</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Interactive property acquisition portal featuring dynamic map exploration, high-resolution virtual tours, and lead capture pipelines.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+              <span class="text-[11px] text-slate-400 font-mono">Next.js &bull; Google Maps API</span>
+              <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20a%20portal%20like%20EstatePrime" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+                Get Similar Portal &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- QuickBite App -->
+        <div class="portfolio-card-item glass-panel overflow-hidden glass-panel-hover" data-category="apps">
+          <div class="relative h-56 overflow-hidden bg-slate-900">
+            <img src="food_app.jpg" alt="QuickBite Food Delivery App" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/70 text-amber-300 border border-amber-500/30 backdrop-blur-md">
+              iOS &amp; Android App
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-white mb-2 font-heading">QuickBite Food Delivery App</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Cross-platform mobile application with live GPS delivery tracking, restaurant kitchen dashboard, and UPI payment integration.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+              <span class="text-[11px] text-slate-400 font-mono">React Native &bull; WebSockets</span>
+              <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20an%20app%20like%20QuickBite" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+                Get Similar App &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CryptoX Fintech -->
+        <div class="portfolio-card-item glass-panel overflow-hidden glass-panel-hover" data-category="apps fintech">
+          <div class="relative h-56 overflow-hidden bg-slate-900">
+            <img src="fintech_app.jpg" alt="CryptoX Wallet Mobile App" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/70 text-violet-300 border border-violet-500/30 backdrop-blur-md">
+              Fintech &amp; Banking
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-white mb-2 font-heading">CryptoX Banking &amp; Wallet App</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Sleek dark-mode financial application with real-time stock and crypto charting, biometric authentication, and instant transfers.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+              <span class="text-[11px] text-slate-400 font-mono">Flutter &bull; Financial APIs</span>
+              <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20a%20Fintech%20App" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+                Get Similar App &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CarePlus Healthcare -->
+        <div class="portfolio-card-item glass-panel overflow-hidden glass-panel-hover" data-category="apps">
+          <div class="relative h-56 overflow-hidden bg-slate-900">
+            <img src="doctor_app.jpg" alt="CarePlus Clinic App" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/70 text-cyan-300 border border-cyan-500/30 backdrop-blur-md">
+              HealthTech Suite
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-white mb-2 font-heading">CarePlus Doctor &amp; Clinic App</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Telehealth consultation suite with online appointment booking, digital prescription downloads, and secure patient records.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+              <span class="text-[11px] text-slate-400 font-mono">React Native &bull; HIPAA Compliant</span>
+              <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20a%20Healthcare%20App" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+                Get Similar App &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ShopFast Retail -->
+        <div class="portfolio-card-item glass-panel overflow-hidden glass-panel-hover" data-category="apps ecommerce">
+          <div class="relative h-56 overflow-hidden bg-slate-900">
+            <img src="shopping_app.png" alt="ShopFast Retail Shopping App" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/70 text-emerald-300 border border-emerald-500/30 backdrop-blur-md">
+              Retail Shopping App
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-base font-bold text-white mb-2 font-heading">ShopFast Retail Native App</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Native Android and iOS mobile application featuring flash sale countdowns, product variant pickers, and push notifications.
+            </p>
+            <div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+              <span class="text-[11px] text-slate-400 font-mono">React Native &bull; Node.js</span>
+              <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20a%20Retail%20App" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+                Get Similar App &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.08] bg-[#020409] py-12 text-xs text-slate-400 text-center">
+    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Hand-crafted with precision.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

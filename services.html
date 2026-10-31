@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Services | HRS Web Solutions</title>
+  <meta name="description" content="Explore our bespoke digital engineering services: Next.js website development, high-converting e-commerce stores, native mobile applications, and AI integrations.">
+  <link rel="icon" type="image/png" href="logo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#040711',
+              card: 'rgba(13, 19, 36, 0.72)',
+              blue: '#3B82F6',
+              indigo: '#6366F1',
+              emerald: '#10B981',
+              cyan: '#06B6D4'
+            }
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#040711] text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white relative bg-mesh-grid">
+
+  <div class="ambient-glow-top"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#040711]/85 backdrop-blur-xl border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-blue-500/30 p-2 shadow-lg shadow-blue-500/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <img src="logo.png" alt="HRS Web Solutions Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-base font-extrabold tracking-tight text-white font-heading">HRS WEB</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">SOLUTIONS</span>
+          </div>
+          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">Digital Engineering Studio</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
+        <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+        <a href="services.html" class="text-blue-400 transition">Services</a>
+        <a href="portfolio.html" class="hover:text-blue-400 transition">Portfolio</a>
+        <a href="pricing.html" class="hover:text-blue-400 transition">Pricing</a>
+        <a href="why-us.html" class="hover:text-blue-400 transition">Why Us</a>
+        <a href="contact.html" class="hover:text-blue-400 transition">Contact</a>
+      </nav>
+
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://wa.me/918808129388" target="_blank" class="px-4 py-2 rounded-xl btn-whatsapp-glow text-xs flex items-center gap-2">
+          <i class="fab fa-whatsapp text-sm"></i> <span>WhatsApp Us</span>
+        </a>
+        <a href="contact.html" class="px-4 py-2 rounded-xl btn-primary-glow text-xs">
+          <span>Get Quote</span>
+        </a>
+      </div>
+
+      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300">
+        <i class="fas fa-bars text-lg"></i>
+      </button>
+    </div>
+
+    <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
+      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Home</a>
+      <a href="services.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Services</a>
+      <a href="portfolio.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Portfolio</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing</a>
+      <a href="why-us.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Why Us</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Contact</a>
+    </div>
+  </header>
+
+  <!-- Page Hero Header -->
+  <section class="py-16 sm:py-24 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 mb-6">
+        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">Comprehensive Digital Expertise</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mb-4">
+        Engineering Services Engineered for Growth
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        From sub-second custom web platforms and e-commerce stores to native mobile apps and AI automation systems.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div class="glass-panel p-8 glass-panel-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-6">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3 font-heading">Custom Web Development</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              Hand-crafted web applications built with Next.js, React, Node.js, and TailwindCSS. Engineered for sub-second speeds and zero bloat.
+            </p>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-400"></i> Under 0.8s Page Load Times</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-400"></i> 100% Fluid Mobile Responsiveness</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-400"></i> Server-Side Rendering (SSR) &amp; Edge Caching</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20need%20Web%20Development" target="_blank" class="mt-8 py-3 rounded-xl btn-glass text-xs font-bold text-center block">
+            Start Web Project &rarr;
+          </a>
+        </div>
+
+        <div class="glass-panel p-8 glass-panel-hover flex flex-col justify-between border-blue-500/30">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xl mb-6">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3 font-heading">High-Converting E-Commerce</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              High-velocity online shopping experiences with frictionless checkout flows, automated inventory sync, and multi-channel order tracking.
+            </p>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> Razorpay, UPI &amp; Credit Card Gateways</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> Automated WhatsApp Order Confirmations</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> Real-Time Inventory &amp; Admin Dashboard</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20need%20an%20E-Commerce%20Store" target="_blank" class="mt-8 py-3 rounded-xl btn-primary-glow text-xs font-bold text-center block">
+            Launch Your Store &rarr;
+          </a>
+        </div>
+
+        <div class="glass-panel p-8 glass-panel-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-6">
+              <i class="fas fa-mobile-screen"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3 font-heading">Mobile App Development</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              Cross-platform mobile applications for Apple iOS and Google Android. Smooth 60fps animations with native performance.
+            </p>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-400"></i> React Native &amp; Flutter Architecture</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-400"></i> Push Notifications &amp; Offline Storage</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-400"></i> App Store &amp; Play Store Deployment</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20need%20a%20Mobile%20App" target="_blank" class="mt-8 py-3 rounded-xl btn-glass text-xs font-bold text-center block">
+            Build Mobile App &rarr;
+          </a>
+        </div>
+
+        <div class="glass-panel p-8 glass-panel-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 text-xl mb-6">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3 font-heading">AI Workflows &amp; Automation</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              Automate customer interactions, lead scrapers, and internal processes using cutting-edge Gemini, Claude, and OpenAI integrations.
+            </p>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-violet-400"></i> Custom LLM &amp; AI Pitch Engines</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-violet-400"></i> WhatsApp Business API Automated Messaging</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-violet-400"></i> CRM &amp; Multi-Platform Webhook Sync</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20need%20AI%20Automation" target="_blank" class="mt-8 py-3 rounded-xl btn-glass text-xs font-bold text-center block">
+            Automate With AI &rarr;
+          </a>
+        </div>
+
+        <div class="glass-panel p-8 glass-panel-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-6">
+              <i class="fas fa-gauge-high"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3 font-heading">PageSpeed &amp; SEO Overhaul</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              We rescue slow WordPress sites and turn them into 99+ score speed demons that rank at the top of Google search.
+            </p>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Sub-Second First Contentful Paint (FCP)</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Core Web Vitals Pass Guaranteed</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Schema Markup &amp; Structured Data</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20fix%20my%20website%20speed" target="_blank" class="mt-8 py-3 rounded-xl btn-glass text-xs font-bold text-center block">
+            Speed Up Site &rarr;
+          </a>
+        </div>
+
+        <div class="glass-panel p-8 glass-panel-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-6">
+              <i class="fas fa-compass-drafting"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3 font-heading">UI/UX &amp; Brand Architecture</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">
+              Conversion-focused Figma design systems crafted with obsessive visual detail to elevate your brand authority.
+            </p>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-amber-400"></i> Interactive Clickable Prototypes</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-amber-400"></i> Design Tokens &amp; Component Systems</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-amber-400"></i> Conversion-Optimized User Journeys</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20need%20UI/UX%20Design" target="_blank" class="mt-8 py-3 rounded-xl btn-glass text-xs font-bold text-center block">
+            Design Prototype &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Bar -->
+  <section class="py-16 border-t border-white/[0.08] bg-slate-950/50">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-heading mb-4">
+        Ready to Build Your High-Velocity Digital Platform?
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-400 mb-8 max-w-xl mx-auto">
+        Speak directly with founders Mohammad Hamza and Farhan Attari. Get a detailed roadmap and estimate within hours.
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="https://wa.me/918808129388" target="_blank" class="px-6 py-3.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center gap-2">
+          <i class="fab fa-whatsapp text-sm"></i> <span>Chat on WhatsApp (+91 8808129388)</span>
+        </a>
+        <a href="contact.html" class="px-6 py-3.5 rounded-xl btn-glass text-xs font-semibold">
+          <span>Submit Project Inquiry</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.08] bg-[#020409] py-12 text-xs text-slate-400 text-center">
+    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; Engineered for sub-second performance.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

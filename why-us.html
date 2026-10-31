@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why HRS Web Solutions | The Engineering Difference</title>
+  <meta name="description" content="Discover why businesses choose HRS Web Solutions: Sub-second 0.4s speed, zero plugin bloat, direct senior engineer access, and guaranteed Core Web Vitals.">
+  <link rel="icon" type="image/png" href="logo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#040711',
+              card: 'rgba(13, 19, 36, 0.72)',
+              blue: '#3B82F6',
+              indigo: '#6366F1',
+              emerald: '#10B981',
+              cyan: '#06B6D4'
+            }
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#040711] text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white relative bg-mesh-grid">
+
+  <div class="ambient-glow-top"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#040711]/85 backdrop-blur-xl border-b border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-900/90 border border-blue-500/30 p-2 shadow-lg shadow-blue-500/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <img src="logo.png" alt="HRS Web Solutions Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-base font-extrabold tracking-tight text-white font-heading">HRS WEB</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30 font-bold font-mono">SOLUTIONS</span>
+          </div>
+          <span class="text-[10px] text-slate-400 block tracking-wider uppercase font-medium">Digital Engineering Studio</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
+        <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+        <a href="services.html" class="hover:text-blue-400 transition">Services</a>
+        <a href="portfolio.html" class="hover:text-blue-400 transition">Portfolio</a>
+        <a href="pricing.html" class="hover:text-blue-400 transition">Pricing</a>
+        <a href="why-us.html" class="text-blue-400 transition">Why Us</a>
+        <a href="contact.html" class="hover:text-blue-400 transition">Contact</a>
+      </nav>
+
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://wa.me/918808129388" target="_blank" class="px-4 py-2 rounded-xl btn-whatsapp-glow text-xs flex items-center gap-2">
+          <i class="fab fa-whatsapp text-sm"></i> <span>WhatsApp Us</span>
+        </a>
+      </div>
+
+      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300">
+        <i class="fas fa-bars text-lg"></i>
+      </button>
+    </div>
+
+    <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
+      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Home</a>
+      <a href="services.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Services</a>
+      <a href="portfolio.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Portfolio</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing</a>
+      <a href="why-us.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Why Us</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="py-16 sm:py-24 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 mb-6">
+        <span class="text-xs font-semibold text-blue-300 uppercase font-mono tracking-wider">The Engineering Advantage</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mb-4">
+        Why Forward-Thinking Businesses Choose HRS
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        We bridge the gap between world-class Silicon Valley engineering standards and rapid, founder-friendly delivery.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6 Pillars -->
+  <section class="pb-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        
+        <div class="glass-panel p-8">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-6">
+            <i class="fas fa-gauge-high"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3 font-heading">Sub-Second 0.4s Page Loads</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Standard websites take 4-6 seconds to load, losing over 60% of their mobile traffic. We engineer lightweight Next.js and Tailwind platforms that load instantly, maximizing conversion rates.
+          </p>
+        </div>
+
+        <div class="glass-panel p-8">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-6">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3 font-heading">Zero Junior Outsource Games</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Most agencies sell you with seniors, then hand your codebase to unpaid interns. At HRS, your code is written and reviewed directly by Mohammad Hamza and senior engineers.
+          </p>
+        </div>
+
+        <div class="glass-panel p-8">
+          <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 text-xl mb-6">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3 font-heading">You Own 100% of Your Code</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            No proprietary CMS locks or hostage fees. You receive full GitHub repository access, deployment rights, and documentation from Day 1.
+          </p>
+        </div>
+
+        <div class="glass-panel p-8">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-6">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3 font-heading">24/7 Direct WhatsApp Channel</h3>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            No slow support tickets or waiting 4 days for an email reply. You have a direct WhatsApp line to founders with typical response times under 15 minutes.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.08] bg-[#020409] py-12 text-xs text-slate-400 text-center">
+    <p>&copy; <span id="year">2026</span> HRS Web Solutions. All rights reserved. &bull; The engineering difference.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
