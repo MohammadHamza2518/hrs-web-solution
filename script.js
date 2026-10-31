@@ -191,10 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAgencyROI();
   }
 
-  // 6. Checkout Modal Controller
+  // 6. Checkout Modal Controller & Razorpay Live Gateway (BlackRoots Key)
   window.openCheckoutModal = function() {
     const modal = document.getElementById('checkoutModal');
+    const formView = document.getElementById('checkoutFormView');
+    const successView = document.getElementById('checkoutSuccessView');
     if (modal) {
+      if (formView && successView) {
+        // If not already paid, ensure form is shown
+        if (!localStorage.getItem('osp_license_paid')) {
+          formView.classList.remove('hidden');
+          successView.classList.add('hidden');
+        }
+      }
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -213,6 +222,130 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeCheckoutModal();
     });
+  }
+
+  // Razorpay Payment Trigger using BlackRoots Live API Key
+  window.handleRazorpaySubmit = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    startRazorpayPayment();
+  };
+
+  window.startRazorpayPayment = function() {
+    const nameInput = document.getElementById('checkoutName');
+    const phoneInput = document.getElementById('checkoutPhone');
+    const emailInput = document.getElementById('checkoutEmail');
+    const payBtn = document.getElementById('btnRazorpayPay');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const phone = phoneInput ? phoneInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    if (!name) {
+      alert('Please enter your Full Name.');
+      if (nameInput) nameInput.focus();
+      return;
+    }
+
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (!cleanPhone || cleanPhone.length < 10) {
+      alert('Please enter a valid 10-digit WhatsApp number.');
+      if (phoneInput) phoneInput.focus();
+      return;
+    }
+
+    if (typeof Razorpay === 'undefined') {
+      alert('Payment gateway is loading. Please check your internet connection and try again in 2 seconds.');
+      return;
+    }
+
+    const originalBtnHtml = payBtn ? payBtn.innerHTML : '';
+    if (payBtn) {
+      payBtn.disabled = true;
+      payBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Opening Secure Razorpay Gateway...';
+    }
+
+    // Exact key from BlackRoots
+    const rzpOptions = {
+      key: 'rzp_live_TV9VNPhiYYbB07',
+      amount: 199900, // ₹1,999 in paise
+      currency: 'INR',
+      name: 'HRS Web Solutions',
+      description: 'Outreach Studio Pro (Lifetime Commercial License)',
+      image: 'https://www.hrswebsolution.online/assets/images/hrs_icon.png',
+      prefill: {
+        name: name,
+        contact: cleanPhone,
+        email: email || ''
+      },
+      notes: {
+        product: 'Outreach Studio Pro',
+        license: 'Lifetime Commercial License',
+        price: '₹1,999'
+      },
+      theme: {
+        color: '#2563EB'
+      },
+      modal: {
+        ondismiss: function() {
+          if (payBtn) {
+            payBtn.disabled = false;
+            payBtn.innerHTML = originalBtnHtml;
+          }
+        }
+      },
+      handler: function(response) {
+        if (payBtn) {
+          payBtn.disabled = false;
+          payBtn.innerHTML = originalBtnHtml;
+        }
+        handlePaymentSuccess(response, { name, phone: cleanPhone, email });
+      }
+    };
+
+    const rzp = new Razorpay(rzpOptions);
+    rzp.on('payment.failed', function(resp) {
+      alert('Payment Failed: ' + (resp.error ? resp.error.description : 'Transaction cancelled'));
+      if (payBtn) {
+        payBtn.disabled = false;
+        payBtn.innerHTML = originalBtnHtml;
+      }
+    });
+    rzp.open();
+  };
+
+  window.handlePaymentSuccess = function(response, customer) {
+    const paymentId = response.razorpay_payment_id || ('pay_' + Date.now());
+
+    try {
+      localStorage.setItem('osp_license_paid', 'true');
+      localStorage.setItem('osp_payment_id', paymentId);
+      localStorage.setItem('osp_buyer_name', customer.name);
+      localStorage.setItem('osp_buyer_phone', customer.phone);
+    } catch(e) {}
+
+    const formView = document.getElementById('checkoutFormView');
+    const successView = document.getElementById('checkoutSuccessView');
+    const successPaymentId = document.getElementById('successPaymentId');
+    const successCustomer = document.getElementById('successCustomer');
+    const successWhatsAppBtn = document.getElementById('successWhatsAppBtn');
+
+    if (formView) formView.classList.add('hidden');
+    if (successView) successView.classList.remove('hidden');
+
+    if (successPaymentId) successPaymentId.textContent = paymentId;
+    if (successCustomer) successCustomer.textContent = `${customer.name} (${customer.phone})`;
+
+    if (successWhatsAppBtn) {
+      const waMsg = encodeURIComponent(
+        `Hi Hamza, I have successfully paid Rs 1,999 for Outreach Studio Pro via Razorpay! 🎉\n\n` +
+        `• Name: ${customer.name}\n` +
+        `• WhatsApp: ${customer.phone}\n` +
+        `• Email: ${customer.email || 'N/A'}\n` +
+        `• Payment ID: ${paymentId}\n\n` +
+        `Please share my Google Drive ZIP download link and activate my Lifetime License key.`
+      );
+      successWhatsAppBtn.href = `https://wa.me/918808129388?text=${waMsg}`;
+    }
   }
 
   // 7. Lead Pitch Accordion
