@@ -46,86 +46,82 @@
   <div class="ambient-glow-top"></div>
   <div class="ambient-glow-secondary"></div>
 
-  <!-- 1. Ultra-Sleek Top Announcement Bar -->
-  <div class="relative z-50 bg-gradient-to-r from-blue-950/80 via-[#060a16] to-indigo-950/80 border-b border-white/[0.08] py-2 px-4 text-center text-xs">
-    <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
-      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 font-bold text-[10px] border border-amber-500/30 uppercase tracking-wider">
-        <i class="fas fa-bolt text-amber-400"></i> Lifetime Launch Deal
+  <!-- 1. Sleek Top Announcement Bar -->
+  <div class="relative z-50 bg-[#060a16] border-b border-white/[0.06] py-2 px-4 text-center">
+    <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 sm:gap-3 text-xs flex-wrap">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 font-bold text-[10px] border border-amber-500/30 uppercase tracking-wider">
+        <i class="fas fa-bolt text-amber-400"></i> Lifetime Deal
       </span>
       <span class="text-slate-300 font-medium">
-        High-Ticket B2B Client Acquisition CRM &bull; <strong class="text-white">Zero Monthly SaaS Subscriptions</strong>
+        High-Ticket B2B Client Acquisition CRM &bull; <strong class="text-white">Zero Monthly Fees</strong>
       </span>
-      <button onclick="openCheckoutModal()" class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 hover:text-white font-semibold text-[11px] border border-blue-500/30 transition cursor-pointer">
-        <span>Claim License for &#8377;1,999 (Save 80%)</span>
-        <i class="fas fa-arrow-right text-[10px]"></i>
+      <span class="text-slate-600 hidden sm:inline">&bull;</span>
+      <button onclick="openCheckoutModal()" class="text-blue-400 hover:text-blue-300 font-semibold cursor-pointer underline hover:no-underline transition flex items-center gap-1">
+        <span>Get Lifetime License for &#8377;1,999 (Save 80%) &rarr;</span>
       </button>
     </div>
   </div>
 
-  <!-- 2. Sticky Glass Navigation -->
-  <header class="sticky top-0 z-40 bg-[#040711]/85 backdrop-blur-2xl border-b border-white/[0.08] shadow-lg shadow-black/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <!-- 2. Sticky Glass Navigation (Spacious, Responsive, No-Wrap) -->
+  <header class="sticky top-0 z-40 bg-[#040711]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="flex items-center gap-3.5 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600/20 via-indigo-600/30 to-purple-600/20 border border-blue-500/35 p-2 shadow-lg shadow-blue-500/15 flex items-center justify-center group-hover:scale-105 group-hover:border-blue-400 transition-all duration-300">
+      <a href="index.html" class="flex items-center gap-3 flex-shrink-0 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600/30 via-indigo-600/40 to-purple-600/30 border border-blue-500/40 p-2 shadow-lg shadow-blue-500/20 flex items-center justify-center group-hover:scale-105 group-hover:border-blue-400 transition-all duration-300">
           <img src="assets/images/hrs_icon.png" alt="Outreach Studio Pro" class="w-full h-full object-contain">
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-base font-extrabold tracking-tight text-white font-heading">Outreach Studio</span>
-            <span class="text-[9px] px-2 py-0.5 rounded-md bg-blue-500/15 text-blue-300 border border-blue-500/30 font-bold font-mono tracking-wider">PRO</span>
-          </div>
-          <span class="text-[9px] text-slate-400 block tracking-widest uppercase font-medium">by HRS Web Solutions</span>
+        <div class="flex items-center gap-2">
+          <span class="text-base sm:text-lg font-black tracking-tight text-white font-heading whitespace-nowrap">Outreach Studio</span>
+          <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold font-mono tracking-wider">PRO</span>
         </div>
       </a>
 
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-300">
-        <a href="#overview" class="hover:text-white transition">Overview</a>
-        <a href="leads-vault.html" class="hover:text-white transition flex items-center gap-1.5">
+      <!-- Desktop Navigation Links (Single-Line, No-Wrap, Perfectly Spaced) -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-slate-300">
+        <a href="#features" class="whitespace-nowrap hover:text-white transition-colors">Features</a>
+        <a href="leads-vault.html" class="whitespace-nowrap hover:text-white transition-colors flex items-center gap-1.5">
           <span>Leads Vault</span>
-          <span class="px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 text-[9px] border border-emerald-500/25 font-bold tracking-wider">DIRECTORY</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
         </a>
-        <a href="#features" class="hover:text-white transition">Features</a>
-        <a href="#reviews" class="hover:text-white transition flex items-center gap-1.5">
-          <span>Reviews</span>
-          <span class="px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 text-[9px] border border-amber-500/25 font-bold">4.9 &#9733;</span>
-        </a>
-        <a href="#comparison" class="hover:text-white transition">Why &#8377;1,999?</a>
-        <a href="pricing.html" class="hover:text-white transition">Pricing</a>
-        <a href="contact.html" class="hover:text-white transition">VIP Support</a>
+        <a href="#reviews" class="whitespace-nowrap hover:text-white transition-colors">Reviews</a>
+        <a href="how-it-works.html" class="whitespace-nowrap hover:text-white transition-colors">How It Works</a>
+        <a href="#comparison" class="whitespace-nowrap hover:text-white transition-colors">Why Pro?</a>
+        <a href="pricing.html" class="whitespace-nowrap hover:text-white transition-colors">Pricing</a>
       </nav>
 
       <!-- Action Buttons -->
-      <div class="hidden sm:flex items-center gap-3">
-        <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20know%20more%20about%20Outreach%20Studio%20Pro" target="_blank" class="px-3.5 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 hover:border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-2 transition-all">
-          <i class="fab fa-whatsapp text-emerald-400 text-sm"></i>
-          <span>Chat on WhatsApp</span>
+      <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
+        <a href="https://wa.me/918808129388?text=Hi%20Hamza%2C%20I%20want%20to%20know%20more%20about%20Outreach%20Studio%20Pro" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 hover:border-emerald-500/40 text-emerald-400 hover:text-emerald-300 text-xs font-semibold flex items-center gap-1.5 transition whitespace-nowrap">
+          <i class="fab fa-whatsapp text-sm"></i>
+          <span>WhatsApp</span>
         </a>
-        <button onclick="openCheckoutModal()" class="px-4.5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/45 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 cursor-pointer">
+        <button onclick="openCheckoutModal()" class="px-4.5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 cursor-pointer whitespace-nowrap">
           <i class="fas fa-bolt text-amber-300 text-xs"></i>
           <span>Get Lifetime Access (&#8377;1,999)</span>
         </button>
       </div>
 
       <!-- Mobile Hamburger Button -->
-      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300 hover:text-white">
+      <button id="mobileMenuToggle" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-white/[0.1] text-slate-300 hover:text-white flex-shrink-0">
         <i class="fas fa-bars text-lg"></i>
       </button>
     </div>
 
     <!-- Mobile Drawer Menu -->
     <div id="mobileNavDrawer" class="hidden lg:hidden border-b border-white/[0.08] bg-[#070b16] px-6 py-6 space-y-3.5">
-      <a href="index.html" class="mobile-nav-link block text-sm font-semibold text-blue-400 py-1">Overview</a>
-      <a href="leads-vault.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Leads Vault Directory</a>
       <a href="#features" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Features Breakdown</a>
+      <a href="leads-vault.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Leads Vault Directory</a>
       <a href="#reviews" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Agency Reviews (4.9 &#9733;)</a>
-      <a href="#comparison" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">&#8377;1,999 Lifetime Deal &amp; Comparison</a>
-      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">VIP WhatsApp Support</a>
+      <a href="how-it-works.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">How It Works</a>
+      <a href="#comparison" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">&#8377;1,999 vs SaaS Comparison</a>
+      <a href="pricing.html" class="mobile-nav-link block text-sm font-semibold text-slate-300 hover:text-white py-1">Pricing &amp; License Details</a>
+      <a href="contact.html" class="mobile-nav-link block text-sm font-semibold text-emerald-400 hover:text-emerald-300 py-1 flex items-center gap-2">
+        <i class="fab fa-whatsapp"></i> VIP WhatsApp Support
+      </a>
       <div class="pt-3 border-t border-white/[0.08]">
         <button onclick="openCheckoutModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xs text-center block">
-          Get Lifetime License &bull; &#8377;1,999
+          Get Lifetime Access &bull; &#8377;1,999
         </button>
       </div>
     </div>
