@@ -1218,11 +1218,36 @@
       return String(str).replace(/"/g, '""');
     }
   
-    // =========================================================================
-    // AI OUTREACH COPILOT & BYOK API CONTROLLER
+        // =========================================================================
+    // AI OUTREACH COPILOT — COMMERCIAL BYOK LIVE AI ENGINE
     // =========================================================================
     let copilotChatHistory = [];
-    let currentCopilotModel = 'builtin'; // 'builtin', 'gemini', 'gpt4o', 'claude'
+    let activeAIProvider = 'gemini'; // 'gemini', 'openai', 'claude'
+
+    function hasActiveApiKey() {
+      try {
+        const keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
+        return !!(keys[activeAIProvider] && keys[activeAIProvider].trim().length > 5);
+      } catch(e) {
+        return false;
+      }
+    }
+
+    function getActiveApiKey() {
+      try {
+        const keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
+        return (keys[activeAIProvider] || '').trim();
+      } catch(e) {
+        return '';
+      }
+    }
+
+    function getProviderDisplayName(p) {
+      if (p === 'gemini') return "Google Gemini 2.0";
+      if (p === 'openai') return "OpenAI GPT-4o";
+      if (p === 'claude') return "Anthropic Claude 3.7";
+      return "Google Gemini 2.0";
+    }
 
     window.toggleAICopilot = function() {
       const drawer = document.getElementById('aiCopilotDrawer');
@@ -1232,100 +1257,188 @@
       if (drawer.classList.contains('hidden')) {
         drawer.classList.remove('hidden');
         if (floatBtn) floatBtn.classList.add('opacity-0', 'pointer-events-none');
-        loadAIKeys();
-        const input = document.getElementById('copilotInput');
-        if (input) setTimeout(() => input.focus(), 150);
+
+        // Check if user has connected API key
+        if (hasActiveApiKey()) {
+          switchToChatView();
+        } else {
+          // Check if any other provider has a key
+          try {
+            const keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
+            if (keys.gemini && keys.gemini.trim().length > 5) {
+              activeAIProvider = 'gemini';
+              switchToChatView();
+            } else if (keys.openai && keys.openai.trim().length > 5) {
+              activeAIProvider = 'openai';
+              switchToChatView();
+            } else if (keys.claude && keys.claude.trim().length > 5) {
+              activeAIProvider = 'claude';
+              switchToChatView();
+            } else {
+              switchToSetupView();
+            }
+          } catch(e) {
+            switchToSetupView();
+          }
+        }
       } else {
         drawer.classList.add('hidden');
         if (floatBtn) floatBtn.classList.remove('opacity-0', 'pointer-events-none');
       }
     };
 
-    window.openAIKeyModal = function() {
-      const modal = document.getElementById('aiKeySettingsModal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        loadAIKeys();
+    window.selectAIProvider = function(prov) {
+      activeAIProvider = prov;
+
+      // Update card styling
+      const cards = {
+        gemini: document.getElementById('card_prov_gemini'),
+        openai: document.getElementById('card_prov_openai'),
+        claude: document.getElementById('card_prov_claude')
+      };
+
+      Object.keys(cards).forEach(k => {
+        const c = cards[k];
+        if (c) {
+          if (k === prov) {
+            c.className = "flex items-center justify-between p-3 rounded-2xl border border-blue-500/60 bg-blue-500/15 cursor-pointer hover:border-blue-400 transition shadow-sm";
+          } else {
+            c.className = "flex items-center justify-between p-3 rounded-2xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+          }
+        }
+      });
+
+      // Update label and link
+      const label = document.getElementById('setupKeyLabel');
+      const link = document.getElementById('setupGetKeyLink');
+      const input = document.getElementById('copilotSetupApiKeyInput');
+
+      if (prov === 'gemini') {
+        if (label) label.textContent = "Paste Your Google Gemini API Key:";
+        if (link) {
+          link.href = "https://aistudio.google.com/app/apikey";
+          link.innerHTML = `<span>Get Free Key (30s)</span> <i class="fas fa-external-link-alt text-[8px]"></i>`;
+        }
+        if (input) input.placeholder = "AIzaSy...";
+      } else if (prov === 'openai') {
+        if (label) label.textContent = "Paste Your OpenAI API Key:";
+        if (link) {
+          link.href = "https://platform.openai.com/api-keys";
+          link.innerHTML = `<span>Get OpenAI Key</span> <i class="fas fa-external-link-alt text-[8px]"></i>`;
+        }
+        if (input) input.placeholder = "sk-proj-...";
+      } else if (prov === 'claude') {
+        if (label) label.textContent = "Paste Your Anthropic Claude API Key:";
+        if (link) {
+          link.href = "https://console.anthropic.com/";
+          link.innerHTML = `<span>Get Claude Key</span> <i class="fas fa-external-link-alt text-[8px]"></i>`;
+        }
+        if (input) input.placeholder = "sk-ant-...";
       }
-    };
 
-    window.closeAIKeyModal = function() {
-      const modal = document.getElementById('aiKeySettingsModal');
-      if (modal) modal.classList.add('hidden');
-    };
-
-    window.saveAIKeys = function() {
-      const gemini = (document.getElementById('inputGeminiKey')?.value || '').trim();
-      const openai = (document.getElementById('inputOpenAIKey')?.value || '').trim();
-      const claude = (document.getElementById('inputClaudeKey')?.value || '').trim();
-
-      const keys = { gemini, openai, claude };
-      localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
-      closeAIKeyModal();
-      updateCopilotEngineStatus();
-      addChatMessage('ai', `🔑 **API Key Saved Successfully!**\n\nAapka API key connect ho chuka hai. Active Model: **${getEngineDisplayName(currentCopilotModel)}**.`);
-    };
-
-    window.loadAIKeys = function() {
+      // Pre-fill existing key if saved
       try {
         const saved = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
-        const g = document.getElementById('inputGeminiKey');
-        const o = document.getElementById('inputOpenAIKey');
-        const c = document.getElementById('inputClaudeKey');
-
-        if (g && saved.gemini) g.value = saved.gemini;
-        if (o && saved.openai) o.value = saved.openai;
-        if (c && saved.claude) c.value = saved.claude;
+        if (input) input.value = saved[prov] || '';
       } catch(e) {}
-      updateCopilotEngineStatus();
     };
 
-    window.clearSavedAIKeys = function() {
-      if (confirm("Reset all saved custom API keys and revert to Built-in Pro Engine?")) {
-        localStorage.removeItem('osp_byok_keys');
-        const g = document.getElementById('inputGeminiKey');
-        const o = document.getElementById('inputOpenAIKey');
-        const c = document.getElementById('inputClaudeKey');
-        if (g) g.value = '';
-        if (o) o.value = '';
-        if (c) c.value = '';
-        currentCopilotModel = 'builtin';
-        const sel = document.getElementById('copilotModelSelector');
-        if (sel) sel.value = 'builtin';
-        updateCopilotEngineStatus();
-        closeAIKeyModal();
-        addChatMessage('ai', "🔄 Custom keys removed. Active Engine reverted to **Built-in Pro Neural Brain**.");
+    window.handleConnectApiKeySubmit = function() {
+      const input = document.getElementById('copilotSetupApiKeyInput');
+      const keyVal = (input ? input.value : '').trim();
+
+      if (!keyVal || keyVal.length < 8) {
+        alert("Please enter a valid API Key from " + getProviderDisplayName(activeAIProvider));
+        if (input) input.focus();
+        return;
       }
-    };
 
-    function getSavedKey(type) {
+      let keys = {};
       try {
-        const saved = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
-        return saved[type] || '';
-      } catch(e) { return ''; }
-    }
+        keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
+      } catch(e) {}
 
-    window.handleCopilotModelChange = function(model) {
-      currentCopilotModel = model;
-      updateCopilotEngineStatus();
+      keys[activeAIProvider] = keyVal;
+      localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
+
+      showToast(`Connected to ${getProviderDisplayName(activeAIProvider)}!`, "success");
+      switchToChatView();
     };
 
-    function updateCopilotEngineStatus() {
-      const display = document.getElementById('copilotActiveEngineDisplay');
-      if (!display) return;
-      display.textContent = getEngineDisplayName(currentCopilotModel);
+    function switchToSetupView() {
+      const setup = document.getElementById('copilotSetupView');
+      const chat = document.getElementById('copilotChatView');
+      if (setup) setup.classList.remove('hidden');
+      if (chat) chat.classList.add('hidden');
+
+      selectAIProvider(activeAIProvider);
+      const input = document.getElementById('copilotSetupApiKeyInput');
+      if (input) setTimeout(() => input.focus(), 150);
     }
 
-    function getEngineDisplayName(m) {
-      if (m === 'gemini') {
-        return getSavedKey('gemini') ? "⚡ Gemini 2.0 (Connected)" : "⚡ Gemini (Key Needed)";
-      } else if (m === 'gpt4o') {
-        return getSavedKey('openai') ? "🤖 OpenAI GPT-4o (Connected)" : "🤖 GPT-4o (Key Needed)";
-      } else if (m === 'claude') {
-        return getSavedKey('claude') ? "🧠 Claude 3.7 (Connected)" : "🧠 Claude (Key Needed)";
+    function switchToChatView() {
+      const setup = document.getElementById('copilotSetupView');
+      const chat = document.getElementById('copilotChatView');
+      if (setup) setup.classList.add('hidden');
+      if (chat) chat.classList.remove('hidden');
+
+      // Update engine display
+      const engineEl = document.getElementById('copilotActiveEngineDisplay');
+      if (engineEl) engineEl.textContent = getProviderDisplayName(activeAIProvider);
+
+      // If messages container is empty, populate initial welcome
+      const container = document.getElementById('copilotMessages');
+      if (container && container.children.length === 0) {
+        initWelcomeMessage();
       }
-      return "🚀 Built-in Neural Brain";
+
+      const input = document.getElementById('copilotInput');
+      if (input) setTimeout(() => input.focus(), 150);
     }
+
+    function initWelcomeMessage() {
+      const container = document.getElementById('copilotMessages');
+      if (!container) return;
+
+      const provName = getProviderDisplayName(activeAIProvider);
+      const userSkill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'High-Ticket Client Acquisition';
+
+      container.innerHTML = `
+        <div class="flex items-start gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-blue-500/30 shadow-md">
+            <i class="fas fa-brain-circuit text-amber-300"></i>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/[0.08] text-slate-200 max-w-[85%] space-y-2 shadow-md">
+            <div class="flex items-center justify-between border-b border-white/[0.06] pb-1.5 mb-1">
+              <span class="font-bold text-white text-xs">Live AI Copilot Ready</span>
+              <span class="text-[9px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">CONNECTED</span>
+            </div>
+            <p class="text-xs leading-relaxed text-slate-300">
+              Salam / Hello! 👋 Connected to <strong class="text-cyan-300">${provName}</strong>.
+            </p>
+            <p class="text-[11px] leading-relaxed text-slate-400">
+              I have real-time context of all <strong class="text-white font-mono">52 global leads</strong> in your CRM (Dubai, London, Switzerland) and your skill (<strong class="text-amber-300 font-mono">${userSkill}</strong>).
+            </p>
+            <p class="text-[11px] leading-relaxed text-slate-400">
+              Ask me anything: e.g. <em class="text-slate-300">"Pitch Oud Al Masar for Video Editing"</em>, <em class="text-slate-300">"Audit Dubai Real Estate leads"</em>, or <em class="text-slate-300">"Handle objection: Already have an agency"</em>!
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    window.toggleKeyVisibility = function(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) icon.className = 'fas fa-eye-slash';
+      } else {
+        input.type = 'password';
+        if (icon) icon.className = 'fas fa-eye';
+      }
+    };
 
     window.sendQuickPrompt = function(promptText) {
       const input = document.getElementById('copilotInput');
@@ -1337,20 +1450,9 @@
 
     window.clearCopilotChat = function() {
       const container = document.getElementById('copilotMessages');
-      if (container) {
-        container.innerHTML = `
-          <div class="flex items-start gap-2.5">
-            <div class="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-blue-500/30">
-              <i class="fas fa-robot"></i>
-            </div>
-            <div class="p-3 rounded-2xl bg-slate-900 border border-white/[0.08] text-slate-200 max-w-[85%] space-y-2">
-              <p class="font-semibold text-white">Chat cleared! 👋 Ready for new client outreach prompts.</p>
-              <p class="text-slate-300">Ask about any foreign lead, request a custom pitch angle, or ask how to handle client objections.</p>
-            </div>
-          </div>
-        `;
-      }
+      if (container) container.innerHTML = '';
       copilotChatHistory = [];
+      initWelcomeMessage();
     };
 
     window.handleCopilotSubmit = async function(e) {
@@ -1361,21 +1463,30 @@
       const userText = input.value.trim();
       if (!userText) return;
 
+      // Add user message
       addChatMessage('user', userText);
       input.value = '';
 
+      // Show typing indicator
       const typing = document.getElementById('copilotTyping');
+      const typingText = document.getElementById('copilotTypingText');
       if (typing) typing.classList.remove('hidden');
+      if (typingText) typingText.textContent = `${getProviderDisplayName(activeAIProvider)} is thinking...`;
       scrollCopilotToBottom();
 
       try {
-        const aiResponse = await generateAIResponse(userText);
+        const aiResponse = await generateLiveAIResponse(userText);
         if (typing) typing.classList.add('hidden');
         addChatMessage('ai', aiResponse);
+        // Save to multi-turn memory
+        copilotChatHistory.push({ role: 'user', content: userText });
+        copilotChatHistory.push({ role: 'assistant', content: aiResponse });
       } catch(err) {
         if (typing) typing.classList.add('hidden');
-        const fallback = generateBuiltinNeuralResponse(userText);
-        addChatMessage('ai', fallback);
+        const errNotice = `⚠️ **Connection Error with ${getProviderDisplayName(activeAIProvider)}:**\\n\\n` +
+          `\`${err.message || 'API request failed'}\`\\n\\n` +
+          `👉 Please check if your API Key is correct and active. [Click here to Change API Key](javascript:switchToSetupView())`;
+        addChatMessage('ai', errNotice);
       }
 
       scrollCopilotToBottom();
@@ -1406,7 +1517,7 @@
 
         msgDiv.innerHTML = `
           <div class="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-blue-500/30">
-            <i class="fas fa-robot"></i>
+            <i class="fas fa-robot text-cyan-400"></i>
           </div>
           <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/[0.08] text-slate-200 max-w-[85%] space-y-2 shadow-md">
             <div class="text-xs leading-relaxed space-y-2 break-words" id="${msgId}">
@@ -1414,7 +1525,7 @@
             </div>
             <div class="flex items-center justify-between pt-1.5 border-t border-white/[0.06] text-[10px] text-slate-400 font-mono">
               <span class="flex items-center gap-1 text-cyan-400">
-                <i class="fas fa-brain-circuit text-[9px]"></i> ${getEngineDisplayName(currentCopilotModel)}
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${getProviderDisplayName(activeAIProvider)}
               </span>
               <button onclick="copyMsgContent('${msgId}')" class="hover:text-white transition flex items-center gap-1 cursor-pointer">
                 <i class="fas fa-copy"></i> Copy
@@ -1440,7 +1551,7 @@
       if (el) {
         const text = el.innerText || el.textContent;
         navigator.clipboard.writeText(text).then(() => {
-          showToast("AI response copied to clipboard!", "info");
+          showToast("Copied to clipboard!", "info");
         });
       }
     };
@@ -1451,83 +1562,125 @@
       escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-bold">$1</strong>');
       escaped = escaped.replace(/`(.*?)`/g, '<code class="px-1 py-0.5 rounded bg-black/40 text-cyan-300 font-mono text-[11px]">$1</code>');
       escaped = escaped.replace(/^\s*[\-\*]\s+(.*)$/gm, '<div class="flex items-start gap-1.5 ml-1"><span class="text-cyan-400">&bull;</span><span>$1</span></div>');
-      escaped = escaped.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-cyan-400 hover:underline inline-flex items-center gap-1"><i class="fas fa-external-link-alt text-[9px]"></i> $1</a>');
+      escaped = escaped.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-cyan-400 hover:underline inline-flex items-center gap-1 font-bold"><i class="fas fa-external-link-alt text-[9px]"></i> $1</a>');
       escaped = escaped.replace(/\n\n/g, '<div class="h-2"></div>');
       escaped = escaped.replace(/\n/g, '<br>');
       return escaped;
     }
 
-    async function generateAIResponse(userPrompt) {
-      const leadsSummary = (leadsVault || []).slice(0, 15).map(l => 
-        `- ${l.name} (${l.city}, ${l.country}) | Industry: ${l.industry_name || l.category} | Phone: ${l.phone} | Audit Leak: ${l.audit_proof}`
-      ).join('\n');
-
-      const userSkill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Full Agency (Web, Video, Ads)';
-
-      const systemPrompt = `You are Outreach Studio Pro AI Copilot, an elite B2B client acquisition strategist for freelancers and agency owners (specializing in: ${userSkill}).
-You assist users in pitching, closing, and handling objections with affluent clients in Dubai (UAE), London (UK), and Switzerland.
-You have real-time access to the user's CRM leads vault:
-${leadsSummary}
-
-Instructions:
-- If user asks for a pitch, craft a personalized, punchy 3-part WhatsApp message tailored to ${userSkill}.
-- Reference specific companies, phone numbers, and digital leaks from the CRM.
-- Keep answers practical, actionable, and ready to send.`;
-
-      if (currentCopilotModel === 'gemini') {
-        const key = getSavedKey('gemini');
-        if (key) return await callGeminiAPI(key, systemPrompt, userPrompt);
-      } else if (currentCopilotModel === 'gpt4o') {
-        const key = getSavedKey('openai');
-        if (key) return await callOpenAIAPI(key, systemPrompt, userPrompt);
-      } else if (currentCopilotModel === 'claude') {
-        const key = getSavedKey('claude');
-        if (key) return await callClaudeAPI(key, systemPrompt, userPrompt);
+    // =========================================================================
+    // LIVE API CALLS (Gemini, OpenAI, Claude)
+    // =========================================================================
+    async function generateLiveAIResponse(userPrompt) {
+      const key = getActiveApiKey();
+      if (!key) {
+        switchToSetupView();
+        throw new Error("No active API Key found. Please connect your API Key first.");
       }
 
-      return generateBuiltinNeuralResponse(userPrompt);
+      // Build Context of User & Leads
+      const userSkill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Freelancer / Agency Owner';
+      
+      const sampleLeads = (leadsVault || []).slice(0, 15).map(l => 
+        `• ${l.name} (${l.city}, ${l.country}) | Industry: ${l.industry_name || l.category} | Phone: ${l.phone} | Audit: ${l.audit_proof}`
+      ).join('\n');
+
+      const systemPrompt = `You are Outreach Studio Pro AI Copilot, a sharp, elite B2B client acquisition strategist for freelancers and agency owners.
+The user is a freelancer/agency owner whose skill is: "${userSkill}".
+You are embedded directly inside their Outreach Studio Pro CRM workspace.
+You have real-time access to the user's 52 verified high-ticket foreign leads (Dubai UAE, London UK, Switzerland):
+${sampleLeads}
+
+CRITICAL RULES:
+1. Speak in the EXACT same language and tone as the user! If the user speaks in casual Hinglish/Hindi (e.g. "hey suno", "bhai pitch bana de", "kaisa hai"), reply in warm, confident, sharp, conversational Hinglish (like a smart agency mentor)!
+2. If the user asks for a pitch, craft an irresistible, punchy WhatsApp message tailored to ${userSkill}.
+3. If they ask about specific leads (e.g. Dubai Real Estate, Oud Al Masar, Supercars), reference the exact company details and digital leaks from the CRM.
+4. If they ask about objections or negotiation, give a high-converting psychology-backed script.
+5. Keep your advice practical, high-ticket focused ($1,500 - $5,000/mo retainers), and ready to execute.`;
+
+      if (activeAIProvider === 'gemini') {
+        return await callLiveGeminiAPI(key, systemPrompt, userPrompt);
+      } else if (activeAIProvider === 'openai') {
+        return await callLiveOpenAIAPI(key, systemPrompt, userPrompt);
+      } else if (activeAIProvider === 'claude') {
+        return await callLiveClaudeAPI(key, systemPrompt, userPrompt);
+      }
+
+      return await callLiveGeminiAPI(key, systemPrompt, userPrompt);
     }
 
-    async function callGeminiAPI(apiKey, systemPrompt, userPrompt) {
+    // Gemini 1.5/2.0 Flash
+    async function callLiveGeminiAPI(apiKey, systemPrompt, userPrompt) {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-      const payload = {
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: systemPrompt + "\n\n---\nUser Request: " + userPrompt }]
-          }
-        ],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 800 }
-      };
+      
+      // Multi-turn conversation history
+      const contents = [
+        {
+          role: "user",
+          parts: [{ text: systemPrompt }]
+        },
+        {
+          role: "model",
+          parts: [{ text: "Understood! I am your Outreach Studio Pro AI Copilot. How can I help you close high-ticket clients today?" }]
+        }
+      ];
+
+      // Add recent history (up to last 6 messages)
+      const recentHistory = copilotChatHistory.slice(-6);
+      recentHistory.forEach(h => {
+        contents.push({
+          role: h.role === 'user' ? 'user' : 'model',
+          parts: [{ text: h.content }]
+        });
+      });
+
+      // Add current user prompt
+      contents.push({
+        role: "user",
+        parts: [{ text: userPrompt }]
+      });
 
       const resp = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          contents: contents,
+          generationConfig: {
+            temperature: 0.75,
+            maxOutputTokens: 900
+          }
+        })
       });
 
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
-        throw new Error(err.error ? err.error.message : 'Gemini API Error');
+        const msg = err.error ? err.error.message : `HTTP ${resp.status} Error`;
+        throw new Error(msg);
       }
 
       const data = await resp.json();
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (!text) throw new Error("Empty response from Gemini");
+      if (!text) throw new Error("No text response from Gemini API.");
       return text;
     }
 
-    async function callOpenAIAPI(apiKey, systemPrompt, userPrompt) {
+    // OpenAI GPT-4o / GPT-4o-mini
+    async function callLiveOpenAIAPI(apiKey, systemPrompt, userPrompt) {
       const url = 'https://api.openai.com/v1/chat/completions';
-      const payload = {
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt }
-        ],
-        temperature: 0.7,
-        max_tokens: 800
-      };
+      
+      const messages = [
+        { role: 'system', content: systemPrompt }
+      ];
+
+      const recentHistory = copilotChatHistory.slice(-6);
+      recentHistory.forEach(h => {
+        messages.push({
+          role: h.role === 'user' ? 'user' : 'assistant',
+          content: h.content
+        });
+      });
+
+      messages.push({ role: 'user', content: userPrompt });
 
       const resp = await fetch(url, {
         method: 'POST',
@@ -1535,26 +1688,39 @@ Instructions:
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          model: 'gpt-4o-mini',
+          messages: messages,
+          temperature: 0.75,
+          max_tokens: 900
+        })
       });
 
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
-        throw new Error(err.error ? err.error.message : 'OpenAI API Error');
+        const msg = err.error ? err.error.message : `HTTP ${resp.status} Error`;
+        throw new Error(msg);
       }
 
       const data = await resp.json();
-      return data.choices?.[0]?.message?.content || "No response generated.";
+      const text = data.choices?.[0]?.message?.content;
+      if (!text) throw new Error("No text response from OpenAI API.");
+      return text;
     }
 
-    async function callClaudeAPI(apiKey, systemPrompt, userPrompt) {
+    // Anthropic Claude 3.7
+    async function callLiveClaudeAPI(apiKey, systemPrompt, userPrompt) {
       const url = 'https://api.anthropic.com/v1/messages';
-      const payload = {
-        model: 'claude-3-7-sonnet-20250219',
-        max_tokens: 800,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userPrompt }]
-      };
+      
+      const messages = [];
+      const recentHistory = copilotChatHistory.slice(-6);
+      recentHistory.forEach(h => {
+        messages.push({
+          role: h.role === 'user' ? 'user' : 'assistant',
+          content: h.content
+        });
+      });
+      messages.push({ role: 'user', content: userPrompt });
 
       const resp = await fetch(url, {
         method: 'POST',
@@ -1564,108 +1730,24 @@ Instructions:
           'anthropic-version': '2023-06-01',
           'anthropic-dangerous-direct-browser-access': 'true'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          model: 'claude-3-7-sonnet-20250219',
+          max_tokens: 900,
+          system: systemPrompt,
+          messages: messages
+        })
       });
 
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
-        throw new Error(err.error ? err.error.message : 'Claude API Error');
+        const msg = err.error ? err.error.message : `HTTP ${resp.status} Error`;
+        throw new Error(msg);
       }
 
       const data = await resp.json();
-      return data.content?.[0]?.text || "No response from Claude.";
-    }
-
-    function generateBuiltinNeuralResponse(prompt) {
-      const q = prompt.toLowerCase();
-      const userSkill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Full Agency';
-
-      if (q.includes('agency') || q.includes('already have') || q.includes('pehle se') || q.includes('objection')) {
-        return `🛡️ **Battle-Tested Script for: "We already have an agency"**\n\n` +
-               `Most foreign clients say this automatically to filter out spam. Do NOT argue with them. Use this **Compliment + Specific Audit Angle**:\n\n` +
-               `*"Totally understand! Most established brands in ${q.includes('dubai') ? 'Dubai' : 'your space'} already work with an agency.\n\n` +
-               `Not looking to replace them at all — we actually noticed a specific friction point on your mobile checkout speed (5.2s load) that most general agencies overlook.\n\n` +
-               `Happy to send over a 45-second screen recording showing the exact leak so your current team can fix it. Open to taking a quick look?"*\n\n` +
-               `💡 **Why this works:** You offer zero-friction value without asking them to fire their existing team. 42% of clients reply asking for the video!`;
-      }
-
-      if (q.includes('expensive') || q.includes('budget') || q.includes('paisa') || q.includes('rate') || q.includes('cost')) {
-        return `💰 **How to Handle Price / Budget Objections ($2k - $5k Retainers):**\n\n` +
-               `When pitching high-ticket clients in Dubai or UK, never discount your price. Reframe price as **Return On Investment (ROI)**:\n\n` +
-               `*"Understood! If this was just an expense, I'd agree with you.\n\n` +
-               `However, for your ticket size (average sale of AED 5,000+), landing just ONE extra customer from our WhatsApp acquisition system pays for the entire retainer.\n\n` +
-               `Everything beyond that is 100% net profit for your brand. Would you be open to a 2-week pilot with a guaranteed lead threshold?"*`;
-      }
-
-      if (q.includes('follow') || q.includes('followup') || q.includes('reply nahi') || q.includes('no reply')) {
-        return `🔥 **High-Converting 3-Step WhatsApp Follow-Up Sequence:**\n\n` +
-               `**Day 1 (Initial Pitch):** Value-first audit question (under 60 words).\n\n` +
-               `**Day 3 (Soft Bump):**\n` +
-               `*"Hey [Name], put together a 30-second Figma preview of how your mobile checkout could look with 1-click WhatsApp checkout. Want me to drop the screenshot here?"*\n\n` +
-               `**Day 7 (Break-Up Message — Highest Response Rate):**\n` +
-               `*"Hey [Name], guessing your hands are full with Q4 orders right now. Won't crowd your inbox — if you ever want to plug the mobile booking drop-off for [Company], you have my number here. Wishing you a great quarter!"*\n\n` +
-               `💡 **Stat:** 58% of replies come on the Day 7 break-up message because it removes all pressure!`;
-      }
-
-      let matchedLead = null;
-      if (leadsVault && leadsVault.length) {
-        matchedLead = leadsVault.find(l => 
-          (l.name && q.includes(l.name.toLowerCase())) ||
-          (l.name && l.name.toLowerCase().split(' ').some(word => word.length > 3 && q.includes(word)))
-        );
-      }
-
-      if (matchedLead) {
-        const cleanP = (matchedLead.phone || '').replace(/[^0-9]/g, '');
-        return `🎯 **Strategy & Pitch for: ${matchedLead.name} (${matchedLead.city}, ${matchedLead.country})**\n\n` +
-               `📍 **Industry:** ${matchedLead.industry_name || matchedLead.category}\n` +
-               `📞 **Direct WhatsApp:** \`${matchedLead.phone}\`\n` +
-               `🔍 **Identified Audit Leak:** ${matchedLead.audit_proof}\n\n` +
-               `💡 **Recommended WhatsApp Pitch (${userSkill}):**\n\n` +
-               `*"Hello team ${matchedLead.name}! Came across your brand in ${matchedLead.city} — very strong presence.\n\n` +
-               `Did a quick digital audit on your channels: noticed ${matchedLead.audit_proof.slice(0, 85)}...\n\n` +
-               `We help high-end brands in the GCC fix this exact drop-off to drive direct WhatsApp retainers.\n\n` +
-               `Open to a 60-second teardown showing how to optimize this for ${matchedLead.name}?"*\n\n` +
-               `📲 [Click to Open in WhatsApp Web](https://web.whatsapp.com/send?phone=${cleanP})`;
-      }
-
-      if (q.includes('dubai') || q.includes('uae') || q.includes('uk') || q.includes('london') || q.includes('swiss') || q.includes('real estate') || q.includes('abaya') || q.includes('car') || q.includes('salon')) {
-        let matching = (leadsVault || []).filter(l => {
-          const lCity = (l.city || '').toLowerCase();
-          const lCountry = (l.country || '').toLowerCase();
-          const lCat = (l.category || '').toLowerCase();
-          const lInd = (l.industry || '').toLowerCase();
-          if (q.includes('dubai') && (lCity.includes('dubai') || lCountry.includes('uae'))) return true;
-          if (q.includes('london') && (lCity.includes('london') || lCountry.includes('uk'))) return true;
-          if (q.includes('uk') && (lCity.includes('london') || lCountry.includes('uk'))) return true;
-          if (q.includes('swiss') && lCountry.includes('swiss')) return true;
-          if (q.includes('real estate') && (lCat.includes('real') || lCat.includes('fitout') || lInd.includes('real'))) return true;
-          if (q.includes('car') && (lCat.includes('car') || lCat.includes('auto') || lInd.includes('car'))) return true;
-          if (q.includes('salon') && (lCat.includes('salon') || lCat.includes('spa') || lCat.includes('clinic'))) return true;
-          if (q.includes('abaya') && (lCat.includes('abaya') || lCat.includes('fashion') || lCat.includes('oud'))) return true;
-          return false;
-        }).slice(0, 5);
-
-        if (matching.length) {
-          let res = `📋 **Found ${matching.length} Matching Foreign Leads in your CRM:**\n\n`;
-          matching.forEach((m, idx) => {
-            const cleanP = (m.phone || '').replace(/[^0-9]/g, '');
-            res += `**${idx+1}. ${m.name}** (${m.city}, ${m.country})\n` +
-                   `• **Niche:** ${m.industry_name || m.category}\n` +
-                   `• **WhatsApp:** \`${m.phone}\` [Chat Now](https://web.whatsapp.com/send?phone=${cleanP})\n` +
-                   `• **Audit Leak:** ${m.audit_proof}\n\n`;
-          });
-          res += `💡 *Ask me: 'Write a pitch for ${matching[0].name}' to generate a custom outreach message!*`;
-          return res;
-        }
-      }
-
-      return `🚀 **Outreach Studio Pro — Growth Advisory (${userSkill}):**\n\n` +
-             `To close **$1,500 – $4,000/month retainers** from your 52 CRM leads:\n\n` +
-             `1. **Focus on Direct WhatsApp:** Email open rates in the Gulf are under 12%, but WhatsApp message open rates are **98% within 15 minutes**.\n` +
-             `2. **Lead with a Hyper-Specific Leak:** Never send generic 'We are an agency' messages. Point out their exact speed, video hook, or checkout flaw.\n` +
-             `3. **Offer an Ultra-Low-Friction CTA:** Ask for a 60-second screen recording, not a 30-minute Zoom call.\n\n` +
-             `Ask me any specific question: e.g. *"Audit Oud Al Masar"*, *"Give me follow-up message"*, or *"How to handle price objection"*.`;
+      const text = data.content?.[0]?.text;
+      if (!text) throw new Error("No text response from Claude API.");
+      return text;
     }
 
   </script>
@@ -1687,123 +1769,207 @@ Instructions:
   <!-- =========================================================================
        AI OUTREACH COPILOT — SLIDING CHAT DRAWER
        ========================================================================= -->
-  <div id="aiCopilotDrawer" class="hidden fixed bottom-6 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[480px] h-[640px] max-h-[88vh] rounded-3xl bg-slate-950/95 border border-blue-500/40 shadow-2xl shadow-blue-950/80 backdrop-blur-2xl flex flex-col overflow-hidden transition-all duration-300 text-left">
+  <div id="aiCopilotDrawer" class="hidden fixed bottom-6 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[480px] h-[650px] max-h-[90vh] rounded-3xl bg-slate-950/95 border border-blue-500/40 shadow-2xl shadow-blue-950/80 backdrop-blur-2xl flex flex-col overflow-hidden transition-all duration-300 text-left">
     
     <!-- Drawer Top Laser Line -->
     <div class="h-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400"></div>
 
-    <!-- Drawer Header -->
-    <div class="p-4 border-b border-white/[0.08] flex items-center justify-between bg-slate-900/60">
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600/30 to-purple-600/30 border border-blue-500/30 flex items-center justify-center text-amber-300 text-base shadow-md">
-          <i class="fas fa-brain-circuit"></i>
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h3 class="font-bold text-white text-xs sm:text-sm font-heading">Outreach Studio Copilot</h3>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[9px] font-mono font-bold">ONLINE</span>
+    <!-- =====================================================================
+         VIEW 1: API KEY ACTIVATION / ONBOARDING VIEW (Shown if no API key)
+         ===================================================================== -->
+    <div id="copilotSetupView" class="hidden flex-1 flex flex-col justify-between p-6 overflow-y-auto">
+      <div>
+        <!-- Setup Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600/30 to-purple-600/30 border border-blue-500/30 flex items-center justify-center text-amber-300 text-lg shadow-md">
+              <i class="fas fa-brain-circuit"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-sm font-heading">Activate AI Copilot</h3>
+              <p class="text-[10px] text-slate-400 font-mono">Connect your AI API key to start live chatting</p>
+            </div>
           </div>
-          <div class="text-[10px] text-slate-400 font-mono flex items-center gap-1.5 mt-0.5">
-            <span>Model:</span>
-            <span id="copilotActiveEngineDisplay" class="text-cyan-300 font-bold">Built-in Neural Brain</span>
+          <button onclick="toggleAICopilot()" class="text-slate-400 hover:text-white p-1 cursor-pointer"><i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- Info Notice -->
+        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-white/[0.08] mb-4 space-y-1.5 text-xs text-slate-300">
+          <div class="font-bold text-white flex items-center gap-2">
+            <i class="fas fa-bolt text-amber-400"></i>
+            <span>Real-Time Conversational AI Outreach</span>
           </div>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-1.5">
-        <!-- Connect API Key Button -->
-        <button onclick="openAIKeyModal()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition cursor-pointer" title="Connect Your Own API Key (BYOK)">
-          <i class="fas fa-key text-amber-400 text-xs"></i>
-        </button>
-        <!-- Clear Chat -->
-        <button onclick="clearCopilotChat()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer" title="Clear Chat History">
-          <i class="fas fa-trash-can text-xs"></i>
-        </button>
-        <!-- Minimize Drawer -->
-        <button onclick="toggleAICopilot()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer" title="Close Copilot">
-          <i class="fas fa-times text-xs"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Quick Prompts Chips Carousel -->
-    <div class="px-3 py-2 bg-slate-900/40 border-b border-white/[0.04] flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[10px] font-mono">
-      <span class="text-slate-500 text-[9px] uppercase font-bold flex-shrink-0">Quick Prompts:</span>
-      <button onclick="sendQuickPrompt('Audit the top 3 leads in Dubai for web development & speed issues')" class="px-2.5 py-1 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/20 whitespace-nowrap transition cursor-pointer">
-        🎯 Audit Top Dubai Leads
-      </button>
-      <button onclick="sendQuickPrompt('Write a high-converting short-form video editing pitch for Supreme Collection Abayas')" class="px-2.5 py-1 rounded-lg bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 border border-pink-500/20 whitespace-nowrap transition cursor-pointer">
-        🎬 Video Pitch for Abayas
-      </button>
-      <button onclick="sendQuickPrompt('Generate a website redesign pitch for Royal Marble & Fitouts Dubai')" class="px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/20 whitespace-nowrap transition cursor-pointer">
-        💻 Web Pitch for Royal Marble
-      </button>
-      <button onclick="sendQuickPrompt('How do I handle the objection: We already have an agency handling this?')" class="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/20 whitespace-nowrap transition cursor-pointer">
-        🛡️ Handle 'Already Have Agency'
-      </button>
-      <button onclick="sendQuickPrompt('Give me a 3-step value-first WhatsApp follow-up sequence for foreign clients')" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/20 whitespace-nowrap transition cursor-pointer">
-        🔥 3-Step Follow-Up Sequence
-      </button>
-    </div>
-
-    <!-- Chat Messages Scroll Area -->
-    <div id="copilotMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
-      <!-- Default AI Welcome Message -->
-      <div class="flex items-start gap-2.5">
-        <div class="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-blue-500/30">
-          <i class="fas fa-robot"></i>
-        </div>
-        <div class="p-3 rounded-2xl bg-slate-900 border border-white/[0.08] text-slate-200 max-w-[85%] space-y-2">
-          <p class="font-semibold text-white">Salam / Hello! 👋 I am your Outreach Studio AI Copilot.</p>
-          <p class="text-slate-300">
-            I have direct real-time access to all <span class="text-cyan-400 font-bold font-mono">52+ verified global leads</span> in your CRM.
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Outreach Studio Copilot directly connects with top AI models (Gemini, OpenAI, Claude) to provide human-like strategy, pitch drafting &amp; WhatsApp negotiation for your 52 CRM leads.
           </p>
-          <p class="text-slate-300">
-            Aap mujhse kisi bhi lead ke bare mein pooch sakte hain, custom pitches (Web Dev, Video Editing, Ads) generate karwa sakte hain, ya objections handle karwa sakte hain!
-          </p>
-          <div class="p-2 rounded-xl bg-black/40 border border-white/[0.06] text-[11px] text-amber-300/90 font-mono flex items-center gap-1.5">
-            <i class="fas fa-lightbulb text-amber-400"></i>
-            <span>Tip: Click the <i class="fas fa-key text-[10px]"></i> icon above to connect your free Google Gemini or OpenAI API Key, or use my built-in engine right away!</span>
-          </div>
         </div>
+
+        <!-- Provider Selector Radio Cards -->
+        <label class="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-2 font-bold">1. Select AI Model Provider</label>
+        <div class="grid grid-cols-1 gap-2 mb-4">
+          
+          <!-- Option A: Google Gemini (Recommended & 100% Free) -->
+          <label id="card_prov_gemini" class="flex items-center justify-between p-3 rounded-2xl border border-blue-500/60 bg-blue-500/15 cursor-pointer hover:border-blue-400 transition" onclick="selectAIProvider('gemini')">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="ai_provider" value="gemini" checked class="w-4 h-4 text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+              <div>
+                <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                  <i class="fab fa-google text-cyan-400"></i> Google Gemini 2.0 / 1.5 Flash
+                </div>
+                <div class="text-[10px] text-slate-400 font-sans">Super fast, generous free tier &bull; Recommended</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">100% FREE</span>
+          </label>
+
+          <!-- Option B: OpenAI GPT-4o -->
+          <label id="card_prov_openai" class="flex items-center justify-between p-3 rounded-2xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition" onclick="selectAIProvider('openai')">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="ai_provider" value="openai" class="w-4 h-4 text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+              <div>
+                <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                  <i class="fas fa-bolt text-emerald-400"></i> OpenAI (GPT-4o &bull; GPT-4o-mini)
+                </div>
+                <div class="text-[10px] text-slate-400 font-sans">Official OpenAI API key</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono text-slate-400">BYOK</span>
+          </label>
+
+          <!-- Option C: Anthropic Claude 3.7 -->
+          <label id="card_prov_claude" class="flex items-center justify-between p-3 rounded-2xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition" onclick="selectAIProvider('claude')">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="ai_provider" value="claude" class="w-4 h-4 text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+              <div>
+                <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                  <i class="fas fa-brain text-purple-400"></i> Anthropic Claude 3.7 Sonnet
+                </div>
+                <div class="text-[10px] text-slate-400 font-sans">High-ticket cold email &amp; pitch specialist</div>
+              </div>
+            </div>
+            <span class="text-[9px] font-mono text-slate-400">BYOK</span>
+          </label>
+
+        </div>
+
+        <!-- API Key Input -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="text-[11px] font-bold text-white flex items-center gap-1">
+              <i class="fas fa-key text-amber-400"></i>
+              <span id="setupKeyLabel">Paste Your Google Gemini API Key:</span>
+            </label>
+            <a id="setupGetKeyLink" href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-cyan-400 hover:underline font-mono flex items-center gap-1">
+              <span>Get Free Key (30s)</span> <i class="fas fa-external-link-alt text-[8px]"></i>
+            </a>
+          </div>
+          <div class="relative">
+            <input type="password" id="copilotSetupApiKeyInput" placeholder="AIzaSy..." class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-xs text-white font-mono placeholder-slate-600 focus:border-blue-500 focus:outline-none transition">
+            <button type="button" onclick="toggleKeyVisibility('copilotSetupApiKeyInput', 'eyeIconKeySetup')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition text-xs">
+              <i id="eyeIconKeySetup" class="fas fa-eye"></i>
+            </button>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1 font-mono">
+            <i class="fas fa-lock text-emerald-400 mr-1"></i> 100% Private &bull; Stored locally in your browser.
+          </p>
+        </div>
+
       </div>
+
+      <!-- Action Button -->
+      <div class="pt-2">
+        <button onclick="handleConnectApiKeySubmit()" class="w-full py-3.5 rounded-2xl btn-primary-glow text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-blue-600/30">
+          <i class="fas fa-plug text-cyan-300"></i>
+          <span>Connect API Key &amp; Start Chatting &rarr;</span>
+        </button>
+      </div>
+
     </div>
 
-    <!-- Typing Indicator (Hidden by default) -->
-    <div id="copilotTyping" class="hidden px-4 py-2 flex items-center gap-2 text-xs text-slate-400 font-mono">
-      <div class="flex items-center gap-1">
-        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.2s]"></span>
-        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-bounce [animation-delay:0.4s]"></span>
-      </div>
-      <span class="text-[11px]">AI Copilot is analyzing CRM leads...</span>
-    </div>
-
-    <!-- Drawer Footer Input -->
-    <div class="p-3 border-t border-white/[0.08] bg-slate-900/90">
+    <!-- =====================================================================
+         VIEW 2: LIVE CHAT VIEW (Shown when API key is connected)
+         ===================================================================== -->
+    <div id="copilotChatView" class="hidden flex-1 flex flex-col overflow-hidden">
       
-      <!-- Model Switcher Bar -->
-      <div class="flex items-center justify-between gap-2 mb-2">
-        <div class="flex items-center gap-1 text-[10px] font-mono text-slate-400">
-          <i class="fas fa-microchip text-indigo-400"></i>
-          <span>Active Engine:</span>
+      <!-- Drawer Header -->
+      <div class="p-3.5 border-b border-white/[0.08] flex items-center justify-between bg-slate-900/60">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600/30 to-purple-600/30 border border-blue-500/30 flex items-center justify-center text-amber-300 text-sm shadow-md">
+            <i class="fas fa-brain-circuit"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-bold text-white text-xs sm:text-sm font-heading">AI Outreach Copilot</h3>
+              <span id="copilotLiveBadge" class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[9px] font-mono font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE
+              </span>
+            </div>
+            <div class="text-[10px] text-slate-400 font-mono flex items-center gap-1 mt-0.5">
+              <span>Engine:</span>
+              <span id="copilotActiveEngineDisplay" class="text-cyan-300 font-bold">Google Gemini 2.0</span>
+            </div>
+          </div>
         </div>
-        <select id="copilotModelSelector" onchange="handleCopilotModelChange(this.value)" class="py-1 px-2.5 rounded-lg bg-slate-950 border border-white/10 text-[10px] font-mono text-slate-200 focus:border-blue-500 focus:outline-none cursor-pointer">
-          <option value="builtin">🚀 Built-in Neural Engine (Free &bull; 0ms)</option>
-          <option value="gemini">⚡ Google Gemini 2.0 Flash (Free API Key)</option>
-          <option value="gpt4o">🤖 OpenAI GPT-4o / GPT-4o-mini</option>
-          <option value="claude">🧠 Anthropic Claude 3.7 Sonnet</option>
-        </select>
+
+        <div class="flex items-center gap-1.5">
+          <!-- Change API Key Button -->
+          <button onclick="switchToSetupView()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition cursor-pointer" title="Change or Disconnect API Key">
+            <i class="fas fa-key text-amber-400 text-xs"></i>
+          </button>
+          <!-- Clear Chat -->
+          <button onclick="clearCopilotChat()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer" title="Clear Chat History">
+            <i class="fas fa-trash-can text-xs"></i>
+          </button>
+          <!-- Minimize Drawer -->
+          <button onclick="toggleAICopilot()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer" title="Close Copilot">
+            <i class="fas fa-times text-xs"></i>
+          </button>
+        </div>
       </div>
 
-      <!-- Text Input & Submit -->
-      <form onsubmit="handleCopilotSubmit(event)" class="flex items-center gap-2">
-        <input type="text" id="copilotInput" placeholder="Ask: 'Pitch Oud Al Masar for Video Editing', 'List Dubai Real Estate'..." class="flex-1 bg-slate-950 border border-white/[0.1] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none transition font-sans">
-        
-        <button type="submit" id="btnCopilotSend" class="p-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center justify-center cursor-pointer shadow-lg shadow-blue-600/30 flex-shrink-0">
-          <i class="fas fa-paper-plane"></i>
+      <!-- Quick Prompts Chips Carousel -->
+      <div class="px-3 py-2 bg-slate-900/40 border-b border-white/[0.04] flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[10px] font-mono">
+        <span class="text-slate-500 text-[9px] uppercase font-bold flex-shrink-0">Prompts:</span>
+        <button onclick="sendQuickPrompt('Audit top Dubai leads and tell me what services to pitch them')" class="px-2.5 py-1 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/20 whitespace-nowrap transition cursor-pointer">
+          🎯 Audit Top Leads
         </button>
-      </form>
+        <button onclick="sendQuickPrompt('Write a personalized WhatsApp video editing pitch for Supreme Collection Abayas')" class="px-2.5 py-1 rounded-lg bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 border border-pink-500/20 whitespace-nowrap transition cursor-pointer">
+          🎬 Video Pitch (Abayas)
+        </button>
+        <button onclick="sendQuickPrompt('Client ne bola: We already have an agency. How should I reply to win them over?')" class="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/20 whitespace-nowrap transition cursor-pointer">
+          🛡️ Handle 'Already Have Agency'
+        </button>
+        <button onclick="sendQuickPrompt('Give me a 3-step value-first WhatsApp follow-up sequence for foreign clients')" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/20 whitespace-nowrap transition cursor-pointer">
+          🔥 3-Step Follow-Up
+        </button>
+      </div>
+
+      <!-- Chat Messages Scroll Area -->
+      <div id="copilotMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
+        <!-- Welcoming message populated via JS -->
+      </div>
+
+      <!-- Typing Indicator (Hidden by default) -->
+      <div id="copilotTyping" class="hidden px-4 py-2 flex items-center gap-2 text-xs text-slate-400 font-mono">
+        <div class="flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.2s]"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-bounce [animation-delay:0.4s]"></span>
+        </div>
+        <span class="text-[11px] text-cyan-400" id="copilotTypingText">Live AI is thinking...</span>
+      </div>
+
+      <!-- Drawer Footer Input -->
+      <div class="p-3 border-t border-white/[0.08] bg-slate-900/90">
+        <form onsubmit="handleCopilotSubmit(event)" class="flex items-center gap-2">
+          <input type="text" id="copilotInput" placeholder="Ask anything: 'hey suno', 'Pitch Oud Al Masar for Video Editing'..." class="flex-1 bg-slate-950 border border-white/[0.1] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none transition font-sans">
+          
+          <button type="submit" id="btnCopilotSend" class="p-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center justify-center cursor-pointer shadow-lg shadow-blue-600/30 flex-shrink-0">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+
     </div>
 
   </div>
