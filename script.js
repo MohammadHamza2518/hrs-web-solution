@@ -290,6 +290,147 @@ document.addEventListener('DOMContentLoaded', () => {
     startRazorpayPayment();
   };
 
+  
+  // =========================================================================
+  // TARGET NICHE SELECTION CONTROLLER (CHECKOUT MODAL)
+  // =========================================================================
+  window.selectedNichesState = ['all'];
+
+  window.toggleNicheSelection = function(nicheId) {
+    const allBox = document.getElementById('niche_all');
+    const allCard = document.getElementById('card_niche_all');
+
+    const individualNiches = [
+      'real_estate', 'fashion_ecommerce', 'car_rentals_detailing', 
+      'salons_clinics', 'yachts_events', 'b2b_corporate'
+    ];
+
+    if (nicheId === 'all') {
+      // Toggle all
+      window.selectedNichesState = ['all'];
+      if (allBox) allBox.checked = true;
+      if (allCard) {
+        allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-blue-500/20 cursor-pointer hover:border-blue-400 transition";
+      }
+      // Uncheck all individual ones
+      individualNiches.forEach(id => {
+        const box = document.getElementById('niche_' + id);
+        const card = document.getElementById('card_niche_' + id);
+        if (box) box.checked = false;
+        if (card) {
+          card.className = "niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+        }
+      });
+    } else {
+      // Individual niche clicked
+      // First uncheck 'all'
+      if (allBox) allBox.checked = false;
+      if (allCard) {
+        allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+      }
+
+      const box = document.getElementById('niche_' + nicheId);
+      const card = document.getElementById('card_niche_' + nicheId);
+      const isChecked = box ? !box.checked : false; // toggling
+
+      if (box) box.checked = isChecked;
+
+      if (card) {
+        if (isChecked) {
+          card.className = "niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-cyan-500/60 bg-cyan-500/15 cursor-pointer hover:border-cyan-400 transition shadow-sm";
+        } else {
+          card.className = "niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+        }
+      }
+
+      // Collect active niches
+      const active = [];
+      individualNiches.forEach(id => {
+        const b = document.getElementById('niche_' + id);
+        if (b && b.checked) active.push(id);
+      });
+
+      if (active.length === 0) {
+        // Fallback to all if none selected
+        window.selectedNichesState = ['all'];
+        if (allBox) allBox.checked = true;
+        if (allCard) {
+          allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-blue-500/20 cursor-pointer hover:border-blue-400 transition";
+        }
+      } else {
+        window.selectedNichesState = active;
+      }
+    }
+
+    updateNicheBadgeDisplay();
+  };
+
+  function updateNicheBadgeDisplay() {
+    const badge = document.getElementById('checkoutNicheBadge');
+    if (!badge) return;
+
+    const counts = {
+      real_estate: 8,
+      fashion_ecommerce: 10,
+      car_rentals_detailing: 10,
+      salons_clinics: 8,
+      yachts_events: 8,
+      b2b_corporate: 8
+    };
+
+    if (window.selectedNichesState.includes('all')) {
+      badge.textContent = "52+ Leads • All Niches";
+      badge.className = "text-[10px] font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/30";
+    } else {
+      let total = 0;
+      window.selectedNichesState.forEach(id => { total += (counts[id] || 8); });
+      badge.textContent = `${total} Leads (${window.selectedNichesState.length} Field${window.selectedNichesState.length > 1 ? 's' : ''} Selected)`;
+      badge.className = "text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30";
+    }
+  }
+
+  window.getSelectedNichesData = function() {
+    const nicheLabels = {
+      all: "All Industries (Full 52+ Vault)",
+      real_estate: "Real Estate & Fitouts",
+      fashion_ecommerce: "Luxury Fashion & Oud",
+      car_rentals_detailing: "Supercars & Detailing",
+      salons_clinics: "Clinics & Salons",
+      yachts_events: "VIP Tourism & Yachts",
+      b2b_corporate: "B2B & Corporate"
+    };
+
+    const counts = {
+      all: 52,
+      real_estate: 8,
+      fashion_ecommerce: 10,
+      car_rentals_detailing: 10,
+      salons_clinics: 8,
+      yachts_events: 8,
+      b2b_corporate: 8
+    };
+
+    const state = (window.selectedNichesState && window.selectedNichesState.length) ? window.selectedNichesState : ['all'];
+
+    if (state.includes('all')) {
+      return {
+        ids: ['all'],
+        displayString: "All Industries (52+ Leads)",
+        totalCount: 52
+      };
+    }
+
+    const names = state.map(id => nicheLabels[id] || id);
+    let total = 0;
+    state.forEach(id => { total += (counts[id] || 8); });
+
+    return {
+      ids: state,
+      displayString: names.join(', '),
+      totalCount: total
+    };
+  };
+
   window.startRazorpayPayment = function() {
     const nameInput = document.getElementById('checkoutName');
     const phoneInput = document.getElementById('checkoutPhone');
@@ -358,7 +499,8 @@ document.addEventListener('DOMContentLoaded', () => {
           payBtn.disabled = false;
           payBtn.innerHTML = originalBtnHtml;
         }
-        handlePaymentSuccess(response, { name, phone: cleanPhone, email });
+        const nichesData = window.getSelectedNichesData ? window.getSelectedNichesData() : { ids: ['all'], displayString: 'All Industries (52+ Leads)', totalCount: 52 };
+        handlePaymentSuccess(response, { name, phone: cleanPhone, email, targetNiches: nichesData.ids, targetNichesDisplay: nichesData.displayString, totalLeadsCount: nichesData.totalCount });
       }
     };
 
@@ -429,11 +571,17 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('osp_download_link', downloadLink);
 
       // Auto-authenticate buyer into Cloud CRM
+      const nichesDisplay = customer.targetNichesDisplay || 'All Industries (52+ Leads)';
+      const nichesList = (customer.targetNiches && customer.targetNiches.length) ? customer.targetNiches : ['all'];
+
       const authPayload = {
         name: customer.name,
         email: customer.email || (customer.phone + '@customer.crm'),
         phone: customer.phone,
         licenseKey: randomKey,
+        targetNiches: nichesList,
+        targetNichesDisplay: nichesDisplay,
+        totalLeadsCount: customer.totalLeadsCount || 52,
         tier: 'Lifetime Commercial Pro',
         loginAt: new Date().toISOString()
       };
@@ -458,6 +606,9 @@ document.addEventListener('DOMContentLoaded', () => {
         name: customer.name,
         phone: customer.phone,
         email: customer.email || 'N/A',
+        targetNiches: nichesList,
+        targetNichesDisplay: nichesDisplay,
+        totalLeadsCount: customer.totalLeadsCount || 52,
         amount: 1999,
         gateway: 'Razorpay Live',
         paymentId: paymentId,

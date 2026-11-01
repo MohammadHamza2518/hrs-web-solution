@@ -202,6 +202,54 @@
   <!-- Main CRM Application Workspace -->
   <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
     
+    
+    <!-- Industry / Niche Filter Ribbon -->
+    <div class="mb-4 flex items-center justify-between flex-wrap gap-2 p-2.5 rounded-2xl bg-slate-900/90 border border-white/[0.08]">
+      <div class="flex items-center gap-1.5 overflow-x-auto py-1 text-xs font-semibold font-mono no-scrollbar flex-1" id="industryRibbonContainer">
+        <span class="text-[11px] text-slate-400 font-sans uppercase font-bold tracking-wider px-2 flex items-center gap-1.5 flex-shrink-0">
+          <i class="fas fa-layer-group text-blue-400"></i> Field:
+        </span>
+        <button onclick="setFilterIndustry('MY_NICHES')" id="tabInd-MY_NICHES" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-blue-500/50 bg-blue-500/20 text-blue-300 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-star text-amber-300"></i>
+          <span>My Target Field</span>
+          <span id="badgeMyNichesCount" class="px-1.5 py-0.2 rounded-full bg-blue-500/30 text-[10px] font-mono">0</span>
+        </button>
+        <button onclick="setFilterIndustry('ALL')" id="tabInd-ALL" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-earth-americas text-cyan-400"></i>
+          <span>All 52+ Vault</span>
+        </button>
+        <button onclick="setFilterIndustry('real_estate')" id="tabInd-real_estate" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-building text-amber-400"></i>
+          <span>Real Estate (8)</span>
+        </button>
+        <button onclick="setFilterIndustry('fashion_ecommerce')" id="tabInd-fashion_ecommerce" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-gem text-pink-400"></i>
+          <span>Fashion & Oud (10)</span>
+        </button>
+        <button onclick="setFilterIndustry('car_rentals_detailing')" id="tabInd-car_rentals_detailing" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-car-side text-red-400"></i>
+          <span>Supercars (10)</span>
+        </button>
+        <button onclick="setFilterIndustry('salons_clinics')" id="tabInd-salons_clinics" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-spa text-emerald-400"></i>
+          <span>Clinics & Salons (8)</span>
+        </button>
+        <button onclick="setFilterIndustry('yachts_events')" id="tabInd-yachts_events" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-ship text-cyan-400"></i>
+          <span>VIP Yachts (8)</span>
+        </button>
+        <button onclick="setFilterIndustry('b2b_corporate')" id="tabInd-b2b_corporate" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-briefcase text-indigo-400"></i>
+          <span>B2B Advisory (8)</span>
+        </button>
+      </div>
+
+      <button onclick="openSettingsModal()" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer flex-shrink-0" title="Change Target Field Preferences">
+        <i class="fas fa-sliders text-blue-400"></i>
+        <span>Change Field</span>
+      </button>
+    </div>
+
     <!-- Controls Bar: Search + Stage Tabs + Country Filter -->
     <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-6">
       
@@ -447,6 +495,7 @@
     let leadsVault = [];
     let currentStageFilter = 'ALL';
     let currentCountryFilter = 'ALL';
+    let currentIndustryFilter = 'MY_NICHES';
     let currentSearchQuery = '';
     let activeModalLead = null;
 
@@ -489,6 +538,18 @@
         if (nameEl) nameEl.textContent = currentUser.name || 'Founder';
         if (settingsKeyEl) settingsKeyEl.textContent = currentUser.licenseKey || 'OSP-PRO-9842-LIVE';
 
+        const nicheDisplayEl = document.getElementById('userNicheDisplay');
+        if (nicheDisplayEl) {
+          nicheDisplayEl.textContent = currentUser.targetNichesDisplay || 'All Niches (52+ Leads)';
+        }
+
+        // Set initial industry filter mode
+        if (currentUser.targetNiches && currentUser.targetNiches.length && !currentUser.targetNiches.includes('all')) {
+          currentIndustryFilter = 'MY_NICHES';
+        } else {
+          currentIndustryFilter = 'ALL';
+        }
+
         if (avatarEl) {
           const initials = (currentUser.name || 'FO').split(' ').map(n=>n[0]).join('').slice(0, 2).toUpperCase();
           avatarEl.textContent = initials;
@@ -526,6 +587,17 @@
             leadsVault = [];
           }
         }
+
+        // Auto-upgrade if new leads exist in DEFAULT_GLOBAL_LEADS
+        if (window.DEFAULT_GLOBAL_LEADS && Array.isArray(window.DEFAULT_GLOBAL_LEADS) && leadsVault.length < window.DEFAULT_GLOBAL_LEADS.length) {
+          const existingIds = new Set(leadsVault.map(l => l.id || l.name));
+          window.DEFAULT_GLOBAL_LEADS.forEach(dl => {
+            if (!existingIds.has(dl.id) && !existingIds.has(dl.name)) {
+              leadsVault.push(dl);
+            }
+          });
+          saveLeadsToVault(false);
+        }
       } catch(e) {
         console.error("Vault read error:", e);
         leadsVault = (window.DEFAULT_GLOBAL_LEADS || []);
@@ -549,6 +621,7 @@
         console.error("Vault write error:", e);
       }
       updateKPIStats();
+      updateIndustryRibbonUI();
     }
 
     // 3. Render Dashboard Grid & KPIs
@@ -561,6 +634,16 @@
 
       // Filter leads
       let filtered = leadsVault.filter(lead => {
+        // Industry / Niche filter
+        if (currentIndustryFilter === 'MY_NICHES') {
+          const userNiches = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches : ['all'];
+          if (!userNiches.includes('all')) {
+            if (!userNiches.includes(lead.industry)) return false;
+          }
+        } else if (currentIndustryFilter !== 'ALL') {
+          if (lead.industry !== currentIndustryFilter) return false;
+        }
+
         // Stage filter
         if (currentStageFilter !== 'ALL' && lead.status !== currentStageFilter) {
           return false;
@@ -785,6 +868,41 @@
     }
 
     // 5. Filter & Search Handlers
+    
+    // Industry / Niche Filter Controller
+    window.setFilterIndustry = function(ind) {
+      currentIndustryFilter = ind;
+      updateIndustryRibbonUI();
+      renderDashboard();
+    };
+
+    function updateIndustryRibbonUI() {
+      const buttons = document.querySelectorAll('.ind-filter-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('border-blue-500/60', 'bg-blue-500/25', 'text-white', 'text-blue-300');
+        btn.classList.add('border-white/10', 'bg-white/5', 'text-slate-400');
+      });
+
+      const activeBtn = document.getElementById('tabInd-' + currentIndustryFilter);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-white/10', 'bg-white/5', 'text-slate-400');
+        activeBtn.classList.add('border-blue-500/60', 'bg-blue-500/25', 'text-white');
+      }
+
+      // Update My Niches badge count
+      const myCountEl = document.getElementById('badgeMyNichesCount');
+      if (myCountEl && leadsVault) {
+        const userNiches = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches : ['all'];
+        let count = 0;
+        if (userNiches.includes('all')) {
+          count = leadsVault.length;
+        } else {
+          count = leadsVault.filter(l => userNiches.includes(l.industry)).length;
+        }
+        myCountEl.textContent = count;
+      }
+    }
+
     function setFilterStage(stage) {
       currentStageFilter = stage;
       ['ALL', 'NEW', 'PITCH_SENT', 'MEETING_BOOKED', 'CLOSED'].forEach(s => {

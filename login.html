@@ -181,6 +181,22 @@
             </div>
           </div>
 
+                    <div>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1.5">Target Lead Field</label>
+            <div class="relative">
+              <i class="fas fa-layer-group absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <select id="activateNiche" class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/[0.1] text-xs text-white focus:border-blue-500 focus:outline-none transition cursor-pointer">
+                <option value="all">🌐 All Industries (Full 52+ Leads Vault)</option>
+                <option value="real_estate">🏢 Real Estate, Interior & Fitouts (8 Leads)</option>
+                <option value="fashion_ecommerce">💎 Luxury Fashion, Abayas & Oud (10 Leads)</option>
+                <option value="car_rentals_detailing">🏎️ Supercars & Detailing (10 Leads)</option>
+                <option value="salons_clinics">💆‍♀️ Aesthetic Clinics & Salons (8 Leads)</option>
+                <option value="yachts_events">🛥️ VIP Tourism & Yachts (8 Leads)</option>
+                <option value="b2b_corporate">💼 B2B & Corporate Advisory (8 Leads)</option>
+              </select>
+            </div>
+          </div>
+
           <button type="submit" id="btnActivateSubmit" class="w-full py-3 rounded-xl btn-primary-glow text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-blue-600/30 mt-2">
             <i class="fas fa-sparkles text-amber-300"></i>
             <span>Activate &amp; Launch CRM</span>
@@ -359,6 +375,19 @@
       const email = document.getElementById('activateEmail').value.trim().toLowerCase();
       const key = document.getElementById('activateKey').value.trim().toUpperCase();
       const password = document.getElementById('activatePassword').value.trim();
+      const nicheEl = document.getElementById('activateNiche');
+      const nicheVal = nicheEl ? nicheEl.value : 'all';
+
+      const nicheLabels = {
+        all: "All Industries (Full 52+ Vault)",
+        real_estate: "Real Estate & Fitouts",
+        fashion_ecommerce: "Luxury Fashion & Oud",
+        car_rentals_detailing: "Supercars & Detailing",
+        salons_clinics: "Clinics & Salons",
+        yachts_events: "VIP Tourism & Yachts",
+        b2b_corporate: "B2B & Corporate"
+      };
+      const nicheDisplay = nicheLabels[nicheVal] || "All Industries (52+ Leads)";
 
       if (!key.startsWith('OSP-')) {
         showAlert("Invalid License Key format. Key must start with 'OSP-PRO-' or 'OSP-'.");
@@ -382,6 +411,8 @@
         email,
         licenseKey: key,
         password,
+        targetNiches: [nicheVal],
+        targetNichesDisplay: nicheDisplay,
         registeredAt: new Date().toISOString()
       };
 
@@ -416,6 +447,8 @@
         name: name,
         email: email,
         licenseKey: key,
+        targetNiches: [nicheVal],
+        targetNichesDisplay: nicheDisplay,
         tier: 'Lifetime Commercial Pro',
         loginAt: new Date().toISOString()
       };
