@@ -4,6 +4,18 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Check active CRM session on homepage
+  const navLoginBtn = document.getElementById('navLoginBtn');
+  if (navLoginBtn) {
+    try {
+      const u = JSON.parse(localStorage.getItem('osp_auth_user'));
+      if (u && (u.email || u.licenseKey)) {
+        navLoginBtn.href = '/crm';
+        navLoginBtn.innerHTML = '<i class="fas fa-rocket text-amber-300"></i><span>My CRM</span>';
+        navLoginBtn.className = 'whitespace-nowrap text-emerald-400 hover:text-emerald-300 font-bold transition-colors flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 shadow-sm';
+      }
+    } catch(e) {}
+  }
   // 1. Dynamic Footer Year
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -415,6 +427,25 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('osp_buyer_email', customer.email || '');
       localStorage.setItem('osp_license_key', randomKey);
       localStorage.setItem('osp_download_link', downloadLink);
+
+      // Auto-authenticate buyer into Cloud CRM
+      const authPayload = {
+        name: customer.name,
+        email: customer.email || (customer.phone + '@customer.crm'),
+        phone: customer.phone,
+        licenseKey: randomKey,
+        tier: 'Lifetime Commercial Pro',
+        loginAt: new Date().toISOString()
+      };
+      localStorage.setItem('osp_auth_user', JSON.stringify(authPayload));
+
+      // Record in registered users
+      let regUsers = [];
+      try { regUsers = JSON.parse(localStorage.getItem('osp_registered_users')) || []; } catch(e) {}
+      if (!regUsers.some(u => u.licenseKey === randomKey)) {
+        regUsers.push(authPayload);
+        localStorage.setItem('osp_registered_users', JSON.stringify(regUsers));
+      }
 
       // Record in Admin Orders Database
       let allOrders = [];

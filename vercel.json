@@ -1,3 +1,9 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/app", "destination": "/crm.html" },
+    { "source": "/crm", "destination": "/crm.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/admin", "destination": "/admin.html" }
+  ]
 }

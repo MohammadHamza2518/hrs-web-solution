@@ -264,6 +264,12 @@
             <span>Live Site Settings</span>
           </button>
 
+          <button onclick="switchAdminTab('users')" id="tabBtn-users" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-2 cursor-pointer">
+            <i class="fas fa-users-gear"></i>
+            <span>CRM Users</span>
+            <span id="badgeUsersCount" class="px-1.5 py-0.5 rounded-full bg-white/20 text-[10px] font-mono">0</span>
+          </button>
+
           <button onclick="switchAdminTab('generator')" id="tabBtn-generator" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-2 cursor-pointer">
             <i class="fas fa-key"></i>
             <span>License Generator</span>
@@ -459,6 +465,68 @@
       <!-- =========================================================================
            TAB 4: CRYPTOGRAPHIC LICENSE KEY GENERATOR
            ========================================================================= -->
+      
+      <!-- =========================================================================
+           TAB: CRM WORKSPACE USERS (CLOUD ACCOUNTS)
+           ========================================================================= -->
+      <section id="tabContent-users" class="hidden space-y-4">
+        
+        <!-- Controls Bar -->
+        <div class="flex items-center justify-between flex-wrap gap-4 admin-card p-4 rounded-2xl border border-white/[0.08]">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg border border-indigo-500/30">
+              <i class="fas fa-users-gear"></i>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold text-white font-heading">CRM Workspace Accounts</h2>
+              <p class="text-[11px] text-slate-400">Buyers registered & accessing the Cloud CRM with Lifetime Commercial licenses</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="renderUsers()" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 border border-white/10 cursor-pointer">
+              <i class="fas fa-rotate"></i>
+              <span>Refresh</span>
+            </button>
+            <button onclick="exportUsersCSV()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-300 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+              <i class="fas fa-file-csv"></i>
+              <span>Export CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="admin-card rounded-2xl overflow-hidden border border-white/[0.08]">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-white/[0.03] text-slate-400 font-mono text-[11px] uppercase border-b border-white/[0.08]">
+                <tr>
+                  <th class="py-3 px-4">User</th>
+                  <th class="py-3 px-4">Contact Details</th>
+                  <th class="py-3 px-4">Commercial Key</th>
+                  <th class="py-3 px-4">Registered Date</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody" class="divide-y divide-white/[0.04] text-slate-300">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty State -->
+          <div id="usersEmptyState" class="hidden py-16 text-center">
+            <div class="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-slate-400 mx-auto mb-3">
+              <i class="fas fa-users-slash text-xl"></i>
+            </div>
+            <p class="text-sm font-bold text-white font-heading">No registered cloud CRM users yet</p>
+            <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">When customers complete checkout or activate their license via /login, their accounts will be automatically logged here.</p>
+          </div>
+        </div>
+
+      </section>
+
       <section id="tabContent-generator" class="hidden space-y-6">
         
         <div class="max-w-2xl mx-auto admin-card rounded-2xl p-6 sm:p-8 border-white/[0.08] space-y-6 text-center">
@@ -723,15 +791,109 @@
       }
     }
 
+    
+    // =========================================================================
+    // CRM USERS MANAGEMENT
+    // =========================================================================
+    function renderUsers() {
+      const tbody = document.getElementById('usersTableBody');
+      const empty = document.getElementById('usersEmptyState');
+      const badge = document.getElementById('badgeUsersCount');
+      if (!tbody) return;
+
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('osp_registered_users')) || [];
+      } catch(e) { users = []; }
+
+      // Also merge with orders that have email/details
+      try {
+        const orders = JSON.parse(localStorage.getItem(LS_ORDERS)) || [];
+        orders.forEach(o => {
+          if (o.email && !users.some(u => u.email && u.email.toLowerCase() === (o.email || '').toLowerCase())) {
+            users.push({
+              name: o.name,
+              email: o.email || 'N/A',
+              phone: o.phone || '',
+              licenseKey: o.licenseKey || 'OSP-PRO-LIVE',
+              registeredAt: o.date || new Date().toISOString()
+            });
+          }
+        });
+      } catch(e) {}
+
+      if (badge) badge.textContent = users.length;
+
+      if (users.length === 0) {
+        tbody.innerHTML = '';
+        if (empty) empty.classList.remove('hidden');
+        return;
+      }
+      if (empty) empty.classList.add('hidden');
+
+      tbody.innerHTML = users.map((u, i) => `
+        <tr class="hover:bg-white/[0.02] transition">
+          <td class="py-3 px-4">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-indigo-600/20 text-indigo-400 font-bold flex items-center justify-center text-xs font-mono border border-indigo-500/30">
+                ${(u.name || 'U').slice(0, 2).toUpperCase()}
+              </div>
+              <div>
+                <div class="font-bold text-white text-xs">${u.name || 'Founder'}</div>
+                <div class="text-[10px] text-slate-500 font-mono">User #${1000 + i}</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3 px-4 font-mono text-xs">
+            <div class="text-slate-200">${u.email || 'N/A'}</div>
+            <div class="text-[10px] text-slate-500">${u.phone || 'Web Account'}</div>
+          </td>
+          <td class="py-3 px-4 font-mono text-xs">
+            <div class="text-cyan-400 font-bold select-all">${u.licenseKey || 'OSP-PRO-LIVE'}</div>
+          </td>
+          <td class="py-3 px-4 text-slate-400 text-xs">
+            ${u.registeredAt ? (u.registeredAt.includes('T') ? new Date(u.registeredAt).toLocaleDateString('en-IN') : u.registeredAt) : 'Recent'}
+          </td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono text-[10px] font-bold">
+              ACTIVE
+            </span>
+          </td>
+          <td class="py-3 px-4 text-right">
+            <button onclick="copyText('${u.licenseKey || ''}', 'License Key')" class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition cursor-pointer" title="Copy Key">
+              <i class="fas fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    window.exportUsersCSV = function() {
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('osp_registered_users')) || [];
+      } catch(e) {}
+      if (users.length === 0) {
+        showToast("No users to export.", "error");
+        return;
+      }
+      let csv = "Name,Email,LicenseKey,RegisteredAt\n";
+      users.forEach(u => {
+        csv += `"${u.name}","${u.email}","${u.licenseKey}","${u.registeredAt || ''}"\n`;
+      });
+      downloadFile(csv, `osp_users_${Date.now()}.csv`, "text/csv");
+    };
+
     // 4. Tab Switching
     window.switchAdminTab = function(tabName) {
-      const tabs = ['orders', 'leads', 'settings', 'generator'];
+      const tabs = ['orders', 'leads', 'settings', 'users', 'generator'];
       tabs.forEach(t => {
         const btn = document.getElementById('tabBtn-' + t);
         const content = document.getElementById('tabContent-' + t);
         if (t === tabName) {
           if (btn) btn.classList.add('active');
           if (content) content.classList.remove('hidden');
+          if (t === 'users') renderUsers();
         } else {
           if (btn) btn.classList.remove('active');
           if (content) content.classList.add('hidden');

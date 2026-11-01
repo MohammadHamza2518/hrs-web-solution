@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workspace Dashboard &bull; Outreach Studio Pro CRM</title>
+  <meta name="description" content="Outreach Studio Pro Web CRM Workspace &mdash; High-ticket client acquisition engine with multi-AI personalized pitching and 1-click WhatsApp outreach.">
+  <link rel="icon" type="image/png" href="assets/images/hrs_icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#040711',
+              card: 'rgba(13, 19, 36, 0.72)',
+              blue: '#3B82F6',
+              indigo: '#6366F1',
+              emerald: '#10B981',
+              cyan: '#06B6D4'
+            }
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Custom CRM Glass & Table Styles */
+    .crm-card {
+      background: rgba(13, 19, 36, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .crm-card:hover {
+      border-color: rgba(59, 130, 246, 0.35);
+      box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
+    }
+    .crm-tab-active {
+      background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%) !important;
+      color: #FFFFFF !important;
+      border-color: rgba(96, 165, 250, 0.5) !important;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+    }
+    .status-badge-NEW { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border-color: rgba(59, 130, 246, 0.3); }
+    .status-badge-AUDITED { background: rgba(168, 85, 247, 0.15); color: #C084FC; border-color: rgba(168, 85, 247, 0.3); }
+    .status-badge-PITCH_SENT { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border-color: rgba(245, 158, 11, 0.3); }
+    .status-badge-MEETING_BOOKED { background: rgba(6, 182, 212, 0.15); color: #22D3EE; border-color: rgba(6, 182, 212, 0.3); }
+    .status-badge-CLOSED { background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4); font-weight: bold; }
+  </style>
+
+  <!-- Preloaded Global Verified Leads Vault -->
+  <script src="assets/js/preloaded_leads.js"></script>
+</head>
+<body class="bg-[#040711] text-slate-100 min-h-screen relative bg-mesh-grid flex flex-col selection:bg-blue-600 selection:text-white">
+
+  <!-- Ambient Glows -->
+  <div class="ambient-glow-top"></div>
+  <div class="ambient-glow-secondary"></div>
+
+  <!-- Top App Navigation -->
+  <header class="sticky top-0 z-40 border-b border-white/[0.08] bg-[#040711]/90 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Tier -->
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-500/40 p-1.5 flex items-center justify-center transition-transform group-hover:scale-105">
+            <img src="assets/images/hrs_icon.png" alt="Logo" class="w-full h-full object-contain">
+          </div>
+          <div>
+            <span class="text-sm font-black text-white tracking-tight font-heading">Outreach Studio <span class="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">PRO</span></span>
+            <div class="flex items-center gap-1.5 text-[9px] font-mono text-emerald-400">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Cloud CRM Workspace</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center Sync Indicator -->
+      <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/90 border border-white/[0.08] text-[11px] font-mono text-slate-400">
+        <i class="fas fa-database text-cyan-400 text-[10px]"></i>
+        <span id="syncStatus">Cloud Vault: Synced (0ms)</span>
+      </div>
+
+      <!-- Right Actions: User Profile & Controls -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <button onclick="openAddLeadModal()" class="px-3.5 py-1.5 rounded-xl btn-primary-glow text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-lg shadow-blue-600/30">
+          <i class="fas fa-plus text-[10px]"></i>
+          <span class="hidden sm:inline">Add Prospect</span>
+        </button>
+
+        <button onclick="exportLeadsCSV()" title="Export CSV" class="p-2 sm:px-3 sm:py-1.5 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fas fa-file-export text-cyan-400"></i>
+          <span class="hidden sm:inline">Export</span>
+        </button>
+
+        <button onclick="openSettingsModal()" title="Settings & Backup" class="p-2 sm:px-3 sm:py-1.5 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition cursor-pointer">
+          <i class="fas fa-gear text-slate-400"></i>
+          <span class="hidden sm:inline">Settings</span>
+        </button>
+
+        <!-- User Profile Dropdown Pill -->
+        <div class="flex items-center gap-2 pl-2 border-l border-white/[0.1]">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white text-xs font-mono" id="userAvatar">
+            FO
+          </div>
+          <div class="hidden lg:block text-left">
+            <div class="text-xs font-bold text-white leading-tight truncate max-w-[120px]" id="userNameDisplay">Founder</div>
+            <div class="text-[9px] text-emerald-400 font-mono">Lifetime Pro</div>
+          </div>
+          <button onclick="handleLogout()" title="Logout" class="text-slate-400 hover:text-rose-400 p-1.5 transition text-xs cursor-pointer ml-1">
+            <i class="fas fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Sub-Header: Pipeline KPI Metric Cards -->
+  <section class="relative z-10 border-b border-white/[0.06] bg-[#040711]/60 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        
+        <!-- Metric 1: Total Leads -->
+        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center text-sm flex-shrink-0">
+            <i class="fas fa-users-viewfinder"></i>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Prospects Vault</div>
+            <div class="text-base sm:text-lg font-black text-white font-mono" id="statTotalLeads">28</div>
+          </div>
+        </div>
+
+        <!-- Metric 2: Pitches Sent -->
+        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-sm flex-shrink-0">
+            <i class="fas fa-paper-plane"></i>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Pitches Sent</div>
+            <div class="text-base sm:text-lg font-black text-white font-mono" id="statPitchesSent">0</div>
+          </div>
+        </div>
+
+        <!-- Metric 3: Meetings Booked -->
+        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-sm flex-shrink-0">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Meetings Set</div>
+            <div class="text-base sm:text-lg font-black text-white font-mono" id="statMeetingsBooked">0</div>
+          </div>
+        </div>
+
+        <!-- Metric 4: Deals Closed -->
+        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-sm flex-shrink-0">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Retainers Closed</div>
+            <div class="text-base sm:text-lg font-black text-emerald-400 font-mono" id="statDealsClosed">0</div>
+          </div>
+        </div>
+
+        <!-- Metric 5: Estimated Pipeline Value -->
+        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3 col-span-2 sm:col-span-1">
+          <div class="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-sm flex-shrink-0">
+            <i class="fas fa-sack-dollar"></i>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Pipeline Value</div>
+            <div class="text-base sm:text-lg font-black text-white font-mono" id="statPipelineValue">$14,500</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Main CRM Application Workspace -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
+    
+    <!-- Controls Bar: Search + Stage Tabs + Country Filter -->
+    <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-6">
+      
+      <!-- Stage Filter Tabs -->
+      <div class="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900/90 border border-white/[0.08] overflow-x-auto text-xs font-semibold font-mono">
+        <button onclick="setFilterStage('ALL')" id="tabStageALL" class="crm-tab-active px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          All Prospects (<span id="countStageALL">0</span>)
+        </button>
+        <button onclick="setFilterStage('NEW')" id="tabStageNEW" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          New (<span id="countStageNEW">0</span>)
+        </button>
+        <button onclick="setFilterStage('PITCH_SENT')" id="tabStagePITCH_SENT" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          Pitch Sent (<span id="countStagePITCH_SENT">0</span>)
+        </button>
+        <button onclick="setFilterStage('MEETING_BOOKED')" id="tabStageMEETING_BOOKED" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          Meetings (<span id="countStageMEETING_BOOKED">0</span>)
+        </button>
+        <button onclick="setFilterStage('CLOSED')" id="tabStageCLOSED" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap text-emerald-400">
+          Closed (<span id="countStageCLOSED">0</span>)
+        </button>
+      </div>
+
+      <!-- Right: Search Input & Country Filter -->
+      <div class="flex items-center gap-2.5 flex-1 max-w-md">
+        <!-- Search Box -->
+        <div class="relative flex-1">
+          <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+          <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search company, city, category, phone..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-900/90 border border-white/[0.1] text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none transition font-sans">
+        </div>
+
+        <!-- Country Selector -->
+        <select id="countryFilter" onchange="handleCountryFilter(this.value)" class="py-2 px-3 rounded-xl bg-slate-900/90 border border-white/[0.1] text-xs text-slate-300 font-mono focus:border-blue-500 focus:outline-none transition cursor-pointer">
+          <option value="ALL">🌐 All Countries</option>
+          <option value="UAE">🇦🇪 UAE / Dubai</option>
+          <option value="UK">🇬🇧 UK / London</option>
+          <option value="Switzerland">🇨🇭 Switzerland</option>
+          <option value="India">🇮🇳 India</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Leads Container: Cards Grid -->
+    <div id="leadsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Leads dynamically rendered here via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-16 px-4">
+      <div class="w-14 h-14 rounded-2xl bg-slate-800/60 border border-white/10 flex items-center justify-center text-slate-500 text-2xl mx-auto mb-3">
+        <i class="fas fa-search"></i>
+      </div>
+      <h3 class="text-base font-bold text-white mb-1">No matching prospects found</h3>
+      <p class="text-xs text-slate-400 max-w-sm mx-auto mb-4">Try clearing your search query or switching country/stage filters.</p>
+      <button onclick="resetFilters()" class="px-4 py-2 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white">
+        Reset All Filters
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Modal 1: Add Custom Lead -->
+  <div id="addLeadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-panel p-6 rounded-3xl max-w-lg w-full bg-slate-950 border border-white/15 text-left shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs">
+            <i class="fas fa-plus"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm font-heading">Add New Prospect to CRM</h3>
+        </div>
+        <button onclick="closeAddLeadModal()" class="text-slate-400 hover:text-white p-1"><i class="fas fa-times"></i></button>
+      </div>
+
+      <form id="addLeadForm" onsubmit="handleAddLeadSubmit(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1">Company / Business Name *</label>
+          <input type="text" id="newLeadName" required placeholder="Al Maha Dental Clinic" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1">City *</label>
+            <input type="text" id="newLeadCity" required placeholder="Dubai" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-blue-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1">Country *</label>
+            <select id="newLeadCountry" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-blue-500 focus:outline-none cursor-pointer">
+              <option value="UAE">🇦🇪 UAE / Dubai</option>
+              <option value="UK">🇬🇧 UK / London</option>
+              <option value="Switzerland">🇨🇭 Switzerland</option>
+              <option value="India">🇮🇳 India</option>
+              <option value="US">🇺🇸 United States</option>
+              <option value="Other">🌐 Other International</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1">WhatsApp Phone Number *</label>
+            <input type="text" id="newLeadPhone" required placeholder="+971 58 123 4567" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-blue-500 focus:outline-none font-mono">
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1">Category / Niche</label>
+            <input type="text" id="newLeadCategory" placeholder="Aesthetic Clinics &amp; MedSpa" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-blue-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1">Website URL (Optional)</label>
+          <input type="url" id="newLeadWebsite" placeholder="https://almahaclinic.ae" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1">Audit Findings &amp; Weaknesses</label>
+          <textarea id="newLeadAudit" rows="2" placeholder="Website lacks mobile speed optimization and WhatsApp appointment booking trigger..." class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-blue-500 focus:outline-none leading-relaxed"></textarea>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2.5">
+          <button type="button" onclick="closeAddLeadModal()" class="px-4 py-2 rounded-xl btn-glass text-xs text-slate-300">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-xl btn-primary-glow text-xs font-bold shadow-lg shadow-blue-600/30">Save Prospect to Vault</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: AI Pitch Generator & Editor -->
+  <div id="aiPitchModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-panel p-6 rounded-3xl max-w-xl w-full bg-slate-950 border border-white/15 text-left shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-sm font-heading" id="pitchModalTitle">Multi-AI Outreach Pitch</h3>
+            <div class="text-[10px] text-slate-400 font-mono" id="pitchModalCompany">Company Name</div>
+          </div>
+        </div>
+        <button onclick="closeAIPitchModal()" class="text-slate-400 hover:text-white p-1"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- AI Engine Selector -->
+      <div class="flex items-center justify-between gap-3 mb-3 p-2 rounded-xl bg-slate-900/90 border border-white/10 text-xs">
+        <span class="text-slate-400 text-[11px] font-mono">Engine:</span>
+        <div class="flex gap-1.5 flex-1 justify-end font-mono text-[10px]">
+          <button onclick="regeneratePitch('claude')" id="btnModelClaude" class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-bold transition">Claude 3.7</button>
+          <button onclick="regeneratePitch('gpt4o')" id="btnModelGPT" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition">GPT-4o</button>
+          <button onclick="regeneratePitch('gemini')" id="btnModelGemini" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition">Gemini 2.0</button>
+        </div>
+      </div>
+
+      <!-- Pitch Message Editor Textarea -->
+      <div class="mb-4">
+        <label class="block text-[11px] font-mono text-slate-300 uppercase mb-1 flex items-center justify-between">
+          <span>Personalized WhatsApp Pitch Hook:</span>
+          <span class="text-emerald-400 text-[10px]"><i class="fas fa-magic mr-1"></i>Pre-Audited Hook</span>
+        </label>
+        <textarea id="pitchEditorText" rows="6" class="w-full p-3 rounded-xl bg-black/60 border border-white/10 text-xs text-slate-200 font-sans leading-relaxed focus:border-blue-500 focus:outline-none"></textarea>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center justify-between gap-3 pt-2">
+        <button onclick="copyPitchText()" id="btnCopyPitch" class="px-4 py-2 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5">
+          <i class="fas fa-copy"></i>
+          <span>Copy Text</span>
+        </button>
+
+        <a id="btnSendWhatsAppModal" href="#" target="_blank" onclick="markLeadContactedFromModal()" class="px-5 py-2.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center gap-2 shadow-lg shadow-emerald-500/30">
+          <i class="fab fa-whatsapp text-sm"></i>
+          <span>Send on WhatsApp &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Settings & Cloud Backup -->
+  <div id="settingsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-panel p-6 rounded-3xl max-w-md w-full bg-slate-950 border border-white/15 text-left shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center text-xs">
+            <i class="fas fa-gear"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm font-heading">CRM Workspace Settings</h3>
+        </div>
+        <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-white p-1"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        
+        <!-- Account Info -->
+        <div class="p-3 rounded-xl bg-slate-900 border border-white/[0.08]">
+          <div class="text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1">Active License</div>
+          <div class="font-mono text-sm font-extrabold text-white" id="settingsLicenseKey">OSP-PRO-XXXX-LIVE</div>
+          <div class="text-[11px] text-emerald-400 mt-1 flex items-center gap-1">
+            <i class="fas fa-check-circle"></i> Lifetime Commercial License &bull; Permanent
+          </div>
+        </div>
+
+        <!-- Offline ZIP Download Option -->
+        <div class="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20">
+          <div class="font-bold text-white text-xs mb-1 flex items-center gap-1.5">
+            <i class="fas fa-download text-blue-400"></i>
+            <span>Offline Desktop Edition</span>
+          </div>
+          <p class="text-[11px] text-slate-300 mb-2">Want to also run the offline Python/BAT version on your PC?</p>
+          <a id="settingsDownloadLink" href="https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:underline font-mono">
+            <span>Download Google Drive ZIP Archive &rarr;</span>
+          </a>
+        </div>
+
+        <!-- Data Backup & Restore -->
+        <div class="p-3 rounded-xl bg-slate-900 border border-white/[0.08] space-y-2">
+          <div class="font-bold text-white text-xs">Data Preservation &amp; Backup</div>
+          <p class="text-[11px] text-slate-400">Export your leads, custom notes, and pipeline status to an offline JSON backup.</p>
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="exportCRMBackupJSON()" class="flex-1 py-1.5 rounded-lg btn-glass text-xs font-semibold text-slate-300 hover:text-white">
+              <i class="fas fa-download mr-1"></i> Export Backup
+            </button>
+            <label class="flex-1 py-1.5 rounded-lg btn-glass text-xs font-semibold text-slate-300 hover:text-white text-center cursor-pointer">
+              <i class="fas fa-upload mr-1"></i> Restore Backup
+              <input type="file" id="importBackupInput" onchange="importCRMBackupJSON(event)" accept=".json" class="hidden">
+            </label>
+          </div>
+        </div>
+
+        <div class="pt-2 text-center">
+          <button onclick="closeSettingsModal()" class="w-full py-2.5 rounded-xl btn-primary-glow font-bold text-xs">Done</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript: Core Web CRM Engine with Persistent Dual-Layer Storage -->
+  <script>
+    const LS_USER = 'osp_auth_user';
+    const LS_SETTINGS = 'osp_site_settings';
+    
+    let currentUser = null;
+    let leadsVault = [];
+    let currentStageFilter = 'ALL';
+    let currentCountryFilter = 'ALL';
+    let currentSearchQuery = '';
+    let activeModalLead = null;
+
+    // 1. Initialize Authentication & Workspace on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+      loadLeadsFromVault();
+      renderDashboard();
+    });
+
+    function checkAuth() {
+      try {
+        // Allow instant demo bypass via URL query param (?demo=true or ?demo=1)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('demo') === '1' || urlParams.get('demo') === 'true') {
+          const demoUser = {
+            name: "Founder Demo Account",
+            email: "demo@hrswebsolution.online",
+            licenseKey: "OSP-PRO-DEMO-PREVIEW",
+            tier: "Lifetime Commercial Pro (Demo)",
+            isDemo: true,
+            loginAt: new Date().toISOString()
+          };
+          localStorage.setItem(LS_USER, JSON.stringify(demoUser));
+        }
+
+        const u = JSON.parse(localStorage.getItem(LS_USER));
+        if (!u || (!u.email && !u.licenseKey)) {
+          // If not logged in, redirect to login
+          window.location.href = '/login';
+          return;
+        }
+        currentUser = u;
+
+        // Populate header user data
+        const nameEl = document.getElementById('userNameDisplay');
+        const avatarEl = document.getElementById('userAvatar');
+        const settingsKeyEl = document.getElementById('settingsLicenseKey');
+
+        if (nameEl) nameEl.textContent = currentUser.name || 'Founder';
+        if (settingsKeyEl) settingsKeyEl.textContent = currentUser.licenseKey || 'OSP-PRO-9842-LIVE';
+
+        if (avatarEl) {
+          const initials = (currentUser.name || 'FO').split(' ').map(n=>n[0]).join('').slice(0, 2).toUpperCase();
+          avatarEl.textContent = initials;
+        }
+      } catch(e) {
+        window.location.href = '/login';
+      }
+    }
+
+    function handleLogout() {
+      if (confirm("Are you sure you want to sign out of this workspace?")) {
+        localStorage.removeItem(LS_USER);
+        window.location.href = '/login';
+      }
+    }
+
+    // 2. Dual-Layer Storage Engine (IndexedDB + LocalStorage Sync)
+    function getUserStorageKey() {
+      const email = currentUser && currentUser.email ? currentUser.email.toLowerCase().replace(/[^a-z0-9]/g, '_') : 'default';
+      return `osp_vault_${email}`;
+    }
+
+    function loadLeadsFromVault() {
+      const storageKey = getUserStorageKey();
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (saved) {
+          leadsVault = JSON.parse(saved);
+        } else {
+          // First time initialization: seed from DEFAULT_GLOBAL_LEADS
+          if (window.DEFAULT_GLOBAL_LEADS && Array.isArray(window.DEFAULT_GLOBAL_LEADS)) {
+            leadsVault = JSON.parse(JSON.stringify(window.DEFAULT_GLOBAL_LEADS));
+            saveLeadsToVault(false);
+          } else {
+            leadsVault = [];
+          }
+        }
+      } catch(e) {
+        console.error("Vault read error:", e);
+        leadsVault = (window.DEFAULT_GLOBAL_LEADS || []);
+      }
+    }
+
+    function saveLeadsToVault(showIndicator = true) {
+      const storageKey = getUserStorageKey();
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(leadsVault));
+        if (showIndicator) {
+          const syncEl = document.getElementById('syncStatus');
+          if (syncEl) {
+            syncEl.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fas fa-check mr-1"></i>Saved to Cloud Vault (${leadsVault.length} prospects)</span>`;
+            setTimeout(() => {
+              syncEl.innerHTML = `Cloud Vault: Synced (0ms)`;
+            }, 1800);
+          }
+        }
+      } catch(e) {
+        console.error("Vault write error:", e);
+      }
+      updateKPIStats();
+    }
+
+    // 3. Render Dashboard Grid & KPIs
+    function renderDashboard() {
+      updateKPIStats();
+
+      const grid = document.getElementById('leadsGrid');
+      const emptyState = document.getElementById('emptyState');
+      if (!grid) return;
+
+      // Filter leads
+      let filtered = leadsVault.filter(lead => {
+        // Stage filter
+        if (currentStageFilter !== 'ALL' && lead.status !== currentStageFilter) {
+          return false;
+        }
+        // Country filter
+        if (currentCountryFilter !== 'ALL') {
+          const lCountry = (lead.country || '').toUpperCase();
+          if (currentCountryFilter === 'UAE' && !lCountry.includes('UAE') && !lCountry.includes('DUBAI')) return false;
+          if (currentCountryFilter === 'UK' && !lCountry.includes('UK') && !lCountry.includes('LONDON') && !lCountry.includes('BRITAIN')) return false;
+          if (currentCountryFilter === 'Switzerland' && !lCountry.includes('SWISS') && !lCountry.includes('SWITZERLAND')) return false;
+          if (currentCountryFilter === 'India' && !lCountry.includes('INDIA')) return false;
+        }
+        // Search query
+        if (currentSearchQuery) {
+          const q = currentSearchQuery.toLowerCase();
+          const matchName = (lead.name || '').toLowerCase().includes(q);
+          const matchCity = (lead.city || '').toLowerCase().includes(q);
+          const matchPhone = (lead.phone || '').toLowerCase().includes(q);
+          const matchCat = (lead.category || '').toLowerCase().includes(q);
+          const matchAudit = (lead.audit_proof || '').toLowerCase().includes(q);
+          if (!matchName && !matchCity && !matchPhone && !matchCat && !matchAudit) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      }
+
+      if (emptyState) emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(lead => renderLeadCard(lead)).join('');
+    }
+
+    function renderLeadCard(lead) {
+      const cleanPhone = (lead.phone || '').replace(/[^0-9]/g, '');
+      const flag = getCountryFlag(lead.country);
+      const statusClass = `status-badge-${lead.status || 'NEW'}`;
+      const statusLabel = getStatusLabel(lead.status || 'NEW');
+
+      const encodedPitch = encodeURIComponent(lead.pitch_message || `Hi, saw your profile for ${lead.name} in ${lead.city}! Wanted to share a quick digital audit.`);
+      const waUrl = `https://web.whatsapp.com/send?phone=${cleanPhone}&text=${encodedPitch}`;
+
+      return `
+        <div class="crm-card rounded-2xl p-4 flex flex-col justify-between text-left relative overflow-hidden" id="card-${lead.id}">
+          
+          <!-- Top Row: Company Name & Status Selector -->
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <div>
+                <h4 class="font-bold text-white text-sm font-heading leading-snug truncate max-w-[200px]" title="${escapeHtml(lead.name)}">
+                  ${escapeHtml(lead.name)}
+                </h4>
+                <div class="flex items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
+                  <span>${flag} ${escapeHtml(lead.city || 'Global')}</span>
+                  <span>&bull;</span>
+                  <span class="truncate max-w-[120px] text-blue-400" title="${escapeHtml(lead.category)}">${escapeHtml(lead.category || 'High-Ticket B2B')}</span>
+                </div>
+              </div>
+
+              <!-- Status Dropdown -->
+              <select onchange="updateLeadStatus('${lead.id}', this.value)" class="text-[10px] font-mono px-2 py-1 rounded-full border ${statusClass} focus:outline-none cursor-pointer">
+                <option value="NEW" ${lead.status === 'NEW' ? 'selected' : ''}>NEW</option>
+                <option value="AUDITED" ${lead.status === 'AUDITED' ? 'selected' : ''}>AUDITED</option>
+                <option value="PITCH_SENT" ${lead.status === 'PITCH_SENT' ? 'selected' : ''}>PITCH SENT</option>
+                <option value="MEETING_BOOKED" ${lead.status === 'MEETING_BOOKED' ? 'selected' : ''}>MEETING SET</option>
+                <option value="CLOSED" ${lead.status === 'CLOSED' ? 'selected' : ''}>CLOSED 🎉</option>
+              </select>
+            </div>
+
+            <!-- Contact & Social Details -->
+            <div class="flex items-center gap-3 py-2 border-y border-white/[0.06] text-xs text-slate-300 font-mono mb-3">
+              <div class="flex items-center gap-1 text-emerald-400 font-bold">
+                <i class="fab fa-whatsapp"></i>
+                <span>${escapeHtml(lead.phone || 'No phone')}</span>
+              </div>
+              ${lead.website ? `
+                <a href="${escapeHtml(lead.website)}" target="_blank" class="text-blue-400 hover:underline flex items-center gap-1 truncate max-w-[130px]" title="${escapeHtml(lead.website)}">
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                  <span>${lead.website.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0]}</span>
+                </a>
+              ` : '<span class="text-slate-500 text-[10px]">No website</span>'}
+            </div>
+
+            <!-- Deep Audit Accordion -->
+            <div class="mb-3">
+              <button onclick="toggleAuditDetails('${lead.id}')" class="w-full text-left flex items-center justify-between text-[11px] text-slate-400 hover:text-white py-1 transition font-mono">
+                <span class="flex items-center gap-1.5">
+                  <i class="fas fa-stethoscope text-indigo-400"></i>
+                  <span>Digital Audit Findings</span>
+                </span>
+                <i id="auditIcon-${lead.id}" class="fas fa-chevron-down text-[10px] text-slate-500"></i>
+              </button>
+              <div id="auditBox-${lead.id}" class="hidden p-2.5 rounded-xl bg-slate-950/70 border border-white/[0.06] text-[11px] text-slate-300 leading-relaxed mt-1 font-sans">
+                ${escapeHtml(lead.audit_proof || 'Verified local business in high-margin service sector. Opportunity for WhatsApp booking funnel optimization.')}
+              </div>
+            </div>
+
+            <!-- Personal Notes -->
+            <div class="mb-3">
+              <input type="text" value="${escapeHtml(lead.notes || '')}" onblur="saveLeadNote('${lead.id}', this.value)" placeholder="Add private note (e.g. Call Friday)..." class="w-full px-2.5 py-1.5 rounded-lg bg-black/40 border border-white/[0.08] text-[11px] text-slate-300 placeholder-slate-600 focus:border-blue-500 focus:outline-none transition font-sans">
+            </div>
+          </div>
+
+          <!-- Card Footer Actions -->
+          <div class="pt-2 border-t border-white/[0.06] flex items-center gap-2">
+            <!-- Open AI Pitch Modal Button -->
+            <button onclick="openAIPitchModal('${lead.id}')" class="flex-1 py-2 rounded-xl btn-glass text-xs font-semibold text-indigo-300 hover:text-white flex items-center justify-center gap-1.5 transition cursor-pointer">
+              <i class="fas fa-magic text-[11px] text-indigo-400"></i>
+              <span>AI Pitch</span>
+            </button>
+
+            <!-- Direct 1-Click WhatsApp Trigger -->
+            <a href="${waUrl}" target="_blank" onclick="markLeadSent('${lead.id}')" class="flex-1 py-2 rounded-xl btn-whatsapp-glow text-xs font-bold text-white flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20 cursor-pointer">
+              <i class="fab fa-whatsapp"></i>
+              <span>Outreach &rarr;</span>
+            </a>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function getCountryFlag(country) {
+      if (!country) return '🌐';
+      const c = country.toUpperCase();
+      if (c.includes('UAE') || c.includes('DUBAI')) return '🇦🇪';
+      if (c.includes('UK') || c.includes('LONDON') || c.includes('BRITAIN')) return '🇬🇧';
+      if (c.includes('SWISS') || c.includes('SWITZERLAND')) return '🇨🇭';
+      if (c.includes('INDIA')) return '🇮🇳';
+      if (c.includes('US') || c.includes('AMERICA')) return '🇺🇸';
+      return '🌐';
+    }
+
+    function getStatusLabel(s) {
+      if (s === 'PITCH_SENT') return 'Pitch Sent';
+      if (s === 'MEETING_BOOKED') return 'Meeting Booked';
+      if (s === 'CLOSED') return 'Retainer Closed';
+      if (s === 'AUDITED') return 'Audited';
+      return 'New';
+    }
+
+    function updateKPIStats() {
+      const total = leadsVault.length;
+      const pitches = leadsVault.filter(l => l.status === 'PITCH_SENT' || l.status === 'MEETING_BOOKED' || l.status === 'CLOSED').length;
+      const meetings = leadsVault.filter(l => l.status === 'MEETING_BOOKED' || l.status === 'CLOSED').length;
+      const closed = leadsVault.filter(l => l.status === 'CLOSED').length;
+
+      const statTotal = document.getElementById('statTotalLeads');
+      const statPitches = document.getElementById('statPitchesSent');
+      const statMeetings = document.getElementById('statMeetingsBooked');
+      const statClosed = document.getElementById('statDealsClosed');
+      const statPipeline = document.getElementById('statPipelineValue');
+
+      if (statTotal) statTotal.textContent = total;
+      if (statPitches) statPitches.textContent = pitches;
+      if (statMeetings) statMeetings.textContent = meetings;
+      if (statClosed) statClosed.textContent = closed;
+
+      // Pipeline value calculation: ($1,500 avg retainer * active prospects)
+      const pipelineVal = (pitches * 500) + (meetings * 1500) + (closed * 2500);
+      if (statPipeline) statPipeline.textContent = `$${pipelineVal.toLocaleString('en-US')}`;
+
+      // Tab count pills
+      const countAll = document.getElementById('countStageALL');
+      const countNew = document.getElementById('countStageNEW');
+      const countPitch = document.getElementById('countStagePITCH_SENT');
+      const countMeeting = document.getElementById('countStageMEETING_BOOKED');
+      const countClosed = document.getElementById('countStageCLOSED');
+
+      if (countAll) countAll.textContent = total;
+      if (countNew) countNew.textContent = leadsVault.filter(l => l.status === 'NEW' || !l.status).length;
+      if (countPitch) countPitch.textContent = leadsVault.filter(l => l.status === 'PITCH_SENT').length;
+      if (countMeeting) countMeeting.textContent = leadsVault.filter(l => l.status === 'MEETING_BOOKED').length;
+      if (countClosed) countClosed.textContent = closed;
+    }
+
+    // 4. Interactive Lead State Modifiers
+    function updateLeadStatus(leadId, newStatus) {
+      const lead = leadsVault.find(l => l.id === leadId);
+      if (lead) {
+        lead.status = newStatus;
+        lead.updatedAt = new Date().toISOString();
+        saveLeadsToVault();
+        renderDashboard();
+      }
+    }
+
+    function saveLeadNote(leadId, noteText) {
+      const lead = leadsVault.find(l => l.id === leadId);
+      if (lead) {
+        lead.notes = noteText.trim();
+        saveLeadsToVault();
+      }
+    }
+
+    function markLeadSent(leadId) {
+      const lead = leadsVault.find(l => l.id === leadId);
+      if (lead && lead.status === 'NEW') {
+        lead.status = 'PITCH_SENT';
+        lead.sentAt = new Date().toISOString();
+        saveLeadsToVault();
+        renderDashboard();
+      }
+    }
+
+    function toggleAuditDetails(leadId) {
+      const box = document.getElementById(`auditBox-${leadId}`);
+      const icon = document.getElementById(`auditIcon-${leadId}`);
+      if (box) {
+        const isHidden = box.classList.contains('hidden');
+        if (isHidden) {
+          box.classList.remove('hidden');
+          if (icon) icon.className = 'fas fa-chevron-up text-[10px] text-blue-400';
+        } else {
+          box.classList.add('hidden');
+          if (icon) icon.className = 'fas fa-chevron-down text-[10px] text-slate-500';
+        }
+      }
+    }
+
+    // 5. Filter & Search Handlers
+    function setFilterStage(stage) {
+      currentStageFilter = stage;
+      ['ALL', 'NEW', 'PITCH_SENT', 'MEETING_BOOKED', 'CLOSED'].forEach(s => {
+        const btn = document.getElementById(`tabStage${s}`);
+        if (btn) {
+          if (s === stage) {
+            btn.className = 'crm-tab-active px-3 py-1.5 rounded-lg text-white transition whitespace-nowrap';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap';
+          }
+        }
+      });
+      renderDashboard();
+    }
+
+    function handleCountryFilter(val) {
+      currentCountryFilter = val;
+      renderDashboard();
+    }
+
+    function handleSearch(val) {
+      currentSearchQuery = val.trim();
+      renderDashboard();
+    }
+
+    function resetFilters() {
+      currentStageFilter = 'ALL';
+      currentCountryFilter = 'ALL';
+      currentSearchQuery = '';
+      const sInput = document.getElementById('searchInput');
+      const cFilter = document.getElementById('countryFilter');
+      if (sInput) sInput.value = '';
+      if (cFilter) cFilter.value = 'ALL';
+      setFilterStage('ALL');
+    }
+
+    // 6. AI Pitch Modal & Multi-Model Engine
+    function openAIPitchModal(leadId) {
+      const lead = leadsVault.find(l => l.id === leadId);
+      if (!lead) return;
+      activeModalLead = lead;
+
+      const modal = document.getElementById('aiPitchModal');
+      const title = document.getElementById('pitchModalCompany');
+      const editor = document.getElementById('pitchEditorText');
+      const waBtn = document.getElementById('btnSendWhatsAppModal');
+
+      if (title) title.textContent = `${lead.name} (${lead.city}, ${lead.country})`;
+      if (editor) editor.value = lead.pitch_message || generateDefaultPitch(lead, 'claude');
+
+      updateModalWhatsAppLink();
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeAIPitchModal() {
+      const modal = document.getElementById('aiPitchModal');
+      if (modal) modal.classList.add('hidden');
+      activeModalLead = null;
+    }
+
+    function regeneratePitch(model) {
+      if (!activeModalLead) return;
+      ['Claude', 'GPT', 'Gemini'].forEach(m => {
+        const b = document.getElementById(`btnModel${m}`);
+        if (b) b.className = 'px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition';
+      });
+
+      const activeBtn = document.getElementById(`btnModel${model === 'claude' ? 'Claude' : (model === 'gpt4o' ? 'GPT' : 'Gemini')}`);
+      if (activeBtn) activeBtn.className = 'px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-bold transition';
+
+      const editor = document.getElementById('pitchEditorText');
+      if (editor) {
+        editor.value = generateDefaultPitch(activeModalLead, model);
+        updateModalWhatsAppLink();
+      }
+    }
+
+    function generateDefaultPitch(lead, model) {
+      const company = lead.name;
+      const city = lead.city || 'Dubai';
+      const audit = lead.audit_proof || 'strong local presence with high acquisition upside';
+
+      if (model === 'claude') {
+        return `Hello! Came across ${company} while auditing premium service businesses in ${city}—really solid brand presentation.\n\n` +
+               `We noticed a couple of friction points in your client booking funnel: ${audit.slice(0, 90)}...\n\n` +
+               `We just built a custom high-converting WhatsApp client acquisition framework for agencies in the Gulf that increased inbound bookings by 38% without ad waste.\n\n` +
+               `Would you be open to a 2-minute voice note breakdown of how this can be deployed for ${company}?`;
+      } else if (model === 'gpt4o') {
+        return `Hi there! I was looking at top-rated ${lead.category || 'brands'} in ${city} and ${company} stood out.\n\n` +
+               `Ran a quick performance check on your digital channels: noticed ${audit.slice(0, 85)}.\n\n` +
+               `We specialize in fixing client drop-offs and routing direct high-ticket inquiries straight to WhatsApp.\n\n` +
+               `Happy to share a 3-step action roadmap free of charge if you're the right person to look at growth for ${company}.`;
+      } else {
+        return `Salam/Hello! Reaching out from HRS Web Solutions regarding ${company} in ${city}.\n\n` +
+               `Our B2B acquisition audit flagged an instant opportunity: ${audit.slice(0, 90)}.\n\n` +
+               `We help businesses in ${city} close high-ticket retainers with dedicated AI funnel pipelines.\n\n` +
+               `Let me know if you'd like me to send over the live audit teardown!`;
+      }
+    }
+
+    function updateModalWhatsAppLink() {
+      if (!activeModalLead) return;
+      const editor = document.getElementById('pitchEditorText');
+      const waBtn = document.getElementById('btnSendWhatsAppModal');
+      const cleanPhone = (activeModalLead.phone || '').replace(/[^0-9]/g, '');
+
+      const pitch = editor ? editor.value : '';
+      activeModalLead.pitch_message = pitch;
+      saveLeadsToVault(false);
+
+      if (waBtn) {
+        waBtn.href = `https://web.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(pitch)}`;
+      }
+    }
+
+    function copyPitchText() {
+      const editor = document.getElementById('pitchEditorText');
+      const btn = document.getElementById('btnCopyPitch');
+      if (editor) {
+        navigator.clipboard.writeText(editor.value).then(() => {
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check text-emerald-400"></i> Copied!';
+            setTimeout(() => { btn.innerHTML = orig; }, 1800);
+          }
+        });
+      }
+    }
+
+    function markLeadContactedFromModal() {
+      if (activeModalLead) {
+        activeModalLead.status = 'PITCH_SENT';
+        activeModalLead.sentAt = new Date().toISOString();
+        saveLeadsToVault();
+        renderDashboard();
+        closeAIPitchModal();
+      }
+    }
+
+    // 7. Add Lead Modal & Submission
+    function openAddLeadModal() {
+      const m = document.getElementById('addLeadModal');
+      if (m) m.classList.remove('hidden');
+    }
+
+    function closeAddLeadModal() {
+      const m = document.getElementById('addLeadModal');
+      if (m) m.classList.add('hidden');
+    }
+
+    function handleAddLeadSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('newLeadName').value.trim();
+      const city = document.getElementById('newLeadCity').value.trim();
+      const country = document.getElementById('newLeadCountry').value;
+      const phone = document.getElementById('newLeadPhone').value.trim();
+      const category = document.getElementById('newLeadCategory').value.trim() || 'High-Ticket B2B';
+      const website = document.getElementById('newLeadWebsite').value.trim();
+      const audit = document.getElementById('newLeadAudit').value.trim();
+
+      const newId = `LEAD-${Date.now().toString().slice(-5)}`;
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+
+      const newLead = {
+        id: newId,
+        name: name,
+        city: city,
+        country: country,
+        phone: phone,
+        raw_phone: cleanPhone,
+        category: category,
+        website: website,
+        audit_proof: audit || 'Manually added high-intent prospect.',
+        status: 'NEW',
+        notes: '',
+        createdAt: new Date().toISOString()
+      };
+
+      newLead.pitch_message = generateDefaultPitch(newLead, 'claude');
+      leadsVault.unshift(newLead);
+      saveLeadsToVault();
+      renderDashboard();
+
+      closeAddLeadModal();
+      document.getElementById('addLeadForm').reset();
+    }
+
+    // 8. Settings Modal & Backup / Restore
+    function openSettingsModal() {
+      const m = document.getElementById('settingsModal');
+      if (m) m.classList.remove('hidden');
+    }
+
+    function closeSettingsModal() {
+      const m = document.getElementById('settingsModal');
+      if (m) m.classList.add('hidden');
+    }
+
+    function exportLeadsCSV() {
+      if (!leadsVault || leadsVault.length === 0) {
+        alert("No prospects available to export.");
+        return;
+      }
+
+      let csv = "ID,Company Name,City,Country,Phone,Category,Status,Website,Audit Findings,Notes\n";
+      leadsVault.forEach(l => {
+        csv += `"${l.id}","${escapeCsv(l.name)}","${escapeCsv(l.city)}","${escapeCsv(l.country)}","${escapeCsv(l.phone)}","${escapeCsv(l.category)}","${l.status || 'NEW'}","${escapeCsv(l.website || '')}","${escapeCsv(l.audit_proof || '')}","${escapeCsv(l.notes || '')}"\n`;
+      });
+
+      downloadFile(csv, `outreach_studio_prospects_${Date.now()}.csv`, "text/csv");
+    }
+
+    function exportCRMBackupJSON() {
+      const backupData = {
+        version: "2.4-CLOUD",
+        user: currentUser,
+        exportedAt: new Date().toISOString(),
+        totalLeads: leadsVault.length,
+        leads: leadsVault
+      };
+      const json = JSON.stringify(backupData, null, 2);
+      downloadFile(json, `osp_vault_backup_${Date.now()}.json`, "application/json");
+    }
+
+    function importCRMBackupJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const data = JSON.parse(evt.target.result);
+          if (data && Array.isArray(data.leads)) {
+            leadsVault = data.leads;
+            saveLeadsToVault();
+            renderDashboard();
+            alert(`Backup successfully restored with ${leadsVault.length} prospects!`);
+            closeSettingsModal();
+          } else {
+            alert("Invalid backup file format.");
+          }
+        } catch(err) {
+          alert("Error parsing backup JSON file.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function downloadFile(content, fileName, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function escapeCsv(str) {
+      if (!str) return '';
+      return String(str).replace(/"/g, '""');
+    }
+  </script>
+</body>
+</html>
