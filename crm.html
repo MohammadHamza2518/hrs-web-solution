@@ -108,7 +108,13 @@
           <span class="hidden sm:inline">AI Copilot</span>
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
         </button>
-        <button onclick="openAddLeadModal()" class="px-3.5 py-1.5 rounded-xl btn-primary-glow text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-lg shadow-blue-600/30">
+        <!-- Primary Lead Extraction Action -->
+        <button onclick="openExtractLeadsModal()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-lg shadow-amber-500/30 transition">
+          <i class="fas fa-bolt text-xs"></i>
+          <span>Extract Leads</span>
+        </button>
+
+        <button onclick="openAddLeadModal()" class="px-3 py-1.5 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer">
           <i class="fas fa-plus text-[10px]"></i>
           <span class="hidden sm:inline">Add Prospect</span>
         </button>
@@ -305,17 +311,143 @@
 
     <!-- Empty State -->
     <div id="emptyState" class="hidden text-center py-16 px-4">
-      <div class="w-14 h-14 rounded-2xl bg-slate-800/60 border border-white/10 flex items-center justify-center text-slate-500 text-2xl mx-auto mb-3">
-        <i class="fas fa-search"></i>
+      <div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-amber-500/20 to-blue-600/30 border border-amber-500/30 flex items-center justify-center text-amber-300 text-2xl mx-auto mb-4 shadow-xl">
+        <i class="fas fa-radar"></i>
       </div>
-      <h3 class="text-base font-bold text-white mb-1">No matching prospects found</h3>
-      <p class="text-xs text-slate-400 max-w-sm mx-auto mb-4">Try clearing your search query or switching country/stage filters.</p>
-      <button onclick="resetFilters()" class="px-4 py-2 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white">
-        Reset All Filters
-      </button>
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono mb-2">
+        <i class="fas fa-bolt text-amber-300"></i> Lead Discovery &amp; Extraction Engine
+      </div>
+      <h3 class="text-lg sm:text-xl font-bold text-white mb-2 font-heading">
+        Your CRM Pipeline is Ready!
+      </h3>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto mb-6 leading-relaxed">
+        Aapko kis niche aur country ke leads chahiye? Apni pasand ke verified prospects filter karke extract karein aur unke tailored pitches ke sath direct client acquisition shuru karein.
+      </p>
+      <div class="flex items-center justify-center gap-3 flex-wrap">
+        <button onclick="openExtractLeadsModal()" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-xs sm:text-sm shadow-xl shadow-amber-500/30 flex items-center gap-2 cursor-pointer transition">
+          <i class="fas fa-bolt text-sm"></i>
+          <span>Extract Leads for My Niche &rarr;</span>
+        </button>
+        <button onclick="openAddLeadModal()" class="px-4 py-3 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-plus text-slate-400"></i>
+          <span>Add Custom Prospect</span>
+        </button>
+      </div>
     </div>
 
   </main>
+
+  <!-- Modal: Extract / Discover Leads Engine -->
+  <div id="extractLeadsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-panel p-6 rounded-3xl max-w-lg w-full bg-slate-950 border border-white/15 text-left shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-white/[0.08] mb-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm border border-amber-500/30">
+            <i class="fas fa-radar"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-sm sm:text-base font-heading">Lead Discovery &amp; Extraction Engine</h3>
+            <p class="text-[10px] text-slate-400 font-mono">Filter verified leads &amp; import with tailored pitches</p>
+          </div>
+        </div>
+        <button onclick="closeExtractLeadsModal()" class="text-slate-400 hover:text-white p-1 cursor-pointer"><i class="fas fa-times"></i></button>
+      </div>
+
+      <form id="extractLeadsForm" onsubmit="handleExtractLeadsSubmit(event)" class="space-y-4">
+        
+        <!-- 1. Your Service / Skill Angle -->
+        <div>
+          <label class="block text-[11px] font-mono text-slate-300 uppercase font-bold mb-1.5 flex items-center justify-between">
+            <span>1. What Service Are You Offering?</span>
+            <span class="text-amber-300 text-[9px]">PITCH AUTO-TAILORED</span>
+          </label>
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <label class="flex items-center gap-2 p-2 rounded-xl border border-white/10 bg-slate-900/60 hover:border-purple-500/50 cursor-pointer transition">
+              <input type="radio" name="extract_skill" value="video_editing" class="accent-purple-500" checked>
+              <span class="text-purple-300 font-bold"><i class="fas fa-film mr-1"></i>Video Editing</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded-xl border border-white/10 bg-slate-900/60 hover:border-pink-500/50 cursor-pointer transition">
+              <input type="radio" name="extract_skill" value="graphic_design" class="accent-pink-500">
+              <span class="text-pink-300 font-bold"><i class="fas fa-palette mr-1"></i>Graphic Design</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded-xl border border-white/10 bg-slate-900/60 hover:border-blue-500/50 cursor-pointer transition">
+              <input type="radio" name="extract_skill" value="web_dev" class="accent-blue-500">
+              <span class="text-blue-300 font-bold"><i class="fas fa-laptop-code mr-1"></i>Web Development</span>
+            </label>
+            <label class="flex items-center gap-2 p-2 rounded-xl border border-white/10 bg-slate-900/60 hover:border-emerald-500/50 cursor-pointer transition">
+              <input type="radio" name="extract_skill" value="marketing_ads" class="accent-emerald-500">
+              <span class="text-emerald-300 font-bold"><i class="fas fa-bullhorn mr-1"></i>Paid Ads &amp; Meta</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 2. Target Business Industry -->
+        <div>
+          <label class="block text-[11px] font-mono text-slate-300 uppercase font-bold mb-1">
+            2. Target Business Industry / Niche
+          </label>
+          <select id="extractIndustrySelect" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-amber-500 focus:outline-none font-mono">
+            <option value="all">🌐 All Industries (52 Verified Leads Vault)</option>
+            <option value="car_rentals_detailing">🏎️ Supercars, Exotics &amp; Auto Detailing (10 Leads)</option>
+            <option value="fashion_ecommerce">👗 Luxury Fashion, Abayas, Oud &amp; Perfumes (10 Leads)</option>
+            <option value="real_estate">🏢 Real Estate, Architecture &amp; Villa Fitouts (8 Leads)</option>
+            <option value="salons_clinics">💉 Aesthetic Clinics, Cosmetic &amp; Salons (8 Leads)</option>
+            <option value="yachts_events">🛥️ VIP Yacht Charters &amp; Luxury Events (8 Leads)</option>
+            <option value="b2b_corporate">💼 B2B Advisory &amp; Corporate Consulting (8 Leads)</option>
+          </select>
+        </div>
+
+        <!-- 3. Country / Location -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase font-bold mb-1">
+              3. Target Country
+            </label>
+            <select id="extractCountrySelect" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-amber-500 focus:outline-none font-mono">
+              <option value="ALL">🌍 All Countries</option>
+              <option value="UAE">🇦🇪 Dubai / UAE (High-Ticket)</option>
+              <option value="UK">🇬🇧 London / UK</option>
+              <option value="Switzerland">🇨🇭 Switzerland</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase font-bold mb-1">
+              4. Quantity
+            </label>
+            <select id="extractQuantitySelect" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-xs text-white focus:border-amber-500 focus:outline-none font-mono">
+              <option value="5">5 Leads (Quick Start)</option>
+              <option value="10" selected>10 Leads (Recommended)</option>
+              <option value="25">25 Leads</option>
+              <option value="100">All Matching Leads</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Mode: Replace vs Append -->
+        <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.08] flex items-center justify-between text-xs">
+          <div>
+            <div class="font-bold text-white text-[11px]">Import Mode</div>
+            <div class="text-[10px] text-slate-400">Replace current pipeline or add to existing</div>
+          </div>
+          <label class="flex items-center gap-1.5 text-[11px] text-slate-300 font-mono cursor-pointer">
+            <input type="checkbox" id="extractReplaceCheckbox" class="accent-amber-500" checked>
+            <span>Clean Pipeline (Replace)</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-xs sm:text-sm shadow-xl shadow-amber-500/30 flex items-center justify-center gap-2 cursor-pointer transition">
+          <i class="fas fa-bolt text-sm"></i>
+          <span>Extract &amp; Import Leads into My CRM &rarr;</span>
+        </button>
+
+        <p class="text-[10px] text-slate-500 text-center font-mono">
+          <i class="fas fa-check-circle text-emerald-400 mr-1"></i>Verified WhatsApp numbers &bull; Real business leaks &bull; Custom pitch auto-generated
+        </p>
+      </form>
+    </div>
+  </div>
 
   <!-- Modal 1: Add Custom Lead -->
   <div id="addLeadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
@@ -501,6 +633,17 @@
           </a>
         </div>
 
+        <!-- Reset Pipeline / Clear Leads -->
+        <div class="p-3 rounded-xl bg-rose-950/20 border border-rose-500/20">
+          <div class="font-bold text-white text-xs mb-1 flex items-center justify-between">
+            <span class="flex items-center gap-1.5"><i class="fas fa-trash-can text-rose-400"></i> Clear Pipeline</span>
+            <button onclick="clearAllLeads(); closeSettingsModal();" class="px-2.5 py-1 rounded-lg bg-rose-600/30 hover:bg-rose-600/50 text-rose-300 border border-rose-500/30 text-[10px] font-mono cursor-pointer transition">
+              Reset to 0 Leads
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-snug">Wipe current prospects to start clean. You can extract fresh leads anytime with the Extract Leads button.</p>
+        </div>
+
         <!-- Data Backup & Restore -->
         <div class="p-3 rounded-xl bg-slate-900 border border-white/[0.08] space-y-2">
           <div class="font-bold text-white text-xs">Data Preservation &amp; Backup</div>
@@ -614,28 +757,22 @@
     function loadLeadsFromVault() {
       const storageKey = getUserStorageKey();
       try {
+        const urlParams = new URLSearchParams(window.location.search);
+        // Instant reset parameter (?clear=1) to clear pipeline to 0 leads
+        if (urlParams.get('clear') === '1') {
+          leadsVault = [];
+          localStorage.setItem(storageKey, JSON.stringify(leadsVault));
+          return;
+        }
+
         const saved = localStorage.getItem(storageKey);
         if (saved) {
           leadsVault = JSON.parse(saved);
         } else {
-          // First time initialization: seed from DEFAULT_GLOBAL_LEADS
-          if (window.DEFAULT_GLOBAL_LEADS && Array.isArray(window.DEFAULT_GLOBAL_LEADS)) {
-            leadsVault = JSON.parse(JSON.stringify(window.DEFAULT_GLOBAL_LEADS));
-            saveLeadsToVault(false);
-          } else {
-            leadsVault = [];
-          }
-        }
-
-        // Auto-upgrade if new leads exist in DEFAULT_GLOBAL_LEADS
-        if (window.DEFAULT_GLOBAL_LEADS && Array.isArray(window.DEFAULT_GLOBAL_LEADS) && leadsVault.length < window.DEFAULT_GLOBAL_LEADS.length) {
-          const existingIds = new Set(leadsVault.map(l => l.id || l.name));
-          window.DEFAULT_GLOBAL_LEADS.forEach(dl => {
-            if (!existingIds.has(dl.id) && !existingIds.has(dl.name)) {
-              leadsVault.push(dl);
-            }
-          });
-          saveLeadsToVault(false);
+          // Founder requirement: By default, new buyer starts with ZERO leads!
+          // They extract custom leads on-demand matching their exact service and niche.
+          leadsVault = [];
+          localStorage.setItem(storageKey, JSON.stringify(leadsVault));
         }
       } catch(e) {
         console.error("Vault read error:", e);
@@ -906,6 +1043,112 @@
         }
       }
     }
+
+    // =========================================================================
+    // LEAD DISCOVERY & EXTRACTION CONTROLLER
+    // =========================================================================
+    window.openExtractLeadsModal = function() {
+      const modal = document.getElementById('extractLeadsModal');
+      if (modal) {
+        if (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) {
+          const firstSkill = currentUser.targetNiches[0];
+          const r = document.querySelector(`input[name="extract_skill"][value="${firstSkill}"]`);
+          if (r) r.checked = true;
+        }
+        modal.classList.remove('hidden');
+      }
+    };
+
+    window.closeExtractLeadsModal = function() {
+      const modal = document.getElementById('extractLeadsModal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    window.clearAllLeads = function() {
+      if (confirm("Are you sure you want to clear your current pipeline to 0 leads? You can extract new customized leads anytime using the 'Extract Leads' button.")) {
+        leadsVault = [];
+        saveLeadsToVault(true);
+        renderDashboard();
+        showToast("Pipeline reset to 0 leads!", "info");
+      }
+    };
+
+    window.handleExtractLeadsSubmit = function(e) {
+      if (e && e.preventDefault) e.preventDefault();
+
+      const skill = document.querySelector('input[name="extract_skill"]:checked')?.value || 'video_editing';
+      const industry = document.getElementById('extractIndustrySelect')?.value || 'all';
+      const country = document.getElementById('extractCountrySelect')?.value || 'ALL';
+      const quantity = parseInt(document.getElementById('extractQuantitySelect')?.value || '10', 10);
+      const replaceExisting = document.getElementById('extractReplaceCheckbox')?.checked;
+
+      const allAvailable = window.DEFAULT_GLOBAL_LEADS || [];
+
+      // Filter by industry & country
+      let matches = allAvailable.filter(l => {
+        if (industry !== 'all' && l.industry !== industry) return false;
+        if (country !== 'ALL') {
+          const c = (l.country || '').toUpperCase();
+          if (country === 'UAE' && !c.includes('UAE') && !c.includes('DUBAI')) return false;
+          if (country === 'UK' && !c.includes('UK') && !c.includes('LONDON')) return false;
+          if (country === 'Switzerland' && !c.includes('SWISS') && !c.includes('SWITZERLAND')) return false;
+          if (country === 'India' && !c.includes('INDIA')) return false;
+        }
+        return true;
+      });
+
+      if (matches.length === 0) {
+        alert("No leads found matching those filters. Try choosing 'All Industries' or 'All Countries'.");
+        return;
+      }
+
+      // Limit by quantity
+      if (quantity > 0) {
+        matches = matches.slice(0, quantity);
+      }
+
+      // Deep clone and pre-generate custom pitch for chosen skill
+      const preparedLeads = matches.map(l => {
+        const clone = JSON.parse(JSON.stringify(l));
+        clone.extractedSkill = skill;
+        clone.pitch_message = generateDefaultPitch(clone, 'claude', skill);
+        return clone;
+      });
+
+      if (replaceExisting) {
+        leadsVault = preparedLeads;
+      } else {
+        const existingIds = new Set(leadsVault.map(x => x.id || x.name));
+        preparedLeads.forEach(pl => {
+          if (!existingIds.has(pl.id) && !existingIds.has(pl.name)) {
+            leadsVault.push(pl);
+          }
+        });
+      }
+
+      // Update active user niche display
+      if (currentUser) {
+        currentUser.targetNiches = [skill];
+        const skillLabels = {
+          video_editing: 'Short-Form Video Editing',
+          graphic_design: 'Graphic Design & Branding',
+          web_dev: 'Web Development & UI',
+          marketing_ads: 'Paid Ads & Funnels',
+          automation_ai: 'AI & WhatsApp Automation'
+        };
+        currentUser.targetNichesDisplay = skillLabels[skill] || 'Custom Skill';
+        localStorage.setItem(LS_USER, JSON.stringify(currentUser));
+        
+        const nicheDisplayEl = document.getElementById('userNicheDisplay');
+        if (nicheDisplayEl) nicheDisplayEl.textContent = currentUser.targetNichesDisplay;
+      }
+
+      activePitchService = skill;
+      saveLeadsToVault(true);
+      closeExtractLeadsModal();
+      renderDashboard();
+      showToast(`⚡ Successfully extracted ${preparedLeads.length} leads for ${skill}!`, "success");
+    };
 
     // 5. Filter & Search Handlers
     
