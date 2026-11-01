@@ -259,6 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
           if (successCustomer) successCustomer.textContent = `${bname} ${bphone ? '(' + bphone + ')' : ''}`;
           if (successLicenseKey) successLicenseKey.textContent = lkey;
           if (btnDirectDownload) btnDirectDownload.href = dlLink;
+          const successNichesText = document.getElementById('successNichesText');
+          if (successNichesText) {
+            try {
+              const u = JSON.parse(localStorage.getItem('osp_auth_user'));
+              if (u && u.targetNichesDisplay) successNichesText.textContent = u.targetNichesDisplay;
+            } catch(e) {}
+          }
         } else {
           formView.classList.remove('hidden');
           successView.classList.add('hidden');
@@ -530,6 +537,97 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 100% Automated Immediate Delivery on Payment Success
+  
+  // =========================================================================
+  // ONBOARDING STEP 2: CONNECT AI ENGINE & LAUNCH CRM CONTROLLER
+  // =========================================================================
+  window.activeOnboardProvider = 'gemini';
+
+  window.selectOnboardProvider = function(prov) {
+    window.activeOnboardProvider = prov;
+
+    const cards = {
+      gemini: document.getElementById('onboard_card_gemini'),
+      openai: document.getElementById('onboard_card_openai'),
+      claude: document.getElementById('onboard_card_claude')
+    };
+
+    Object.keys(cards).forEach(k => {
+      const c = cards[k];
+      if (c) {
+        if (k === prov) {
+          c.className = "flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-blue-500/15 cursor-pointer hover:border-blue-400 transition shadow-sm";
+        } else {
+          c.className = "flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+        }
+      }
+    });
+
+    const label = document.getElementById('onboardKeyLabel');
+    const link = document.getElementById('onboardGetKeyLink');
+    const input = document.getElementById('onboardApiKeyInput');
+
+    if (prov === 'gemini') {
+      if (label) label.textContent = "Enter Your Google Gemini API Key:";
+      if (link) {
+        link.href = "https://aistudio.google.com/app/apikey";
+        link.innerHTML = "Get Free Gemini Key (30s) &rarr;";
+      }
+      if (input) input.placeholder = "AIzaSy...";
+    } else if (prov === 'openai') {
+      if (label) label.textContent = "Enter Your OpenAI API Key:";
+      if (link) {
+        link.href = "https://platform.openai.com/api-keys";
+        link.innerHTML = "Get OpenAI Key &rarr;";
+      }
+      if (input) input.placeholder = "sk-proj-...";
+    } else if (prov === 'claude') {
+      if (label) label.textContent = "Enter Your Anthropic Claude API Key:";
+      if (link) {
+        link.href = "https://console.anthropic.com/";
+        link.innerHTML = "Get Claude Key &rarr;";
+      }
+      if (input) input.placeholder = "sk-ant-...";
+    }
+  };
+
+  window.toggleKeyVisibility = function(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+    if (!input) return;
+    if (input.type === 'password') {
+      input.type = 'text';
+      if (icon) icon.className = 'fas fa-eye-slash';
+    } else {
+      input.type = 'password';
+      if (icon) icon.className = 'fas fa-eye';
+    }
+  };
+
+  window.handleSaveKeyAndLaunchCRM = function() {
+    const input = document.getElementById('onboardApiKeyInput');
+    const keyVal = (input ? input.value : '').trim();
+
+    if (!keyVal || keyVal.length < 8) {
+      alert("Please enter a valid API key, or click 'skip for now' below to launch CRM directly.");
+      if (input) input.focus();
+      return;
+    }
+
+    // Save key locally
+    let keys = {};
+    try { keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {}; } catch(e) {}
+    keys[window.activeOnboardProvider || 'gemini'] = keyVal;
+    localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
+
+    // Redirect to CRM
+    window.location.href = '/crm';
+  };
+
+  window.skipKeyAndLaunchCRM = function() {
+    window.location.href = '/crm';
+  };
+
   window.handlePaymentSuccess = function(response, customer) {
     const paymentId = response.razorpay_payment_id || ('pay_' + Date.now());
     const randomKey = `OSP-PRO-${Math.floor(1000+Math.random()*9000)}-${Math.floor(1000+Math.random()*9000)}-LIVE`;
@@ -615,6 +713,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (successCustomer) successCustomer.textContent = `${customer.name} (${customer.phone})`;
     if (successLicenseKey) successLicenseKey.textContent = randomKey;
     if (btnDirectDownload) btnDirectDownload.href = downloadLink;
+    const successNichesText = document.getElementById('successNichesText');
+    if (successNichesText) successNichesText.textContent = nichesDisplay;
 
     if (successWhatsAppBtn) {
       const waMsg = encodeURIComponent(
