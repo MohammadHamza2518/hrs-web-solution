@@ -1403,7 +1403,7 @@
 
       if (targetService === 'video_editing') {
         if (model === 'claude') {
-          return `Salam / Hi team ${company}! 🎥\n\n` +
+          return `Hey team ${company}! 🎥\n\n` +
                  `Came across your recent work in ${city} — really incredible projects and luxury craftsmanship!\n\n` +
                  `Checking your Instagram & TikTok, you have massive potential for high-ticket client acquisition: you're currently missing 4K cinematic walkthrough reels and before-and-after transformation shorts that high-net-worth clients in the Gulf binge-watch.\n\n` +
                  `I run a specialized short-form video editing studio for luxury ${indName} brands. We take your raw phone or camera clips and turn them into viral, high-retention 4K reels with sound design, dynamic pacing, and cinematic color grading.\n\n` +
@@ -1414,14 +1414,14 @@
                  `We specialize in editing viral short-form videos for luxury brands that bring qualified inbound inquiries.\n\n` +
                  `Happy to edit a complimentary 30-second sample reel for ${company} if you'd like to check out our work!`;
         } else {
-          return `Salam! Reaching out regarding ${company} in ${city}. 🎥\n\n` +
+          return `Hey team ${company}! Reaching out regarding ${company} in ${city}. 🎥\n\n` +
                  `We noticed your projects have huge visual appeal, but lack consistent high-definition Reels/Shorts for Instagram and TikTok.\n\n` +
                  `We help luxury brands in the UAE scale their organic reach with dedicated 4K video editing retainers.\n\n` +
                  `Let me know if you'd like me to send over 2 sample edit styles tailored for ${company}!`;
         }
       } else if (targetService === 'graphic_design') {
         if (model === 'claude') {
-          return `Salam / Hi team ${company}! 🎨\n\n` +
+          return `Hey team ${company}! 🎨\n\n` +
                  `Came across ${company} while researching premium brands in ${city}. Your products & services are high-end, but your digital portfolio PDF, social media creatives, and marketing brochures lack that ultra-luxury modern aesthetic.\n\n` +
                  `I'm a brand identity & graphic designer specializing in luxury ${indName}. We design high-converting lookbooks, 3D catalogs, and aesthetic social carousels that attract high-ticket clients.\n\n` +
                  `Happy to send over a 1-page sample rebrand concept for ${company} free of charge. Where's the best email or number to send it?`;
@@ -1431,14 +1431,14 @@
                  `We design high-converting brand lookbooks, VIP client proposals, and social creatives for top brands.\n\n` +
                  `Can I send you a quick 1-page concept redesign tailored for ${company}?`;
         } else {
-          return `Salam! Reaching out regarding ${company} in ${city}. 🎨\n\n` +
+          return `Hey team ${company}! Reaching out regarding ${company} in ${city}. 🎨\n\n` +
                  `Your craftsmanship is world-class, and with a premium lookbook and high-end visual branding, your conversion rate can easily double.\n\n` +
                  `We specialize in luxury graphic design & catalog branding for UAE businesses.\n\n` +
                  `Open to seeing a free sample design mockup for ${company}?`;
         }
       } else if (targetService === 'web_dev') {
         if (model === 'claude') {
-          return `Salam / Hi! Came across ${company} while auditing premium service businesses in ${city} — really solid brand presentation.\n\n` +
+          return `Hey team ${company}! Came across ${company} while auditing premium service businesses in ${city} — really solid brand presentation.\n\n` +
                  `We ran a quick digital speed & mobile check: noticed friction points in your client booking funnel: ${lead.audit_proof || 'slow load time and missing direct WhatsApp booking'}.\n\n` +
                  `We build ultra-fast, high-converting web landing pages with instant WhatsApp quotation calculators for Gulf brands.\n\n` +
                  `Would you be open to a 2-minute breakdown of how a modern revamp can increase your inbound bookings for ${company}?`;
@@ -1448,13 +1448,13 @@
                  `We specialize in fixing client drop-offs and routing direct high-ticket inquiries straight to WhatsApp.\n\n` +
                  `Happy to share a 3-step action roadmap free of charge for ${company}!`;
         } else {
-          return `Salam! Reaching out from HRS Web Solutions regarding ${company} in ${city}.\n\n` +
+          return `Hey team ${company}! Reaching out regarding ${company} in ${city}.\n\n` +
                  `Our web audit flagged an instant opportunity: ${lead.audit_proof || 'mobile speed optimization'}.\n\n` +
                  `We help businesses in ${city} close high-ticket retainers with high-speed modern web funnels.\n\n` +
                  `Let me know if you'd like me to send over the live audit teardown!`;
         }
       } else {
-        return `Salam / Hi! Reaching out regarding ${company} in ${city}.\n\n` +
+        return `Hey team ${company}! Reaching out regarding ${company} in ${city}.\n\n` +
                `We noticed an untapped growth opportunity in your digital client acquisition: ${lead.audit_proof || 'missing multi-channel funnel'}.\n\n` +
                `We help high-end brands in the UAE scale with complete client acquisition pipelines (Cinematic Video, Branding & Web Funnels).\n\n` +
                `Would love to share a complimentary growth breakdown tailored for ${company} if you are the right person to look at this!`;
@@ -1826,7 +1826,7 @@
               <span class="text-[9px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">CONNECTED</span>
             </div>
             <p class="text-xs leading-relaxed text-slate-300">
-              Salam / Hello! 👋 Connected to <strong class="text-cyan-300">${provName}</strong>.
+              Copilot Ready ⚡ Connected to <strong class="text-cyan-300">${provName}</strong>.
             </p>
             <p class="text-[11px] leading-relaxed text-slate-400">
               I have real-time context of all <strong class="text-white font-mono">52 global leads</strong> in your CRM (Dubai, London, Switzerland) and your skill (<strong class="text-amber-300 font-mono">${userSkill}</strong>).
@@ -1991,21 +1991,20 @@
       const skill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Freelancing & Client Acquisition';
       const sampleLead = (leadsVault && leadsVault.length) ? leadsVault[0] : null;
 
-      if (q.includes('suno') || q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('kaisa') || q.includes('kaise') || q.includes('naam') || q.includes('who are you') || q.includes('dikkat')) {
-        return `Salam / Hello bhai! 🚀 Haan sun raha hoon bilkul, bataiye!\n\n` +
-               `Main aapka **Outreach Studio Pro AI Copilot** hoon. Aapki skill (**${skill}**) ke hisaab se live ready hoon.\n\n` +
-               `Aap mujhse pooch sakte hain:\n` +
-               `• Kisi specific company ke liye pitch (e.g. *"Pitch Oud Al Masar for Video Editing"*)\n` +
-               `• WhatsApp follow-up script\n` +
-               `• Client objection handle karna (e.g. *"Client bol raha hai budget nahi hai"*)\n\n` +
-               `Bataiye kis lead se start karein?`;
+      if (q.includes('suno') || q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('kaisa') || q.includes('kaise') || q.includes('naam') || q.includes('who are you') || q.includes('dikkat') || q.includes('bhai') || q.includes('bol')) {
+        return `Haan bolo bhai, sun raha hoon! Kya chal raha hai? Batao kaunsi lead target karni hai ya kis cheez me help chahiye? 🚀\n\n` +
+               `Aapki skill **${skill}** ke hisaab se live ready hoon:\n` +
+               `• Kisi bhi lead ki killer WhatsApp pitch banwani ho\n` +
+               `• High-converting follow-up sequence chahiye ho\n` +
+               `• Client objections handle karne hon (e.g. *"Budget nahi hai"* ya *"Already agency hai"*)\n\n` +
+               `Bolo kis lead se shuru karein?`;
       }
 
       if (q.includes('pitch') || q.includes('message') || q.includes('outreach') || q.includes('likh') || q.includes('bana')) {
         const company = sampleLead ? sampleLead.name : 'Target Business';
         const city = sampleLead ? sampleLead.city : 'Dubai';
         return `🎯 **Custom High-Ticket Pitch (${skill}):**\n\n` +
-               `"Salam / Hi team ${company}! Saw your premium work in ${city} — really high-end craftsmanship.\n\n` +
+               `"Hey team ${company}! Saw your premium work in ${city} — really high-end craftsmanship.\n\n` +
                `Checking your digital channels, we noticed friction points in your client acquisition and retention. We specialize in scaling luxury brands with dedicated ${skill} retainers ($1,500 - $3,000/mo).\n\n` +
                `Would you be open to a 2-minute breakdown of how a quick revamp can double your inbound WhatsApp bookings for ${company}?"\n\n` +
                `💡 *Tip: Is pitch ko copy karke direct lead ke WhatsApp par bhej sakte hain!*`;
@@ -2018,12 +2017,12 @@
                `*Yeh psychology script client ka resistance turant khatam kar deti hai!*`;
       }
 
-      return `🚀 **Outreach Studio Strategy Advisory (${skill}):**\n\n` +
-             `High-ticket retainers ($1,500 – $4,000/month) close karne ke 3 golden rules:\n\n` +
-             `1. **Specific Audit:** Pehle message me hi unki digital leak point-out karein.\n` +
-             `2. **Free Sample Value Hook:** Pehle 1 sample free offer karein (zero friction).\n` +
-             `3. **Voice Note Close:** Reply aate hi 45-second energetic voice note bhejein.\n\n` +
-             `Aap kisi specific company ka naam batayein (jaise Royal Marble, Supercars, Oud etc.), main instant custom pitch bana kar deta hoon!`;
+      return `🚀 **Agency Action Plan (${skill}):**\n\n` +
+             `Bhai high-ticket foreign clients ($1,500 – $4,000/month) close karne ke 3 simple steps:\n\n` +
+             `1. **Specific Audit:** Pehle message me hi unka digital leak point-out karein.\n` +
+             `2. **Free Sample Hook:** Pehle 1 sample video/design free offer karein (zero friction).\n` +
+             `3. **Voice Note Close:** Reply aate hi 45-second energetic English voice note bhejein.\n\n` +
+             `Batao kis company ka naam leke pitch banau? Instant customized script likh deta hoon!`;
     }
 
     async function generateLiveAIResponse(userPrompt) {
@@ -2040,18 +2039,21 @@
         `• ${l.name} (${l.city}, ${l.country}) | Industry: ${l.industry_name || l.category} | Phone: ${l.phone} | Audit: ${l.audit_proof}`
       ).join('\n');
 
-      const systemPrompt = `You are Outreach Studio Pro AI Copilot, a sharp, elite B2B client acquisition strategist for freelancers and agency owners.
+      const systemPrompt = `You are a sharp, elite B2B client acquisition partner and agency co-pilot for freelancers and agency owners.
 The user is a freelancer/agency owner whose skill is: "${userSkill}".
-You are embedded directly inside their Outreach Studio Pro CRM workspace.
-You have real-time access to the user's 52 verified high-ticket foreign leads (Dubai UAE, London UK, Switzerland):
+You are embedded directly inside their CRM workspace.
+You have real-time access to the user's verified high-ticket foreign leads (Dubai UAE, London UK, Switzerland):
 ${sampleLeads}
 
-CRITICAL RULES:
-1. Speak in the EXACT same language and tone as the user! If the user speaks in casual Hinglish/Hindi (e.g. "hey suno", "bhai pitch bana de", "kaisa hai"), reply in warm, confident, sharp, conversational Hinglish (like a smart agency mentor)!
-2. If the user asks for a pitch, craft an irresistible, punchy WhatsApp message tailored to ${userSkill}.
-3. If they ask about specific leads (e.g. Dubai Real Estate, Oud Al Masar, Supercars), reference the exact company details and digital leaks from the CRM.
-4. If they ask about objections or negotiation, give a high-converting psychology-backed script.
-5. Keep your advice practical, high-ticket focused ($1,500 - $5,000/mo retainers), and ready to execute.`;
+CRITICAL RULES (MUST FOLLOW STRICTLY):
+1. ZERO FORMAL GREETINGS: NEVER use religious or formal greetings like "Salam", "Salam / Hello", "Dear Sir", "Respected", or robotic self-introductions like "I am Outreach Studio Pro AI Copilot" or "As an AI model"!
+2. SPEAK CASUALLY & NATURALLY: Talk 100% naturally, directly, and casually in conversational Hinglish — exactly like a sharp, chill agency partner talking 1-on-1 on WhatsApp or pair programming with the user (e.g. "Haan bolo bhai", "Sun raha hoon, batao kis lead pe kaam karein?", "Yeh lo pitch, solid convert karegi", "Bhai yeh angle try karo").
+3. STRAIGHT TO THE POINT: Be punchy, direct, and action-oriented. No generic fluff, no robotic filler sentences.
+4. CLIENT PITCH OPENERS: When drafting pitches/outreach for prospective clients, ALWAYS use clean, modern openers like "Hey team [Company]!" or "Hi [Company] team!" — NEVER use "Salam".
+5. PITCH QUALITY: If asked for a pitch, craft an irresistible, high-converting WhatsApp message tailored to ${userSkill}.
+6. CONTEXT-AWARE: Reference exact company details, cities, and digital audit findings from their CRM leads.
+7. OBJECTIONS & NEGOTIATIONS: When asked about objections (e.g. "already have agency", "no budget"), provide sharp psychology-backed rebuttal scripts.
+8. FOCUS: Keep everything focused on winning $1,500 - $5,000/month foreign retainers.`;
 
       if (activeAIProvider === 'gemini') {
         return await callLiveGeminiAPI(key, systemPrompt, userPrompt);
@@ -2491,7 +2493,7 @@ CRITICAL RULES:
       <!-- Drawer Footer Input -->
       <div class="p-3 border-t border-white/[0.08] bg-slate-900/90">
         <form onsubmit="handleCopilotSubmit(event)" class="flex items-center gap-2">
-          <input type="text" id="copilotInput" placeholder="Ask anything: 'hey suno', 'Pitch Oud Al Masar for Video Editing'..." class="flex-1 bg-slate-950 border border-white/[0.1] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none transition font-sans">
+          <input type="text" id="copilotInput" placeholder="Bolo bhai: 'Oud Al Masar ke liye pitch bana do', 'Lead audit'..." class="flex-1 bg-slate-950 border border-white/[0.1] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none transition font-sans">
           
           <button type="submit" id="btnCopilotSend" class="p-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center justify-center cursor-pointer shadow-lg shadow-blue-600/30 flex-shrink-0">
             <i class="fas fa-paper-plane"></i>
