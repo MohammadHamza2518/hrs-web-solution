@@ -570,3 +570,122 @@ h1, h2, h3, h4, h5, h6 {
 .comparison-row:hover {
   background-color: rgba(255, 255, 255, 0.04);
 }
+
+
+/* ==========================================================================
+   FUTURISTIC ORBITAL HERO BADGE PILL (SILICON VALLEY SAAS STYLE)
+   ========================================================================== */
+.hero-pill-capsule {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5px;
+  border-radius: 9999px;
+  background: transparent;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 0 25px -4px rgba(59, 130, 246, 0.45), 0 0 12px rgba(6, 182, 212, 0.25);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.hero-pill-capsule:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 40px 2px rgba(59, 130, 246, 0.7), 0 0 22px rgba(6, 182, 212, 0.5);
+}
+
+/* Rotating Conic Light Beam Border */
+.hero-pill-capsule::before {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 400%;
+  height: 400%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 75deg,
+    rgba(6, 182, 212, 0.95) 115deg,
+    rgba(59, 130, 246, 1) 140deg,
+    rgba(147, 51, 234, 0.95) 175deg,
+    transparent 210deg,
+    transparent 360deg
+  );
+  animation: hero-pill-spin 3.5s linear infinite;
+  z-index: 0;
+}
+
+@keyframes hero-pill-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Inner Glass Content */
+.hero-pill-inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background: rgba(4, 7, 20, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Shimmer Light Flare Passing Through */
+.hero-pill-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), rgba(96, 165, 250, 0.3), transparent);
+  transform: skewX(-25deg);
+  animation: hero-pill-shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-pill-shimmer {
+  0%, 25% { left: -100%; }
+  60%, 100% { left: 200%; }
+}
+
+/* Cyber Radar Pulse Beacon */
+.cyber-beacon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+.cyber-beacon-core {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #06B6D4;
+  box-shadow: 0 0 10px #06B6D4, 0 0 16px #3B82F6;
+  position: relative;
+  z-index: 2;
+}
+.cyber-beacon-ping {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(6, 182, 212, 0.5);
+  animation: cyber-ping-wave 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  z-index: 1;
+}
+
+@keyframes cyber-ping-wave {
+  0% { transform: scale(0.4); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
