@@ -16,7 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('osp_buyer_name');
     localStorage.removeItem('osp_buyer_phone');
     localStorage.removeItem('osp_buyer_email');
-    window.location.href = window.location.pathname;
+    if (urlParams.get('test') === '1') {
+      window.location.href = window.location.pathname + '?test=1';
+    } else {
+      window.location.href = window.location.pathname;
+    }
     return;
   }
 
