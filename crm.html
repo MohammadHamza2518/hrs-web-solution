@@ -567,8 +567,8 @@
         <span class="text-slate-400 text-[11px] font-mono">Engine:</span>
         <div class="flex gap-1.5 flex-1 justify-end font-mono text-[10px]">
           <button onclick="regeneratePitch('claude')" id="btnModelClaude" class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-bold transition">Claude 3.7</button>
-          <button onclick="regeneratePitch('gpt4o')" id="btnModelGPT" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition">GPT-4o</button>
-          <button onclick="regeneratePitch('gemini')" id="btnModelGemini" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition">Gemini 2.0</button>
+          <button onclick="regeneratePitch('gpt4o')" id="btnModelGPT" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition">GPT-4o / o3-mini</button>
+          <button onclick="regeneratePitch('gemini')" id="btnModelGemini" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition">Gemini 2.5 Flash</button>
         </div>
       </div>
 
@@ -1702,7 +1702,7 @@
 
     function getProviderDisplayName(p) {
       if (p === 'gemini') return "Google Gemini 2.5 Flash";
-      if (p === 'openai') return "OpenAI GPT-4o";
+      if (p === 'openai') return "OpenAI GPT-4o / o3-mini";
       if (p === 'claude') return "Anthropic Claude 3.7";
       return "Google Gemini 2.5 Flash";
     }
@@ -2527,7 +2527,7 @@ CRITICAL RULES (MUST FOLLOW STRICTLY):
               <input type="radio" name="ai_provider" value="gemini" checked class="w-4 h-4 text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
               <div>
                 <div class="text-xs font-bold text-white flex items-center gap-1.5">
-                  <i class="fab fa-google text-cyan-400"></i> Google Gemini 2.0 / 1.5 Flash
+                  <i class="fab fa-google text-cyan-400"></i> Google Gemini 2.5 Flash (100% Free)
                 </div>
                 <div class="text-[10px] text-slate-400 font-sans">Super fast, generous free tier &bull; Recommended</div>
               </div>
@@ -2541,7 +2541,7 @@ CRITICAL RULES (MUST FOLLOW STRICTLY):
               <input type="radio" name="ai_provider" value="openai" class="w-4 h-4 text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
               <div>
                 <div class="text-xs font-bold text-white flex items-center gap-1.5">
-                  <i class="fas fa-bolt text-emerald-400"></i> OpenAI (GPT-4o &bull; GPT-4o-mini)
+                  <i class="fas fa-bolt text-emerald-400"></i> OpenAI (GPT-4o &bull; o3-mini &bull; GPT-4o-mini)
                 </div>
                 <div class="text-[10px] text-slate-400 font-sans">Official OpenAI API key</div>
               </div>
@@ -2619,7 +2619,7 @@ CRITICAL RULES (MUST FOLLOW STRICTLY):
             </div>
             <div class="text-[10px] text-slate-400 font-mono flex items-center gap-1 mt-0.5">
               <span>Engine:</span>
-              <span id="copilotActiveEngineDisplay" class="text-cyan-300 font-bold">Google Gemini 2.0</span>
+              <span id="copilotActiveEngineDisplay" class="text-cyan-300 font-bold">Google Gemini 2.5 Flash</span>
             </div>
           </div>
         </div>
