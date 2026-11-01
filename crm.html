@@ -768,6 +768,26 @@
         const saved = localStorage.getItem(storageKey);
         if (saved) {
           leadsVault = JSON.parse(saved);
+
+          // Auto-upgrade any old mock leads to real verified live companies
+          const isOldMock = leadsVault.some(l => l.website && (l.website.includes('royalmarbledubai.ae') || l.website.includes('alnaboodah-kitchens.ae') || l.website.includes('apexfitoutsdubai.com')));
+          if (isOldMock && window.DEFAULT_GLOBAL_LEADS && window.DEFAULT_GLOBAL_LEADS.length > 0) {
+            console.log("Upgrading pipeline to 100% verified real companies...");
+            const defaultMap = new Map();
+            window.DEFAULT_GLOBAL_LEADS.forEach(dl => defaultMap.set(dl.id, dl));
+
+            leadsVault = leadsVault.map((l, idx) => {
+              const matched = defaultMap.get(l.id) || window.DEFAULT_GLOBAL_LEADS[idx % window.DEFAULT_GLOBAL_LEADS.length];
+              if (matched) {
+                const updated = JSON.parse(JSON.stringify(matched));
+                updated.status = l.status || 'NEW';
+                updated.notes = l.notes || '';
+                return updated;
+              }
+              return l;
+            });
+            saveLeadsToVault(false);
+          }
         } else {
           // Founder requirement: By default, new buyer starts with ZERO leads!
           // They extract custom leads on-demand matching their exact service and niche.
@@ -1111,6 +1131,9 @@
       const preparedLeads = matches.map(l => {
         const clone = JSON.parse(JSON.stringify(l));
         clone.extractedSkill = skill;
+        clone.video_hook = l.video_hook || '';
+        clone.design_hook = l.design_hook || '';
+        clone.web_hook = l.web_hook || '';
         clone.pitch_message = generateDefaultPitch(clone, 'claude', skill);
         return clone;
       });
@@ -1240,13 +1263,15 @@
       let html = '';
 
       if (isVideo) {
-        let vHook = '';
-        if (lead.industry === 'real_estate') vHook = '4K cinematic villa walkthrough reels & before-and-after renovation transformation shorts.';
-        else if (lead.industry === 'fashion_ecommerce') vHook = 'Aesthetic model lookbook reels & slow-mo Oud spray reels with trending Gulf audio.';
-        else if (lead.industry === 'car_rentals_detailing') vHook = 'Viral high-retention TikTok/Reels showcasing engine revs, Dubai night drives & luxury interiors.';
-        else if (lead.industry === 'salons_clinics') vHook = 'Doctor procedure breakdowns & patient aesthetic transformation reels.';
-        else if (lead.industry === 'yachts_events') vHook = 'Sunset yacht charter recap aftermovies & VIP luxury lifestyle shorts.';
-        else vHook = 'High-converting short-form founder reels & podcast highlights.';
+        let vHook = lead.video_hook;
+        if (!vHook) {
+          if (lead.industry === 'real_estate') vHook = '4K cinematic villa walkthrough reels & slow-motion interior lighting transformation shorts.';
+          else if (lead.industry === 'fashion_ecommerce') vHook = 'Aesthetic model lookbook reels & slow-mo Oud spray reels with trending Gulf audio.';
+          else if (lead.industry === 'car_rentals_detailing') vHook = 'Viral high-retention TikTok/Reels showcasing engine revs, Dubai night drives & luxury interiors.';
+          else if (lead.industry === 'salons_clinics') vHook = 'Doctor procedure breakdowns & patient aesthetic transformation reels.';
+          else if (lead.industry === 'yachts_events') vHook = 'Sunset yacht charter recap aftermovies & VIP luxury lifestyle shorts.';
+          else vHook = 'High-converting short-form founder reels & podcast highlights.';
+        }
 
         html += `
           <div class="p-2.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] mb-2.5 shadow-sm">
@@ -1260,13 +1285,15 @@
       }
 
       if (isDesign) {
-        let dHook = '';
-        if (lead.industry === 'real_estate') dHook = 'Ultra-luxury 3D villa portfolio catalog PDF & social media architectural project carousels.';
-        else if (lead.industry === 'fashion_ecommerce') dHook = 'Luxury lookbook PDF, packaging design & premium Instagram grid aesthetic.';
-        else if (lead.industry === 'car_rentals_detailing') dHook = 'VIP fleet rate-card design, story promo graphics & luxury service flyers.';
-        else if (lead.industry === 'salons_clinics') dHook = 'Aesthetic clinic treatment menu, price card graphics & branded social templates.';
-        else if (lead.industry === 'yachts_events') dHook = 'VIP yacht charter brochure deck & luxury VIP invitation cards.';
-        else dHook = 'High-converting investor pitch deck & modern corporate brand identity overhaul.';
+        let dHook = lead.design_hook;
+        if (!dHook) {
+          if (lead.industry === 'real_estate') dHook = 'Ultra-luxury 3D villa portfolio catalog PDF & social media architectural project carousels.';
+          else if (lead.industry === 'fashion_ecommerce') dHook = 'Luxury lookbook PDF, packaging design & premium Instagram grid aesthetic.';
+          else if (lead.industry === 'car_rentals_detailing') dHook = 'VIP fleet rate-card design, story promo graphics & luxury service flyers.';
+          else if (lead.industry === 'salons_clinics') dHook = 'Aesthetic clinic treatment menu, price card graphics & branded social templates.';
+          else if (lead.industry === 'yachts_events') dHook = 'VIP yacht charter brochure deck & luxury VIP invitation cards.';
+          else dHook = 'High-converting investor pitch deck & modern corporate brand identity overhaul.';
+        }
 
         html += `
           <div class="p-2.5 rounded-xl bg-pink-950/40 border border-pink-500/30 text-[11px] mb-2.5 shadow-sm">
