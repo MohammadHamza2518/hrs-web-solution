@@ -217,7 +217,7 @@
         </span>
         <button onclick="setFilterIndustry('MY_NICHES')" id="tabInd-MY_NICHES" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-blue-500/50 bg-blue-500/20 text-blue-300 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
           <i class="fas fa-star text-amber-300"></i>
-          <span>My Target Field</span>
+          <span id="labelMyNichesText">My Target Field</span>
           <span id="badgeMyNichesCount" class="px-1.5 py-0.2 rounded-full bg-blue-500/30 text-[10px] font-mono">0</span>
         </button>
         <button onclick="setFilterIndustry('ALL')" id="tabInd-ALL" class="ind-filter-btn px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
@@ -675,10 +675,8 @@
       let filtered = leadsVault.filter(lead => {
         // Industry / Niche filter
         if (currentIndustryFilter === 'MY_NICHES') {
-          const userNiches = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches : ['all'];
-          if (!userNiches.includes('all')) {
-            if (!userNiches.includes(lead.industry)) return false;
-          }
+          // All 52 verified high-ticket leads are primed commercial client prospects for user's selected skills
+          // Show all leads tailored with user's specific skill opportunities
         } else if (currentIndustryFilter !== 'ALL') {
           if (lead.industry !== currentIndustryFilter) return false;
         }
@@ -768,6 +766,9 @@
                 </a>
               ` : '<span class="text-slate-500 text-[10px]">No website</span>'}
             </div>
+
+            <!-- Tailored Skill Pitch Opportunities (Video Editing / Graphic Design / Web) -->
+            ${renderSkillAngleBadges(lead)}
 
             <!-- Deep Audit Accordion -->
             <div class="mb-3">
@@ -928,17 +929,24 @@
         activeBtn.classList.add('border-blue-500/60', 'bg-blue-500/25', 'text-white');
       }
 
-      // Update My Niches badge count
+      // Update My Niches badge count & label
       const myCountEl = document.getElementById('badgeMyNichesCount');
+      const myLabelEl = document.getElementById('labelMyNichesText');
       if (myCountEl && leadsVault) {
-        const userNiches = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches : ['all'];
-        let count = 0;
-        if (userNiches.includes('all')) {
-          count = leadsVault.length;
+        myCountEl.textContent = leadsVault.length;
+      }
+      if (myLabelEl && currentUser) {
+        if (currentUser.targetNiches && currentUser.targetNiches.length && !currentUser.targetNiches.includes('all')) {
+          const names = [];
+          if (currentUser.targetNiches.includes('video_editing')) names.push('Video');
+          if (currentUser.targetNiches.includes('graphic_design')) names.push('Design');
+          if (currentUser.targetNiches.includes('web_dev')) names.push('Web');
+          if (currentUser.targetNiches.includes('marketing_ads')) names.push('Ads');
+          if (currentUser.targetNiches.includes('automation_ai')) names.push('AI');
+          myLabelEl.textContent = `My Leads (${names.join(' & ')})`;
         } else {
-          count = leadsVault.filter(l => userNiches.includes(l.industry)).length;
+          myLabelEl.textContent = 'My Target Field';
         }
-        myCountEl.textContent = count;
       }
     }
 
@@ -978,15 +986,132 @@
       setFilterStage('ALL');
     }
 
+    // Helper: Dynamic Skill Angle Badges on Lead Cards
+    function renderSkillAngleBadges(lead) {
+      const userNiches = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches : ['all'];
+      const isAll = userNiches.includes('all');
+      const isVideo = userNiches.includes('video_editing') || isAll;
+      const isDesign = userNiches.includes('graphic_design') || isAll;
+      const isWeb = userNiches.includes('web_dev') || isAll;
+
+      let html = '';
+
+      if (isVideo) {
+        let vHook = '';
+        if (lead.industry === 'real_estate') vHook = '4K cinematic villa walkthrough reels & before-and-after renovation transformation shorts.';
+        else if (lead.industry === 'fashion_ecommerce') vHook = 'Aesthetic model lookbook reels & slow-mo Oud spray reels with trending Gulf audio.';
+        else if (lead.industry === 'car_rentals_detailing') vHook = 'Viral high-retention TikTok/Reels showcasing engine revs, Dubai night drives & luxury interiors.';
+        else if (lead.industry === 'salons_clinics') vHook = 'Doctor procedure breakdowns & patient aesthetic transformation reels.';
+        else if (lead.industry === 'yachts_events') vHook = 'Sunset yacht charter recap aftermovies & VIP luxury lifestyle shorts.';
+        else vHook = 'High-converting short-form founder reels & podcast highlights.';
+
+        html += `
+          <div class="p-2.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] mb-2.5 shadow-sm">
+            <div class="flex items-center justify-between text-purple-300 font-bold mb-1">
+              <span class="flex items-center gap-1.5"><i class="fas fa-film text-purple-400"></i> Video Editing Angle</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30">$1,500/mo retainer</span>
+            </div>
+            <p class="text-slate-300 leading-snug font-sans">${escapeHtml(vHook)}</p>
+          </div>
+        `;
+      }
+
+      if (isDesign) {
+        let dHook = '';
+        if (lead.industry === 'real_estate') dHook = 'Ultra-luxury 3D villa portfolio catalog PDF & social media architectural project carousels.';
+        else if (lead.industry === 'fashion_ecommerce') dHook = 'Luxury lookbook PDF, packaging design & premium Instagram grid aesthetic.';
+        else if (lead.industry === 'car_rentals_detailing') dHook = 'VIP fleet rate-card design, story promo graphics & luxury service flyers.';
+        else if (lead.industry === 'salons_clinics') dHook = 'Aesthetic clinic treatment menu, price card graphics & branded social templates.';
+        else if (lead.industry === 'yachts_events') dHook = 'VIP yacht charter brochure deck & luxury VIP invitation cards.';
+        else dHook = 'High-converting investor pitch deck & modern corporate brand identity overhaul.';
+
+        html += `
+          <div class="p-2.5 rounded-xl bg-pink-950/40 border border-pink-500/30 text-[11px] mb-2.5 shadow-sm">
+            <div class="flex items-center justify-between text-pink-300 font-bold mb-1">
+              <span class="flex items-center gap-1.5"><i class="fas fa-paint-brush text-pink-400"></i> Graphic Design Angle</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 font-bold border border-pink-500/30">$1,200/mo retainer</span>
+            </div>
+            <p class="text-slate-300 leading-snug font-sans">${escapeHtml(dHook)}</p>
+          </div>
+        `;
+      }
+
+      if (!isVideo && !isDesign && isWeb) {
+        html += `
+          <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-[11px] mb-2.5 shadow-sm">
+            <div class="flex items-center justify-between text-blue-300 font-bold mb-1">
+              <span class="flex items-center gap-1.5"><i class="fas fa-laptop-code text-blue-400"></i> Web Dev Angle</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold border border-blue-500/30">$2,000 project</span>
+            </div>
+            <p class="text-slate-300 leading-snug font-sans">${escapeHtml(lead.audit_proof || 'Needs speed optimization, instant WhatsApp booking & mobile UI redesign.')}</p>
+          </div>
+        `;
+      }
+
+      return html;
+    }
+
     // 6. AI Pitch Modal & Multi-Model Engine
+    let activeModalAIModel = 'claude';
+
+    window.switchPitchService = function(service) {
+      activePitchService = service;
+      updateServiceAngleUI();
+      if (activeModalLead) {
+        const editor = document.getElementById('pitchEditorText');
+        if (editor) {
+          editor.value = generateDefaultPitch(activeModalLead, activeModalAIModel, service);
+          updateModalWhatsAppLink();
+        }
+      }
+    };
+
+    function updateServiceAngleUI() {
+      const btns = {
+        all: document.getElementById('btnAngleAll'),
+        web_dev: document.getElementById('btnAngleWeb'),
+        video_editing: document.getElementById('btnAngleVideo'),
+        marketing_ads: document.getElementById('btnAngleAds'),
+        graphic_design: document.getElementById('btnAngleDesign'),
+        automation_ai: document.getElementById('btnAngleAI')
+      };
+
+      const labels = {
+        all: 'All-in-One Pitch',
+        web_dev: 'Web Dev & Redesign Angle',
+        video_editing: 'Short-Form Video & Reels Angle',
+        marketing_ads: 'Paid Ads & Funnels Angle',
+        graphic_design: 'Brand Identity & Design Angle',
+        automation_ai: 'AI WhatsApp Bot Angle'
+      };
+
+      const badge = document.getElementById('activeServiceAngleBadge');
+      if (badge) {
+        badge.textContent = labels[activePitchService] || 'Custom Angle';
+      }
+
+      Object.keys(btns).forEach(k => {
+        const b = btns[k];
+        if (b) {
+          if (k === activePitchService) {
+            b.className = 'angle-btn px-2.5 py-1 rounded-lg border border-blue-500/60 bg-blue-500/25 text-white font-bold whitespace-nowrap transition cursor-pointer shadow-sm';
+          } else {
+            b.className = 'angle-btn px-2.5 py-1 rounded-lg border border-white/10 bg-slate-800 text-slate-300 hover:text-white whitespace-nowrap transition cursor-pointer';
+          }
+        }
+      });
+    }
+
     function openAIPitchModal(leadId) {
       // Default angle to user's first target service if available
       if (currentUser && currentUser.targetNiches && currentUser.targetNiches.length && !currentUser.targetNiches.includes('all')) {
         activePitchService = currentUser.targetNiches[0];
       } else {
-        activePitchService = 'all';
+        activePitchService = 'video_editing';
       }
+      activeModalAIModel = 'claude';
       updateServiceAngleUI();
+
       const lead = leadsVault.find(l => l.id === leadId);
       if (!lead) return;
       activeModalLead = lead;
@@ -997,7 +1122,7 @@
       const waBtn = document.getElementById('btnSendWhatsAppModal');
 
       if (title) title.textContent = `${lead.name} (${lead.city}, ${lead.country})`;
-      if (editor) editor.value = lead.pitch_message || generateDefaultPitch(lead, 'claude');
+      if (editor) editor.value = generateDefaultPitch(lead, activeModalAIModel, activePitchService);
 
       updateModalWhatsAppLink();
       if (modal) modal.classList.remove('hidden');
@@ -1011,6 +1136,7 @@
 
     function regeneratePitch(model) {
       if (!activeModalLead) return;
+      activeModalAIModel = model;
       ['Claude', 'GPT', 'Gemini'].forEach(m => {
         const b = document.getElementById(`btnModel${m}`);
         if (b) b.className = 'px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition';
@@ -1021,31 +1147,74 @@
 
       const editor = document.getElementById('pitchEditorText');
       if (editor) {
-        editor.value = generateDefaultPitch(activeModalLead, model);
+        editor.value = generateDefaultPitch(activeModalLead, model, activePitchService);
         updateModalWhatsAppLink();
       }
     }
 
-    function generateDefaultPitch(lead, model) {
+    function generateDefaultPitch(lead, model, service) {
       const company = lead.name;
       const city = lead.city || 'Dubai';
-      const audit = lead.audit_proof || 'strong local presence with high acquisition upside';
+      const indName = lead.industry_name || lead.category || 'luxury business';
+      const targetService = service || activePitchService || 'video_editing';
 
-      if (model === 'claude') {
-        return `Hello! Came across ${company} while auditing premium service businesses in ${city}—really solid brand presentation.\n\n` +
-               `We noticed a couple of friction points in your client booking funnel: ${audit.slice(0, 90)}...\n\n` +
-               `We just built a custom high-converting WhatsApp client acquisition framework for agencies in the Gulf that increased inbound bookings by 38% without ad waste.\n\n` +
-               `Would you be open to a 2-minute voice note breakdown of how this can be deployed for ${company}?`;
-      } else if (model === 'gpt4o') {
-        return `Hi there! I was looking at top-rated ${lead.category || 'brands'} in ${city} and ${company} stood out.\n\n` +
-               `Ran a quick performance check on your digital channels: noticed ${audit.slice(0, 85)}.\n\n` +
-               `We specialize in fixing client drop-offs and routing direct high-ticket inquiries straight to WhatsApp.\n\n` +
-               `Happy to share a 3-step action roadmap free of charge if you're the right person to look at growth for ${company}.`;
+      if (targetService === 'video_editing') {
+        if (model === 'claude') {
+          return `Salam / Hi team ${company}! 🎥\n\n` +
+                 `Came across your recent work in ${city} — really incredible projects and luxury craftsmanship!\n\n` +
+                 `Checking your Instagram & TikTok, you have massive potential for high-ticket client acquisition: you're currently missing 4K cinematic walkthrough reels and before-and-after transformation shorts that high-net-worth clients in the Gulf binge-watch.\n\n` +
+                 `I run a specialized short-form video editing studio for luxury ${indName} brands. We take your raw phone or camera clips and turn them into viral, high-retention 4K reels with sound design, dynamic pacing, and cinematic color grading.\n\n` +
+                 `Would you be open if I edit 1 sample reel for ${company} completely free so you can see the quality?`;
+        } else if (model === 'gpt4o') {
+          return `Hi there! Was looking at top-rated ${indName} in ${city} and ${company} stood out.\n\n` +
+                 `Your craftsmanship is top-tier, but your social channels are missing high-retention Reels/Shorts to convert viewers into WhatsApp inquiries.\n\n` +
+                 `We specialize in editing viral short-form videos for luxury brands that bring qualified inbound inquiries.\n\n` +
+                 `Happy to edit a complimentary 30-second sample reel for ${company} if you'd like to check out our work!`;
+        } else {
+          return `Salam! Reaching out regarding ${company} in ${city}. 🎥\n\n` +
+                 `We noticed your projects have huge visual appeal, but lack consistent high-definition Reels/Shorts for Instagram and TikTok.\n\n` +
+                 `We help luxury brands in the UAE scale their organic reach with dedicated 4K video editing retainers.\n\n` +
+                 `Let me know if you'd like me to send over 2 sample edit styles tailored for ${company}!`;
+        }
+      } else if (targetService === 'graphic_design') {
+        if (model === 'claude') {
+          return `Salam / Hi team ${company}! 🎨\n\n` +
+                 `Came across ${company} while researching premium brands in ${city}. Your products & services are high-end, but your digital portfolio PDF, social media creatives, and marketing brochures lack that ultra-luxury modern aesthetic.\n\n` +
+                 `I'm a brand identity & graphic designer specializing in luxury ${indName}. We design high-converting lookbooks, 3D catalogs, and aesthetic social carousels that attract high-ticket clients.\n\n` +
+                 `Happy to send over a 1-page sample rebrand concept for ${company} free of charge. Where's the best email or number to send it?`;
+        } else if (model === 'gpt4o') {
+          return `Hi there! Loved the brand presentation of ${company} in ${city}.\n\n` +
+                 `Noticed your digital catalogs & marketing assets could use an ultra-luxury visual upgrade to match high-net-worth standards in ${city}.\n\n` +
+                 `We design high-converting brand lookbooks, VIP client proposals, and social creatives for top brands.\n\n` +
+                 `Can I send you a quick 1-page concept redesign tailored for ${company}?`;
+        } else {
+          return `Salam! Reaching out regarding ${company} in ${city}. 🎨\n\n` +
+                 `Your craftsmanship is world-class, and with a premium lookbook and high-end visual branding, your conversion rate can easily double.\n\n` +
+                 `We specialize in luxury graphic design & catalog branding for UAE businesses.\n\n` +
+                 `Open to seeing a free sample design mockup for ${company}?`;
+        }
+      } else if (targetService === 'web_dev') {
+        if (model === 'claude') {
+          return `Salam / Hi! Came across ${company} while auditing premium service businesses in ${city} — really solid brand presentation.\n\n` +
+                 `We ran a quick digital speed & mobile check: noticed friction points in your client booking funnel: ${lead.audit_proof || 'slow load time and missing direct WhatsApp booking'}.\n\n` +
+                 `We build ultra-fast, high-converting web landing pages with instant WhatsApp quotation calculators for Gulf brands.\n\n` +
+                 `Would you be open to a 2-minute breakdown of how a modern revamp can increase your inbound bookings for ${company}?`;
+        } else if (model === 'gpt4o') {
+          return `Hi there! I was looking at top-rated ${lead.category || 'brands'} in ${city} and ${company} stood out.\n\n` +
+                 `Ran a quick performance check: ${lead.audit_proof || 'mobile page layout has client drop-offs'}.\n\n` +
+                 `We specialize in fixing client drop-offs and routing direct high-ticket inquiries straight to WhatsApp.\n\n` +
+                 `Happy to share a 3-step action roadmap free of charge for ${company}!`;
+        } else {
+          return `Salam! Reaching out from HRS Web Solutions regarding ${company} in ${city}.\n\n` +
+                 `Our web audit flagged an instant opportunity: ${lead.audit_proof || 'mobile speed optimization'}.\n\n` +
+                 `We help businesses in ${city} close high-ticket retainers with high-speed modern web funnels.\n\n` +
+                 `Let me know if you'd like me to send over the live audit teardown!`;
+        }
       } else {
-        return `Salam/Hello! Reaching out from HRS Web Solutions regarding ${company} in ${city}.\n\n` +
-               `Our B2B acquisition audit flagged an instant opportunity: ${audit.slice(0, 90)}.\n\n` +
-               `We help businesses in ${city} close high-ticket retainers with dedicated AI funnel pipelines.\n\n` +
-               `Let me know if you'd like me to send over the live audit teardown!`;
+        return `Salam / Hi! Reaching out regarding ${company} in ${city}.\n\n` +
+               `We noticed an untapped growth opportunity in your digital client acquisition: ${lead.audit_proof || 'missing multi-channel funnel'}.\n\n` +
+               `We help high-end brands in the UAE scale with complete client acquisition pipelines (Cinematic Video, Branding & Web Funnels).\n\n` +
+               `Would love to share a complimentary growth breakdown tailored for ${company} if you are the right person to look at this!`;
       }
     }
 
