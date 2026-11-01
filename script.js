@@ -4,6 +4,28 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // Instant Reset Param (?reset=1) for testing fresh buyer experience
+  if (urlParams.get('reset') === '1') {
+    localStorage.removeItem('osp_auth_user');
+    localStorage.removeItem('osp_license_paid');
+    localStorage.removeItem('osp_byok_keys');
+    localStorage.removeItem('osp_payment_id');
+    localStorage.removeItem('osp_license_key');
+    localStorage.removeItem('osp_buyer_name');
+    localStorage.removeItem('osp_buyer_phone');
+    localStorage.removeItem('osp_buyer_email');
+    window.location.href = window.location.pathname;
+    return;
+  }
+
+  // Founder Test Mode Param (?test=1 or ?demo=1)
+  if (urlParams.get('test') === '1' || urlParams.get('demo') === '1') {
+    const testBtn = document.getElementById('founderTestPayBtn');
+    if (testBtn) testBtn.classList.remove('hidden');
+  }
+
   // Check active CRM session on homepage
   const navLoginBtn = document.getElementById('navLoginBtn');
   if (navLoginBtn) {
@@ -290,6 +312,41 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === modal) closeCheckoutModal();
     });
   }
+
+  // Founder Simulated Payment for Live Demo Testing
+  window.simulateTestCheckout = function() {
+    const nameInput = document.getElementById('checkoutName');
+    const phoneInput = document.getElementById('checkoutPhone');
+    const emailInput = document.getElementById('checkoutEmail');
+
+    let name = nameInput ? nameInput.value.trim() : '';
+    let phone = phoneInput ? phoneInput.value.trim() : '';
+    let email = emailInput ? emailInput.value.trim() : '';
+
+    if (!name) name = "Mohammad Hamza";
+    if (!phone) phone = "8808129388";
+    if (!email) email = "hamza@hrswebsolution.online";
+
+    if (nameInput) nameInput.value = name;
+    if (phoneInput) phoneInput.value = phone;
+    if (emailInput) emailInput.value = email;
+
+    const cleanPhone = phone.replace(/\D/g, '') || '8808129388';
+    const nichesData = window.getSelectedNichesData ? window.getSelectedNichesData() : { ids: ['all'], displayString: 'All Industries (52+ Leads)', totalCount: 52 };
+
+    const mockResponse = {
+      razorpay_payment_id: 'pay_founder_sim_' + Math.floor(100000 + Math.random() * 900000)
+    };
+
+    handlePaymentSuccess(mockResponse, {
+      name: name,
+      phone: cleanPhone,
+      email: email,
+      targetNiches: nichesData.ids,
+      targetNichesDisplay: nichesData.displayString,
+      totalLeadsCount: nichesData.totalCount
+    });
+  };
 
   // Razorpay Payment Trigger using BlackRoots Live API Key
   window.handleRazorpaySubmit = function(e) {
