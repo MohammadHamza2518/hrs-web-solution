@@ -1611,7 +1611,8 @@ CRITICAL RULES:
 
     // Gemini 1.5/2.0 Flash
     async function callLiveGeminiAPI(apiKey, systemPrompt, userPrompt) {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      const cleanKey = (apiKey || '').trim();
+      let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(cleanKey)}`;
       
       // Multi-turn conversation history
       const contents = [
@@ -1640,17 +1641,34 @@ CRITICAL RULES:
         parts: [{ text: userPrompt }]
       });
 
-      const resp = await fetch(url, {
+      const payload = {
+        contents: contents,
+        generationConfig: {
+          temperature: 0.75,
+          maxOutputTokens: 900
+        }
+      };
+
+      const headers = {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': cleanKey
+      };
+
+      let resp = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: contents,
-          generationConfig: {
-            temperature: 0.75,
-            maxOutputTokens: 900
-          }
-        })
+        headers: headers,
+        body: JSON.stringify(payload)
       });
+
+      // If gemini-1.5-flash fails with 404, fallback to gemini-2.0-flash
+      if (!resp.ok && resp.status === 404) {
+        url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(cleanKey)}`;
+        resp = await fetch(url, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify(payload)
+        });
+      }
 
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
