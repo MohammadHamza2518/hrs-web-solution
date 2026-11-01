@@ -2021,7 +2021,47 @@ CRITICAL RULES:
       return await callLiveGeminiAPI(key, systemPrompt, userPrompt);
     }
 
-    // Google Gemini 2.5/2.0/1.5 Flash Resilient Multi-Model Engine
+    // Dynamic Google Model Discovery Helper
+    async function getBestActiveGeminiModel(cleanKey) {
+      if (window._cachedActiveGeminiModel) return window._cachedActiveGeminiModel;
+
+      try {
+        const listUrl = `https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(cleanKey)}`;
+        const resp = await fetch(listUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': cleanKey
+          }
+        });
+
+        if (resp.ok) {
+          const data = await resp.json();
+          const models = (data.models || []).filter(m => 
+            m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent')
+          );
+
+          if (models.length > 0) {
+            // Find active Flash model first
+            let chosen = models.find(m => m.name.toLowerCase().includes('flash') && !m.name.toLowerCase().includes('exp') && !m.name.toLowerCase().includes('deprecated'));
+            if (!chosen) chosen = models.find(m => m.name.toLowerCase().includes('flash'));
+            if (!chosen) chosen = models.find(m => m.name.toLowerCase().includes('pro'));
+            if (!chosen) chosen = models[0];
+
+            const cleanName = chosen.name.replace(/^models\//, '');
+            window._cachedActiveGeminiModel = cleanName;
+            console.log("Selected active Gemini model from Google ListModels:", cleanName);
+            return cleanName;
+          }
+        }
+      } catch(e) {
+        console.warn("ListModels query error:", e);
+      }
+
+      return 'gemini-1.5-flash';
+    }
+
+    // Google Gemini Live AI Engine with Real-Time Model Discovery
     async function callLiveGeminiAPI(apiKey, systemPrompt, userPrompt) {
       const cleanKey = (apiKey || '').trim();
       
@@ -2058,13 +2098,16 @@ CRITICAL RULES:
         'x-goog-api-key': cleanKey
       };
 
-      // Candidate models in priority order: Gemini 2.5 Flash is Google's active model!
-      const candidateModels = [
-        'gemini-2.5-flash',
-        'gemini-2.5-pro',
+      // 1. Query Google's own active model registry for this key
+      const bestModel = await getBestActiveGeminiModel(cleanKey);
+      
+      const candidateModels = Array.from(new Set([
+        bestModel,
         'gemini-1.5-flash',
-        'gemini-2.0-flash-exp'
-      ];
+        'gemini-1.5-flash-latest',
+        'gemini-2.5-flash',
+        'gemini-1.5-pro'
+      ]));
 
       let lastError = null;
 
@@ -2080,15 +2123,18 @@ CRITICAL RULES:
           if (resp.ok) {
             const data = await resp.json();
             const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (text) return text;
+            if (text) {
+              window._cachedActiveGeminiModel = model;
+              return text;
+            }
           } else {
             const err = await resp.json().catch(() => ({}));
             const msg = err.error ? err.error.message : `HTTP ${resp.status}`;
             lastError = new Error(msg);
             
-            // If model is deprecated or 404, try next candidate model
-            if (resp.status === 404 || msg.includes('no longer available') || msg.includes('not found')) {
-              console.warn(`Gemini model ${model} unavailable, trying next candidate...`);
+            // If model is 404 or unsupported, continue to next candidate
+            if (resp.status === 404 || msg.includes('no longer available') || msg.includes('not found') || msg.includes('not supported')) {
+              window._cachedActiveGeminiModel = null;
               continue;
             } else {
               throw lastError;
@@ -2096,7 +2142,8 @@ CRITICAL RULES:
           }
         } catch(e) {
           lastError = e;
-          if (e.message && (e.message.includes('no longer available') || e.message.includes('not found') || e.message.includes('404'))) {
+          if (e.message && (e.message.includes('no longer available') || e.message.includes('not found') || e.message.includes('404') || e.message.includes('not supported'))) {
+            window._cachedActiveGeminiModel = null;
             continue;
           }
           throw e;
