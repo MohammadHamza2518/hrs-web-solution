@@ -504,7 +504,7 @@
                   <th class="py-3 px-4">User</th>
                   <th class="py-3 px-4">Contact Details</th>
                   <th class="py-3 px-4">Commercial Key</th>
-                  <th class="py-3 px-4">Target Field / Niche</th>
+                  <th class="py-3 px-4">Service Offered (Skill)</th>
                   <th class="py-3 px-4">Registered Date</th>
                   <th class="py-3 px-4">Status</th>
                   <th class="py-3 px-4 text-right">Actions</th>
@@ -855,7 +855,7 @@
           </td>
           <td class="py-3 px-4">
             <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 text-[10px] font-semibold font-mono">
-              <i class="fas fa-layer-group text-[9px]"></i> ${u.targetNichesDisplay || 'All Niches (52+)'}
+              <i class="fas fa-briefcase text-[9px]"></i> ${u.targetNichesDisplay || 'All Services (Full Agency)'}
             </span>
           </td>
           <td class="py-3 px-4 text-slate-400 text-xs">
@@ -884,7 +884,7 @@
         showToast("No users to export.", "error");
         return;
       }
-      let csv = "Name,Email,LicenseKey,TargetField,RegisteredAt\n";
+      let csv = "Name,Email,LicenseKey,ServiceOffered,RegisteredAt\n";
       users.forEach(u => {
         csv += `"${u.name}","${u.email}","${u.licenseKey}","${u.targetNichesDisplay || 'All Niches'}","${u.registeredAt || ''}"\n`;
       });
@@ -973,7 +973,7 @@
                   <div class="font-bold text-white text-xs">${ord.name}</div>
                   <div class="text-[10px] text-slate-500 font-mono">${ord.id || ('ORD-' + (1000 + index))}</div>
                   <div class="text-[10px] text-cyan-400 font-semibold font-mono mt-0.5 flex items-center gap-1">
-                    <i class="fas fa-layer-group text-[9px]"></i> ${ord.targetNichesDisplay || 'All Niches (52+)'}
+                    <i class="fas fa-briefcase text-[9px]"></i> ${ord.targetNichesDisplay || 'All Services (Full Agency)'}
                   </div>
                 </div>
               </div>

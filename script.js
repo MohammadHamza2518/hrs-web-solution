@@ -292,28 +292,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
   // =========================================================================
-  // TARGET NICHE SELECTION CONTROLLER (CHECKOUT MODAL)
+  // =========================================================================
+  // FREELANCER / AGENCY SERVICE CATEGORY CONTROLLER (CHECKOUT MODAL)
   // =========================================================================
   window.selectedNichesState = ['all'];
 
-  window.toggleNicheSelection = function(nicheId) {
+  window.toggleNicheSelection = function(serviceId) {
     const allBox = document.getElementById('niche_all');
     const allCard = document.getElementById('card_niche_all');
 
-    const individualNiches = [
-      'real_estate', 'fashion_ecommerce', 'car_rentals_detailing', 
-      'salons_clinics', 'yachts_events', 'b2b_corporate'
+    const individualServices = [
+      'web_dev', 'video_editing', 'marketing_ads', 
+      'graphic_design', 'automation_ai'
     ];
 
-    if (nicheId === 'all') {
-      // Toggle all
+    if (serviceId === 'all') {
       window.selectedNichesState = ['all'];
       if (allBox) allBox.checked = true;
       if (allCard) {
         allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-blue-500/20 cursor-pointer hover:border-blue-400 transition";
       }
-      // Uncheck all individual ones
-      individualNiches.forEach(id => {
+      individualServices.forEach(id => {
         const box = document.getElementById('niche_' + id);
         const card = document.getElementById('card_niche_' + id);
         if (box) box.checked = false;
@@ -322,16 +321,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     } else {
-      // Individual niche clicked
-      // First uncheck 'all'
       if (allBox) allBox.checked = false;
       if (allCard) {
         allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
       }
 
-      const box = document.getElementById('niche_' + nicheId);
-      const card = document.getElementById('card_niche_' + nicheId);
-      const isChecked = box ? !box.checked : false; // toggling
+      const box = document.getElementById('niche_' + serviceId);
+      const card = document.getElementById('card_niche_' + serviceId);
+      const isChecked = box ? !box.checked : false;
 
       if (box) box.checked = isChecked;
 
@@ -343,15 +340,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Collect active niches
       const active = [];
-      individualNiches.forEach(id => {
+      individualServices.forEach(id => {
         const b = document.getElementById('niche_' + id);
         if (b && b.checked) active.push(id);
       });
 
       if (active.length === 0) {
-        // Fallback to all if none selected
         window.selectedNichesState = ['all'];
         if (allBox) allBox.checked = true;
         if (allCard) {
@@ -369,45 +364,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const badge = document.getElementById('checkoutNicheBadge');
     if (!badge) return;
 
-    const counts = {
-      real_estate: 8,
-      fashion_ecommerce: 10,
-      car_rentals_detailing: 10,
-      salons_clinics: 8,
-      yachts_events: 8,
-      b2b_corporate: 8
+    const serviceLabels = {
+      all: "All Services (Full Agency)",
+      web_dev: "Web Dev & UI/UX",
+      video_editing: "Video Editing",
+      marketing_ads: "Paid Ads & Marketing",
+      graphic_design: "Graphic Design",
+      automation_ai: "AI & Chatbots"
     };
 
     if (window.selectedNichesState.includes('all')) {
-      badge.textContent = "52+ Leads • All Niches";
+      badge.textContent = "All Services (Full Agency)";
       badge.className = "text-[10px] font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/30";
     } else {
-      let total = 0;
-      window.selectedNichesState.forEach(id => { total += (counts[id] || 8); });
-      badge.textContent = `${total} Leads (${window.selectedNichesState.length} Field${window.selectedNichesState.length > 1 ? 's' : ''} Selected)`;
+      const names = window.selectedNichesState.map(s => serviceLabels[s] || s);
+      badge.textContent = names.join(', ');
       badge.className = "text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30";
     }
   }
 
   window.getSelectedNichesData = function() {
-    const nicheLabels = {
-      all: "All Industries (Full 52+ Vault)",
-      real_estate: "Real Estate & Fitouts",
-      fashion_ecommerce: "Luxury Fashion & Oud",
-      car_rentals_detailing: "Supercars & Detailing",
-      salons_clinics: "Clinics & Salons",
-      yachts_events: "VIP Tourism & Yachts",
-      b2b_corporate: "B2B & Corporate"
-    };
-
-    const counts = {
-      all: 52,
-      real_estate: 8,
-      fashion_ecommerce: 10,
-      car_rentals_detailing: 10,
-      salons_clinics: 8,
-      yachts_events: 8,
-      b2b_corporate: 8
+    const serviceLabels = {
+      all: "All Services (Full Agency)",
+      web_dev: "Web Development & UI/UX",
+      video_editing: "Video Editing & Content",
+      marketing_ads: "Social Media & Paid Ads",
+      graphic_design: "Graphic Design & Branding",
+      automation_ai: "AI Automation & Chatbots"
     };
 
     const state = (window.selectedNichesState && window.selectedNichesState.length) ? window.selectedNichesState : ['all'];
@@ -415,19 +398,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (state.includes('all')) {
       return {
         ids: ['all'],
-        displayString: "All Industries (52+ Leads)",
+        displayString: "All Services / Full Agency",
         totalCount: 52
       };
     }
 
-    const names = state.map(id => nicheLabels[id] || id);
-    let total = 0;
-    state.forEach(id => { total += (counts[id] || 8); });
-
+    const names = state.map(id => serviceLabels[id] || id);
     return {
       ids: state,
       displayString: names.join(', '),
-      totalCount: total
+      totalCount: 52
     };
   };
 

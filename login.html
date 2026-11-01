@@ -182,17 +182,16 @@
           </div>
 
                     <div>
-            <label class="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1.5">Target Lead Field</label>
+            <label class="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1.5">Service You Offer (Skill)</label>
             <div class="relative">
               <i class="fas fa-layer-group absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
               <select id="activateNiche" class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/[0.1] text-xs text-white focus:border-blue-500 focus:outline-none transition cursor-pointer">
-                <option value="all">🌐 All Industries (Full 52+ Leads Vault)</option>
-                <option value="real_estate">🏢 Real Estate, Interior & Fitouts (8 Leads)</option>
-                <option value="fashion_ecommerce">💎 Luxury Fashion, Abayas & Oud (10 Leads)</option>
-                <option value="car_rentals_detailing">🏎️ Supercars & Detailing (10 Leads)</option>
-                <option value="salons_clinics">💆‍♀️ Aesthetic Clinics & Salons (8 Leads)</option>
-                <option value="yachts_events">🛥️ VIP Tourism & Yachts (8 Leads)</option>
-                <option value="b2b_corporate">💼 B2B & Corporate Advisory (8 Leads)</option>
+                <option value="all">🌟 All Services / Full Agency (Web, Video, Ads, Design)</option>
+                <option value="web_dev">💻 Web Development &amp; Shopify / UI/UX</option>
+                <option value="video_editing">🎬 Video Editing &amp; Short-Form Reels</option>
+                <option value="marketing_ads">📈 Social Media Marketing &amp; Paid Ads</option>
+                <option value="graphic_design">🎨 Graphic Design &amp; Brand Identity</option>
+                <option value="automation_ai">🤖 AI Automation &amp; WhatsApp Chatbots</option>
               </select>
             </div>
           </div>
@@ -379,15 +378,14 @@
       const nicheVal = nicheEl ? nicheEl.value : 'all';
 
       const nicheLabels = {
-        all: "All Industries (Full 52+ Vault)",
-        real_estate: "Real Estate & Fitouts",
-        fashion_ecommerce: "Luxury Fashion & Oud",
-        car_rentals_detailing: "Supercars & Detailing",
-        salons_clinics: "Clinics & Salons",
-        yachts_events: "VIP Tourism & Yachts",
-        b2b_corporate: "B2B & Corporate"
+        all: "All Services / Full Agency",
+        web_dev: "Web Development & UI/UX",
+        video_editing: "Video Editing & Content",
+        marketing_ads: "Social Media & Paid Ads",
+        graphic_design: "Graphic Design & Branding",
+        automation_ai: "AI Automation & Chatbots"
       };
-      const nicheDisplay = nicheLabels[nicheVal] || "All Industries (52+ Leads)";
+      const nicheDisplay = nicheLabels[nicheVal] || "All Services (Full Agency)";
 
       if (!key.startsWith('OSP-')) {
         showAlert("Invalid License Key format. Key must start with 'OSP-PRO-' or 'OSP-'.");

@@ -393,6 +393,38 @@
         <button onclick="closeAIPitchModal()" class="text-slate-400 hover:text-white p-1"><i class="fas fa-times"></i></button>
       </div>
 
+            <!-- Service Pitch Angle Selector -->
+      <div class="mb-3 p-2 rounded-xl bg-slate-900/90 border border-white/10 text-xs">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-slate-400 text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1">
+            <i class="fas fa-briefcase text-cyan-400"></i> Service Pitch Angle:
+          </span>
+          <span id="activeServiceAngleBadge" class="text-[9px] font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/30">
+            All-in-One Pitch
+          </span>
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[10px] font-mono no-scrollbar" id="serviceAngleButtonsContainer">
+          <button onclick="switchPitchService('all')" id="btnAngleAll" class="angle-btn px-2.5 py-1 rounded-lg border border-blue-500/50 bg-blue-500/20 text-white font-bold whitespace-nowrap transition cursor-pointer">
+            <i class="fas fa-sparkles text-amber-300 mr-1"></i>All-in-One
+          </button>
+          <button onclick="switchPitchService('web_dev')" id="btnAngleWeb" class="angle-btn px-2.5 py-1 rounded-lg border border-white/10 bg-slate-800 text-slate-300 hover:text-white whitespace-nowrap transition cursor-pointer">
+            <i class="fas fa-laptop-code text-cyan-400 mr-1"></i>Web Dev &amp; UI
+          </button>
+          <button onclick="switchPitchService('video_editing')" id="btnAngleVideo" class="angle-btn px-2.5 py-1 rounded-lg border border-white/10 bg-slate-800 text-slate-300 hover:text-white whitespace-nowrap transition cursor-pointer">
+            <i class="fas fa-film text-pink-400 mr-1"></i>Video Editing
+          </button>
+          <button onclick="switchPitchService('marketing_ads')" id="btnAngleAds" class="angle-btn px-2.5 py-1 rounded-lg border border-white/10 bg-slate-800 text-slate-300 hover:text-white whitespace-nowrap transition cursor-pointer">
+            <i class="fas fa-bullhorn text-amber-400 mr-1"></i>Paid Ads
+          </button>
+          <button onclick="switchPitchService('graphic_design')" id="btnAngleDesign" class="angle-btn px-2.5 py-1 rounded-lg border border-white/10 bg-slate-800 text-slate-300 hover:text-white whitespace-nowrap transition cursor-pointer">
+            <i class="fas fa-paint-brush text-purple-400 mr-1"></i>Graphic Design
+          </button>
+          <button onclick="switchPitchService('automation_ai')" id="btnAngleAI" class="angle-btn px-2.5 py-1 rounded-lg border border-white/10 bg-slate-800 text-slate-300 hover:text-white whitespace-nowrap transition cursor-pointer">
+            <i class="fas fa-robot text-emerald-400 mr-1"></i>AI &amp; Bot
+          </button>
+        </div>
+      </div>
+
       <!-- AI Engine Selector -->
       <div class="flex items-center justify-between gap-3 mb-3 p-2 rounded-xl bg-slate-900/90 border border-white/10 text-xs">
         <span class="text-slate-400 text-[11px] font-mono">Engine:</span>
@@ -498,6 +530,7 @@
     let currentIndustryFilter = 'MY_NICHES';
     let currentSearchQuery = '';
     let activeModalLead = null;
+    let activePitchService = 'all';
 
     // 1. Initialize Authentication & Workspace on Load
     document.addEventListener('DOMContentLoaded', () => {
@@ -941,6 +974,13 @@
 
     // 6. AI Pitch Modal & Multi-Model Engine
     function openAIPitchModal(leadId) {
+      // Default angle to user's first target service if available
+      if (currentUser && currentUser.targetNiches && currentUser.targetNiches.length && !currentUser.targetNiches.includes('all')) {
+        activePitchService = currentUser.targetNiches[0];
+      } else {
+        activePitchService = 'all';
+      }
+      updateServiceAngleUI();
       const lead = leadsVault.find(l => l.id === leadId);
       if (!lead) return;
       activeModalLead = lead;
