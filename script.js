@@ -668,11 +668,19 @@ document.addEventListener('DOMContentLoaded', () => {
   window.handleSaveKeyAndLaunchCRM = function() {
     const input = document.getElementById('onboardApiKeyInput');
     const keyVal = (input ? input.value : '').trim();
+    const provider = window.activeOnboardProvider || 'gemini';
 
     if (!keyVal || keyVal.length < 8) {
       alert("Please enter a valid API key, or click 'skip for now' below to launch CRM directly.");
       if (input) input.focus();
       return;
+    }
+
+    if (provider === 'gemini' && !keyVal.startsWith('AIzaSy')) {
+      if (!confirm("⚠️ Note: Google Gemini API keys hamesha 'AIzaSy...' se start hoti hain. Jo aapne enter kiya hai wo OAuth token ya doosri key lag rahi hai.\n\nKya aap fir bhi save karke aage badhna chahte hain?\n(Free Gemini Key 30s me yahan se milti hai: https://aistudio.google.com/app/apikey)")) {
+        if (input) input.focus();
+        return;
+      }
     }
 
     // Save key locally

@@ -1765,6 +1765,13 @@
         return;
       }
 
+      if (activeAIProvider === 'gemini' && !keyVal.startsWith('AIzaSy')) {
+        if (!confirm("⚠️ Note: Google Gemini API Key hamesha 'AIzaSy...' se start hoti hai. Jo aapne enter kiya hai wo Google AI Studio key nahi lag raha.\n\nKya aap fir bhi save karna chahte hain?\n(Free Gemini Key 30s me yahan se milti hai: https://aistudio.google.com/app/apikey)")) {
+          if (input) input.focus();
+          return;
+        }
+      }
+
       let keys = {};
       try {
         keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
@@ -1889,22 +1896,22 @@
       try {
         const aiResponse = await generateLiveAIResponse(userText);
         if (typing) typing.classList.add('hidden');
-        addChatMessage('ai', aiResponse);
+        addChatMessage('ai', aiResponse, getProviderDisplayName(activeAIProvider));
         copilotChatHistory.push({ role: 'user', content: userText });
         copilotChatHistory.push({ role: 'assistant', content: aiResponse });
       } catch(err) {
         if (typing) typing.classList.add('hidden');
         console.warn("Live API fallback triggered:", err);
-        // Instant intelligent fallback so user NEVER experiences an error!
-        const fallbackResponse = generateSmartCopilotFallback(userText);
-        addChatMessage('ai', fallbackResponse);
+        // Instant intelligent fallback so user NEVER gets broken or repetitive answers!
+        const fallbackResponse = generateSmartCopilotFallback(userText, err);
+        addChatMessage('ai', fallbackResponse, 'Studio CRM Brain ⚡');
         copilotChatHistory.push({ role: 'user', content: userText });
         copilotChatHistory.push({ role: 'assistant', content: fallbackResponse });
       }
       scrollCopilotToBottom();
     };
 
-    function addChatMessage(sender, text) {
+    function addChatMessage(sender, text, providerLabel) {
       const container = document.getElementById('copilotMessages');
       if (!container) return;
 
@@ -1926,18 +1933,20 @@
         msgDiv.className = "flex items-start gap-2.5";
         const formattedHtml = formatMarkdownText(text);
         const msgId = 'msg_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+        const label = providerLabel || getProviderDisplayName(activeAIProvider);
+        const isOffline = label.includes('Brain');
 
         msgDiv.innerHTML = `
-          <div class="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-blue-500/30">
-            <i class="fas fa-robot text-cyan-400"></i>
+          <div class="w-7 h-7 rounded-lg ${isOffline ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' : 'bg-blue-600/20 text-blue-400 border-blue-500/30'} flex items-center justify-center font-bold text-xs flex-shrink-0 border shadow-sm">
+            <i class="fas ${isOffline ? 'fa-bolt text-amber-300' : 'fa-robot text-cyan-400'}"></i>
           </div>
           <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/[0.08] text-slate-200 max-w-[85%] space-y-2 shadow-md">
             <div class="text-xs leading-relaxed space-y-2 break-words" id="${msgId}">
               ${formattedHtml}
             </div>
             <div class="flex items-center justify-between pt-1.5 border-t border-white/[0.06] text-[10px] text-slate-400 font-mono">
-              <span class="flex items-center gap-1 text-cyan-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${getProviderDisplayName(activeAIProvider)}
+              <span class="flex items-center gap-1 ${isOffline ? 'text-amber-300' : 'text-cyan-400'}">
+                <span class="w-1.5 h-1.5 rounded-full ${isOffline ? 'bg-amber-400' : 'bg-emerald-400'}"></span> ${escapeHtml(label)}
               </span>
               <button onclick="copyMsgContent('${msgId}')" class="hover:text-white transition flex items-center gap-1 cursor-pointer">
                 <i class="fas fa-copy"></i> Copy
@@ -1971,6 +1980,7 @@
     function formatMarkdownText(text) {
       if (!text) return '';
       let escaped = escapeHtml(text);
+      escaped = escaped.replace(/```(?:text|)(\n)?([\s\S]*?)```/g, '<div class="p-3 my-2 rounded-xl bg-slate-950/90 border border-blue-500/30 font-sans text-slate-200 text-xs whitespace-pre-wrap select-all leading-relaxed">$2</div>');
       escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-bold">$1</strong>');
       escaped = escaped.replace(/`(.*?)`/g, '<code class="px-1 py-0.5 rounded bg-black/40 text-cyan-300 font-mono text-[11px]">$1</code>');
       escaped = escaped.replace(/^\s*[\-\*]\s+(.*)$/gm, '<div class="flex items-start gap-1.5 ml-1"><span class="text-cyan-400">&bull;</span><span>$1</span></div>');
@@ -1986,43 +1996,169 @@
     // =========================================================================
     // SMART COPILOT FALLBACK ENGINE (Guarantees 100% Uptime & No Broken States)
     // =========================================================================
-    function generateSmartCopilotFallback(userText) {
+    function generateSmartCopilotFallback(userText, apiError) {
       const q = (userText || '').toLowerCase().trim();
-      const skill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Freelancing & Client Acquisition';
-      const sampleLead = (leadsVault && leadsVault.length) ? leadsVault[0] : null;
+      const skill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Video Editing & Content';
+      const allLeads = (leadsVault && leadsVault.length > 0) ? leadsVault : (window.DEFAULT_GLOBAL_LEADS || []);
 
-      if (q.includes('suno') || q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('kaisa') || q.includes('kaise') || q.includes('naam') || q.includes('who are you') || q.includes('dikkat') || q.includes('bhai') || q.includes('bol')) {
-        return `Haan bolo bhai, sun raha hoon! Kya chal raha hai? Batao kaunsi lead target karni hai ya kis cheez me help chahiye? 🚀\n\n` +
-               `Aapki skill **${skill}** ke hisaab se live ready hoon:\n` +
-               `• Kisi bhi lead ki killer WhatsApp pitch banwani ho\n` +
-               `• High-converting follow-up sequence chahiye ho\n` +
-               `• Client objections handle karne hon (e.g. *"Budget nahi hai"* ya *"Already agency hai"*)\n\n` +
-               `Bolo kis lead se shuru karein?`;
+      let notice = '';
+      if (apiError && (apiError.message && (apiError.message.includes('API key') || apiError.message.includes('401') || apiError.message.includes('UNAUTHENTICATED') || apiError.message.includes('ACCESS_TOKEN')))) {
+        notice = '<div class="mb-2 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300 leading-relaxed"><i class="fas fa-info-circle mr-1 text-amber-400"></i><strong>API Key Tip:</strong> Google Gemini key <code class="bg-black/40 px-1 py-0.5 rounded font-mono text-cyan-300">AIzaSy...</code> se start hoti hai. CRM ke internal Smart Engine ne aapka query answer kiya hai. <a href="javascript:void(0)" onclick="openKeySettingsModal()" class="underline font-bold text-white hover:text-cyan-300">Update Key 🔑</a></div>';
       }
 
-      if (q.includes('pitch') || q.includes('message') || q.includes('outreach') || q.includes('likh') || q.includes('bana')) {
-        const company = sampleLead ? sampleLead.name : 'Target Business';
-        const city = sampleLead ? sampleLead.city : 'Dubai';
-        return `🎯 **Custom High-Ticket Pitch (${skill}):**\n\n` +
-               `"Hey team ${company}! Saw your premium work in ${city} — really high-end craftsmanship.\n\n` +
-               `Checking your digital channels, we noticed friction points in your client acquisition and retention. We specialize in scaling luxury brands with dedicated ${skill} retainers ($1,500 - $3,000/mo).\n\n` +
-               `Would you be open to a 2-minute breakdown of how a quick revamp can double your inbound WhatsApp bookings for ${company}?"\n\n` +
-               `💡 *Tip: Is pitch ko copy karke direct lead ke WhatsApp par bhej sakte hain!*`;
+      // 1. OBJECTION HANDLING (Check first so "client bol raha hai..." triggers objection)
+      if (q.includes('objection') || q.includes('budget') || q.includes('agency') || q.includes('mehnga') || q.includes('nahin') || q.includes('editor hai') || q.includes('already') || q.includes('not interested') || q.includes('mana kar diya')) {
+        const scriptText = 'Completely understand! We actually do not replace your existing team or demand big commitments. We specialize strictly in high-converting client acquisition assets. Most of our Gulf clients keep their internal team and bring us in specifically to double their inbound lead volume with 4K retention reels. Open to seeing a quick 30-sec sample comparison free of charge?';
+        return notice + '🛡️ **High-Ticket Objection Handling Framework:**\n\n' +
+               'Agar client bole: *"We already have an in-house editor / agency"* ya *"Budget nahi hai"*:\n\n' +
+               '👉 **Winning Script:**\n' +
+               '```text\n' + scriptText + '\n```\n\n' +
+               '💡 *Yeh psychology script client ka resistance turant khatam kar deti hai kyunki aap unse unki agency hatane ko nahi bol rahe, sirf 1 free sample dikhane ko bol rahe ho!*';
       }
 
-      if (q.includes('objection') || q.includes('budget') || q.includes('agency') || q.includes('mehnga') || q.includes('nahin') || q.includes('paisa')) {
-        return `🛡️ **High-Ticket Objection Handling Framework:**\n\n` +
-               `Agar client bole: *"We already have an agency / editor"* ya *"Budget nahi hai"*:\n\n` +
-               `👉 **Winning Script:** *"Completely understand! We actually don't replace your existing team or demand big commitments. We specialize strictly in high-converting acquisition assets. Most of our Gulf clients keep their internal team and bring us in specifically to double their inbound lead volume. Open to seeing a quick 30-sec sample comparison free of charge?"*\n\n` +
-               `*Yeh psychology script client ka resistance turant khatam kar deti hai!*`;
+      // 2. SPECIFIC COMPANY PITCH REQUEST
+      if (q.includes('pitch') || q.includes('outreach') || q.includes('script') || q.includes('likh do') || q.includes('bana do') || q.includes('bana de') || q.includes('kya message bheju')) {
+        let matchedLead = allLeads.find(l => q.includes(l.name.toLowerCase()));
+        if (!matchedLead) {
+          matchedLead = allLeads.find(l => {
+            const words = l.name.toLowerCase().split(' ').filter(w => w.length > 3);
+            return words.some(w => q.includes(w));
+          });
+        }
+        if (!matchedLead && allLeads.length > 0) matchedLead = allLeads[0];
+
+        const company = matchedLead ? matchedLead.name : 'Target Luxury Business';
+        const city = matchedLead ? matchedLead.city : 'Dubai';
+        const phone = matchedLead ? matchedLead.phone : '+971 50 847 2910';
+        const cleanPhone = phone.replace(/[^0-9]/g, '');
+
+        let pitchBody = '';
+        if (skill.toLowerCase().includes('video') || q.includes('video') || q.includes('edit')) {
+          pitchBody = 'Hey team ' + company + '! 🎥\n\n' +
+                      'Came across your recent work in ' + city + ' — really incredible luxury craftsmanship!\n\n' +
+                      'Checking your Instagram & TikTok, you have massive potential for high-ticket client acquisition: you are currently missing 4K cinematic walkthrough reels and before-and-after transformation shorts that high-net-worth clients in the Gulf binge-watch.\n\n' +
+                      'I run a specialized short-form video studio for luxury brands. We turn raw phone/camera footage into viral, high-retention 4K reels ($1,500/mo retainer) that drive qualified WhatsApp inquiries.\n\n' +
+                      'Would you be open if I edit 1 sample reel for ' + company + ' completely free of charge so you can see the visual standard?';
+        } else if (skill.toLowerCase().includes('design') || q.includes('design')) {
+          pitchBody = 'Hey team ' + company + '! 🎨\n\n' +
+                      'Came across ' + company + ' while researching premium brands in ' + city + '. Your service is top-tier, but your digital portfolio PDF, lookbooks and social creatives lack that ultra-luxury modern aesthetic.\n\n' +
+                      'We design high-converting brand lookbooks, 3D catalogs, and aesthetic social carousels that attract high-net-worth clients.\n\n' +
+                      'Happy to send over a 1-page sample rebrand concept for ' + company + ' free of charge. Where is the best number or email to send it?';
+        } else {
+          pitchBody = 'Hey team ' + company + '! Came across your work in ' + city + ' — really solid brand presentation.\n\n' +
+                      'We ran a quick digital speed check: noticed friction points in your client booking funnel: ' + (matchedLead ? matchedLead.audit_proof : 'slow load times and missing direct WhatsApp booking') + '.\n\n' +
+                      'We build ultra-fast, high-converting web landing pages with instant WhatsApp quotation calculators for Gulf brands.\n\n' +
+                      'Would you be open to a 2-minute breakdown of how a modern revamp can increase inbound bookings for ' + company + '?';
+        }
+
+        const encodedMsg = encodeURIComponent(pitchBody);
+
+        return notice + '🎯 **Ready-to-Send High-Ticket Cold WhatsApp Pitch for ' + company + ':**\n\n' +
+               '```text\n' + pitchBody + '\n```\n\n' +
+               '📲 **Direct Action:** [Open WhatsApp Chat with ' + company + '](https://wa.me/' + cleanPhone + '?text=' + encodedMsg + ')\n' +
+               '💡 *Tip: Is pitch ko copy karke bhej do — free sample hook se Gulf clients ka reply rate 4x ho jata hai!*';
       }
 
-      return `🚀 **Agency Action Plan (${skill}):**\n\n` +
-             `Bhai high-ticket foreign clients ($1,500 – $4,000/month) close karne ke 3 simple steps:\n\n` +
-             `1. **Specific Audit:** Pehle message me hi unka digital leak point-out karein.\n` +
-             `2. **Free Sample Hook:** Pehle 1 sample video/design free offer karein (zero friction).\n` +
-             `3. **Voice Note Close:** Reply aate hi 45-second energetic English voice note bhejein.\n\n` +
-             `Batao kis company ka naam leke pitch banau? Instant customized script likh deta hoon!`;
+      // 3. LEADS REQUEST (e.g. "dubai ki leads do", "leads dikhao", "video editing leads", etc.)
+      if (q.includes('lead') || q.includes('leads') || q.includes('prospect') || q.includes('companies') || q.includes('list') || q.includes('kaunsi') || q.includes('dikhao') || q.includes('chahiye') || q.includes('dubai') || q.includes('london')) {
+        let filtered = allLeads.slice();
+        let regionTitle = 'Dubai (UAE)';
+
+        if (q.includes('london') || q.includes('uk') || q.includes('england') || q.includes('british')) {
+          filtered = filtered.filter(l => (l.city && l.city.toLowerCase().includes('london')) || (l.country && l.country.toLowerCase().includes('uk')));
+          regionTitle = 'London (UK)';
+        } else if (q.includes('swiss') || q.includes('switzerland') || q.includes('zurich') || q.includes('geneva')) {
+          filtered = filtered.filter(l => (l.country && l.country.toLowerCase().includes('switzerland')) || (l.city && (l.city.toLowerCase().includes('zurich') || l.city.toLowerCase().includes('geneva'))));
+          regionTitle = 'Switzerland (Zurich & Geneva)';
+        } else {
+          // Default or specified Dubai / UAE
+          const dubaiList = filtered.filter(l => (l.city && l.city.toLowerCase().includes('dubai')) || (l.country && l.country.toLowerCase().includes('uae')));
+          if (dubaiList.length > 0) {
+            filtered = dubaiList;
+            regionTitle = 'Dubai (UAE)';
+          }
+        }
+
+        // Category matching if user mentioned any niche
+        if (q.includes('estate') || q.includes('marble') || q.includes('interior') || q.includes('fitout') || q.includes('kitchen') || q.includes('villa')) {
+          const catList = filtered.filter(l => l.industry === 'real_estate');
+          if (catList.length > 0) filtered = catList;
+        } else if (q.includes('fashion') || q.includes('oud') || q.includes('perfume') || q.includes('abaya')) {
+          const catList = filtered.filter(l => l.industry === 'fashion_ecommerce');
+          if (catList.length > 0) filtered = catList;
+        } else if (q.includes('car') || q.includes('supercar') || q.includes('rental') || q.includes('detailing')) {
+          const catList = filtered.filter(l => l.industry === 'car_rentals_detailing');
+          if (catList.length > 0) filtered = catList;
+        } else if (q.includes('salon') || q.includes('clinic') || q.includes('spa') || q.includes('aesthetic')) {
+          const catList = filtered.filter(l => l.industry === 'salons_clinics');
+          if (catList.length > 0) filtered = catList;
+        }
+
+        if (filtered.length === 0) filtered = allLeads.slice(0, 3);
+        const topMatches = filtered.slice(0, 3);
+
+        let leadsListText = '';
+        topMatches.forEach((l, idx) => {
+          let specificAngle = '';
+          if (skill.toLowerCase().includes('video') || q.includes('video') || q.includes('edit')) {
+            specificAngle = '🎬 **Video Editing Angle:** ' + (l.audit_proof || 'Instagram feed is missing 4K cinematic walkthrough reels and viral transformation shorts') + '. Pitch retainer: **$1,500 – $2,500/mo**.';
+          } else if (skill.toLowerCase().includes('design') || q.includes('design') || q.includes('graphic')) {
+            specificAngle = '🎨 **Graphic Design Angle:** ' + (l.audit_proof || 'Digital portfolio and social creatives lack modern ultra-luxury aesthetic') + '. Pitch retainer: **$1,200 – $2,000/mo**.';
+          } else {
+            specificAngle = '💻 **Funnel Growth Angle:** ' + (l.audit_proof || 'High friction in mobile client booking funnel') + '. Pitch: Ultra-fast landing page revamp + direct WhatsApp lead flow (**$2,000/mo**).';
+          }
+
+          leadsListText += '**' + (idx + 1) + '. 🏢 ' + l.name + '**\n' +
+                          '📍 ' + l.city + ', ' + l.country + ' • *' + (l.industry_name || l.category) + '*\n' +
+                          '📞 WhatsApp: `' + l.phone + '`\n' +
+                          specificAngle + '\n\n';
+        });
+
+        const targetLead = topMatches[0] ? topMatches[0].name : 'Royal Marble & Fitouts Dubai';
+
+        return notice + 'Haan bhai! Yeh rahi aapke liye **' + regionTitle + '** ki top verified leads (Video Editing & Content ke hisaab se live ready):\n\n' +
+               leadsListText +
+               '💡 **Next Step:** Inme se kis company ke liye customized cold outreach WhatsApp pitch banwani hai? Direct bolo *"Pitch ' + targetLead + '"*!';
+      }
+
+      // 4. FOLLOW-UP SCRIPTS
+      if (q.includes('follow') || q.includes('reply') || q.includes('ghost') || q.includes('dobara') || q.includes('answer nahi') || q.includes('2 din')) {
+        return notice + '🔥 **3-Touch High-Converting Follow-Up Sequence:**\n\n' +
+               '**Touch 1 (Day 2 — Casual Value Drop):**\n' +
+               '```text\nHey team! Just put together a quick 30-second audit showing 2 specific reel concepts that Gulf competitors are using to get inquiries. Where can I send the preview link?\n```\n\n' +
+               '**Touch 2 (Day 4 — 45-Second Voice Note):**\n' +
+               'Send an energetic English audio note: *"Hey! Mohammad here. Just wanted to make sure you saw my sample offer — no obligations at all, just wanted to show you what high-retention 4K edits look like for your brand. Let me know if you want the link!"*\n\n' +
+               '**Touch 3 (Day 7 — The Break-Up Message):**\n' +
+               '```text\nHey! Assuming you are completely booked right now. I will not follow up again, but wishing you guys great success ahead!\n```\n(Triggers instant FOMO).';
+      }
+
+      // 5. PRICING & RETAINER GUIDANCE
+      if (q.includes('price') || q.includes('charge') || q.includes('retainer') || q.includes('fees') || q.includes('rate') || q.includes('cost') || q.includes('kitna') || q.includes('package')) {
+        return notice + '💰 **Gulf Client Retainer Pricing Guide (' + skill + '):**\n\n' +
+               'Dubai/Gulf clients ko cheap freelancer pricing quote mat karo. Gulf businesses authority dhoondte hain:\n\n' +
+               '• **Starter Retainer ($1,200/mo • AED 4,500):** 8 high-retention 4K Reels/Shorts + sound design & dynamic subtitles.\n' +
+               '• **Growth Retainer ($2,200/mo • AED 8,000):** 16 Reels + 1 hero brand video + TikTok & IG formatting.\n' +
+               '• **VIP Scale ($3,500/mo • AED 13,000):** Full acquisition pipeline (Reels + Paid ad creatives + Cover designs).\n\n' +
+               '💡 *Always quote in USD or AED, and ask for 50% upfront before starting monthly work!*';
+      }
+
+      // 6. GREETINGS & CASUAL TALK
+      if (q.includes('suno') || q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('kaisa') || q.includes('kaise') || q.includes('naam') || q.includes('who are you') || q.includes('bhai') || q.includes('bol')) {
+        return notice + 'Haan bolo bhai, sun raha hoon! Kya chal raha hai? Batao kaunsi lead target karni hai ya kis cheez me help chahiye? 🚀\n\n' +
+               'Aapki skill **' + skill + '** ke hisaab se live ready hoon:\n' +
+               '• Kisi bhi city ki verified leads chahiye hon (e.g. *"Dubai ki leads do"*)\n' +
+               '• Kisi company ke liye killer cold WhatsApp pitch banwani ho\n' +
+               '• Follow-up sequence ya objection handling scripts chahiye hon\n\n' +
+               'Bolo kis lead se shuru karein?';
+      }
+
+      // 7. DYNAMIC GENERAL ADVICE
+      return notice + '🚀 **Agency Action Plan for ' + skill + ':**\n\n' +
+             'Bhai foreign clients ($1,500 – $3,000/month) close karne ka proven 3-step system:\n\n' +
+             '1. **Specific Audit:** Lead ko generic hello mat bhejo. Pehle message me unka exact visual leak point-out karo.\n' +
+             '2. **Free Sample Hook:** 1 sample reel/design free offer karo. Zero friction se door open hota hai.\n' +
+             '3. **Voice Note Close:** Reply aate hi 45-second energetic English voice note bhejo.\n\n' +
+             'Batao kis specific company ya city ki leads dekhna chahte ho? (e.g. *"Dubai leads"* ya *"Royal Marble pitch"*!)';
     }
 
     async function generateLiveAIResponse(userPrompt) {
