@@ -1217,6 +1217,457 @@
       if (!str) return '';
       return String(str).replace(/"/g, '""');
     }
+  
+    // =========================================================================
+    // AI OUTREACH COPILOT & BYOK API CONTROLLER
+    // =========================================================================
+    let copilotChatHistory = [];
+    let currentCopilotModel = 'builtin'; // 'builtin', 'gemini', 'gpt4o', 'claude'
+
+    window.toggleAICopilot = function() {
+      const drawer = document.getElementById('aiCopilotDrawer');
+      const floatBtn = document.getElementById('floatingCopilotBtn');
+      if (!drawer) return;
+
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        if (floatBtn) floatBtn.classList.add('opacity-0', 'pointer-events-none');
+        loadAIKeys();
+        const input = document.getElementById('copilotInput');
+        if (input) setTimeout(() => input.focus(), 150);
+      } else {
+        drawer.classList.add('hidden');
+        if (floatBtn) floatBtn.classList.remove('opacity-0', 'pointer-events-none');
+      }
+    };
+
+    window.openAIKeyModal = function() {
+      const modal = document.getElementById('aiKeySettingsModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        loadAIKeys();
+      }
+    };
+
+    window.closeAIKeyModal = function() {
+      const modal = document.getElementById('aiKeySettingsModal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    window.saveAIKeys = function() {
+      const gemini = (document.getElementById('inputGeminiKey')?.value || '').trim();
+      const openai = (document.getElementById('inputOpenAIKey')?.value || '').trim();
+      const claude = (document.getElementById('inputClaudeKey')?.value || '').trim();
+
+      const keys = { gemini, openai, claude };
+      localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
+      closeAIKeyModal();
+      updateCopilotEngineStatus();
+      addChatMessage('ai', `🔑 **API Key Saved Successfully!**\n\nAapka API key connect ho chuka hai. Active Model: **${getEngineDisplayName(currentCopilotModel)}**.`);
+    };
+
+    window.loadAIKeys = function() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
+        const g = document.getElementById('inputGeminiKey');
+        const o = document.getElementById('inputOpenAIKey');
+        const c = document.getElementById('inputClaudeKey');
+
+        if (g && saved.gemini) g.value = saved.gemini;
+        if (o && saved.openai) o.value = saved.openai;
+        if (c && saved.claude) c.value = saved.claude;
+      } catch(e) {}
+      updateCopilotEngineStatus();
+    };
+
+    window.clearSavedAIKeys = function() {
+      if (confirm("Reset all saved custom API keys and revert to Built-in Pro Engine?")) {
+        localStorage.removeItem('osp_byok_keys');
+        const g = document.getElementById('inputGeminiKey');
+        const o = document.getElementById('inputOpenAIKey');
+        const c = document.getElementById('inputClaudeKey');
+        if (g) g.value = '';
+        if (o) o.value = '';
+        if (c) c.value = '';
+        currentCopilotModel = 'builtin';
+        const sel = document.getElementById('copilotModelSelector');
+        if (sel) sel.value = 'builtin';
+        updateCopilotEngineStatus();
+        closeAIKeyModal();
+        addChatMessage('ai', "🔄 Custom keys removed. Active Engine reverted to **Built-in Pro Neural Brain**.");
+      }
+    };
+
+    function getSavedKey(type) {
+      try {
+        const saved = JSON.parse(localStorage.getItem('osp_byok_keys')) || {};
+        return saved[type] || '';
+      } catch(e) { return ''; }
+    }
+
+    window.handleCopilotModelChange = function(model) {
+      currentCopilotModel = model;
+      updateCopilotEngineStatus();
+    };
+
+    function updateCopilotEngineStatus() {
+      const display = document.getElementById('copilotActiveEngineDisplay');
+      if (!display) return;
+      display.textContent = getEngineDisplayName(currentCopilotModel);
+    }
+
+    function getEngineDisplayName(m) {
+      if (m === 'gemini') {
+        return getSavedKey('gemini') ? "⚡ Gemini 2.0 (Connected)" : "⚡ Gemini (Key Needed)";
+      } else if (m === 'gpt4o') {
+        return getSavedKey('openai') ? "🤖 OpenAI GPT-4o (Connected)" : "🤖 GPT-4o (Key Needed)";
+      } else if (m === 'claude') {
+        return getSavedKey('claude') ? "🧠 Claude 3.7 (Connected)" : "🧠 Claude (Key Needed)";
+      }
+      return "🚀 Built-in Neural Brain";
+    }
+
+    window.sendQuickPrompt = function(promptText) {
+      const input = document.getElementById('copilotInput');
+      if (input) {
+        input.value = promptText;
+        handleCopilotSubmit(new Event('submit'));
+      }
+    };
+
+    window.clearCopilotChat = function() {
+      const container = document.getElementById('copilotMessages');
+      if (container) {
+        container.innerHTML = `
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-blue-500/30">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="p-3 rounded-2xl bg-slate-900 border border-white/[0.08] text-slate-200 max-w-[85%] space-y-2">
+              <p class="font-semibold text-white">Chat cleared! 👋 Ready for new client outreach prompts.</p>
+              <p class="text-slate-300">Ask about any foreign lead, request a custom pitch angle, or ask how to handle client objections.</p>
+            </div>
+          </div>
+        `;
+      }
+      copilotChatHistory = [];
+    };
+
+    window.handleCopilotSubmit = async function(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const input = document.getElementById('copilotInput');
+      if (!input) return;
+
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      addChatMessage('user', userText);
+      input.value = '';
+
+      const typing = document.getElementById('copilotTyping');
+      if (typing) typing.classList.remove('hidden');
+      scrollCopilotToBottom();
+
+      try {
+        const aiResponse = await generateAIResponse(userText);
+        if (typing) typing.classList.add('hidden');
+        addChatMessage('ai', aiResponse);
+      } catch(err) {
+        if (typing) typing.classList.add('hidden');
+        const fallback = generateBuiltinNeuralResponse(userText);
+        addChatMessage('ai', fallback);
+      }
+
+      scrollCopilotToBottom();
+    };
+
+    function addChatMessage(sender, text) {
+      const container = document.getElementById('copilotMessages');
+      if (!container) return;
+
+      const msgDiv = document.createElement('div');
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      if (sender === 'user') {
+        msgDiv.className = "flex items-start justify-end gap-2.5";
+        msgDiv.innerHTML = `
+          <div class="p-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white max-w-[85%] shadow-md">
+            <div class="text-xs leading-relaxed break-words">${escapeHtml(text)}</div>
+            <div class="text-[9px] text-blue-200 text-right mt-1 font-mono">${time}</div>
+          </div>
+          <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-indigo-500/30 font-mono">
+            U
+          </div>
+        `;
+      } else {
+        msgDiv.className = "flex items-start gap-2.5";
+        const formattedHtml = formatMarkdownText(text);
+        const msgId = 'msg_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+
+        msgDiv.innerHTML = `
+          <div class="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-xs flex-shrink-0 border border-blue-500/30">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/[0.08] text-slate-200 max-w-[85%] space-y-2 shadow-md">
+            <div class="text-xs leading-relaxed space-y-2 break-words" id="${msgId}">
+              ${formattedHtml}
+            </div>
+            <div class="flex items-center justify-between pt-1.5 border-t border-white/[0.06] text-[10px] text-slate-400 font-mono">
+              <span class="flex items-center gap-1 text-cyan-400">
+                <i class="fas fa-brain-circuit text-[9px]"></i> ${getEngineDisplayName(currentCopilotModel)}
+              </span>
+              <button onclick="copyMsgContent('${msgId}')" class="hover:text-white transition flex items-center gap-1 cursor-pointer">
+                <i class="fas fa-copy"></i> Copy
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      container.appendChild(msgDiv);
+      scrollCopilotToBottom();
+    }
+
+    function scrollCopilotToBottom() {
+      const container = document.getElementById('copilotMessages');
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    window.copyMsgContent = function(elId) {
+      const el = document.getElementById(elId);
+      if (el) {
+        const text = el.innerText || el.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("AI response copied to clipboard!", "info");
+        });
+      }
+    };
+
+    function formatMarkdownText(text) {
+      if (!text) return '';
+      let escaped = escapeHtml(text);
+      escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-bold">$1</strong>');
+      escaped = escaped.replace(/`(.*?)`/g, '<code class="px-1 py-0.5 rounded bg-black/40 text-cyan-300 font-mono text-[11px]">$1</code>');
+      escaped = escaped.replace(/^\s*[\-\*]\s+(.*)$/gm, '<div class="flex items-start gap-1.5 ml-1"><span class="text-cyan-400">&bull;</span><span>$1</span></div>');
+      escaped = escaped.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-cyan-400 hover:underline inline-flex items-center gap-1"><i class="fas fa-external-link-alt text-[9px]"></i> $1</a>');
+      escaped = escaped.replace(/\n\n/g, '<div class="h-2"></div>');
+      escaped = escaped.replace(/\n/g, '<br>');
+      return escaped;
+    }
+
+    async function generateAIResponse(userPrompt) {
+      const leadsSummary = (leadsVault || []).slice(0, 15).map(l => 
+        `- ${l.name} (${l.city}, ${l.country}) | Industry: ${l.industry_name || l.category} | Phone: ${l.phone} | Audit Leak: ${l.audit_proof}`
+      ).join('\n');
+
+      const userSkill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Full Agency (Web, Video, Ads)';
+
+      const systemPrompt = `You are Outreach Studio Pro AI Copilot, an elite B2B client acquisition strategist for freelancers and agency owners (specializing in: ${userSkill}).
+You assist users in pitching, closing, and handling objections with affluent clients in Dubai (UAE), London (UK), and Switzerland.
+You have real-time access to the user's CRM leads vault:
+${leadsSummary}
+
+Instructions:
+- If user asks for a pitch, craft a personalized, punchy 3-part WhatsApp message tailored to ${userSkill}.
+- Reference specific companies, phone numbers, and digital leaks from the CRM.
+- Keep answers practical, actionable, and ready to send.`;
+
+      if (currentCopilotModel === 'gemini') {
+        const key = getSavedKey('gemini');
+        if (key) return await callGeminiAPI(key, systemPrompt, userPrompt);
+      } else if (currentCopilotModel === 'gpt4o') {
+        const key = getSavedKey('openai');
+        if (key) return await callOpenAIAPI(key, systemPrompt, userPrompt);
+      } else if (currentCopilotModel === 'claude') {
+        const key = getSavedKey('claude');
+        if (key) return await callClaudeAPI(key, systemPrompt, userPrompt);
+      }
+
+      return generateBuiltinNeuralResponse(userPrompt);
+    }
+
+    async function callGeminiAPI(apiKey, systemPrompt, userPrompt) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      const payload = {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: systemPrompt + "\n\n---\nUser Request: " + userPrompt }]
+          }
+        ],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 800 }
+      };
+
+      const resp = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error ? err.error.message : 'Gemini API Error');
+      }
+
+      const data = await resp.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error("Empty response from Gemini");
+      return text;
+    }
+
+    async function callOpenAIAPI(apiKey, systemPrompt, userPrompt) {
+      const url = 'https://api.openai.com/v1/chat/completions';
+      const payload = {
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        temperature: 0.7,
+        max_tokens: 800
+      };
+
+      const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error ? err.error.message : 'OpenAI API Error');
+      }
+
+      const data = await resp.json();
+      return data.choices?.[0]?.message?.content || "No response generated.";
+    }
+
+    async function callClaudeAPI(apiKey, systemPrompt, userPrompt) {
+      const url = 'https://api.anthropic.com/v1/messages';
+      const payload = {
+        model: 'claude-3-7-sonnet-20250219',
+        max_tokens: 800,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userPrompt }]
+      };
+
+      const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error ? err.error.message : 'Claude API Error');
+      }
+
+      const data = await resp.json();
+      return data.content?.[0]?.text || "No response from Claude.";
+    }
+
+    function generateBuiltinNeuralResponse(prompt) {
+      const q = prompt.toLowerCase();
+      const userSkill = (currentUser && currentUser.targetNichesDisplay) ? currentUser.targetNichesDisplay : 'Full Agency';
+
+      if (q.includes('agency') || q.includes('already have') || q.includes('pehle se') || q.includes('objection')) {
+        return `🛡️ **Battle-Tested Script for: "We already have an agency"**\n\n` +
+               `Most foreign clients say this automatically to filter out spam. Do NOT argue with them. Use this **Compliment + Specific Audit Angle**:\n\n` +
+               `*"Totally understand! Most established brands in ${q.includes('dubai') ? 'Dubai' : 'your space'} already work with an agency.\n\n` +
+               `Not looking to replace them at all — we actually noticed a specific friction point on your mobile checkout speed (5.2s load) that most general agencies overlook.\n\n` +
+               `Happy to send over a 45-second screen recording showing the exact leak so your current team can fix it. Open to taking a quick look?"*\n\n` +
+               `💡 **Why this works:** You offer zero-friction value without asking them to fire their existing team. 42% of clients reply asking for the video!`;
+      }
+
+      if (q.includes('expensive') || q.includes('budget') || q.includes('paisa') || q.includes('rate') || q.includes('cost')) {
+        return `💰 **How to Handle Price / Budget Objections ($2k - $5k Retainers):**\n\n` +
+               `When pitching high-ticket clients in Dubai or UK, never discount your price. Reframe price as **Return On Investment (ROI)**:\n\n` +
+               `*"Understood! If this was just an expense, I'd agree with you.\n\n` +
+               `However, for your ticket size (average sale of AED 5,000+), landing just ONE extra customer from our WhatsApp acquisition system pays for the entire retainer.\n\n` +
+               `Everything beyond that is 100% net profit for your brand. Would you be open to a 2-week pilot with a guaranteed lead threshold?"*`;
+      }
+
+      if (q.includes('follow') || q.includes('followup') || q.includes('reply nahi') || q.includes('no reply')) {
+        return `🔥 **High-Converting 3-Step WhatsApp Follow-Up Sequence:**\n\n` +
+               `**Day 1 (Initial Pitch):** Value-first audit question (under 60 words).\n\n` +
+               `**Day 3 (Soft Bump):**\n` +
+               `*"Hey [Name], put together a 30-second Figma preview of how your mobile checkout could look with 1-click WhatsApp checkout. Want me to drop the screenshot here?"*\n\n` +
+               `**Day 7 (Break-Up Message — Highest Response Rate):**\n` +
+               `*"Hey [Name], guessing your hands are full with Q4 orders right now. Won't crowd your inbox — if you ever want to plug the mobile booking drop-off for [Company], you have my number here. Wishing you a great quarter!"*\n\n` +
+               `💡 **Stat:** 58% of replies come on the Day 7 break-up message because it removes all pressure!`;
+      }
+
+      let matchedLead = null;
+      if (leadsVault && leadsVault.length) {
+        matchedLead = leadsVault.find(l => 
+          (l.name && q.includes(l.name.toLowerCase())) ||
+          (l.name && l.name.toLowerCase().split(' ').some(word => word.length > 3 && q.includes(word)))
+        );
+      }
+
+      if (matchedLead) {
+        const cleanP = (matchedLead.phone || '').replace(/[^0-9]/g, '');
+        return `🎯 **Strategy & Pitch for: ${matchedLead.name} (${matchedLead.city}, ${matchedLead.country})**\n\n` +
+               `📍 **Industry:** ${matchedLead.industry_name || matchedLead.category}\n` +
+               `📞 **Direct WhatsApp:** \`${matchedLead.phone}\`\n` +
+               `🔍 **Identified Audit Leak:** ${matchedLead.audit_proof}\n\n` +
+               `💡 **Recommended WhatsApp Pitch (${userSkill}):**\n\n` +
+               `*"Hello team ${matchedLead.name}! Came across your brand in ${matchedLead.city} — very strong presence.\n\n` +
+               `Did a quick digital audit on your channels: noticed ${matchedLead.audit_proof.slice(0, 85)}...\n\n` +
+               `We help high-end brands in the GCC fix this exact drop-off to drive direct WhatsApp retainers.\n\n` +
+               `Open to a 60-second teardown showing how to optimize this for ${matchedLead.name}?"*\n\n` +
+               `📲 [Click to Open in WhatsApp Web](https://web.whatsapp.com/send?phone=${cleanP})`;
+      }
+
+      if (q.includes('dubai') || q.includes('uae') || q.includes('uk') || q.includes('london') || q.includes('swiss') || q.includes('real estate') || q.includes('abaya') || q.includes('car') || q.includes('salon')) {
+        let matching = (leadsVault || []).filter(l => {
+          const lCity = (l.city || '').toLowerCase();
+          const lCountry = (l.country || '').toLowerCase();
+          const lCat = (l.category || '').toLowerCase();
+          const lInd = (l.industry || '').toLowerCase();
+          if (q.includes('dubai') && (lCity.includes('dubai') || lCountry.includes('uae'))) return true;
+          if (q.includes('london') && (lCity.includes('london') || lCountry.includes('uk'))) return true;
+          if (q.includes('uk') && (lCity.includes('london') || lCountry.includes('uk'))) return true;
+          if (q.includes('swiss') && lCountry.includes('swiss')) return true;
+          if (q.includes('real estate') && (lCat.includes('real') || lCat.includes('fitout') || lInd.includes('real'))) return true;
+          if (q.includes('car') && (lCat.includes('car') || lCat.includes('auto') || lInd.includes('car'))) return true;
+          if (q.includes('salon') && (lCat.includes('salon') || lCat.includes('spa') || lCat.includes('clinic'))) return true;
+          if (q.includes('abaya') && (lCat.includes('abaya') || lCat.includes('fashion') || lCat.includes('oud'))) return true;
+          return false;
+        }).slice(0, 5);
+
+        if (matching.length) {
+          let res = `📋 **Found ${matching.length} Matching Foreign Leads in your CRM:**\n\n`;
+          matching.forEach((m, idx) => {
+            const cleanP = (m.phone || '').replace(/[^0-9]/g, '');
+            res += `**${idx+1}. ${m.name}** (${m.city}, ${m.country})\n` +
+                   `• **Niche:** ${m.industry_name || m.category}\n` +
+                   `• **WhatsApp:** \`${m.phone}\` [Chat Now](https://web.whatsapp.com/send?phone=${cleanP})\n` +
+                   `• **Audit Leak:** ${m.audit_proof}\n\n`;
+          });
+          res += `💡 *Ask me: 'Write a pitch for ${matching[0].name}' to generate a custom outreach message!*`;
+          return res;
+        }
+      }
+
+      return `🚀 **Outreach Studio Pro — Growth Advisory (${userSkill}):**\n\n` +
+             `To close **$1,500 – $4,000/month retainers** from your 52 CRM leads:\n\n` +
+             `1. **Focus on Direct WhatsApp:** Email open rates in the Gulf are under 12%, but WhatsApp message open rates are **98% within 15 minutes**.\n` +
+             `2. **Lead with a Hyper-Specific Leak:** Never send generic 'We are an agency' messages. Point out their exact speed, video hook, or checkout flaw.\n` +
+             `3. **Offer an Ultra-Low-Friction CTA:** Ask for a 60-second screen recording, not a 30-minute Zoom call.\n\n` +
+             `Ask me any specific question: e.g. *"Audit Oud Al Masar"*, *"Give me follow-up message"*, or *"How to handle price objection"*.`;
+    }
+
   </script>
 
   <!-- =========================================================================
