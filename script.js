@@ -223,8 +223,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const successView = document.getElementById('checkoutSuccessView');
     if (modal) {
       if (formView && successView) {
-        // If not already paid, ensure form is shown
-        if (!localStorage.getItem('osp_license_paid')) {
+        if (localStorage.getItem('osp_license_paid')) {
+          // If already paid, automatically show the unlocked download screen!
+          formView.classList.add('hidden');
+          successView.classList.remove('hidden');
+          
+          const pid = localStorage.getItem('osp_payment_id') || 'pay_live_verified';
+          const bname = localStorage.getItem('osp_buyer_name') || 'Valued Customer';
+          const bphone = localStorage.getItem('osp_buyer_phone') || '';
+          const lkey = localStorage.getItem('osp_license_key') || 'OSP-PRO-9842-7104-LIVE';
+          let dlLink = localStorage.getItem('osp_download_link') || 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro';
+          try {
+            const settings = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
+            if (settings.downloadLink) dlLink = settings.downloadLink;
+          } catch(e) {}
+
+          const successPaymentId = document.getElementById('successPaymentId');
+          const successCustomer = document.getElementById('successCustomer');
+          const successLicenseKey = document.getElementById('successLicenseKey');
+          const btnDirectDownload = document.getElementById('btnDirectDownload');
+
+          if (successPaymentId) successPaymentId.textContent = pid;
+          if (successCustomer) successCustomer.textContent = `${bname} ${bphone ? '(' + bphone + ')' : ''}`;
+          if (successLicenseKey) successLicenseKey.textContent = lkey;
+          if (btnDirectDownload) btnDirectDownload.href = dlLink;
+        } else {
           formView.classList.remove('hidden');
           successView.classList.add('hidden');
         }
@@ -338,17 +361,62 @@ document.addEventListener('DOMContentLoaded', () => {
     rzp.open();
   };
 
+  // 1-Click Copy License Key
+  window.copyLicenseKey = function() {
+    const keyEl = document.getElementById('successLicenseKey');
+    const btn = document.getElementById('btnCopyLicenseKey');
+    if (keyEl) {
+      const text = keyEl.textContent.trim();
+      const doCopy = () => {
+        if (btn) {
+          const originalHtml = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-check text-emerald-300"></i> Copied!';
+          setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
+        }
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(doCopy).catch(() => {
+          fallbackCopy(text);
+          doCopy();
+        });
+      } else {
+        fallbackCopy(text);
+        doCopy();
+      }
+    }
+  };
+
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+
+  // 100% Automated Immediate Delivery on Payment Success
   window.handlePaymentSuccess = function(response, customer) {
     const paymentId = response.razorpay_payment_id || ('pay_' + Date.now());
+    const randomKey = `OSP-PRO-${Math.floor(1000+Math.random()*9000)}-${Math.floor(1000+Math.random()*9000)}-LIVE`;
+
+    // Fetch custom Google Drive download link from admin settings or default
+    let downloadLink = 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro';
+    try {
+      const settings = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
+      if (settings.downloadLink) downloadLink = settings.downloadLink;
+    } catch(e) {}
 
     try {
       localStorage.setItem('osp_license_paid', 'true');
       localStorage.setItem('osp_payment_id', paymentId);
       localStorage.setItem('osp_buyer_name', customer.name);
       localStorage.setItem('osp_buyer_phone', customer.phone);
+      localStorage.setItem('osp_buyer_email', customer.email || '');
+      localStorage.setItem('osp_license_key', randomKey);
+      localStorage.setItem('osp_download_link', downloadLink);
 
       // Record in Admin Orders Database
-      const randomKey = `OSP-PRO-${Math.floor(1000+Math.random()*9000)}-${Math.floor(1000+Math.random()*9000)}-LIVE`;
       let allOrders = [];
       try {
         allOrders = JSON.parse(localStorage.getItem('osp_orders_db')) || [];
@@ -374,6 +442,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const successView = document.getElementById('checkoutSuccessView');
     const successPaymentId = document.getElementById('successPaymentId');
     const successCustomer = document.getElementById('successCustomer');
+    const successLicenseKey = document.getElementById('successLicenseKey');
+    const btnDirectDownload = document.getElementById('btnDirectDownload');
     const successWhatsAppBtn = document.getElementById('successWhatsAppBtn');
 
     if (formView) formView.classList.add('hidden');
@@ -381,19 +451,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (successPaymentId) successPaymentId.textContent = paymentId;
     if (successCustomer) successCustomer.textContent = `${customer.name} (${customer.phone})`;
+    if (successLicenseKey) successLicenseKey.textContent = randomKey;
+    if (btnDirectDownload) btnDirectDownload.href = downloadLink;
 
     if (successWhatsAppBtn) {
       const waMsg = encodeURIComponent(
         `Hi Hamza, I have successfully paid Rs 1,999 for Outreach Studio Pro via Razorpay! 🎉\n\n` +
         `• Name: ${customer.name}\n` +
         `• WhatsApp: ${customer.phone}\n` +
-        `• Email: ${customer.email || 'N/A'}\n` +
-        `• Payment ID: ${paymentId}\n\n` +
-        `Please share my Google Drive ZIP download link and activate my Lifetime License key.`
+        `• Payment ID: ${paymentId}\n` +
+        `• License Key: ${randomKey}\n\n` +
+        `I am downloading the software from Google Drive. Please save my order for technical updates.`
       );
       successWhatsAppBtn.href = `https://wa.me/918808129388?text=${waMsg}`;
     }
-  }
+  };
 
   // 7. Lead Pitch Accordion
   window.toggleLeadPitch = function(leadId) {
