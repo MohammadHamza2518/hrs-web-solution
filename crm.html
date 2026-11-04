@@ -222,50 +222,37 @@
   <!-- Main CRM Application Workspace -->
   <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
     
-    <!-- Licensed Plan & Leads Quota Entitlement Banner -->
-    <div id="licenseQuotaBanner" class="mb-5 p-4 sm:p-5 rounded-2xl bg-[#0d1424] border border-blue-500/25 shadow-xl shadow-black/40">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        
-        <!-- Left: Category Identity & Entitlement -->
-        <div class="flex items-center gap-3.5">
-          <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-lg flex-shrink-0" id="quotaIconBox">
-            <i class="fas fa-certificate"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/15 text-blue-400 border border-blue-500/30">
-                Your Licensed Industry
-              </span>
-              <span id="quotaPlanTier" class="text-[10px] font-mono text-slate-400">Lifetime Commercial Pro</span>
-            </div>
-            <h3 class="text-base sm:text-lg font-bold text-white font-heading leading-tight" id="quotaCategoryName">
-              Loading Licensed Category...
-            </h3>
-            <p class="text-xs text-slate-400 mt-0.5" id="quotaDescription">
-              Loading leads allocation...
-            </p>
-          </div>
+    <!-- Workspace Pipeline Header & Entitlement Strip -->
+    <div id="licenseQuotaBanner" class="mb-5 pb-4 border-b border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <h2 class="text-base sm:text-lg font-bold text-white font-heading tracking-tight flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+            Prospects Pipeline
+          </h2>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium flex items-center gap-1.5" id="quotaCategoryBadge">
+            <i class="fas fa-certificate text-amber-300 text-[10px]"></i>
+            <span id="quotaCategoryName">Loading Category...</span>
+          </span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-[11px]" id="quotaAvailableCount">
+            -- Verified Quota
+          </span>
         </div>
+        <p class="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed" id="quotaDescription">
+          Pre-audited direct decision-makers ready for conversion.
+        </p>
+      </div>
 
-        <!-- Right: Quota Numbers & 1-Click Extraction Action -->
-        <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 pt-3 md:pt-0 border-white/[0.08]">
-          <div class="text-left md:text-right pr-2">
-            <div class="text-[10px] font-mono text-slate-400 uppercase">Available Leads Quota</div>
-            <div class="text-sm font-bold font-mono text-emerald-400" id="quotaAvailableCount">-- Prospects Available</div>
-            <div class="text-[10px] text-slate-500 font-mono" id="quotaActiveLoaded">0 In Active Pipeline</div>
-          </div>
-
-          <div class="flex items-center gap-2 flex-shrink-0">
-            <button onclick="extractUserLicensedLeads()" id="btnExtractLicensedLeads" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-600/30 flex items-center gap-2 cursor-pointer transition">
-              <i class="fas fa-bolt text-amber-300"></i>
-              <span id="btnExtractLicensedText">Extract My Leads</span>
-            </button>
-            <button onclick="clearWorkingPipeline()" id="btnClearPipeline" title="Clear pipeline back to 0 leads" class="p-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-rose-500/40 text-slate-400 hover:text-rose-400 text-xs transition cursor-pointer">
-              <i class="fas fa-trash-can"></i>
-            </button>
-          </div>
-        </div>
-
+      <!-- Quick Action Controls -->
+      <div class="flex items-center gap-2 flex-shrink-0 self-start sm:self-center">
+        <button onclick="extractUserLicensedLeads()" id="btnExtractLicensedLeads" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-md shadow-blue-600/20 flex items-center gap-2 cursor-pointer transition">
+          <i class="fas fa-bolt text-amber-300"></i>
+          <span id="btnExtractLicensedText">Extract My Leads</span>
+        </button>
+        <button onclick="clearWorkingPipeline()" id="btnClearPipeline" title="Clear pipeline back to 0 leads" class="px-3 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 hover:border-rose-500/30 text-slate-400 hover:text-rose-400 text-xs transition cursor-pointer flex items-center gap-1.5">
+          <i class="fas fa-trash-can text-[11px]"></i>
+          <span class="hidden md:inline text-[11px]">Clear</span>
+        </button>
       </div>
     </div>
     
@@ -993,10 +980,10 @@
       const emptyCat = document.getElementById('emptyStateCategoryName');
       const emptyBtn = document.getElementById('emptyStateBtnText');
 
-      if (catEl) catEl.textContent = `${planData.name} (${planData.skillName})`;
+      if (catEl) catEl.textContent = planData.name;
       if (descEl) descEl.textContent = planData.desc;
-      if (availEl) availEl.textContent = `${planData.count} Verified Prospects Available`;
-      if (activeEl) activeEl.textContent = `${leadsVault.length} / ${planData.count} Loaded in Pipeline`;
+      if (availEl) availEl.textContent = `${planData.count} Verified Quota`;
+      if (activeEl) activeEl.textContent = `${leadsVault.length} / ${planData.count} In Pipeline`;
       if (iconBox) iconBox.innerHTML = `<i class="fas ${planData.icon} text-blue-400"></i>`;
       if (emptyCat) emptyCat.textContent = planData.name;
       if (emptyBtn) emptyBtn.textContent = `Extract My ${planData.count} Licensed Leads Now →`;
