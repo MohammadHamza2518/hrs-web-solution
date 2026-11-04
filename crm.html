@@ -3353,24 +3353,19 @@ ${agencyName}`;
             document.getElementById("modalCountryBadge").innerText = `${lead.country || 'Global'} • ${lead.city || ''}`;
             document.getElementById("modalSubInfo").innerText = `Tailored Outreach • ${lead.category || 'High-Ticket'}`;
 
+            // Smart Category-Aware Pitch Populator
+            const initialPitch = (typeof getCategoryPitchTemplates === 'function') 
+                ? getCategoryPitchTemplates(lead, currentUser?.targetNiches?.[0]) 
+                : null;
+
             // Email inputs
-            document.getElementById("pitchSubject").value = `Quick proposal for ${bizName} - ${agencyName}`;
+            document.getElementById("pitchSubject").value = initialPitch ? initialPitch.subject : `Quick proposal for ${bizName} - ${agencyName}`;
             document.getElementById("pitchRecipientEmail").value = lead.email || '';
-            document.getElementById("pitchEmailBody").value = lead.email_pitch || `Hi ${bizName} Team,
-
-I noticed your premier work in ${lead.city || 'Dubai'}. We built high-performance conversion systems that can scale your customer bookings.
-
-Audit: ${lead.audit_proof || 'Needs responsive conversion funnels.'}
-
-Showcase: ${portfolioUrl}
-
-Best,
-${senderName}
-${agencyName}`;
+            document.getElementById("pitchEmailBody").value = lead.email_pitch || (initialPitch ? initialPitch.email.replace(/\\n/g, '\n') : `Hi ${bizName} Team,\n\nI noticed your premier work in ${lead.city || 'Dubai'}. We build high-performance client conversion systems that can scale your customer bookings.\n\nShowcase: ${portfolioUrl}\n\nBest,\n${senderName}\n${agencyName}`);
 
             // WhatsApp inputs
             document.getElementById("pitchWaPhone").value = lead.phone || '';
-            document.getElementById("pitchWaBody").value = lead.pitch_message || `Hi ${bizName} team! ${senderName} from ${agencyName}. Loved your brand presentation! We help top agencies scale client retainers. Check our portfolio: ${portfolioUrl}. Let me know if you'd like a free 3-minute video audit!`;
+            document.getElementById("pitchWaBody").value = lead.pitch_message || (initialPitch ? initialPitch.whatsapp : `Hi ${bizName} team! ${senderName} from ${agencyName}. Loved your brand presentation! Check our portfolio: ${portfolioUrl}. Let me know if you'd like a free audit!`);
 
             switchPitchTab(defaultTab);
             document.getElementById("pitchModal").classList.remove("hidden");
@@ -3484,32 +3479,131 @@ ${agencyName}`;
             showToast("WhatsApp dispatched!");
         }
 
-        function regenerateFreshPitch() {
+        // ==================== CATEGORY-AWARE NEURAL PITCH ENGINE ====================
+        function getCategoryPitchTemplates(lead, userNiche) {
+            const bName = lead.business_name || lead.name || 'Owner';
+            const city = lead.city || 'your market';
+            const sender = getSetting('senderName') || (currentUser ? currentUser.name : 'Alex Morgan');
+            const agency = getSetting('agencyName') || 'HRS Web Solutions';
+            const showcase = getSetting('portfolioUrl') || 'https://hrswebsolution.online';
+            const audit = lead.audit_proof || 'Verified: No dedicated mobile conversion funnel.';
+
+            const cat = ((lead.category || '') + ' ' + (userNiche || '')).toLowerCase();
+
+            if (cat.includes('video') || cat.includes('reel') || cat.includes('content') || cat.includes('short')) {
+                return {
+                    subject: `15-Sec Short-Form Reel Concept for ${bName}`,
+                    email: `Hi ${bName} Leadership Team,\n\nI was reviewing your brand in ${city} and loved your market presence.\n\nYour visual authority has huge organic growth potential, but high-converting brands in your niche are currently scaling 3x faster using high-retention 60fps Reels, kinetic subtitles, and hook pacing.\n\nAudit: ${audit}\n\nClient portfolio: ${showcase}\n\nWould you be open to me creating a complimentary 15-second customized sample reel for ${bName} this week?\n\nBest regards,\n${sender}\nShort-Form Creative Director | ${agency}`,
+                    whatsapp: `Hey ${bName}! ${sender} here from ${agency}. Your brand presence in ${city} looks premier! We edit viral high-retention Reels & TikToks for luxury brands. Client showcase: ${showcase}. Can I send over a free 15-second sample reel for you this week?`
+                };
+            }
+
+            if (cat.includes('web') || cat.includes('shop') || cat.includes('ecommerce') || cat.includes('site') || cat.includes('design') && cat.includes('web')) {
+                return {
+                    subject: `Mobile CRO & conversion funnel review for ${bName}`,
+                    email: `Hi ${bName} Team,\n\nI was reviewing top-rated businesses in ${city} and wanted to reach out regarding your digital booking presence.\n\nAudit findings: ${audit}\n\nRight now, qualified local clients searching on Google Maps are dropping off due to the absence of a modern 1-click mobile catalog and fast checkout.\n\nCase studies & interactive designs: ${showcase}\n\nWe built an interactive prototype for ${bName} that fixes this leak. Do you have 4 minutes this Thursday to review?\n\nWarm regards,\n${sender}\nDigital Systems Architect | ${agency}`,
+                    whatsapp: `Hi ${bName} team! ${sender} from ${agency}. Noticed your premier profile in ${city} lacks a direct mobile-optimized booking funnel. We created a free prototype for your brand: ${showcase}. Open to taking a quick look?`
+                };
+            }
+
+            if (cat.includes('ad') || cat.includes('marketing') || cat.includes('meta') || cat.includes('google') || cat.includes('lead')) {
+                return {
+                    subject: `Client acquisition roadmap for ${bName} (${agency})`,
+                    email: `Hi ${bName} Team,\n\nI came across your business in ${city} and was really impressed by your client reviews.\n\nWe help premier companies scale high-ticket inquiries using targeted Meta & Google acquisition funnels, consistently delivering 20 to 35 pre-qualified consultations every month on auto-pilot.\n\nAudit: ${audit}\n\nVerified proof & ROAS data: ${showcase}\n\nWould you be open to a 5-minute walk-through of our client acquisition playbook for your niche?\n\nBest regards,\n${sender}\nGrowth Lead | ${agency}`,
+                    whatsapp: `Hey ${bName}! ${sender} here with ${agency}. We run paid client acquisition funnels in ${city} delivering 20+ booked appointments every month. Case studies: ${showcase}. Mind if I send a quick 2-min breakdown?`
+                };
+            }
+
+            if (cat.includes('graphic') || cat.includes('brand') || cat.includes('logo') || cat.includes('creative') || cat.includes('aesthetic')) {
+                return {
+                    subject: `Complimentary 3D brand identity concept for ${bName}`,
+                    email: `Hi ${bName} Leadership,\n\nYour presentation in ${city} caught our creative team's eye today.\n\nWe specialize in high-end brand identity, 3D visual assets, and luxury packaging overhauls for top tier brands.\n\nAudit: ${audit}\n\nShowcase & concepts: ${showcase}\n\nWe put together a complimentary 3D visual mockup tailored specifically for ${bName}. Can I email you the preview file?\n\nWarmly,\n${sender}\nCreative Director | ${agency}`,
+                    whatsapp: `Hey ${bName}! ${sender} from ${agency}. Loved your brand aesthetic in ${city}! We designed a complimentary 3D visual mockup for you: ${showcase}. Would love to share the high-res file with you!`
+                };
+            }
+
+            if (cat.includes('ai') || cat.includes('bot') || cat.includes('auto') || cat.includes('chat') || cat.includes('reception')) {
+                return {
+                    subject: `24/7 AI Receptionist & Booking Bot for ${bName}`,
+                    email: `Hi ${bName} Team,\n\nDid you know that over 62% of high-intent customer inquiries after 6 PM go unanswered, resulting in lost bookings?\n\nAt ${agency}, we install custom 24/7 WhatsApp & Web AI Receptionists that instantly qualify leads, answer pricing questions, and auto-book appointments directly into your calendar without human delay.\n\nAudit: ${audit}\n\nInteractive Demo: ${showcase}\n\nCan I send over a 60-second video demo showing how the AI agent would handle a live customer for ${bName}?\n\nBest regards,\n${sender}\nAutomation Consultant | ${agency}`,
+                    whatsapp: `Hi ${bName}! ${sender} here. Did you know 60% of after-hours client inquiries go unanswered? We deployed a 24/7 WhatsApp AI receptionist that auto-books clients. Live demo: ${showcase}. Can I show you a 60-sec video demo?`
+                };
+            }
+
+            // Universal High-Ticket Scale Pitch
+            return {
+                subject: `High-converting growth strategy for ${bName}`,
+                email: `Hi ${bName} Team,\n\nI was reviewing premier brands in ${city} and your portfolio immediately stood out.\n\nAt ${agency}, we build end-to-end digital acquisition systems that scale customer acquisition and conversion rates by over 40% in 30 days.\n\nAudit: ${audit}\n\nClient showcase: ${showcase}\n\nWould it make sense to connect for 4 minutes this Thursday to walk you through our initial audit?\n\nWarm regards,\n${sender}\nGrowth Consultant | ${agency}`,
+                whatsapp: `Hey ${bName}! ${sender} here with ${agency}. Saw your recent work in ${city} and loved it! We help top agencies scale client retainers. Showcase: ${showcase}. Open to a quick 2-min chat this week?`
+            };
+        }
+
+        async function regenerateFreshPitch() {
             if (!activeModalLead) return;
             const bName = activeModalLead.business_name || activeModalLead.name;
-            const sender = getSetting('senderName') || 'Alex Morgan';
+            const sender = getSetting('senderName') || (currentUser ? currentUser.name : 'Alex Morgan');
             const agency = getSetting('agencyName') || 'HRS Web Solutions';
-            const showcase = getSetting('portfolioUrl') || 'https://myagencyshowcase.com';
+            const showcase = getSetting('portfolioUrl') || 'https://hrswebsolution.online';
+            const apiKey = (getSetting('aiApiKey') || getSetting('geminiKey') || '').trim();
+            const userNiche = (currentUser?.targetNiches && currentUser.targetNiches[0]) || activeModalLead.category || 'all';
 
             showToast("Generating fresh psychology pitch angle...");
+
+            // If user has Gemini API Key connected, call live Google Gemini API!
+            if (apiKey && apiKey.startsWith('AIza')) {
+                try {
+                    const prompt = `You are a world-class cold outreach copywriter for a high-ticket agency.
+Lead Business: "${bName}" in ${activeModalLead.city || 'Dubai'}, ${activeModalLead.country || 'UAE'}
+Industry/Category: ${activeModalLead.category || userNiche}
+Audit Proof: ${activeModalLead.audit_proof || 'No mobile-optimized conversion funnels.'}
+Our Agency: "${agency}"
+Sender Name: "${sender}"
+Showcase Portfolio Link: ${showcase}
+
+Write TWO assets in strict JSON format:
+{
+  "subject": "Natural, punchy 4-7 word email subject line with high open rates (no spam words)",
+  "email": "A concise 3-paragraph cold email with a compliment, a specific audit problem, a client result proof, and a soft low-friction call-to-action (4-min chat this week)",
+  "whatsapp": "A punchy, natural 2-sentence WhatsApp DM with personalized compliment, clear value proposition, and soft question"
+}
+Output ONLY raw JSON.`;
+
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+                    const resp = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            generationConfig: { temperature: 0.75, maxOutputTokens: 700 }
+                        })
+                    });
+
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                        const cleanJson = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+                        const parsed = JSON.parse(cleanJson);
+                        if (parsed.subject && parsed.email) {
+                            document.getElementById("pitchSubject").value = parsed.subject;
+                            document.getElementById("pitchEmailBody").value = parsed.email;
+                            if (parsed.whatsapp) document.getElementById("pitchWaBody").value = parsed.whatsapp;
+                            showToast("Live Gemini AI pitch generated successfully!");
+                            return;
+                        }
+                    }
+                } catch(e) {
+                    console.warn("Live Gemini API call fell back to Neural Engine:", e);
+                }
+            }
+
+            // High-converting Category-Aware Neural Generator Fallback
             setTimeout(() => {
-                document.getElementById("pitchSubject").value = `High-converting growth strategy for ${bName}`;
-                document.getElementById("pitchEmailBody").value = `Hi ${bName} Team,
-
-I was reviewing high-end businesses in ${activeModalLead.city || 'your area'} and your portfolio immediately stood out.
-
-We recently created an acquisition funnel system for luxury brands that increased organic qualified inquiries by 40% in 30 days.
-
-Proof of concept: ${showcase}
-
-Would it make sense to connect for 4 minutes this Thursday to walk you through our initial audit?
-
-Warm regards,
-${sender}
-Growth Consultant | ${agency}`;
-                document.getElementById("pitchWaBody").value = `Hey ${bName}! ${sender} here with ${agency}. Saw your recent work and wanted to say it looks world-class! We helped 14 brands in ${activeModalLead.city || 'Dubai'} optimize their conversion rates. Portfolio: ${showcase}. Open to a quick 2-min chat this week?`;
-                showToast("Fresh AI pitch angle ready!");
-            }, 600);
+                const pitch = getCategoryPitchTemplates(activeModalLead, userNiche);
+                document.getElementById("pitchSubject").value = pitch.subject;
+                document.getElementById("pitchEmailBody").value = pitch.email.replace(/\\n/g, '\n');
+                document.getElementById("pitchWaBody").value = pitch.whatsapp;
+                showToast("Category-tailored pitch angle ready!");
+            }, 500);
         }
 
         // =========================================================================
@@ -3900,17 +3994,29 @@ Growth Consultant | ${agency}`;
                 if (document.getElementById("cfgAgencyName")) document.getElementById("cfgAgencyName").value = s.agencyName || 'HRS Web Solutions';
                 if (document.getElementById("cfgSenderPhone")) document.getElementById("cfgSenderPhone").value = s.senderPhone || '+1 555 123 4567';
                 if (document.getElementById("cfgPortfolioUrl")) document.getElementById("cfgPortfolioUrl").value = s.portfolioUrl || 'https://myagencyshowcase.com';
-                if (document.getElementById("cfgGeminiKey")) document.getElementById("cfgGeminiKey").value = s.geminiKey || '';
+                
+                const savedKey = s.geminiKey || s.aiApiKey || '';
+                if (document.getElementById("cfgAiApiKey")) document.getElementById("cfgAiApiKey").value = savedKey;
+                if (document.getElementById("cfgGeminiKey")) document.getElementById("cfgGeminiKey").value = savedKey;
+                if (document.getElementById("cfgSenderEmail")) document.getElementById("cfgSenderEmail").value = s.senderEmail || '';
+                if (document.getElementById("cfgSenderPassword")) document.getElementById("cfgSenderPassword").value = s.senderPassword || '';
+                if (s.aiProvider && typeof setAiProvider === 'function') setAiProvider(s.aiProvider);
             } catch (e) {}
         }
 
         function saveSettings() {
+            const apiKey = (document.getElementById("cfgAiApiKey")?.value || document.getElementById("cfgGeminiKey")?.value || '').trim();
             const s = {
                 senderName: document.getElementById("cfgSenderName")?.value || 'Alex Morgan',
                 agencyName: document.getElementById("cfgAgencyName")?.value || 'HRS Web Solutions',
                 senderPhone: document.getElementById("cfgSenderPhone")?.value || '+1 555 123 4567',
                 portfolioUrl: document.getElementById("cfgPortfolioUrl")?.value || 'https://myagencyshowcase.com',
-                geminiKey: document.getElementById("cfgGeminiKey")?.value || ''
+                geminiKey: apiKey,
+                aiApiKey: apiKey,
+                senderEmail: (document.getElementById("cfgSenderEmail")?.value || '').trim(),
+                senderPassword: (document.getElementById("cfgSenderPassword")?.value || '').trim(),
+                aiProvider: window.currentAiProvider || 'gemini',
+                aiModel: document.getElementById("cfgAiModel")?.value || 'gemini-2.0-flash'
             };
             localStorage.setItem(LS_SETTINGS, JSON.stringify(s));
             showToast("Settings saved successfully!");
