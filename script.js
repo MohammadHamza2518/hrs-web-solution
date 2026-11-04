@@ -327,15 +327,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let phone = phoneInput ? phoneInput.value.trim() : '';
     let email = emailInput ? emailInput.value.trim() : '';
 
-    if (!name) name = "Mohammad Hamza";
-    if (!phone) phone = "8808129388";
-    if (!email) email = "hamza@hrswebsolution.online";
+    if (!name) name = "Agency Client";
+    if (!phone) phone = "9876543210";
+    if (!email) email = "client@agency.com";
 
     if (nameInput) nameInput.value = name;
     if (phoneInput) phoneInput.value = phone;
     if (emailInput) emailInput.value = email;
 
-    const cleanPhone = phone.replace(/\D/g, '') || '8808129388';
+    const cleanPhone = phone.replace(/\D/g, '') || '9876543210';
     const nichesData = window.getSelectedNichesData ? window.getSelectedNichesData() : { ids: ['all'], displayString: 'All Industries (52+ Leads)', totalCount: 52 };
 
     const mockResponse = {
