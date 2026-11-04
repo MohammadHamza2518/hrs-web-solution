@@ -62,7 +62,7 @@
 <body class="bg-dark-900 text-slate-100 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-white">
 
     <!-- ==================== FIRST-TIME CLIENT SETUP GATEKEEPER ==================== -->
-    <div id="onboardingGatekeeper" class="fixed inset-0 z-50 bg-[#070b14]/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto transition-all duration-500">
+    <div id="onboardingGatekeeper" class="fixed inset-0 z-50 hidden bg-[#070b14]/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto transition-all duration-500">
         <!-- Ambient decorative gradient orbs -->
         <div class="fixed top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="fixed bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -121,7 +121,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">Your Full Name (Sender) <span class="text-rose-400">*</span></label>
                         <div class="relative">
                             <i class="fa-solid fa-user absolute left-3 top-3 text-slate-500 text-xs"></i>
-                            <input type="text" id="obSenderName" placeholder="e.g. Mohammad Hamza" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="text" id="obSenderName" placeholder="e.g. Alex Morgan" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <span class="text-[10px] text-slate-500 mt-0.5 block">Used in greeting sign-offs (e.g., 'Best, [Your Name]').</span>
                     </div>
@@ -130,7 +130,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">WhatsApp / Phone Number <span class="text-rose-400">*</span></label>
                         <div class="relative">
                             <i class="fa-brands fa-whatsapp absolute left-3 top-3 text-emerald-400 text-sm"></i>
-                            <input type="text" id="obSenderPhone" placeholder="e.g. +91 8808129388" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="text" id="obSenderPhone" placeholder="e.g. +1 555 123 4567" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <span class="text-[10px] text-slate-500 mt-0.5 block">1-Click 'Chat on WhatsApp' links will dispatch from your device with this number.</span>
                     </div>
@@ -167,7 +167,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">Agency / Company Name <span class="text-rose-400">*</span></label>
                         <div class="relative">
                             <i class="fa-solid fa-briefcase absolute left-3 top-3 text-slate-500 text-xs"></i>
-                            <input type="text" id="obAgencyName" placeholder="e.g. HRS Web Solutions" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="text" id="obAgencyName" placeholder="e.g. Apex Growth Studio" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                     </div>
 
@@ -205,7 +205,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">Portfolio or Showcase Demo Link</label>
                         <div class="relative">
                             <i class="fa-solid fa-link absolute left-3 top-3 text-slate-500 text-xs"></i>
-                            <input type="url" id="obPortfolioUrl" placeholder="e.g. https://arabiansshoppingzone.shop" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="url" id="obPortfolioUrl" placeholder="e.g. https://myagencyshowcase.com" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <span class="text-[10px] text-emerald-400/90 mt-0.5 block"><i class="fa-solid fa-bolt mr-1"></i> Dynamically appended to your pitches so clients can see live proof of your work.</span>
                     </div>
@@ -538,7 +538,7 @@
                             <h3 class="text-xs font-bold text-white uppercase tracking-wider">Anti-Ban Safe Outreach Guard</h3>
                             <span class="px-2 py-0.2 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Daily Protection Active</span>
                         </div>
-                        <p class="text-[11px] text-slate-400">Protects your WhatsApp (+91 8808129388) from Meta algorithm bans & keeps Gmail inbox reputation clean.</p>
+                        <p class="text-[11px] text-slate-400">Protects your WhatsApp account from Meta algorithm bans & keeps Gmail inbox reputation clean.</p>
                     </div>
                 </div>
 
@@ -931,7 +931,7 @@
                         <span>🛡️ Anti-Ban Cooldown Active</span>
                         <span class="px-2 py-0.5 rounded-full text-[10px] bg-amber-400/20 text-amber-300 font-mono font-bold" id="cooldownBadge">COOLDOWN</span>
                     </div>
-                    <p class="text-[11px] text-amber-300/80 mt-0.5">WhatsApp (+91 8808129388) ko Meta automated spam ban se bachane ke liye har message ke beech <strong>45 second ka cooling gap</strong> zaroori hai.</p>
+                    <p class="text-[11px] text-amber-300/80 mt-0.5">WhatsApp account ko Meta automated spam ban se bachane ke liye har message ke beech <strong>45 second ka cooling gap</strong> zaroori hai.</p>
                 </div>
             </div>
             <div class="flex items-center gap-3 bg-dark-950/80 border border-amber-500/30 px-3.5 py-2 rounded-xl">
@@ -1295,7 +1295,7 @@
                                 <i class="fa-solid fa-user text-cyan-400 text-[11px]"></i>
                                 <span>Your Full Name (Sender):</span>
                             </label>
-                            <input type="text" id="cfgSenderName" placeholder="Mohammad Hamza" value="Mohammad Hamza" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
+                            <input type="text" id="cfgSenderName" placeholder="e.g. Alex Morgan" value="" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
                             <span class="text-[10px] text-slate-400 block">Appears in greetings & signature</span>
                         </div>
 
@@ -1304,7 +1304,7 @@
                                 <i class="fa-solid fa-briefcase text-cyan-400 text-[11px]"></i>
                                 <span>Agency / Brand Name:</span>
                             </label>
-                            <input type="text" id="cfgAgencyName" placeholder="HRS Web Solutions" value="HRS Web Solutions" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
+                            <input type="text" id="cfgAgencyName" placeholder="e.g. Apex Growth Studio" value="" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
                             <span class="text-[10px] text-slate-400 block">Shown as your consulting company</span>
                         </div>
 
@@ -1313,7 +1313,7 @@
                                 <i class="fa-brands fa-whatsapp text-emerald-400 text-[12px]"></i>
                                 <span>WhatsApp Phone Number:</span>
                             </label>
-                            <input type="text" id="cfgSenderPhone" placeholder="+91 8808129388" value="+91 8808129388" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-mono placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
+                            <input type="text" id="cfgSenderPhone" placeholder="e.g. +1 555 123 4567" value="" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-mono placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
                             <span class="text-[10px] text-slate-400 block">Format with country code (e.g. +91...)</span>
                         </div>
 
@@ -1322,7 +1322,7 @@
                                 <i class="fa-solid fa-globe text-cyan-400 text-[11px]"></i>
                                 <span>Portfolio / Store URL:</span>
                             </label>
-                            <input type="text" id="cfgPortfolioUrl" placeholder="https://arabiansshoppingzone.shop" value="https://arabiansshoppingzone.shop" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
+                            <input type="text" id="cfgPortfolioUrl" placeholder="e.g. https://myagencyshowcase.com" value="" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 text-xs focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition">
                             <span class="text-[10px] text-slate-400 block">Proof link injected into AI pitches</span>
                         </div>
                     </div>
@@ -1787,7 +1787,7 @@
             </div>
             <h3 class="text-base font-bold text-white mb-1" id="antiBanModalTitle">Daily Safe Limit Reached!</h3>
             <p class="text-xs text-slate-300 mb-4" id="antiBanModalDesc">
-                Aapne aaj ki safe outreach limit cross kar li hai. WhatsApp (+91 8808129388) ko Meta ke automated ban se bachane ke liye recommended hai ki aap aaj outreach stop karein aur kal subah 9 baje resume karein.
+                Aapne aaj ki safe outreach limit cross kar li hai. Aapke WhatsApp account ko Meta ke automated ban se bachane ke liye recommended hai ki aap aaj outreach stop karein aur kal subah 9 baje resume karein.
             </p>
             <div class="bg-red-950/40 border border-red-500/20 rounded-xl p-3 text-left text-xs mb-5 space-y-1 text-slate-300">
                 <div class="flex justify-between font-semibold text-slate-200">
@@ -2463,9 +2463,9 @@
 
             const cleanPhone = lead.phone.replace(/[^0-9]/g, '');
             const bizName = lead.business_name || lead.name || 'Owner';
-            const senderName = getSetting('senderName') || (currentUser ? currentUser.name : 'Mohammad Hamza');
+            const senderName = getSetting('senderName') || (currentUser ? currentUser.name : 'Alex Morgan');
             const agencyName = getSetting('agencyName') || 'HRS Web Solutions';
-            const portfolioUrl = getSetting('portfolioUrl') || 'https://arabiansshoppingzone.shop';
+            const portfolioUrl = getSetting('portfolioUrl') || 'https://myagencyshowcase.com';
 
             const defaultPitch = lead.pitch_message || lead.video_hook || lead.web_hook || 
                 `Hi ${bizName} team! ${senderName} here from ${agencyName}. I saw your profile and loved your work. We help high-ticket brands scale client acquisitions with dedicated digital systems. Here is our client showcase: ${portfolioUrl}. Would love to share a free personalized roadmap!`;
@@ -2495,9 +2495,9 @@
             }
 
             const bizName = lead.business_name || lead.name || 'Owner';
-            const senderName = getSetting('senderName') || (currentUser ? currentUser.name : 'Mohammad Hamza');
+            const senderName = getSetting('senderName') || (currentUser ? currentUser.name : 'Alex Morgan');
             const agencyName = getSetting('agencyName') || 'HRS Web Solutions';
-            const portfolioUrl = getSetting('portfolioUrl') || 'https://arabiansshoppingzone.shop';
+            const portfolioUrl = getSetting('portfolioUrl') || 'https://myagencyshowcase.com';
 
             const subject = `Quick proposal for ${bizName} (${agencyName})`;
             const body = `Hi ${bizName} Leadership Team,
@@ -2560,9 +2560,9 @@ ${agencyName}`;
             activePitchTab = defaultTab;
 
             const bizName = lead.business_name || lead.name || 'Company';
-            const senderName = getSetting('senderName') || 'Mohammad Hamza';
+            const senderName = getSetting('senderName') || 'Alex Morgan';
             const agencyName = getSetting('agencyName') || 'HRS Web Solutions';
-            const portfolioUrl = getSetting('portfolioUrl') || 'https://arabiansshoppingzone.shop';
+            const portfolioUrl = getSetting('portfolioUrl') || 'https://myagencyshowcase.com';
 
             document.getElementById("modalBizName").innerText = bizName;
             document.getElementById("modalCountryBadge").innerText = `${lead.country || 'Global'} • ${lead.city || ''}`;
@@ -2702,9 +2702,9 @@ ${agencyName}`;
         function regenerateFreshPitch() {
             if (!activeModalLead) return;
             const bName = activeModalLead.business_name || activeModalLead.name;
-            const sender = getSetting('senderName') || 'Mohammad Hamza';
+            const sender = getSetting('senderName') || 'Alex Morgan';
             const agency = getSetting('agencyName') || 'HRS Web Solutions';
-            const showcase = getSetting('portfolioUrl') || 'https://arabiansshoppingzone.shop';
+            const showcase = getSetting('portfolioUrl') || 'https://myagencyshowcase.com';
 
             showToast("Generating fresh psychology pitch angle...");
             setTimeout(() => {
@@ -3069,20 +3069,20 @@ Growth Consultant | ${agency}`;
         function loadSettings() {
             try {
                 const s = JSON.parse(localStorage.getItem(LS_SETTINGS) || '{}');
-                if (document.getElementById("cfgSenderName")) document.getElementById("cfgSenderName").value = s.senderName || 'Mohammad Hamza';
+                if (document.getElementById("cfgSenderName")) document.getElementById("cfgSenderName").value = s.senderName || 'Alex Morgan';
                 if (document.getElementById("cfgAgencyName")) document.getElementById("cfgAgencyName").value = s.agencyName || 'HRS Web Solutions';
-                if (document.getElementById("cfgSenderPhone")) document.getElementById("cfgSenderPhone").value = s.senderPhone || '+91 8808129388';
-                if (document.getElementById("cfgPortfolioUrl")) document.getElementById("cfgPortfolioUrl").value = s.portfolioUrl || 'https://arabiansshoppingzone.shop';
+                if (document.getElementById("cfgSenderPhone")) document.getElementById("cfgSenderPhone").value = s.senderPhone || '+1 555 123 4567';
+                if (document.getElementById("cfgPortfolioUrl")) document.getElementById("cfgPortfolioUrl").value = s.portfolioUrl || 'https://myagencyshowcase.com';
                 if (document.getElementById("cfgGeminiKey")) document.getElementById("cfgGeminiKey").value = s.geminiKey || '';
             } catch (e) {}
         }
 
         function saveSettings() {
             const s = {
-                senderName: document.getElementById("cfgSenderName")?.value || 'Mohammad Hamza',
+                senderName: document.getElementById("cfgSenderName")?.value || 'Alex Morgan',
                 agencyName: document.getElementById("cfgAgencyName")?.value || 'HRS Web Solutions',
-                senderPhone: document.getElementById("cfgSenderPhone")?.value || '+91 8808129388',
-                portfolioUrl: document.getElementById("cfgPortfolioUrl")?.value || 'https://arabiansshoppingzone.shop',
+                senderPhone: document.getElementById("cfgSenderPhone")?.value || '+1 555 123 4567',
+                portfolioUrl: document.getElementById("cfgPortfolioUrl")?.value || 'https://myagencyshowcase.com',
                 geminiKey: document.getElementById("cfgGeminiKey")?.value || ''
             };
             localStorage.setItem(LS_SETTINGS, JSON.stringify(s));
