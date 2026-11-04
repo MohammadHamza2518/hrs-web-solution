@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#040711">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Outreach Studio PRO • Enterprise CRM & Global Leads Engine</title>
     <link rel="icon" type="image/png" href="assets/images/hrs_icon.png">
     <!-- Tailwind CSS -->
@@ -53,6 +56,29 @@
         .glow-hover:hover {
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
             border-color: rgba(6, 182, 212, 0.6);
+        }
+        /* Desktop Only Workspace Media Rules */
+        @media (max-width: 1023px) {
+            body:not(.crm-mobile-override) #desktopWorkspaceWrapper {
+                display: none !important;
+            }
+            body:not(.crm-mobile-override) #desktopOnlyBlocker {
+                display: flex !important;
+            }
+            body:not(.crm-mobile-override) #onboardingGatekeeper {
+                display: none !important;
+            }
+        }
+        @media (min-width: 1024px) {
+            #desktopOnlyBlocker {
+                display: none !important;
+            }
+        }
+        .crm-mobile-override #desktopWorkspaceWrapper {
+            display: block !important;
+        }
+        .crm-mobile-override #desktopOnlyBlocker {
+            display: none !important;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -350,6 +376,125 @@
 
 
     
+    <!-- ==================== DESKTOP-ONLY WORKSPACE NOTICE (MOBILE & TABLET VIEWPORTS) ==================== -->
+    <div id="desktopOnlyBlocker" class="lg:hidden min-h-screen w-full bg-[#040711] text-slate-100 flex flex-col justify-between p-5 sm:p-8 relative overflow-hidden select-none" style="background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px); background-size: 28px 28px;">
+        
+        <!-- Ambient Cyber Glows -->
+        <div class="fixed top-0 left-1/2 -translate-x-1/2 w-80 h-80 bg-gradient-to-b from-cyan-500/20 via-blue-600/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        <div class="fixed bottom-0 right-0 w-64 h-64 bg-purple-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Top Header Strip -->
+        <div class="flex items-center justify-between pb-4 border-b border-white/[0.08] relative z-10">
+            <a href="/" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-slate-900 border border-cyan-500/40 p-1.5 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                    <img src="assets/images/hrs_icon.png" alt="HRS" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <div class="text-sm font-extrabold text-white tracking-tight flex items-center gap-1.5 font-heading">
+                        <span>OUTREACH STUDIO</span>
+                        <span class="px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[9px] font-mono font-bold border border-cyan-500/30">PRO</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-mono">Workstation v2.6</span>
+                </div>
+            </a>
+            <a href="/" class="px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.1] text-xs text-slate-300 hover:text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                <span>Home</span>
+            </a>
+        </div>
+
+        <!-- Center Content Card -->
+        <div class="my-auto py-8 text-center max-w-md mx-auto relative z-10 w-full">
+            
+            <!-- Animated Cyber Workstation Hologram -->
+            <div class="relative inline-flex items-center justify-center mb-5">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-tr from-cyan-500/20 via-blue-600/15 to-purple-600/20 border border-cyan-500/40 flex items-center justify-center shadow-2xl shadow-cyan-500/30">
+                    <i class="fa-solid fa-laptop-code text-3xl sm:text-4xl text-cyan-300"></i>
+                </div>
+                <!-- Pulsing outer ring -->
+                <span class="absolute -inset-2 rounded-3xl border border-cyan-500/30 animate-pulse pointer-events-none"></span>
+            </div>
+
+            <!-- Status Pill -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono font-bold mb-3 uppercase tracking-wider">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                <span>Desktop Workspace Exclusive</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-xl sm:text-2xl font-black text-white font-heading tracking-tight mb-2.5">
+                Switch to a Desktop or Laptop for Full Studio Power
+            </h1>
+
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-5">
+                Outreach Studio Pro is engineered exclusively for desktop displays (1024px+). Multi-column prospecting pipelines, side-by-side Multi-AI pitch generation (Claude 3.7 / GPT-4o), and 1-click WhatsApp automation require a full-sized screen.
+            </p>
+
+            <!-- 3 Mini Feature Badges -->
+            <div class="space-y-2 text-left mb-6">
+                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-white/[0.08] flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-table-columns text-xs"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-white">Dual-Pane Pipeline View</div>
+                        <div class="text-[10px] text-slate-400">Review digital audits and pitch high-ticket leads side-by-side</div>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-white/[0.08] flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-microchip text-xs"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-white">Multi-AI Pitch Studio</div>
+                        <div class="text-[10px] text-slate-400">Simultaneous prompt tuning with Claude 3.7 Sonnet & GPT-4o</div>
+                    </div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-white/[0.08] flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-shield-halved text-xs"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-white">Anti-Ban Dispatch Guard</div>
+                        <div class="text-[10px] text-slate-400">Paced multi-tab WhatsApp & email outreach protection</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primary Actions -->
+            <div class="space-y-2.5">
+                <!-- Copy Studio Link Button -->
+                <button type="button" onclick="copyCrmLink(this)" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-blue-600/30 transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]">
+                    <i class="fa-solid fa-copy text-sm"></i>
+                    <span>Copy Studio Link (Open on PC / Laptop)</span>
+                </button>
+
+                <!-- Return Home Button -->
+                <a href="/" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/[0.1] text-slate-200 font-semibold text-xs transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-globe text-xs text-slate-400"></i>
+                    <span>Back to Website &amp; Features</span>
+                </a>
+            </div>
+
+            <!-- Bypass / Force Mobile View Option -->
+            <div class="mt-4 text-[11px] text-slate-400">
+                <span>Need quick mobile inspection?</span>
+                <button type="button" onclick="enableMobileOverride()" class="text-cyan-400 hover:text-cyan-300 font-semibold underline ml-1 cursor-pointer">
+                    Continue in Desktop Mode anyway &rarr;
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="text-center pt-3 border-t border-white/[0.06] text-[10px] text-slate-400 font-mono relative z-10">
+            <span>&copy; 2026 HRS Web Solutions &bull; Outreach Studio PRO</span>
+        </div>
+
+    </div>
+
+    <!-- ==================== DESKTOP WORKSPACE WRAPPER (1024px+ VIEWPORTS) ==================== -->
+    <div id="desktopWorkspaceWrapper" class="hidden lg:block w-full min-h-screen">
     <!-- Mac OS Window & App Navigation Bar -->
     <div class="bg-slate-900/95 border-b border-white/[0.08] px-4 sm:px-6 py-2 flex flex-col sm:flex-row items-center justify-between gap-2.5">
         <div class="flex items-center gap-2">
@@ -1808,6 +1953,9 @@
         </div>
     </div>
 
+    </div>
+    <!-- /desktopWorkspaceWrapper -->
+
     <!-- Notification Toast -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-xl bg-dark-800 border border-cyan-500/40 text-xs text-white shadow-2xl flex items-center gap-2 animate-bounce">
         <i class="fa-solid fa-circle-check text-emerald-400"></i>
@@ -1827,6 +1975,51 @@
         const LS_WA_TODAY = 'osp_daily_wa_count';
         const LS_EMAIL_TODAY = 'osp_daily_email_count';
         const LS_WA_COOLDOWN = 'osp_wa_cooldown';
+
+        // =========================================================================
+        // MOBILE OVERRIDE & COPY LINK HELPERS (DESKTOP-ONLY GUARD)
+        // =========================================================================
+        function copyCrmLink(btn) {
+            const link = window.location.origin + '/crm';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(link).then(() => {
+                    const oldHtml = btn.innerHTML;
+                    btn.innerHTML = '<i class="fa-solid fa-check text-emerald-300"></i> <span class="text-emerald-200">Link Copied! Open on your PC</span>';
+                    btn.classList.add('from-emerald-600', 'to-teal-600');
+                    setTimeout(() => {
+                        btn.innerHTML = oldHtml;
+                        btn.classList.remove('from-emerald-600', 'to-teal-600');
+                    }, 3500);
+                }).catch(() => {
+                    fallbackCopy(link);
+                });
+            } else {
+                fallbackCopy(link);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            alert("Studio link copied to clipboard!\n" + text + "\n\nSend this to your WhatsApp or Email and open on your computer.");
+        }
+
+        function enableMobileOverride() {
+            sessionStorage.setItem('osp_mobile_override', 'true');
+            document.body.classList.add('crm-mobile-override');
+            const blocker = document.getElementById('desktopOnlyBlocker');
+            const wrapper = document.getElementById('desktopWorkspaceWrapper');
+            if (blocker) blocker.classList.add('hidden');
+            if (wrapper) wrapper.classList.remove('hidden', 'lg:block');
+        }
+
+        if (sessionStorage.getItem('osp_mobile_override') === 'true') {
+            document.body.classList.add('crm-mobile-override');
+        }
 
         let currentUser = null;
         let leadsVault = [];

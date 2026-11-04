@@ -256,6 +256,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. Checkout Modal Controller & Razorpay Live Gateway (BlackRoots Key)
   window.openCheckoutModal = function() {
+    // Close mobile nav drawer if open
+    const mobileDrawer = document.getElementById('mobileNavDrawer');
+    const mobileBtn = document.getElementById('mobileMenuToggle');
+    if (mobileDrawer && !mobileDrawer.classList.contains('hidden')) {
+      mobileDrawer.classList.add('hidden');
+      if (mobileBtn) mobileBtn.innerHTML = '<i class="fas fa-bars text-lg"></i>';
+    }
+
     const modal = document.getElementById('checkoutModal');
     const formView = document.getElementById('checkoutFormView');
     const successView = document.getElementById('checkoutSuccessView');
