@@ -700,6 +700,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.handlePaymentSuccess = function(response, customer) {
     const paymentId = response.razorpay_payment_id || ('pay_' + Date.now());
     const randomKey = `OSP-PRO-${Math.floor(1000+Math.random()*9000)}-${Math.floor(1000+Math.random()*9000)}-LIVE`;
+    const nichesDisplay = customer.targetNichesDisplay || 'All Industries (52+ Leads)';
+    const nichesList = (customer.targetNiches && customer.targetNiches.length) ? customer.targetNiches : ['all'];
 
     // Fetch custom Google Drive download link from admin settings or default
     let downloadLink = 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro';
@@ -718,8 +720,6 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('osp_download_link', downloadLink);
 
       // Auto-authenticate buyer into Cloud CRM
-      const nichesDisplay = customer.targetNichesDisplay || 'All Industries (52+ Leads)';
-      const nichesList = (customer.targetNiches && customer.targetNiches.length) ? customer.targetNiches : ['all'];
 
       const authPayload = {
         name: customer.name,

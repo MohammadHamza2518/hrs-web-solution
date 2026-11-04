@@ -162,7 +162,10 @@
           </div>
 
           <div>
-            <label class="block text-[11px] font-mono text-slate-300 uppercase tracking-wider mb-1.5">Lifetime License Key</label>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-[11px] font-mono text-slate-300 uppercase tracking-wider">Lifetime License Key</label>
+              <button type="button" onclick="autoFillTrialLicense()" class="text-[10px] text-cyan-400 hover:text-cyan-300 transition font-mono underline cursor-pointer">Testing? Auto-fill Trial Key</button>
+            </div>
             <div class="relative">
               <i class="fas fa-certificate absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
               <input type="text" id="activateKey" required placeholder="OSP-PRO-XXXX-XXXX-LIVE" class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/[0.1] text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none transition font-mono uppercase tracking-wider">
@@ -258,9 +261,30 @@
     const LS_USER = 'osp_auth_user';
     const LS_ORDERS = 'osp_orders_db';
 
-    // Auto-redirect if already logged in
+    function autoFillTrialLicense() {
+      const keyInput = document.getElementById('activateKey');
+      if (keyInput) keyInput.value = 'OSP-PRO-TEST-CLIENT-' + Math.floor(1000 + Math.random() * 9000);
+      const nameInput = document.getElementById('activateName');
+      if (nameInput && !nameInput.value) nameInput.value = 'Mohammad Hamza';
+      const emailInput = document.getElementById('activateEmail');
+      if (emailInput && !emailInput.value) emailInput.value = 'hamza@agency.com';
+      const passInput = document.getElementById('activatePassword');
+      if (passInput && !passInput.value) passInput.value = '123456';
+    }
+
+    // Auto-redirect if already logged in (allows ?new=1 or ?test=1 to reset for testing)
     document.addEventListener('DOMContentLoaded', () => {
       try {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('logout') === '1' || urlParams.get('new') === '1' || urlParams.get('test') === '1') {
+          localStorage.removeItem(LS_USER);
+          if (urlParams.get('mode') === 'activate' || urlParams.get('test') === '1') {
+            switchLoginMode('activate');
+            autoFillTrialLicense();
+          }
+          return;
+        }
+
         const u = JSON.parse(localStorage.getItem(LS_USER));
         if (u && (u.email || u.licenseKey)) {
           window.location.href = '/crm';
