@@ -229,7 +229,7 @@
         <!-- Need Help Footer -->
         <div class="mt-6 text-center text-[11px] text-slate-500">
           <span>Need help or haven't bought yet?</span>
-          <a href="/#pricing" class="text-blue-400 hover:underline ml-1">Buy License for &#8377;1,999</a>
+          <a href="/#pricing" class="text-blue-400 hover:underline ml-1">Buy License (from &#8377;1,999)</a>
           <span class="mx-1">&bull;</span>
           <a href="https://wa.me/918808129388" target="_blank" class="text-emerald-400 hover:underline">WhatsApp Support</a>
         </div>
@@ -354,7 +354,26 @@
       const email = document.getElementById('loginEmail').value.trim().toLowerCase();
       const passOrKey = document.getElementById('loginPassword').value.trim();
 
-      // Check registered orders or users
+      if (!email) {
+        showAlert("Please enter your registered email address or WhatsApp number.");
+        return;
+      }
+      if (!passOrKey) {
+        showAlert("Please enter your password or Lifetime License Key.");
+        return;
+      }
+
+      // Check registered custom users
+      let foundUser = null;
+      try {
+        const users = JSON.parse(localStorage.getItem('osp_registered_users')) || [];
+        foundUser = users.find(u => 
+          (u.email && u.email.toLowerCase() === email) ||
+          (u.licenseKey && u.licenseKey.toLowerCase() === passOrKey.toLowerCase())
+        );
+      } catch(e) {}
+
+      // Check registered orders database
       let foundOrder = null;
       try {
         const orders = JSON.parse(localStorage.getItem(LS_ORDERS)) || [];
@@ -365,28 +384,28 @@
         );
       } catch(e) {}
 
-      // Check registered custom users
-      let foundUser = null;
-      try {
-        const users = JSON.parse(localStorage.getItem('osp_registered_users')) || [];
-        foundUser = users.find(u => 
-          u.email.toLowerCase() === email && 
-          (u.password === passOrKey || u.licenseKey.toLowerCase() === passOrKey.toLowerCase())
-        );
-      } catch(e) {}
-
-      // Also allow direct login if passOrKey starts with OSP- or is demo/paid
       const isLicenseKeyMatch = passOrKey.toUpperCase().startsWith('OSP-');
-      const isPaidFlag = localStorage.getItem('osp_license_paid') === 'true';
 
-      if (foundUser || foundOrder || isLicenseKeyMatch || (isPaidFlag && email)) {
-        const userName = foundUser ? foundUser.name : (foundOrder ? foundOrder.name : (email.split('@')[0] || 'Valued Founder'));
-        const userKey = foundUser ? foundUser.licenseKey : (foundOrder ? foundOrder.licenseKey : (isLicenseKeyMatch ? passOrKey.toUpperCase() : 'OSP-PRO-VERIFIED-LIVE'));
+      // Security check: If user has a registered password, enforce exact match
+      if (foundUser && foundUser.password) {
+        if (foundUser.password !== passOrKey && (!foundUser.licenseKey || foundUser.licenseKey.toLowerCase() !== passOrKey.toLowerCase())) {
+          showAlert("Incorrect password or license key. Please check your credentials or enter your OSP-PRO key.");
+          return;
+        }
+      }
+
+      if (foundUser || foundOrder || isLicenseKeyMatch) {
+        const userName = foundUser?.name || foundOrder?.name || (email.includes('@') ? email.split('@')[0] : 'Valued Founder');
+        const userKey = foundUser?.licenseKey || foundOrder?.licenseKey || (isLicenseKeyMatch ? passOrKey.toUpperCase() : 'OSP-PRO-VERIFIED-LIVE');
+        const userNiches = foundUser?.targetNiches || foundOrder?.targetNiches || ['all'];
+        const userNichesDisplay = foundUser?.targetNichesDisplay || foundOrder?.targetNichesDisplay || 'All Services (Full Agency)';
 
         const authPayload = {
           name: userName,
           email: email,
           licenseKey: userKey,
+          targetNiches: userNiches,
+          targetNichesDisplay: userNichesDisplay,
           tier: 'Lifetime Commercial Pro',
           loginAt: new Date().toISOString()
         };
@@ -420,6 +439,16 @@
       };
       const nicheDisplay = nicheLabels[nicheVal] || "All Services (Full Agency)";
 
+      if (!name) {
+        showAlert("Please enter your Full Name.");
+        return;
+      }
+
+      if (!email || !email.includes('@')) {
+        showAlert("Please enter a valid email address.");
+        return;
+      }
+
       if (!key.startsWith('OSP-')) {
         showAlert("Invalid License Key format. Key must start with 'OSP-PRO-' or 'OSP-'.");
         return;
@@ -436,7 +465,7 @@
         users = JSON.parse(localStorage.getItem('osp_registered_users')) || [];
       } catch(e) {}
 
-      const existingIndex = users.findIndex(u => u.email === email);
+      const existingIndex = users.findIndex(u => u.email === email || u.licenseKey === key);
       const newUser = {
         name,
         email,
@@ -463,7 +492,7 @@
             name: name,
             email: email,
             phone: 'Online Activation',
-            amount: 1999,
+            amount: nicheVal === 'all' ? 3200 : 1999,
             gateway: 'License Activation',
             paymentId: 'pay_activated_' + Date.now().toString().slice(-6),
             licenseKey: key,
@@ -497,6 +526,8 @@
         name: "Founder Demo Account",
         email: "demo@hrswebsolution.online",
         licenseKey: "OSP-PRO-DEMO-PREVIEW",
+        targetNiches: ["all"],
+        targetNichesDisplay: "All Services / Full Agency",
         tier: "Lifetime Commercial Pro (Demo)",
         isDemo: true,
         loginAt: new Date().toISOString()

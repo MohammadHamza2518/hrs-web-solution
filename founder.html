@@ -2534,6 +2534,54 @@ CRITICAL RULES (MUST FOLLOW STRICTLY):
       return text;
     }
 
+    // ==================== BYOK AI KEY MODAL HELPERS ====================
+    function openKeySettingsModal() {
+      const m = document.getElementById('aiKeySettingsModal');
+      if (m) {
+        try {
+          const keys = JSON.parse(localStorage.getItem('osp_custom_ai_keys') || '{}');
+          if (document.getElementById('inputGeminiKey')) document.getElementById('inputGeminiKey').value = keys.gemini || '';
+          if (document.getElementById('inputOpenAIKey')) document.getElementById('inputOpenAIKey').value = keys.openai || '';
+          if (document.getElementById('inputClaudeKey')) document.getElementById('inputClaudeKey').value = keys.claude || '';
+        } catch(e) {}
+        m.classList.remove('hidden');
+      }
+    }
+
+    function closeAIKeyModal() {
+      const m = document.getElementById('aiKeySettingsModal');
+      if (m) m.classList.add('hidden');
+    }
+
+    function saveAIKeys() {
+      const keys = {
+        gemini: (document.getElementById('inputGeminiKey')?.value || '').trim(),
+        openai: (document.getElementById('inputOpenAIKey')?.value || '').trim(),
+        claude: (document.getElementById('inputClaudeKey')?.value || '').trim()
+      };
+      localStorage.setItem('osp_custom_ai_keys', JSON.stringify(keys));
+      closeAIKeyModal();
+      if (typeof showToast === 'function') {
+        showToast('AI API Keys securely saved in browser!');
+      } else {
+        alert('AI API Keys securely saved!');
+      }
+    }
+
+    function clearSavedAIKeys() {
+      if (confirm('Clear all saved AI keys from this browser?')) {
+        localStorage.removeItem('osp_custom_ai_keys');
+        if (document.getElementById('inputGeminiKey')) document.getElementById('inputGeminiKey').value = '';
+        if (document.getElementById('inputOpenAIKey')) document.getElementById('inputOpenAIKey').value = '';
+        if (document.getElementById('inputClaudeKey')) document.getElementById('inputClaudeKey').value = '';
+        if (typeof showToast === 'function') {
+          showToast('Saved AI keys cleared.');
+        } else {
+          alert('Saved AI keys cleared.');
+        }
+      }
+    }
+
   </script>
 
   <!-- =========================================================================
