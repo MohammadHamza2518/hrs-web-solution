@@ -234,8 +234,8 @@
             <i class="fas fa-certificate text-amber-300 text-[10px]"></i>
             <span id="quotaCategoryName">Loading Category...</span>
           </span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-[11px]" id="quotaAvailableCount">
-            -- Verified Quota
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-[11px]" id="quotaAvailableCount">
+            Verified High-Ticket Vault
           </span>
         </div>
         <p class="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed" id="quotaDescription">
@@ -922,7 +922,7 @@
         skillName: 'Short-Form Video Editing & Reels',
         count: 10,
         icon: 'fa-film',
-        desc: '10 Verified high-ticket creators & podcast channels in Dubai and London hiring video editors.'
+        desc: 'Verified high-ticket creators & podcast channels in Dubai and London hiring video editors.'
       },
       graphic_design: {
         industry: 'd2c_ecommerce',
@@ -930,7 +930,7 @@
         skillName: 'Graphic Design & Brand Identity',
         count: 10,
         icon: 'fa-palette',
-        desc: '10 Verified D2C brands spending AED 200k+ on ads needing lookbooks, carousels & Meta ad creatives.'
+        desc: 'Verified D2C brands spending AED 200k+ on ads needing lookbooks, carousels & Meta ad creatives.'
       },
       web_dev: {
         industry: 'real_estate',
@@ -938,7 +938,7 @@
         skillName: 'Web Development & CRO Funnels',
         count: 8,
         icon: 'fa-building',
-        desc: '8 Verified high-ticket developers & interior firms needing speed, mobile UI & WhatsApp booking funnels.'
+        desc: 'Verified high-ticket developers & interior firms needing speed, mobile UI & WhatsApp booking funnels.'
       },
       marketing_ads: {
         industry: 'car_rentals_detailing',
@@ -946,7 +946,7 @@
         skillName: 'Paid Ads & Social Media Marketing',
         count: 8,
         icon: 'fa-car-side',
-        desc: '8 Verified supercar rental & detailing brands in Dubai needing high-ROAS Meta & TikTok ads.'
+        desc: 'Verified supercar rental & detailing brands in Dubai needing high-ROAS Meta & TikTok ads.'
       },
       automation_ai: {
         industry: 'salons_clinics',
@@ -954,7 +954,7 @@
         skillName: 'AI Automation & Chatbots',
         count: 8,
         icon: 'fa-spa',
-        desc: '8 Verified aesthetic clinics & medical spas needing automated patient lead capture & booking bots.'
+        desc: 'Verified aesthetic clinics & medical spas needing automated patient lead capture & booking bots.'
       },
       all: {
         industry: 'all',
@@ -962,7 +962,7 @@
         skillName: 'Full Agency (All Services)',
         count: 52,
         icon: 'fa-earth-americas',
-        desc: 'All 52 verified high-ticket companies across Dubai, UK & Zurich across all 6 high-margin niches.'
+        desc: 'Verified high-ticket enterprise companies across Dubai, UK & Zurich across all high-margin niches.'
       }
     };
 
@@ -982,17 +982,17 @@
 
       if (catEl) catEl.textContent = planData.name;
       if (descEl) descEl.textContent = planData.desc;
-      if (availEl) availEl.textContent = `${planData.count} Verified Quota`;
-      if (activeEl) activeEl.textContent = `${leadsVault.length} / ${planData.count} In Pipeline`;
+      if (availEl) availEl.textContent = 'Verified High-Ticket Vault';
+      if (activeEl) activeEl.textContent = `${leadsVault.length} In Active Pipeline`;
       if (iconBox) iconBox.innerHTML = `<i class="fas ${planData.icon} text-blue-400"></i>`;
       if (emptyCat) emptyCat.textContent = planData.name;
-      if (emptyBtn) emptyBtn.textContent = `Extract My ${planData.count} Licensed Leads Now →`;
+      if (emptyBtn) emptyBtn.textContent = `Extract Category Prospects Into Pipeline →`;
 
       if (btnText) {
         if (leadsVault.length === 0) {
-          btnText.textContent = `Extract My Leads (${planData.count} Ready)`;
+          btnText.textContent = `Extract Prospects`;
         } else {
-          btnText.textContent = `Re-Extract Leads (${planData.count})`;
+          btnText.textContent = `Reload Prospects`;
         }
       }
     }
