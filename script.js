@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 6. Checkout Modal Controller & Razorpay Live Gateway (BlackRoots Key)
-  window.openCheckoutModal = function() {
+  window.openCheckoutModal = function(planType) {
     // Close mobile nav drawer if open
     const mobileDrawer = document.getElementById('mobileNavDrawer');
     const mobileBtn = document.getElementById('mobileMenuToggle');
@@ -265,6 +265,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const modal = document.getElementById('checkoutModal');
+    if (modal && typeof window.toggleNicheSelection === 'function') {
+      if (planType === 'custom') {
+        window.toggleNicheSelection('web_dev');
+      } else {
+        window.toggleNicheSelection('all');
+      }
+    }
     const formView = document.getElementById('checkoutFormView');
     const successView = document.getElementById('checkoutSuccessView');
     if (modal) {
@@ -344,6 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (emailInput) emailInput.value = email;
 
     const cleanPhone = phone.replace(/\D/g, '') || '9876543210';
+    const isAllBundle = window.selectedNichesState && window.selectedNichesState.includes('all');
+    const amountVal = isAllBundle ? 3200 : 1999;
+    const planTierName = isAllBundle ? 'All Services Master Bundle (₹3,200)' : 'Custom Specialist Plan (₹1,999)';
     const nichesData = window.getSelectedNichesData ? window.getSelectedNichesData() : { ids: ['all'], displayString: 'All Industries (52+ Leads)', totalCount: 52 };
 
     const mockResponse = {
@@ -354,6 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
       name: name,
       phone: cleanPhone,
       email: email,
+      amount: amountVal,
+      planTier: planTierName,
       targetNiches: nichesData.ids,
       targetNichesDisplay: nichesData.displayString,
       totalLeadsCount: nichesData.totalCount
@@ -370,13 +382,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // =========================================================================
   // FREELANCER / AGENCY SERVICE CATEGORY CONTROLLER (CHECKOUT MODAL)
+  // Max 3 Categories for Custom Plan (₹1,999) | Master Bundle for All 5 (₹3,200)
   // =========================================================================
   window.selectedNichesState = ['all'];
+
+  window.updatePlanPricingUI = function(isAll) {
+    const modalOldPrice = document.getElementById('checkoutModalOldPrice');
+    const modalPrice = document.getElementById('checkoutModalPrice');
+    const modalSaveBadge = document.getElementById('checkoutModalSaveBadge');
+    const modalSubtitle = document.getElementById('checkoutModalPlanSubtitle');
+    const btnPayAmount = document.getElementById('btnPayAmount');
+    const btnPayOldAmount = document.getElementById('btnPayOldAmount');
+    const nicheCountBadge = document.getElementById('nicheCountBadge');
+
+    if (isAll) {
+      if (modalOldPrice) modalOldPrice.textContent = '₹14,999';
+      if (modalPrice) modalPrice.textContent = '₹3,200';
+      if (modalSaveBadge) modalSaveBadge.textContent = 'SAVE 78%';
+      if (modalSubtitle) modalSubtitle.textContent = 'All-In-One Full Agency Master Bundle • Lifetime Commercial License';
+      if (btnPayAmount) btnPayAmount.textContent = '₹3,200';
+      if (btnPayOldAmount) btnPayOldAmount.textContent = '₹14,999';
+      if (nicheCountBadge) {
+        nicheCountBadge.textContent = 'All 5 Included (₹3,200)';
+        nicheCountBadge.className = 'text-[10px] font-mono font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded-md border border-amber-500/30';
+      }
+    } else {
+      const activeCount = (window.selectedNichesState && !window.selectedNichesState.includes('all')) 
+        ? window.selectedNichesState.length 
+        : 1;
+
+      if (modalOldPrice) modalOldPrice.textContent = '₹9,999';
+      if (modalPrice) modalPrice.textContent = '₹1,999';
+      if (modalSaveBadge) modalSaveBadge.textContent = 'SAVE 80%';
+      if (modalSubtitle) modalSubtitle.textContent = 'Custom Specialist Plan (Up to 3 Categories) • Lifetime License';
+      if (btnPayAmount) btnPayAmount.textContent = '₹1,999';
+      if (btnPayOldAmount) btnPayOldAmount.textContent = '₹9,999';
+      if (nicheCountBadge) {
+        nicheCountBadge.textContent = `${activeCount} / 3 Selected (₹1,999)`;
+        nicheCountBadge.className = activeCount === 3 
+          ? 'text-[10px] font-mono font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-md border border-emerald-500/30'
+          : 'text-[10px] font-mono font-bold text-cyan-300 bg-cyan-500/20 px-2 py-0.5 rounded-md border border-cyan-500/30';
+      }
+    }
+  };
 
   window.toggleNicheSelection = function(serviceId) {
     const allBox = document.getElementById('niche_all');
     const allCard = document.getElementById('card_niche_all');
     const allChk = document.getElementById('chk_niche_all');
+    const limitNotice = document.getElementById('nicheLimitNotice');
 
     const individualServices = [
       'web_dev', 'video_editing', 'marketing_ads', 
@@ -408,36 +462,74 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (serviceId === 'all') {
-      // User clicked "All Services / Full Agency" master card
+      // User clicked Master "All Services / Full Agency" card (₹3,200)
+      if (limitNotice) limitNotice.classList.add('hidden');
       setMasterUI(true);
       individualServices.forEach(id => setCardUI(id, true));
       window.selectedNichesState = ['all'];
+      window.updatePlanPricingUI(true);
     } else {
-      // User clicked an individual service card -> toggle its state
+      // User clicked an individual category card
       const targetBox = document.getElementById('niche_' + serviceId);
-      const willBeChecked = targetBox ? !targetBox.checked : true;
-      setCardUI(serviceId, willBeChecked);
+      const isCurrentlyAll = window.selectedNichesState && window.selectedNichesState.includes('all');
 
-      // Check how many individual services are currently checked
-      const active = [];
-      individualServices.forEach(id => {
-        const b = document.getElementById('niche_' + id);
-        if (b && b.checked) active.push(id);
-      });
-
-      if (active.length === individualServices.length) {
-        // ALL 5 CATEGORIES ARE CHECKED -> Auto-select master 'All Services' card!
-        setMasterUI(true);
-        window.selectedNichesState = ['all'];
-      } else if (active.length === 0) {
-        // Fallback: If user unchecked everything, reset back to all selected
-        setMasterUI(true);
-        individualServices.forEach(id => setCardUI(id, true));
-        window.selectedNichesState = ['all'];
-      } else {
-        // 1 to 4 categories selected -> Master card is unselected, individual stay active
+      if (isCurrentlyAll) {
+        // Was on Master Bundle -> Switch to Custom Plan (₹1,999) with just this clicked category
+        if (limitNotice) limitNotice.classList.add('hidden');
         setMasterUI(false);
-        window.selectedNichesState = active;
+        individualServices.forEach(id => {
+          setCardUI(id, id === serviceId);
+        });
+        window.selectedNichesState = [serviceId];
+        window.updatePlanPricingUI(false);
+      } else {
+        const isChecked = targetBox ? targetBox.checked : false;
+
+        if (isChecked) {
+          // Unchecking this category
+          if (limitNotice) limitNotice.classList.add('hidden');
+          setCardUI(serviceId, false);
+
+          const active = individualServices.filter(id => {
+            const b = document.getElementById('niche_' + id);
+            return b && b.checked;
+          });
+
+          if (active.length === 0) {
+            // Keep at least this category selected (cannot have 0)
+            setCardUI(serviceId, true);
+            window.selectedNichesState = [serviceId];
+          } else {
+            window.selectedNichesState = active;
+          }
+          window.updatePlanPricingUI(false);
+        } else {
+          // Trying to check an additional category: Enforce strict Max 3 limit!
+          const active = individualServices.filter(id => {
+            const b = document.getElementById('niche_' + id);
+            return b && b.checked;
+          });
+
+          if (active.length >= 3) {
+            // Exceeded 3 categories! Show clear upgrade guidance
+            if (limitNotice) {
+              limitNotice.classList.remove('hidden');
+              if (allCard) {
+                allCard.classList.add('ring-2', 'ring-amber-400');
+                setTimeout(() => allCard.classList.remove('ring-2', 'ring-amber-400'), 1800);
+              }
+            } else {
+              alert('Max 3 categories allowed in the ₹1,999 plan! To unlock all 5 categories, choose the All Services Master Bundle (₹3,200).');
+            }
+            return;
+          }
+
+          if (limitNotice) limitNotice.classList.add('hidden');
+          setCardUI(serviceId, true);
+          active.push(serviceId);
+          window.selectedNichesState = active;
+          window.updatePlanPricingUI(false);
+        }
       }
     }
 
@@ -459,15 +551,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = (window.selectedNichesState && window.selectedNichesState.length) ? window.selectedNichesState : ['all'];
 
     if (state.includes('all')) {
-      badge.textContent = "All Services (Recommended)";
-      badge.className = "text-[10px] font-mono font-bold text-blue-300 bg-blue-500/15 px-2.5 py-0.5 rounded-full border border-blue-500/30 whitespace-nowrap flex-shrink-0";
+      badge.textContent = "All Services Bundle (₹3,200)";
+      badge.className = "text-[10px] font-mono font-bold text-amber-300 bg-amber-500/20 px-2.5 py-0.5 rounded-full border border-amber-500/30 whitespace-nowrap flex-shrink-0";
     } else if (state.length === 1) {
       const name = serviceShortNames[state[0]] || "1 Service";
-      badge.textContent = `${name} (1 Selected)`;
+      badge.textContent = `${name} (1/3 • ₹1,999)`;
       badge.className = "text-[10px] font-mono font-bold text-cyan-300 bg-cyan-500/15 px-2.5 py-0.5 rounded-full border border-cyan-500/30 whitespace-nowrap flex-shrink-0";
     } else {
-      badge.textContent = `${state.length} Services Selected`;
-      badge.className = "text-[10px] font-mono font-bold text-emerald-300 bg-emerald-500/15 px-2.5 py-0.5 rounded-full border border-emerald-500/30 whitespace-nowrap flex-shrink-0";
+      badge.textContent = `${state.length} / 3 Categories (₹1,999)`;
+      badge.className = "text-[10px] font-mono font-bold text-indigo-300 bg-indigo-500/15 px-2.5 py-0.5 rounded-full border border-indigo-500/30 whitespace-nowrap flex-shrink-0";
     }
   }
 
@@ -533,13 +625,18 @@ document.addEventListener('DOMContentLoaded', () => {
       payBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Opening Secure Razorpay Gateway...';
     }
 
-    // Exact key from BlackRoots
+    const isAllBundle = window.selectedNichesState && window.selectedNichesState.includes('all');
+    const paymentAmountPaise = isAllBundle ? 320000 : 199900;
+    const paymentAmountDisplay = isAllBundle ? '₹3,200' : '₹1,999';
+    const planTitle = isAllBundle ? 'Outreach Studio Pro (All Services Master Bundle)' : 'Outreach Studio Pro (Custom 3-Category Plan)';
+
+    // Exact key from BlackRoots with dynamic bundle pricing
     const rzpOptions = {
       key: 'rzp_live_TV9VNPhiYYbB07',
-      amount: 199900, // ₹1,999 in paise
+      amount: paymentAmountPaise,
       currency: 'INR',
       name: 'HRS Web Solutions',
-      description: 'Outreach Studio Pro (Lifetime Commercial License)',
+      description: `${planTitle} (${paymentAmountDisplay} Lifetime)`,
       image: 'https://www.hrswebsolution.online/assets/images/hrs_icon.png',
       prefill: {
         name: name,
@@ -547,9 +644,10 @@ document.addEventListener('DOMContentLoaded', () => {
         email: email || ''
       },
       notes: {
-        product: 'Outreach Studio Pro',
+        product: planTitle,
         license: 'Lifetime Commercial License',
-        price: '₹1,999'
+        price: paymentAmountDisplay,
+        planType: isAllBundle ? 'all_services_master_bundle' : 'custom_specialist_plan'
       },
       theme: {
         color: '#2563EB'
@@ -568,7 +666,16 @@ document.addEventListener('DOMContentLoaded', () => {
           payBtn.innerHTML = originalBtnHtml;
         }
         const nichesData = window.getSelectedNichesData ? window.getSelectedNichesData() : { ids: ['all'], displayString: 'All Industries (52+ Leads)', totalCount: 52 };
-        handlePaymentSuccess(response, { name, phone: cleanPhone, email, targetNiches: nichesData.ids, targetNichesDisplay: nichesData.displayString, totalLeadsCount: nichesData.totalCount });
+        handlePaymentSuccess(response, { 
+          name, 
+          phone: cleanPhone, 
+          email, 
+          amount: isAllBundle ? 3200 : 1999,
+          planTier: planTitle,
+          targetNiches: nichesData.ids, 
+          targetNichesDisplay: nichesData.displayString, 
+          totalLeadsCount: nichesData.totalCount 
+        });
       }
     };
 
