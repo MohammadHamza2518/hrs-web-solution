@@ -443,22 +443,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const badge = document.getElementById('checkoutNicheBadge');
     if (!badge) return;
 
-    const serviceLabels = {
-      all: "All Services (Full Agency)",
-      web_dev: "Web Dev & UI/UX",
+    const serviceShortNames = {
+      web_dev: "Web Dev",
       video_editing: "Video Editing",
-      marketing_ads: "Paid Ads & Marketing",
+      marketing_ads: "Paid Ads",
       graphic_design: "Graphic Design",
-      automation_ai: "AI & Chatbots"
+      automation_ai: "AI Automation"
     };
 
-    if (window.selectedNichesState.includes('all')) {
-      badge.textContent = "All Services (Full Agency)";
-      badge.className = "text-[10px] font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/30";
+    const state = (window.selectedNichesState && window.selectedNichesState.length) ? window.selectedNichesState : ['all'];
+
+    if (state.includes('all')) {
+      badge.textContent = "All Services (Recommended)";
+      badge.className = "text-[10px] font-mono font-bold text-blue-300 bg-blue-500/15 px-2.5 py-0.5 rounded-full border border-blue-500/30 whitespace-nowrap flex-shrink-0";
+    } else if (state.length === 1) {
+      const name = serviceShortNames[state[0]] || "1 Service";
+      badge.textContent = `${name} (1 Selected)`;
+      badge.className = "text-[10px] font-mono font-bold text-cyan-300 bg-cyan-500/15 px-2.5 py-0.5 rounded-full border border-cyan-500/30 whitespace-nowrap flex-shrink-0";
     } else {
-      const names = window.selectedNichesState.map(s => serviceLabels[s] || s);
-      badge.textContent = names.join(', ');
-      badge.className = "text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30";
+      badge.textContent = `${state.length} Services Selected`;
+      badge.className = "text-[10px] font-mono font-bold text-emerald-300 bg-emerald-500/15 px-2.5 py-0.5 rounded-full border border-emerald-500/30 whitespace-nowrap flex-shrink-0";
     }
   }
 
