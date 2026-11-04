@@ -392,46 +392,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeChkClass = "w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all flex-shrink-0";
     const inactiveChkClass = "w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all flex-shrink-0";
 
+    const setMasterUI = (active) => {
+      if (allBox) allBox.checked = active;
+      if (allCard) allCard.className = active ? activeMasterClass : inactiveMasterClass;
+      if (allChk) allChk.className = active ? activeChkClass : inactiveChkClass;
+    };
+
+    const setCardUI = (id, active) => {
+      const b = document.getElementById('niche_' + id);
+      const c = document.getElementById('card_niche_' + id);
+      const k = document.getElementById('chk_niche_' + id);
+      if (b) b.checked = active;
+      if (c) c.className = active ? activeCardClass : inactiveCardClass;
+      if (k) k.className = active ? activeChkClass : inactiveChkClass;
+    };
+
     if (serviceId === 'all') {
+      // User clicked "All Services / Full Agency" master card
+      setMasterUI(true);
+      individualServices.forEach(id => setCardUI(id, true));
       window.selectedNichesState = ['all'];
-      if (allBox) allBox.checked = true;
-      if (allCard) allCard.className = activeMasterClass;
-      if (allChk) allChk.className = activeChkClass;
-
-      individualServices.forEach(id => {
-        const box = document.getElementById('niche_' + id);
-        const card = document.getElementById('card_niche_' + id);
-        const chk = document.getElementById('chk_niche_' + id);
-        if (box) box.checked = false;
-        if (card) card.className = inactiveCardClass;
-        if (chk) chk.className = inactiveChkClass;
-      });
     } else {
-      if (allBox) allBox.checked = false;
-      if (allCard) allCard.className = inactiveMasterClass;
-      if (allChk) allChk.className = inactiveChkClass;
+      // User clicked an individual service card -> toggle its state
+      const targetBox = document.getElementById('niche_' + serviceId);
+      const willBeChecked = targetBox ? !targetBox.checked : true;
+      setCardUI(serviceId, willBeChecked);
 
-      const box = document.getElementById('niche_' + serviceId);
-      const card = document.getElementById('card_niche_' + serviceId);
-      const chk = document.getElementById('chk_niche_' + serviceId);
-      const isChecked = box ? !box.checked : false;
-
-      if (box) box.checked = isChecked;
-      if (card) card.className = isChecked ? activeCardClass : inactiveCardClass;
-      if (chk) chk.className = isChecked ? activeChkClass : inactiveChkClass;
-
+      // Check how many individual services are currently checked
       const active = [];
       individualServices.forEach(id => {
         const b = document.getElementById('niche_' + id);
         if (b && b.checked) active.push(id);
       });
 
-      if (active.length === 0) {
+      if (active.length === individualServices.length) {
+        // ALL 5 CATEGORIES ARE CHECKED -> Auto-select master 'All Services' card!
+        setMasterUI(true);
         window.selectedNichesState = ['all'];
-        if (allBox) allBox.checked = true;
-        if (allCard) allCard.className = activeMasterClass;
-        if (allChk) allChk.className = activeChkClass;
+      } else if (active.length === 0) {
+        // Fallback: If user unchecked everything, reset back to all selected
+        setMasterUI(true);
+        individualServices.forEach(id => setCardUI(id, true));
+        window.selectedNichesState = ['all'];
       } else {
+        // 1 to 4 categories selected -> Master card is unselected, individual stay active
+        setMasterUI(false);
         window.selectedNichesState = active;
       }
     }
