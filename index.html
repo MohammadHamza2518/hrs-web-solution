@@ -1774,107 +1774,119 @@
           </div>
 
           <!-- FREELANCER / AGENCY SERVICE CATEGORY SELECTION -->
-          <div class="pt-1.5 pb-1">
+          <div class="pt-2 pb-1">
             <div class="flex items-center justify-between mb-1.5">
-              <label class="text-[11px] font-bold text-white flex items-center gap-1.5 font-heading">
+              <label class="text-xs font-bold text-white flex items-center gap-1.5 font-heading">
                 <i class="fas fa-sliders text-blue-400 text-xs"></i>
                 <span>Agency Specialization (AI Personalization):</span>
               </label>
-              <span id="checkoutNicheBadge" class="text-[10px] font-mono font-bold text-blue-300 bg-blue-500/15 px-2 py-0.5 rounded-full border border-blue-500/30">
+              <span id="checkoutNicheBadge" class="text-[10px] font-mono font-bold text-blue-300 bg-blue-500/15 px-2.5 py-0.5 rounded-full border border-blue-500/30">
                 All Services (Full Agency)
               </span>
             </div>
-            <p class="text-[10px] text-slate-400 mb-2.5 leading-relaxed">
-              Choose your agency focus. Multi-AI (Claude 3.7 &amp; GPT-4o) will pre-configure tailored pitch formulas for these industries:
+            <p class="text-[11px] text-slate-400 mb-3 leading-relaxed">
+              Select your agency's core services to pre-configure tailored Multi-AI pitches (Claude 3.7 &amp; GPT-4o):
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="checkoutNichesContainer">
-              <!-- All Services / Full Agency Pill (Full Width) -->
-              <label id="card_niche_all" class="niche-checkbox-card selected col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all hover:border-blue-400" onclick="toggleNicheSelection('all')">
-                <div class="flex items-center gap-2.5">
-                  <div id="chk_niche_all" class="w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all">
+            <div class="space-y-2" id="checkoutNichesContainer">
+              <!-- Top Master Option: All Services / Full Agency -->
+              <label id="card_niche_all" class="niche-checkbox-card selected group relative flex items-center justify-between p-3 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-lg shadow-blue-500/10 transition-all hover:border-blue-400" onclick="toggleNicheSelection('all')">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div id="chk_niche_all" class="w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all flex-shrink-0">
                     <i class="fas fa-check text-[9px]"></i>
                   </div>
                   <input type="checkbox" id="niche_all" checked class="hidden pointer-events-none">
-                  <div>
-                    <span class="text-xs font-bold text-white flex items-center gap-1.5">
-                      <i class="fas fa-sparkles text-amber-300 text-xs"></i> All Services / Full Agency
+                  <div class="min-w-0">
+                    <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                      <i class="fas fa-crown text-amber-300 text-xs"></i>
+                      <span>All Services / Full Agency</span>
+                    </div>
+                    <div class="text-[10px] text-slate-400 truncate mt-0.5">
+                      Web, Video, Paid Ads, Graphic Design &amp; AI Automation (All 52+ Leads)
+                    </div>
+                  </div>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-blue-500/30 text-blue-200 border border-blue-400/30 uppercase tracking-wider flex-shrink-0 ml-2">
+                  MASTER BUNDLE
+                </span>
+              </label>
+
+              <!-- 2-Column Grid of Individual Specializations -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+
+                <!-- 1. Web Dev & Shopify -->
+                <label id="card_niche_web_dev" class="niche-checkbox-card group flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('web_dev')">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div id="chk_niche_web_dev" class="w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all flex-shrink-0">
+                      <i class="fas fa-check text-[8px]"></i>
+                    </div>
+                    <input type="checkbox" id="niche_web_dev" class="hidden pointer-events-none">
+                    <span class="text-xs font-semibold text-slate-200 flex items-center gap-2 truncate">
+                      <i class="fas fa-laptop-code text-cyan-400 text-xs flex-shrink-0"></i>
+                      <span>Web Dev &amp; Shopify</span>
                     </span>
-                    <span class="text-[9px] text-slate-400 block">Web Development, Video, Paid Ads, Graphic Design &amp; AI</span>
                   </div>
-                </div>
-                <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/30 text-blue-200 border border-blue-400/30 uppercase tracking-wider">Master Bundle</span>
-              </label>
+                </label>
 
-              <!-- Service 1: Web Development & UI/UX -->
-              <label id="card_niche_web_dev" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('web_dev')">
-                <div class="flex items-center gap-2">
-                  <div id="chk_niche_web_dev" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
-                    <i class="fas fa-check text-[8px]"></i>
+                <!-- 2. Video & Short Form -->
+                <label id="card_niche_video_editing" class="niche-checkbox-card group flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('video_editing')">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div id="chk_niche_video_editing" class="w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all flex-shrink-0">
+                      <i class="fas fa-check text-[8px]"></i>
+                    </div>
+                    <input type="checkbox" id="niche_video_editing" class="hidden pointer-events-none">
+                    <span class="text-xs font-semibold text-slate-200 flex items-center gap-2 truncate">
+                      <i class="fas fa-film text-indigo-400 text-xs flex-shrink-0"></i>
+                      <span>Video &amp; Short Form</span>
+                    </span>
                   </div>
-                  <input type="checkbox" id="niche_web_dev" class="hidden pointer-events-none">
-                  <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-laptop-code text-cyan-400 text-xs"></i> Web Dev &amp; Shopify
-                  </span>
-                </div>
-                <span class="text-[9px] font-mono text-slate-400">Web Pitch</span>
-              </label>
+                </label>
 
-              <!-- Service 2: Video Editing & Content Creation -->
-              <label id="card_niche_video_editing" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('video_editing')">
-                <div class="flex items-center gap-2">
-                  <div id="chk_niche_video_editing" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
-                    <i class="fas fa-check text-[8px]"></i>
+                <!-- 3. Paid Ads & Marketing -->
+                <label id="card_niche_marketing_ads" class="niche-checkbox-card group flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('marketing_ads')">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div id="chk_niche_marketing_ads" class="w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all flex-shrink-0">
+                      <i class="fas fa-check text-[8px]"></i>
+                    </div>
+                    <input type="checkbox" id="niche_marketing_ads" class="hidden pointer-events-none">
+                    <span class="text-xs font-semibold text-slate-200 flex items-center gap-2 truncate">
+                      <i class="fas fa-bullhorn text-amber-400 text-xs flex-shrink-0"></i>
+                      <span>Paid Ads &amp; Marketing</span>
+                    </span>
                   </div>
-                  <input type="checkbox" id="niche_video_editing" class="hidden pointer-events-none">
-                  <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-film text-indigo-400 text-xs"></i> Video &amp; Short Form
-                  </span>
-                </div>
-                <span class="text-[9px] font-mono text-slate-400">Video Pitch</span>
-              </label>
+                </label>
 
-              <!-- Service 3: Social Media & Paid Ads -->
-              <label id="card_niche_marketing_ads" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('marketing_ads')">
-                <div class="flex items-center gap-2">
-                  <div id="chk_niche_marketing_ads" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
-                    <i class="fas fa-check text-[8px]"></i>
+                <!-- 4. Graphic Design & UI -->
+                <label id="card_niche_graphic_design" class="niche-checkbox-card group flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('graphic_design')">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div id="chk_niche_graphic_design" class="w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all flex-shrink-0">
+                      <i class="fas fa-check text-[8px]"></i>
+                    </div>
+                    <input type="checkbox" id="niche_graphic_design" class="hidden pointer-events-none">
+                    <span class="text-xs font-semibold text-slate-200 flex items-center gap-2 truncate">
+                      <i class="fas fa-palette text-purple-400 text-xs flex-shrink-0"></i>
+                      <span>Graphic Design &amp; UI</span>
+                    </span>
                   </div>
-                  <input type="checkbox" id="niche_marketing_ads" class="hidden pointer-events-none">
-                  <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-bullhorn text-amber-400 text-xs"></i> Paid Ads &amp; Marketing
-                  </span>
-                </div>
-                <span class="text-[9px] font-mono text-slate-400">Ads Pitch</span>
-              </label>
+                </label>
 
-              <!-- Service 4: Graphic Design & Branding -->
-              <label id="card_niche_graphic_design" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('graphic_design')">
-                <div class="flex items-center gap-2">
-                  <div id="chk_niche_graphic_design" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
-                    <i class="fas fa-check text-[8px]"></i>
-                  </div>
-                  <input type="checkbox" id="niche_graphic_design" class="hidden pointer-events-none">
-                  <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-paint-brush text-purple-400 text-xs"></i> Graphic Design &amp; UI
-                  </span>
-                </div>
-                <span class="text-[9px] font-mono text-slate-400">Design Pitch</span>
-              </label>
+              </div>
 
-              <!-- Service 5: AI Automation & Chatbots (Balanced Full Width) -->
-              <label id="card_niche_automation_ai" class="niche-checkbox-card col-span-1 sm:col-span-2 flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('automation_ai')">
-                <div class="flex items-center gap-2">
-                  <div id="chk_niche_automation_ai" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
+              <!-- 5. AI Automation, Bots & Funnels (Full Width) -->
+              <label id="card_niche_automation_ai" class="niche-checkbox-card group flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('automation_ai')">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <div id="chk_niche_automation_ai" class="w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all flex-shrink-0">
                     <i class="fas fa-check text-[8px]"></i>
                   </div>
                   <input type="checkbox" id="niche_automation_ai" class="hidden pointer-events-none">
-                  <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-robot text-emerald-400 text-xs"></i> AI Automation, WhatsApp Bots &amp; Lead Systems
+                  <span class="text-xs font-semibold text-slate-200 flex items-center gap-2 truncate">
+                    <i class="fas fa-robot text-emerald-400 text-xs flex-shrink-0"></i>
+                    <span>AI Automation, WhatsApp Bots &amp; Lead Systems</span>
                   </span>
                 </div>
-                <span class="text-[9px] font-mono text-slate-400">AI Pitch</span>
+                <span class="text-[9px] font-mono text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">AI Powered</span>
               </label>
+
             </div>
           </div>
 

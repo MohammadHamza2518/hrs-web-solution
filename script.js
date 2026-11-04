@@ -383,36 +383,33 @@ document.addEventListener('DOMContentLoaded', () => {
       'graphic_design', 'automation_ai'
     ];
 
+    const activeMasterClass = "niche-checkbox-card selected group relative flex items-center justify-between p-3 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-lg shadow-blue-500/10 transition-all hover:border-blue-400";
+    const inactiveMasterClass = "niche-checkbox-card group relative flex items-center justify-between p-3 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
+
+    const activeCardClass = "niche-checkbox-card selected group flex items-center justify-between p-2.5 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all";
+    const inactiveCardClass = "niche-checkbox-card group flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
+
+    const activeChkClass = "w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all flex-shrink-0";
+    const inactiveChkClass = "w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all flex-shrink-0";
+
     if (serviceId === 'all') {
       window.selectedNichesState = ['all'];
       if (allBox) allBox.checked = true;
-      if (allCard) {
-        allCard.className = "niche-checkbox-card selected col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all hover:border-blue-400";
-      }
-      if (allChk) {
-        allChk.className = "w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all";
-      }
+      if (allCard) allCard.className = activeMasterClass;
+      if (allChk) allChk.className = activeChkClass;
+
       individualServices.forEach(id => {
         const box = document.getElementById('niche_' + id);
         const card = document.getElementById('card_niche_' + id);
         const chk = document.getElementById('chk_niche_' + id);
         if (box) box.checked = false;
-        if (card) {
-          const isFull = (id === 'automation_ai');
-          card.className = "niche-checkbox-card " + (isFull ? "col-span-1 sm:col-span-2 " : "") + "flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
-        }
-        if (chk) {
-          chk.className = "w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all";
-        }
+        if (card) card.className = inactiveCardClass;
+        if (chk) chk.className = inactiveChkClass;
       });
     } else {
       if (allBox) allBox.checked = false;
-      if (allCard) {
-        allCard.className = "niche-checkbox-card col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
-      }
-      if (allChk) {
-        allChk.className = "w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all";
-      }
+      if (allCard) allCard.className = inactiveMasterClass;
+      if (allChk) allChk.className = inactiveChkClass;
 
       const box = document.getElementById('niche_' + serviceId);
       const card = document.getElementById('card_niche_' + serviceId);
@@ -420,22 +417,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const isChecked = box ? !box.checked : false;
 
       if (box) box.checked = isChecked;
-
-      const isFull = (serviceId === 'automation_ai');
-      if (card) {
-        if (isChecked) {
-          card.className = "niche-checkbox-card selected " + (isFull ? "col-span-1 sm:col-span-2 " : "") + "flex items-center justify-between p-2 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all";
-        } else {
-          card.className = "niche-checkbox-card " + (isFull ? "col-span-1 sm:col-span-2 " : "") + "flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
-        }
-      }
-      if (chk) {
-        if (isChecked) {
-          chk.className = "w-3.5 h-3.5 rounded border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all";
-        } else {
-          chk.className = "w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all";
-        }
-      }
+      if (card) card.className = isChecked ? activeCardClass : inactiveCardClass;
+      if (chk) chk.className = isChecked ? activeChkClass : inactiveChkClass;
 
       const active = [];
       individualServices.forEach(id => {
@@ -446,12 +429,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (active.length === 0) {
         window.selectedNichesState = ['all'];
         if (allBox) allBox.checked = true;
-        if (allCard) {
-          allCard.className = "niche-checkbox-card selected col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all hover:border-blue-400";
-        }
-        if (allChk) {
-          allChk.className = "w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all";
-        }
+        if (allCard) allCard.className = activeMasterClass;
+        if (allChk) allChk.className = activeChkClass;
       } else {
         window.selectedNichesState = active;
       }
