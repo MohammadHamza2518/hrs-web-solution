@@ -376,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.toggleNicheSelection = function(serviceId) {
     const allBox = document.getElementById('niche_all');
     const allCard = document.getElementById('card_niche_all');
+    const allChk = document.getElementById('chk_niche_all');
 
     const individualServices = [
       'web_dev', 'video_editing', 'marketing_ads', 
@@ -386,33 +387,53 @@ document.addEventListener('DOMContentLoaded', () => {
       window.selectedNichesState = ['all'];
       if (allBox) allBox.checked = true;
       if (allCard) {
-        allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-blue-500/20 cursor-pointer hover:border-blue-400 transition";
+        allCard.className = "niche-checkbox-card selected col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all hover:border-blue-400";
+      }
+      if (allChk) {
+        allChk.className = "w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all";
       }
       individualServices.forEach(id => {
         const box = document.getElementById('niche_' + id);
         const card = document.getElementById('card_niche_' + id);
+        const chk = document.getElementById('chk_niche_' + id);
         if (box) box.checked = false;
         if (card) {
-          card.className = "niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+          const isFull = (id === 'automation_ai');
+          card.className = "niche-checkbox-card " + (isFull ? "col-span-1 sm:col-span-2 " : "") + "flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
+        }
+        if (chk) {
+          chk.className = "w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all";
         }
       });
     } else {
       if (allBox) allBox.checked = false;
       if (allCard) {
-        allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+        allCard.className = "niche-checkbox-card col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
+      }
+      if (allChk) {
+        allChk.className = "w-4 h-4 rounded-md border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all";
       }
 
       const box = document.getElementById('niche_' + serviceId);
       const card = document.getElementById('card_niche_' + serviceId);
+      const chk = document.getElementById('chk_niche_' + serviceId);
       const isChecked = box ? !box.checked : false;
 
       if (box) box.checked = isChecked;
 
+      const isFull = (serviceId === 'automation_ai');
       if (card) {
         if (isChecked) {
-          card.className = "niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-cyan-500/60 bg-cyan-500/15 cursor-pointer hover:border-cyan-400 transition shadow-sm";
+          card.className = "niche-checkbox-card selected " + (isFull ? "col-span-1 sm:col-span-2 " : "") + "flex items-center justify-between p-2 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all";
         } else {
-          card.className = "niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition";
+          card.className = "niche-checkbox-card " + (isFull ? "col-span-1 sm:col-span-2 " : "") + "flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all";
+        }
+      }
+      if (chk) {
+        if (isChecked) {
+          chk.className = "w-3.5 h-3.5 rounded border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all";
+        } else {
+          chk.className = "w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all";
         }
       }
 
@@ -426,7 +447,10 @@ document.addEventListener('DOMContentLoaded', () => {
         window.selectedNichesState = ['all'];
         if (allBox) allBox.checked = true;
         if (allCard) {
-          allCard.className = "niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-blue-500/20 cursor-pointer hover:border-blue-400 transition";
+          allCard.className = "niche-checkbox-card selected col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all hover:border-blue-400";
+        }
+        if (allChk) {
+          allChk.className = "w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all";
         }
       } else {
         window.selectedNichesState = active;

@@ -1704,162 +1704,226 @@
       <!-- View 1: Customer Form & Razorpay Trigger -->
       <div id="checkoutFormView">
         <div class="text-center mb-5">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold font-mono uppercase mb-2 border border-blue-500/30">
-            <i class="fas fa-shield-alt text-emerald-400"></i> Razorpay Live Gateway &bull; 256-Bit SSL
-          </span>
-          <h3 class="text-xl sm:text-2xl font-bold text-white font-heading">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Razorpay Verified Live Gateway &bull; 256-Bit SSL</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black text-white font-heading tracking-tight">
             Get Outreach Studio Pro
           </h3>
-          <div class="flex items-center justify-center gap-2.5 mt-1.5">
+          <div class="flex items-center justify-center gap-3 mt-1.5">
             <span class="text-xs sm:text-sm line-through text-slate-500 font-mono">&#8377;9,999</span>
             <span class="text-3xl sm:text-4xl font-black text-white font-heading">&#8377;1,999</span>
-            <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold font-mono">SAVE 80%</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-bold font-mono border border-emerald-500/30">
+              SAVE 80% &bull; LIFETIME ACCESS
+            </span>
           </div>
-          <span class="text-[11px] text-slate-400 block mt-1">One-Time Fee &bull; Lifetime Commercial License &bull; Zero Monthly SaaS</span>
+          <span class="text-[11px] text-slate-400 block mt-1">Single One-Time Fee &bull; Lifetime Commercial License &bull; Zero Monthly SaaS</span>
         </div>
 
         <!-- Inclusions Summary Box -->
-        <div class="bg-slate-900/90 p-3.5 rounded-xl border border-white/[0.08] mb-4 space-y-1.5 text-xs text-slate-300">
+        <div class="bg-gradient-to-r from-blue-950/30 via-slate-900/80 to-indigo-950/30 p-3.5 rounded-2xl border border-white/[0.08] mb-4 space-y-2 text-xs text-slate-300">
           <div class="flex items-center justify-between">
-            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-400 text-xs"></i> 52+ Verified Global Leads (Dubai, UK, Switzerland, USA)</span>
-            <span class="text-emerald-400 font-bold font-mono">&#10003; Included</span>
+            <span class="flex items-center gap-2 text-slate-200"><i class="fas fa-check-circle text-emerald-400 text-xs"></i> 52+ Verified Global Leads (Dubai, UK, Switzerland, USA)</span>
+            <span class="text-emerald-400 font-bold font-mono text-[11px]">&#10003; Included</span>
           </div>
           <div class="flex items-center justify-between">
-            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-400 text-xs"></i> 100% Unencrypted Source Code + 1-Click BAT</span>
-            <span class="text-emerald-400 font-bold font-mono">&#10003; Included</span>
+            <span class="flex items-center gap-2 text-slate-200"><i class="fas fa-check-circle text-emerald-400 text-xs"></i> Multi-AI Pitch Studio (Claude 3.7 &bull; GPT-4o &bull; Gemini)</span>
+            <span class="text-emerald-400 font-bold font-mono text-[11px]">&#10003; Included</span>
           </div>
           <div class="flex items-center justify-between">
-            <span class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-400 text-xs"></i> Multi-AI Pitch Engine + Unlimited Scrapers</span>
-            <span class="text-emerald-400 font-bold font-mono">&#10003; Included</span>
+            <span class="flex items-center gap-2 text-slate-200"><i class="fas fa-check-circle text-emerald-400 text-xs"></i> 1-Click WhatsApp Direct Pitching &bull; Anti-Ban Guard</span>
+            <span class="text-emerald-400 font-bold font-mono text-[11px]">&#10003; Included</span>
           </div>
         </div>
 
         <!-- Customer Form -->
-        <form onsubmit="handleRazorpaySubmit(event)" class="space-y-3 mb-4">
+        <form onsubmit="handleRazorpaySubmit(event)" class="space-y-3.5 mb-4">
           <div>
-            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Your Full Name <span class="text-rose-400">*</span></label>
-            <input type="text" id="checkoutName" required placeholder="e.g. Alex Morgan" class="w-full bg-[#040711] border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-[11px] font-semibold text-slate-300">Your Full Name <span class="text-rose-400">*</span></label>
+              <span class="text-[10px] text-slate-500 font-mono">Personal or Agency</span>
+            </div>
+            <div class="relative">
+              <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <input type="text" id="checkoutName" required placeholder="e.g. Alex Morgan" class="w-full bg-[#040711] border border-white/[0.1] rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-slate-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 outline-none transition font-sans">
+            </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">WhatsApp Number <span class="text-rose-400">*</span></label>
-              <input type="tel" id="checkoutPhone" required placeholder="e.g. 9876543210" class="w-full bg-[#040711] border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-[11px] font-semibold text-slate-300">WhatsApp Number <span class="text-rose-400">*</span></label>
+                <span class="text-[9px] text-emerald-400 font-mono font-medium">Instant SMS</span>
+              </div>
+              <div class="relative">
+                <i class="fab fa-whatsapp absolute left-3.5 top-1/2 -translate-y-1/2 text-emerald-400 text-xs"></i>
+                <input type="tel" id="checkoutPhone" required placeholder="e.g. 9876543210" class="w-full bg-[#040711] border border-white/[0.1] rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-slate-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 outline-none transition font-sans">
+              </div>
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Email Address</label>
-              <input type="email" id="checkoutEmail" placeholder="e.g. you@agency.com" class="w-full bg-[#040711] border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition">
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-[11px] font-semibold text-slate-300">Email Address</label>
+                <span class="text-[9px] text-slate-500 font-mono">License Delivery</span>
+              </div>
+              <div class="relative">
+                <i class="fas fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                <input type="email" id="checkoutEmail" placeholder="e.g. you@agency.com" class="w-full bg-[#040711] border border-white/[0.1] rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-slate-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 outline-none transition font-sans">
+              </div>
             </div>
           </div>
+
           <!-- FREELANCER / AGENCY SERVICE CATEGORY SELECTION -->
-          <div class="pt-1 pb-1">
+          <div class="pt-1.5 pb-1">
             <div class="flex items-center justify-between mb-1.5">
-              <label class="text-[11px] font-bold text-white flex items-center gap-1.5">
-                <i class="fas fa-briefcase text-blue-400"></i>
-                <span>What Service Do You Offer? (Tick 1 or More):</span>
+              <label class="text-[11px] font-bold text-white flex items-center gap-1.5 font-heading">
+                <i class="fas fa-sliders text-blue-400 text-xs"></i>
+                <span>Agency Specialization (AI Personalization):</span>
               </label>
-              <span id="checkoutNicheBadge" class="text-[10px] font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/30">
+              <span id="checkoutNicheBadge" class="text-[10px] font-mono font-bold text-blue-300 bg-blue-500/15 px-2 py-0.5 rounded-full border border-blue-500/30">
                 All Services (Full Agency)
               </span>
             </div>
-            <p class="text-[10px] text-slate-400 mb-2">
-              Aap jis service par tick lagayenge, aapke CRM ke Multi-AI (Claude/GPT-4o) usi service ke personalized pitches create karenge.
+            <p class="text-[10px] text-slate-400 mb-2.5 leading-relaxed">
+              Choose your agency focus. Multi-AI (Claude 3.7 &amp; GPT-4o) will pre-configure tailored pitch formulas for these industries:
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="checkoutNichesContainer">
               <!-- All Services / Full Agency Pill (Full Width) -->
-              <div class="sm:col-span-2">
-                <label id="card_niche_all" class="niche-checkbox-card flex items-center justify-between p-2.5 rounded-xl border border-blue-500/60 bg-blue-500/20 cursor-pointer hover:border-blue-400 transition" onclick="toggleNicheSelection('all')">
-                  <div class="flex items-center gap-2.5">
-                    <input type="checkbox" id="niche_all" checked class="w-4 h-4 rounded text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
-                    <span class="text-xs font-bold text-white flex items-center gap-1.5">
-                      <i class="fas fa-sparkles text-amber-300"></i> All Services / Full Agency (Web, Video, Ads, Design)
-                    </span>
+              <label id="card_niche_all" class="niche-checkbox-card selected col-span-1 sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl border border-blue-500/70 bg-gradient-to-r from-blue-600/20 via-indigo-600/15 to-blue-600/20 cursor-pointer shadow-md shadow-blue-500/10 transition-all hover:border-blue-400" onclick="toggleNicheSelection('all')">
+                <div class="flex items-center gap-2.5">
+                  <div id="chk_niche_all" class="w-4 h-4 rounded-md border flex items-center justify-center bg-blue-600 border-blue-400 text-white transition-all">
+                    <i class="fas fa-check text-[9px]"></i>
                   </div>
-                  <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-blue-500/30 text-blue-300 border border-blue-400/30">ALL PITCH TEMPLATES</span>
-                </label>
-              </div>
+                  <input type="checkbox" id="niche_all" checked class="hidden pointer-events-none">
+                  <div>
+                    <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                      <i class="fas fa-sparkles text-amber-300 text-xs"></i> All Services / Full Agency
+                    </span>
+                    <span class="text-[9px] text-slate-400 block">Web Development, Video, Paid Ads, Graphic Design &amp; AI</span>
+                  </div>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/30 text-blue-200 border border-blue-400/30 uppercase tracking-wider">Master Bundle</span>
+              </label>
 
               <!-- Service 1: Web Development & UI/UX -->
-              <label id="card_niche_web_dev" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition" onclick="toggleNicheSelection('web_dev')">
+              <label id="card_niche_web_dev" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('web_dev')">
                 <div class="flex items-center gap-2">
-                  <input type="checkbox" id="niche_web_dev" class="w-3.5 h-3.5 rounded text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+                  <div id="chk_niche_web_dev" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
+                    <i class="fas fa-check text-[8px]"></i>
+                  </div>
+                  <input type="checkbox" id="niche_web_dev" class="hidden pointer-events-none">
                   <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-laptop-code text-cyan-400 text-xs"></i> Web Dev &amp; Shopify / UI
+                    <i class="fas fa-laptop-code text-cyan-400 text-xs"></i> Web Dev &amp; Shopify
                   </span>
                 </div>
-                <span class="text-[9px] font-mono text-cyan-400">Web Pitch</span>
+                <span class="text-[9px] font-mono text-slate-400">Web Pitch</span>
               </label>
 
               <!-- Service 2: Video Editing & Content Creation -->
-              <label id="card_niche_video_editing" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition" onclick="toggleNicheSelection('video_editing')">
+              <label id="card_niche_video_editing" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('video_editing')">
                 <div class="flex items-center gap-2">
-                  <input type="checkbox" id="niche_video_editing" class="w-3.5 h-3.5 rounded text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+                  <div id="chk_niche_video_editing" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
+                    <i class="fas fa-check text-[8px]"></i>
+                  </div>
+                  <input type="checkbox" id="niche_video_editing" class="hidden pointer-events-none">
                   <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-film text-pink-400 text-xs"></i> Video Editing &amp; Reels
+                    <i class="fas fa-film text-indigo-400 text-xs"></i> Video &amp; Short Form
                   </span>
                 </div>
-                <span class="text-[9px] font-mono text-pink-400">Video Pitch</span>
+                <span class="text-[9px] font-mono text-slate-400">Video Pitch</span>
               </label>
 
               <!-- Service 3: Social Media & Paid Ads -->
-              <label id="card_niche_marketing_ads" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition" onclick="toggleNicheSelection('marketing_ads')">
+              <label id="card_niche_marketing_ads" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('marketing_ads')">
                 <div class="flex items-center gap-2">
-                  <input type="checkbox" id="niche_marketing_ads" class="w-3.5 h-3.5 rounded text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+                  <div id="chk_niche_marketing_ads" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
+                    <i class="fas fa-check text-[8px]"></i>
+                  </div>
+                  <input type="checkbox" id="niche_marketing_ads" class="hidden pointer-events-none">
                   <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
                     <i class="fas fa-bullhorn text-amber-400 text-xs"></i> Paid Ads &amp; Marketing
                   </span>
                 </div>
-                <span class="text-[9px] font-mono text-amber-400">Ads Pitch</span>
+                <span class="text-[9px] font-mono text-slate-400">Ads Pitch</span>
               </label>
 
               <!-- Service 4: Graphic Design & Branding -->
-              <label id="card_niche_graphic_design" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition" onclick="toggleNicheSelection('graphic_design')">
+              <label id="card_niche_graphic_design" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('graphic_design')">
                 <div class="flex items-center gap-2">
-                  <input type="checkbox" id="niche_graphic_design" class="w-3.5 h-3.5 rounded text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+                  <div id="chk_niche_graphic_design" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
+                    <i class="fas fa-check text-[8px]"></i>
+                  </div>
+                  <input type="checkbox" id="niche_graphic_design" class="hidden pointer-events-none">
                   <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-paint-brush text-purple-400 text-xs"></i> Graphic Design &amp; Brand
+                    <i class="fas fa-paint-brush text-purple-400 text-xs"></i> Graphic Design &amp; UI
                   </span>
                 </div>
-                <span class="text-[9px] font-mono text-purple-400">Design Pitch</span>
+                <span class="text-[9px] font-mono text-slate-400">Design Pitch</span>
               </label>
 
-              <!-- Service 5: AI Automation & Chatbots -->
-              <label id="card_niche_automation_ai" class="niche-checkbox-card flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 cursor-pointer hover:border-white/20 transition" onclick="toggleNicheSelection('automation_ai')">
+              <!-- Service 5: AI Automation & Chatbots (Balanced Full Width) -->
+              <label id="card_niche_automation_ai" class="niche-checkbox-card col-span-1 sm:col-span-2 flex items-center justify-between p-2 rounded-xl border border-white/[0.08] bg-slate-900/60 hover:bg-slate-900/90 hover:border-white/20 cursor-pointer transition-all" onclick="toggleNicheSelection('automation_ai')">
                 <div class="flex items-center gap-2">
-                  <input type="checkbox" id="niche_automation_ai" class="w-3.5 h-3.5 rounded text-blue-600 focus:ring-0 cursor-pointer accent-blue-500 pointer-events-none">
+                  <div id="chk_niche_automation_ai" class="w-3.5 h-3.5 rounded border flex items-center justify-center border-white/20 bg-black/40 text-transparent transition-all">
+                    <i class="fas fa-check text-[8px]"></i>
+                  </div>
+                  <input type="checkbox" id="niche_automation_ai" class="hidden pointer-events-none">
                   <span class="text-[11px] font-medium text-slate-200 flex items-center gap-1.5">
-                    <i class="fas fa-robot text-emerald-400 text-xs"></i> AI &amp; WhatsApp Bots
+                    <i class="fas fa-robot text-emerald-400 text-xs"></i> AI Automation, WhatsApp Bots &amp; Lead Systems
                   </span>
                 </div>
-                <span class="text-[9px] font-mono text-emerald-400">AI Pitch</span>
+                <span class="text-[9px] font-mono text-slate-400">AI Pitch</span>
               </label>
             </div>
           </div>
 
-          <!-- Razorpay Trigger Button -->
-          <button type="submit" id="btnRazorpayPay" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer mt-1">
-            <i class="fas fa-bolt text-amber-300"></i>
-            <span>Pay &#8377;1,999 with Razorpay</span>
-            <span class="text-[10px] font-mono opacity-85">(UPI &bull; Cards &bull; NetBanking)</span>
+          <!-- Razorpay Trigger Button (Sleek SaaS Standard) -->
+          <button type="submit" id="btnRazorpayPay" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-blue-600/30 hover:shadow-blue-600/50 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-between cursor-pointer border border-white/20 mt-2 group">
+            <span class="flex items-center gap-2">
+              <i class="fas fa-lock text-emerald-300 text-xs"></i>
+              <span class="font-heading tracking-wide">Pay with Razorpay &bull; Instant Access</span>
+            </span>
+            <span class="flex items-center gap-2 font-mono">
+              <span class="text-xs line-through text-blue-200/50 hidden sm:inline">&#8377;9,999</span>
+              <span class="px-2.5 py-0.5 rounded-lg bg-black/40 text-white font-bold text-xs border border-white/20">&#8377;1,999</span>
+              <i class="fas fa-arrow-right text-[10px] text-blue-200 group-hover:translate-x-1 transition-transform"></i>
+            </span>
           </button>
 
-          <!-- Founder Test Mode Bypass Button (Always available for testing) -->
-          <div class="pt-2 text-center">
-            <button type="button" onclick="simulateTestCheckout()" class="w-full py-2.5 rounded-xl border border-dashed border-cyan-500/50 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 font-mono font-medium text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-sm">
-              <i class="fas fa-play text-cyan-400 text-[10px]"></i>
-              <span>⚡ Test as Client (Simulate Free Purchase &amp; Launch CRM)</span>
+          <!-- Founder Test Mode Bypass Button (Preserved for Testing per User Request) -->
+          <div class="pt-1.5 text-center">
+            <button type="button" onclick="simulateTestCheckout()" class="w-full py-2 px-3 rounded-xl border border-white/[0.08] hover:border-cyan-500/40 bg-slate-900/50 hover:bg-cyan-500/10 text-slate-400 hover:text-cyan-300 text-[11px] font-mono transition flex items-center justify-between cursor-pointer group shadow-sm">
+              <span class="flex items-center gap-2">
+                <i class="fas fa-flask text-cyan-400 text-xs"></i>
+                <span class="text-slate-300 group-hover:text-cyan-200 font-sans font-medium">Developer Sandbox Mode</span>
+              </span>
+              <span class="flex items-center gap-1.5 text-[10px] text-cyan-400 font-semibold">
+                <span>Simulate Free Purchase &amp; Launch CRM</span>
+                <i class="fas fa-play text-[8px]"></i>
+              </span>
             </button>
           </div>
         </form>
 
-        <!-- Trust & Payment Methods Strip -->
-        <div class="py-2.5 px-3 rounded-lg bg-white/[0.02] border border-white/[0.05] flex items-center justify-between text-[10px] text-slate-400 mb-3 flex-wrap gap-2">
-          <span class="flex items-center gap-1.5"><i class="fas fa-lock text-emerald-400"></i> 256-Bit SSL Encrypted</span>
-          <span class="flex items-center gap-2 font-mono text-[11px] text-slate-300">
-            <span>UPI</span> &bull; <span>GPay</span> &bull; <span>PhonePe</span> &bull; <span>Cards</span>
-          </span>
-          <span class="flex items-center gap-1 text-emerald-400 font-semibold"><i class="fas fa-shield-halved"></i> 30-Day Guarantee</span>
+        <!-- High-Trust Payment Methods Strip -->
+        <div class="mt-3 pt-3 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] text-slate-400">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1.5 text-emerald-400 font-semibold">
+              <i class="fas fa-shield-halved"></i> 256-Bit SSL Encrypted
+            </span>
+            <span class="text-slate-600">&bull;</span>
+            <span class="flex items-center gap-1 text-slate-300">
+              <i class="fas fa-rotate-left text-blue-400"></i> 30-Day Money-Back
+            </span>
+          </div>
+          <div class="flex items-center gap-1 font-mono text-[9px] text-slate-300">
+            <span class="px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">UPI</span>
+            <span class="px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">GPay</span>
+            <span class="px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">PhonePe</span>
+            <span class="px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">Cards</span>
+            <span class="px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">NetBanking</span>
+          </div>
         </div>
       </div>
 
