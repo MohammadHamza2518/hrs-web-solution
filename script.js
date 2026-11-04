@@ -806,6 +806,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Copy Desktop CRM Link for Customer
+  window.copyDesktopStudioLink = function(btn) {
+    const crmUrl = window.location.origin + '/crm';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(crmUrl).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check text-emerald-300"></i> <span class="text-emerald-200">Link Copied! Open on Desktop / PC</span>';
+        setTimeout(() => { btn.innerHTML = originalText; }, 3000);
+      }).catch(() => {
+        prompt("Copy this link to open on your Desktop / PC:", crmUrl);
+      });
+    } else {
+      prompt("Copy this link to open on your Desktop / PC:", crmUrl);
+    }
+  };
+
   // 7. Lead Pitch Accordion
   window.toggleLeadPitch = function(leadId) {
     const pitchBox = document.getElementById(`pitch-${leadId}`);
