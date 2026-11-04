@@ -1,3 +1,41 @@
+  // =========================================================================
+  // AUTOMATIC TRAFFIC, UTM & CONVERSION TRACKING ENGINE
+  // =========================================================================
+  (function initTrafficTracker() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const utmSource = params.get('utm_source');
+      const utmMedium = params.get('utm_medium');
+      const utmCampaign = params.get('utm_campaign');
+      const utmContent = params.get('utm_content');
+      const referrer = document.referrer || 'Direct';
+
+      if (utmSource || !localStorage.getItem('osp_utm_tracking')) {
+        let detectedSource = utmSource;
+        if (!detectedSource) {
+          if (referrer.includes('google')) detectedSource = 'Google Search';
+          else if (referrer.includes('facebook') || referrer.includes('instagram')) detectedSource = 'Meta Ads';
+          else if (referrer.includes('whatsapp')) detectedSource = 'WhatsApp Link';
+          else if (referrer.includes('linkedin')) detectedSource = 'LinkedIn';
+          else if (referrer.includes('youtube')) detectedSource = 'YouTube';
+          else detectedSource = 'Direct / Organic';
+        }
+
+        const trackingData = {
+          utm_source: detectedSource,
+          utm_medium: utmMedium || 'direct',
+          utm_campaign: utmCampaign || 'general',
+          utm_content: utmContent || '',
+          referrer: referrer,
+          firstLandingPage: window.location.pathname,
+          device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
+          trackedAt: new Date().toISOString()
+        };
+        localStorage.setItem('osp_utm_tracking', JSON.stringify(trackingData));
+      }
+    } catch(e) {}
+  })();
+
 /* ==========================================================================
    OUTREACH STUDIO PRO — CLIENT ACQUISITION CRM INTERACTIVE ENGINE
    Hero Tab Switcher | Agency ROI Engine | Checkout Modal | Pitch Inspector
@@ -875,6 +913,10 @@ document.addEventListener('DOMContentLoaded', () => {
         allOrders = JSON.parse(localStorage.getItem('osp_orders_db')) || [];
       } catch(err) { allOrders = []; }
 
+      // Capture UTM & traffic source
+      let traffic = {};
+      try { traffic = JSON.parse(localStorage.getItem('osp_utm_tracking')) || {}; } catch(e) {}
+
       const newOrder = {
         id: `ORD-${Date.now().toString().slice(-4)}`,
         name: customer.name,
@@ -883,10 +925,14 @@ document.addEventListener('DOMContentLoaded', () => {
         targetNiches: nichesList,
         targetNichesDisplay: nichesDisplay,
         totalLeadsCount: customer.totalLeadsCount || 52,
-        amount: 1999,
+        amount: customer.amount || 1999,
+        planTier: customer.planTier || (customer.amount === 3200 ? 'All Services Master Bundle' : 'Custom Specialist Plan'),
         gateway: 'Razorpay Live',
         paymentId: paymentId,
         licenseKey: randomKey,
+        trafficSource: traffic.utm_source || 'Direct',
+        campaign: traffic.utm_campaign || 'Organic',
+        device: traffic.device || (window.innerWidth < 768 ? 'Mobile' : 'Desktop'),
         date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
         status: 'PAID'
       };

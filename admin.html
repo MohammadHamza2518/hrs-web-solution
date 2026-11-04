@@ -971,7 +971,10 @@
                 </div>
                 <div>
                   <div class="font-bold text-white text-xs">${ord.name}</div>
-                  <div class="text-[10px] text-slate-500 font-mono">${ord.id || ('ORD-' + (1000 + index))}</div>
+                  <div class="text-[10px] text-slate-500 font-mono flex items-center gap-1.5">
+                    <span>${ord.id || ('ORD-' + (1000 + index))}</span>
+                    ${ord.trafficSource ? `<span class="px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[9px]">${ord.trafficSource}</span>` : ''}
+                  </div>
                   <div class="text-[10px] text-cyan-400 font-semibold font-mono mt-0.5 flex items-center gap-1">
                     <i class="fas fa-briefcase text-[9px]"></i> ${ord.targetNichesDisplay || 'All Services (Full Agency)'}
                   </div>

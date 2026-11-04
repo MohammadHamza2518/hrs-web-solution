@@ -410,6 +410,17 @@
           loginAt: new Date().toISOString()
         };
 
+        // Track user login activity
+        try {
+          let users = JSON.parse(localStorage.getItem('osp_registered_users')) || [];
+          const idx = users.findIndex(u => (u.email && u.email.toLowerCase() === email) || (u.licenseKey && u.licenseKey.toLowerCase() === userKey.toLowerCase()));
+          if (idx >= 0) {
+            users[idx].lastLoginAt = new Date().toISOString();
+            users[idx].loginCount = (users[idx].loginCount || 0) + 1;
+            localStorage.setItem('osp_registered_users', JSON.stringify(users));
+          }
+        } catch(e) {}
+
         localStorage.setItem(LS_USER, JSON.stringify(authPayload));
         showAlert("Login successful! Redirecting to your CRM workspace...", "success");
         setTimeout(() => {
@@ -487,6 +498,10 @@
       try {
         let orders = JSON.parse(localStorage.getItem(LS_ORDERS)) || [];
         if (!orders.some(o => o.licenseKey === key)) {
+          // Read UTM tracking data
+          let traffic = {};
+          try { traffic = JSON.parse(localStorage.getItem('osp_utm_tracking')) || {}; } catch(e) {}
+
           orders.unshift({
             id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
             name: name,
@@ -496,6 +511,9 @@
             gateway: 'License Activation',
             paymentId: 'pay_activated_' + Date.now().toString().slice(-6),
             licenseKey: key,
+            trafficSource: traffic.utm_source || 'Direct Activation',
+            campaign: traffic.utm_campaign || 'Organic',
+            device: window.innerWidth < 768 ? 'Mobile' : 'Desktop',
             date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
             status: 'PAID'
           });
