@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohammad Hamza &bull; Founder &amp; Master Agency Edition | Outreach Studio Pro</title>
+  <meta name="description" content="Exclusive Founder & CEO Edition for Mohammad Hamza. All 52+ global leads unlocked, 6 high-ticket niches, 5-platform AI pitch engine, viral video recording HUD & omni-outreach suite.">
+  <link rel="icon" type="image/png" href="assets/images/hrs_icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#03060f',
+              card: 'rgba(11, 16, 32, 0.78)',
+              blue: '#3B82F6',
+              indigo: '#6366F1',
+              emerald: '#10B981',
+              cyan: '#06B6D4',
+              gold: '#F59E0B'
+            }
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Founder Glass HUD Styles */
+    .founder-card {
+      background: rgba(11, 17, 34, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .founder-card:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 12px 35px -10px rgba(245, 158, 11, 0.2);
+    }
+    .founder-tab-active {
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
+      color: #000000 !important;
+      font-weight: 800 !important;
+      border-color: rgba(251, 191, 36, 0.8) !important;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4);
+    }
+    .pill-active-niche {
+      background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%) !important;
+      color: #FFFFFF !important;
+      border-color: rgba(96, 165, 250, 0.6) !important;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+    .cursor-blink {
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    /* Video Presentation Mode Clean HUD */
+    body.video-mode-active .hide-in-video-mode {
+      display: none !important;
+    }
+    body.video-mode-active .video-mode-glow {
+      box-shadow: 0 0 50px rgba(245, 158, 11, 0.35);
+    }
+  </style>
+
+  <!-- Preloaded Global Verified Leads Vault (All 52+ Leads) -->
+  <script src="assets/js/preloaded_leads.js"></script>
+</head>
+<body class="bg-[#03060f] text-slate-100 min-h-screen relative bg-mesh-grid flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+
+  <!-- Ambient Glow Effects -->
+  <div class="ambient-glow-top opacity-60"></div>
+  <div class="ambient-glow-secondary opacity-40"></div>
+
+  <!-- Top Sticky Master Navigation Header -->
+  <header class="sticky top-0 z-40 border-b border-white/[0.08] bg-[#03060f]/85 backdrop-blur-xl">
+    <div class="max-w-[1700px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Founder VIP Badge -->
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500/20 to-blue-500/20 border border-amber-500/40 p-1.5 flex items-center justify-center transition-transform group-hover:scale-105 shadow-md shadow-amber-500/20">
+            <img src="assets/images/hrs_icon.png" alt="Logo" class="w-full h-full object-contain">
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-base font-black text-white tracking-tight font-heading">Outreach Studio <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">PRO</span></span>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-extrabold tracking-wider bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-300 border border-amber-500/40 uppercase shadow-sm">
+                👑 FOUNDER EDITION
+              </span>
+            </div>
+            <p class="text-[10px] text-slate-400 font-mono hidden sm:block">Mohammad Hamza &bull; Master Unrestricted License &bull; All 52 Leads Unlocked</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center Promotion / Video Controls -->
+      <div class="hidden lg:flex items-center gap-2.5">
+        <!-- 1. Video Recording Mode Toggle -->
+        <button onclick="toggleVideoMode()" id="btnVideoMode" class="px-3.5 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-xs font-bold font-mono transition flex items-center gap-2 shadow-sm cursor-pointer">
+          <i class="fas fa-video text-amber-400"></i>
+          <span id="videoModeText">🎥 Video Recording HUD</span>
+        </button>
+
+        <!-- 2. Viral Promo Scripts Teleprompter -->
+        <button onclick="openPromoScriptsModal()" class="px-3.5 py-1.5 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-xs font-bold font-mono transition flex items-center gap-2 shadow-sm cursor-pointer">
+          <i class="fas fa-scroll text-cyan-400"></i>
+          <span>🎬 Viral Scripts (Reels/Shorts)</span>
+        </button>
+
+        <!-- 3. Live AI Copilot -->
+        <button onclick="openCopilotModal()" class="px-3.5 py-1.5 rounded-xl border border-indigo-500/40 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 text-xs font-bold font-mono transition flex items-center gap-2 shadow-sm cursor-pointer">
+          <i class="fas fa-brain text-indigo-400"></i>
+          <span>🤖 AI Copilot (Gemini 3.5)</span>
+        </button>
+      </div>
+
+      <!-- Right Profile & Live Status -->
+      <div class="flex items-center gap-3">
+        <!-- Live Sync Pill -->
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="syncIndicator">Vault: Synced (0ms)</span>
+        </div>
+
+        <!-- Export CSV Button -->
+        <button onclick="exportFounderCSV()" title="Export all 52 verified prospects to CSV" class="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-white/[0.1] bg-slate-900/90 text-slate-300 hover:text-white hover:border-white/30 text-xs font-semibold transition flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-file-csv text-emerald-400"></i>
+          <span class="hidden sm:inline">Export CSV</span>
+        </button>
+
+        <!-- Hamza Avatar & User Badge -->
+        <div class="flex items-center gap-2 pl-2 border-l border-white/[0.1]">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-indigo-600 p-[1.5px] shadow-md shadow-amber-500/30">
+            <div class="w-full h-full rounded-full bg-slate-950 flex items-center justify-center text-amber-300 font-extrabold text-xs font-heading">
+              MH
+            </div>
+          </div>
+          <div class="text-left hidden md:block leading-tight">
+            <p class="text-xs font-bold text-white">Mohammad Hamza</p>
+            <p class="text-[9px] text-amber-400 font-mono">Owner &bull; Master Pro</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="max-w-[1700px] mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+
+    <!-- 1. Executive Video Showcase Banner (Perfect for Screen Recordings) -->
+    <section class="founder-card rounded-3xl p-5 sm:p-7 relative overflow-hidden border-amber-500/30 shadow-2xl shadow-amber-950/30">
+      <!-- Laser Top Accent -->
+      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 via-yellow-400 to-cyan-400"></div>
+
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-2.5 mb-2 flex-wrap">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">
+              ⚡ LIVE FOUNDER PIPELINE
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/40">
+              DUBAI &bull; LONDON &bull; ZURICH
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              100% VERIFIED COMPANIES
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white font-heading tracking-tight">
+            High-Ticket Client Acquisition Suite &mdash; <span class="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">Master Vault</span>
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-3xl mt-1 leading-relaxed">
+            All 52 verified high-ticket companies loaded with pre-audited revenue leaks, multi-AI tailored pitch hooks (Video, Design, Web, Ads), and 1-click WhatsApp/Email outreach.
+          </p>
+        </div>
+
+        <!-- 4 Key Metrics Cards for High-Authority Video Presentation -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full lg:w-auto">
+          <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-white/[0.08] text-center min-w-[130px]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block mb-1">Pipeline Value</span>
+            <span class="text-xl sm:text-2xl font-black text-emerald-400 font-mono">$156,000+</span>
+            <span class="text-[9px] text-slate-500 block font-mono">AED 572,000+</span>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-white/[0.08] text-center min-w-[130px]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block mb-1">Total Prospects</span>
+            <span class="text-xl sm:text-2xl font-black text-amber-400 font-mono" id="statTotalProspects">52</span>
+            <span class="text-[9px] text-slate-500 block font-mono">100% Real Brands</span>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-white/[0.08] text-center min-w-[130px]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block mb-1">Avg Retainer</span>
+            <span class="text-xl sm:text-2xl font-black text-cyan-400 font-mono">$3,500/mo</span>
+            <span class="text-[9px] text-slate-500 block font-mono">&#8377;2.9 Lakh/mo</span>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-white/[0.08] text-center min-w-[130px]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block mb-1">Response Benchmark</span>
+            <span class="text-xl sm:text-2xl font-black text-indigo-400 font-mono">38.4%</span>
+            <span class="text-[9px] text-slate-500 block font-mono">Anti-Spam Proof</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Super Filter Ribbon: All Categories Included -->
+    <section class="space-y-3">
+      <!-- Industry Niche Pills Ribbon (All Categories Active) -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs font-semibold">
+        <button onclick="setFounderIndustry('all')" id="tabNiche_all" class="pill-active-niche px-4 py-2 rounded-xl border border-white/[0.1] whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-globe"></i>
+          <span>🌟 All Industries (Full 52+ Vault)</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-black/30 text-[10px] font-mono">52</span>
+        </button>
+
+        <button onclick="setFounderIndustry('creators_podcasts')" id="tabNiche_creators_podcasts" class="px-4 py-2 rounded-xl border border-white/[0.08] bg-slate-900/80 text-slate-300 hover:text-white whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-film text-pink-400"></i>
+          <span>🎬 Creators &amp; Podcasts</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono">10</span>
+        </button>
+
+        <button onclick="setFounderIndustry('d2c_ecommerce')" id="tabNiche_d2c_ecommerce" class="px-4 py-2 rounded-xl border border-white/[0.08] bg-slate-900/80 text-slate-300 hover:text-white whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-palette text-amber-400"></i>
+          <span>🎨 D2C Brands &amp; E-Commerce</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono">10</span>
+        </button>
+
+        <button onclick="setFounderIndustry('car_rentals_detailing')" id="tabNiche_car_rentals_detailing" class="px-4 py-2 rounded-xl border border-white/[0.08] bg-slate-900/80 text-slate-300 hover:text-white whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-car text-cyan-400"></i>
+          <span>🏎️ Supercars &amp; Detailing</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono">8</span>
+        </button>
+
+        <button onclick="setFounderIndustry('fashion_ecommerce')" id="tabNiche_fashion_ecommerce" class="px-4 py-2 rounded-xl border border-white/[0.08] bg-slate-900/80 text-slate-300 hover:text-white whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-gem text-purple-400"></i>
+          <span>👗 Luxury Fashion &amp; Oud</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono">8</span>
+        </button>
+
+        <button onclick="setFounderIndustry('real_estate')" id="tabNiche_real_estate" class="px-4 py-2 rounded-xl border border-white/[0.08] bg-slate-900/80 text-slate-300 hover:text-white whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-building text-blue-400"></i>
+          <span>🏢 Luxury Real Estate</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono">8</span>
+        </button>
+
+        <button onclick="setFounderIndustry('salons_clinics')" id="tabNiche_salons_clinics" class="px-4 py-2 rounded-xl border border-white/[0.08] bg-slate-900/80 text-slate-300 hover:text-white whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-spa text-emerald-400"></i>
+          <span>💉 Aesthetic Clinics &amp; Spas</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 text-[10px] font-mono">8</span>
+        </button>
+      </div>
+
+      <!-- Controls & Search Toolbar -->
+      <div class="founder-card p-3 sm:p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Search Input with Deep Filtering -->
+        <div class="relative w-full md:w-96">
+          <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+          <input type="text" id="founderSearchInput" oninput="handleFounderSearch(this.value)" placeholder="Search Dubai, London, #ABtalks, Supercars, Phone..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-900/90 border border-white/[0.1] text-xs text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition font-sans">
+        </div>
+
+        <!-- Secondary Filters: Pitch Service & Stage -->
+        <div class="flex items-center gap-2.5 flex-wrap w-full md:w-auto justify-end">
+          
+          <!-- Pitch Service Hook View Selector -->
+          <div class="flex items-center gap-1.5 bg-slate-900/90 border border-white/[0.1] px-2.5 py-1.5 rounded-xl text-xs">
+            <span class="text-slate-400 text-[11px] font-mono">Pitch Lens:</span>
+            <select id="founderServiceLens" onchange="changeFounderServiceLens(this.value)" class="bg-transparent text-white font-semibold text-xs outline-none cursor-pointer">
+              <option value="all">🌟 All Services (Full Agency)</option>
+              <option value="video_editing">🎬 Video Editing &amp; Reels</option>
+              <option value="graphic_design">🎨 Graphic Design &amp; Lookbooks</option>
+              <option value="web_dev">💻 Web Dev &amp; CRO Audit</option>
+              <option value="marketing_ads">📈 Paid Ads &amp; ROAS</option>
+            </select>
+          </div>
+
+          <!-- Stage Filter Dropdown -->
+          <div class="flex items-center gap-1.5 bg-slate-900/90 border border-white/[0.1] px-2.5 py-1.5 rounded-xl text-xs">
+            <span class="text-slate-400 text-[11px] font-mono">Pipeline Stage:</span>
+            <select id="founderStageFilter" onchange="changeFounderStageFilter(this.value)" class="bg-transparent text-white font-semibold text-xs outline-none cursor-pointer">
+              <option value="ALL">All Stages</option>
+              <option value="NEW">New Prospect</option>
+              <option value="AUDITED">Audited</option>
+              <option value="PITCH_SENT">Pitch Sent</option>
+              <option value="MEETING_BOOKED">Meeting Booked</option>
+              <option value="CLOSED">Closed Deal</option>
+            </select>
+          </div>
+
+          <!-- Reset Leads Vault -->
+          <button onclick="resetFounderVault()" title="Reset Vault to default 52 verified leads" class="p-2 rounded-xl bg-slate-900/90 border border-white/[0.1] text-slate-400 hover:text-amber-400 transition cursor-pointer">
+            <i class="fas fa-rotate"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Lead Cards Grid (Master Presentation Layout) -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-xs font-mono text-slate-400" id="resultsCountLabel">Showing 52 Verified Global Prospects</span>
+        <span class="text-[11px] font-mono text-amber-400 flex items-center gap-1.5">
+          <i class="fas fa-bolt text-xs"></i> 1-Click WhatsApp Direct Pitch Ready
+        </span>
+      </div>
+
+      <div id="founderLeadsContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 4. MODAL: 5-Platform Omni-Outreach & Live AI Generator -->
+  <div id="founderPitchModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="founder-card p-6 sm:p-7 rounded-3xl max-w-2xl w-full border-amber-500/40 relative shadow-2xl shadow-amber-950/50 max-h-[92vh] overflow-y-auto">
+      
+      <!-- Close Button -->
+      <button onclick="closeFounderPitchModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg transition cursor-pointer">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="mb-4">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-mono font-bold uppercase">
+            ⚡ Omni-Channel AI Pitch Engine
+          </span>
+          <span id="modalLeadIndustryBadge" class="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/40 text-[9px] font-mono"></span>
+        </div>
+        <h3 id="modalLeadName" class="text-xl sm:text-2xl font-black text-white font-heading"></h3>
+        <p id="modalLeadLocation" class="text-xs text-slate-400 font-mono"></p>
+      </div>
+
+      <!-- 5-Platform Tab Switcher (Video Showcase Powerhouse) -->
+      <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-white/[0.08] mb-4 text-xs font-semibold overflow-x-auto scrollbar-none">
+        <button id="tabChan_whatsapp" onclick="switchOutreachChannel('whatsapp')" class="flex-1 py-1.5 px-2.5 rounded-lg bg-emerald-600 text-white shadow transition whitespace-nowrap">
+          <i class="fab fa-whatsapp mr-1 text-emerald-300"></i> WhatsApp
+        </button>
+        <button id="tabChan_instagram" onclick="switchOutreachChannel('instagram')" class="flex-1 py-1.5 px-2.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          <i class="fab fa-instagram mr-1 text-pink-400"></i> Instagram DM
+        </button>
+        <button id="tabChan_email" onclick="switchOutreachChannel('email')" class="flex-1 py-1.5 px-2.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          <i class="fas fa-envelope mr-1 text-blue-400"></i> Cold Email
+        </button>
+        <button id="tabChan_linkedin" onclick="switchOutreachChannel('linkedin')" class="flex-1 py-1.5 px-2.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          <i class="fab fa-linkedin mr-1 text-cyan-400"></i> LinkedIn
+        </button>
+        <button id="tabChan_call" onclick="switchOutreachChannel('call')" class="flex-1 py-1.5 px-2.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap">
+          <i class="fas fa-phone mr-1 text-amber-400"></i> 15s Opener
+        </button>
+      </div>
+
+      <!-- Audit Finding Highlight Box -->
+      <div class="p-3 rounded-xl bg-slate-900/90 border border-white/[0.08] mb-3 text-xs">
+        <span class="text-[10px] text-amber-400 uppercase font-mono font-bold block mb-1">
+          <i class="fas fa-magnifying-glass-chart mr-1"></i> Observed Missing Revenue Leak / Audit Proof:
+        </span>
+        <p id="modalAuditText" class="text-slate-300 text-xs leading-relaxed"></p>
+      </div>
+
+      <!-- Pitch Text Area with Real-Time Auto-Type Simulator for Video Recordings -->
+      <div class="relative mb-4">
+        <div class="flex items-center justify-between mb-1">
+          <label class="text-[11px] font-mono text-slate-400 uppercase">Generated Cold Pitch (Direct &amp; Anti-Spam)</label>
+          <button onclick="triggerAutoTypeDemo()" class="text-[10px] text-amber-400 hover:text-amber-300 font-mono underline flex items-center gap-1 cursor-pointer">
+            <i class="fas fa-play text-[9px]"></i>
+            <span>✨ Live Auto-Type Demo (Video Recording)</span>
+          </button>
+        </div>
+        <textarea id="modalPitchText" rows="6" class="w-full p-3.5 rounded-2xl bg-slate-950 border border-white/[0.12] text-xs text-white leading-relaxed focus:border-amber-500 focus:outline-none font-sans resize-none"></textarea>
+      </div>
+
+      <!-- Live AI Re-Generate Tools with Gemini 3.5 Flash -->
+      <div class="flex items-center justify-between gap-3 mb-5 flex-wrap">
+        <div class="flex items-center gap-2">
+          <button onclick="generateLiveFounderPitch('gemini')" id="btnGenGemini" class="px-3 py-1.5 rounded-xl border border-blue-500/40 bg-blue-500/15 text-blue-300 hover:bg-blue-500/25 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-sparkles text-cyan-400"></i>
+            <span>⚡ Generate with Gemini 3.5</span>
+          </button>
+          <button onclick="generateLiveFounderPitch('claude')" id="btnGenClaude" class="px-3 py-1.5 rounded-xl border border-purple-500/40 bg-purple-500/15 text-purple-300 hover:bg-purple-500/25 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-brain text-purple-400"></i>
+            <span>Claude 3.7 Retainer</span>
+          </button>
+        </div>
+
+        <span class="text-[10px] text-slate-500 font-mono" id="modalPitchWordCount">~55 words &bull; High Conversion</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-white/[0.08]">
+        <button onclick="copyFounderPitch()" id="btnCopyPitch" class="w-full py-3 rounded-xl border border-white/[0.15] bg-slate-900 text-white font-bold text-xs hover:border-amber-500 transition flex items-center justify-center gap-2 cursor-pointer shadow-md">
+          <i class="fas fa-copy text-amber-400"></i>
+          <span>Copy Pitch to Clipboard</span>
+        </button>
+
+        <a id="btnSendWhatsAppModal" href="#" target="_blank" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-lg shadow-emerald-600/30">
+          <i class="fab fa-whatsapp text-sm"></i>
+          <span>Open Direct WhatsApp Pitch &rarr;</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 5. MODAL: Viral Video Scripts Teleprompter (For Hamza's Promo Reels) -->
+  <div id="promoScriptsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div class="founder-card p-6 sm:p-8 rounded-3xl max-w-3xl w-full border-cyan-500/40 relative shadow-2xl shadow-cyan-950/50 max-h-[92vh] overflow-y-auto">
+      
+      <button onclick="closePromoScriptsModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg transition cursor-pointer">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="flex items-center gap-2 mb-2">
+        <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-[10px] font-mono font-bold uppercase">
+          🎬 YouTube &amp; Reels Teleprompter
+        </span>
+        <span class="text-[10px] text-slate-400 font-mono">Use while screen-recording this CRM</span>
+      </div>
+      <h3 class="text-2xl font-black text-white font-heading mb-1">
+        High-Converting Viral Scripts for Promotions
+      </h3>
+      <p class="text-xs text-slate-400 mb-6">
+        Yeh 5 scripts read karke screen record karo. Tumhara CRM background mein run karega aur viewers instantly impress honge!
+      </p>
+
+      <!-- Script Tabs -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none mb-4 text-xs font-semibold">
+        <button onclick="showScriptTab(1)" id="btnScriptTab_1" class="px-3.5 py-1.5 rounded-xl bg-cyan-600 text-white border border-cyan-400 transition whitespace-nowrap">
+          Script 1: Dubai Agency ($3,000/mo)
+        </button>
+        <button onclick="showScriptTab(2)" id="btnScriptTab_2" class="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-white/[0.08] text-slate-400 hover:text-white transition whitespace-nowrap">
+          Script 2: Zero Spam Audit Pitch
+        </button>
+        <button onclick="showScriptTab(3)" id="btnScriptTab_3" class="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-white/[0.08] text-slate-400 hover:text-white transition whitespace-nowrap">
+          Script 3: &#8377;1,999 vs Apollo ($149/mo)
+        </button>
+        <button onclick="showScriptTab(4)" id="btnScriptTab_4" class="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-white/[0.08] text-slate-400 hover:text-white transition whitespace-nowrap">
+          Script 4: 1-Click WhatsApp Close
+        </button>
+      </div>
+
+      <!-- Script Content Display -->
+      <div id="scriptContentBox" class="p-5 rounded-2xl bg-slate-950 border border-white/[0.1] text-sm text-slate-200 leading-relaxed font-sans space-y-4">
+        <!-- Rendered via JS -->
+      </div>
+
+      <div class="mt-5 flex items-center justify-between pt-4 border-t border-white/[0.08]">
+        <button onclick="copyCurrentScript()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-500/30 text-xs font-bold transition flex items-center gap-2 cursor-pointer">
+          <i class="fas fa-copy"></i>
+          <span>Copy Script to Clipboard</span>
+        </button>
+        <button onclick="closePromoScriptsModal()" class="px-5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold transition cursor-pointer">
+          Close &amp; Record Screen &rarr;
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 6. MODAL: Full Lead Audit Dossier -->
+  <div id="founderAuditModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="founder-card p-6 sm:p-8 rounded-3xl max-w-xl w-full border-blue-500/40 relative shadow-2xl shadow-blue-950/50 max-h-[92vh] overflow-y-auto">
+      <button onclick="closeFounderAuditModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg transition cursor-pointer">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/40 text-[9px] font-mono font-bold uppercase mb-2 inline-block">
+        🏢 Deep Client Audit Dossier
+      </span>
+      <h3 id="dossierName" class="text-xl sm:text-2xl font-black text-white font-heading mb-1"></h3>
+      <p id="dossierMeta" class="text-xs text-slate-400 font-mono mb-4"></p>
+
+      <div class="space-y-3 text-xs">
+        <div class="p-3.5 rounded-xl bg-slate-900/90 border border-white/[0.08]">
+          <span class="text-[10px] text-amber-400 font-mono uppercase font-bold block mb-1">Observed Revenue Leak / Bottleneck</span>
+          <p id="dossierAudit" class="text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-white/[0.08]">
+            <span class="text-[10px] text-pink-400 font-mono uppercase font-bold block mb-1">Video Editing Hook</span>
+            <p id="dossierVideo" class="text-slate-300 text-[11px]"></p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-white/[0.08]">
+            <span class="text-[10px] text-purple-400 font-mono uppercase font-bold block mb-1">Graphic Design Hook</span>
+            <p id="dossierDesign" class="text-slate-300 text-[11px]"></p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-900/90 border border-white/[0.08]">
+          <span class="text-[10px] text-cyan-400 font-mono uppercase font-bold block mb-1">Web Dev &amp; CRO Hook</span>
+          <p id="dossierWeb" class="text-slate-300 text-[11px]"></p>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-900/90 border border-white/[0.08] flex items-center justify-between">
+          <span class="text-[11px] text-slate-400">Direct Verified Contact:</span>
+          <span id="dossierPhone" class="font-mono text-emerald-400 font-bold"></span>
+        </div>
+      </div>
+
+      <div class="mt-5 pt-3 border-t border-white/[0.08] flex justify-end">
+        <button onclick="closeFounderAuditModal()" class="px-5 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Close Dossier</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. MODAL: Founder Internal Notes -->
+  <div id="founderNotesModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="founder-card p-6 rounded-3xl max-w-md w-full border-amber-500/40 relative shadow-2xl">
+      <button onclick="closeFounderNotesModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-base"><i class="fas fa-times"></i></button>
+      <h3 class="text-lg font-bold text-white font-heading mb-1" id="notesLeadName">Internal Deal Notes</h3>
+      <p class="text-[11px] text-slate-400 font-mono mb-3">Save notes, retainer quotes, call outcomes or next follow-ups.</p>
+      
+      <textarea id="founderNotesInput" rows="5" placeholder="e.g. Discussed with marketing manager on WhatsApp. Sent 3 video samples. Quoted $3,000/mo retainer..." class="w-full p-3 rounded-xl bg-slate-950 border border-white/10 text-xs text-white leading-relaxed focus:border-amber-500 focus:outline-none mb-3 resize-none"></textarea>
+
+      <div class="flex items-center justify-end gap-2">
+        <button onclick="closeFounderNotesModal()" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 text-xs font-semibold">Cancel</button>
+        <button onclick="saveFounderNotes()" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs">Save to Vault</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. MODAL: AI Copilot Drawer -->
+  <div id="copilotModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div class="founder-card p-6 rounded-3xl max-w-xl w-full border-indigo-500/40 relative shadow-2xl flex flex-col h-[600px]">
+      <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-xs">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white font-heading">AI Acquisition Copilot</h3>
+            <span class="text-[10px] text-indigo-400 font-mono">Google Gemini 3.5 Flash &bull; Real-Time</span>
+          </div>
+        </div>
+        <button onclick="closeCopilotModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div id="copilotChatMessages" class="flex-1 overflow-y-auto py-3 space-y-2.5 text-xs">
+        <div class="p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/20 text-slate-200">
+          👋 <strong>Welcome Mohammad Hamza!</strong> Main tumhara master copilot hoon. Mujhe batao:
+          <ul class="list-disc pl-4 mt-1.5 space-y-1 text-slate-300 text-[11px]">
+            <li>"Dubai supercars rental ko $4,000/mo reel retainer kaise pitch karun?"</li>
+            <li>"Ek high-converting 15-second cold call script likho #ABtalks ke liye"</li>
+            <li>"Agar client bole 'fee bohot zyda hai', toh objection kaise handle karein?"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-white/[0.08] flex items-center gap-2">
+        <input type="text" id="copilotInput" onkeydown="if(event.key==='Enter') sendCopilotMsg()" placeholder="Type instructions or questions for Gemini..." class="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-xs text-white focus:border-indigo-500 focus:outline-none">
+        <button onclick="sendCopilotMsg()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.08] py-4 px-6 text-center text-xs text-slate-500 font-mono">
+    <span>Outreach Studio Pro &bull; Mohammad Hamza Founder &amp; Master Agency Edition</span>
+    <span class="mx-2">&bull;</span>
+    <span class="text-amber-400">52 Verified Leads Master Vault</span>
+  </footer>
+
+  <!-- Core JavaScript: Master Founder CRM Controller -->
+  <script>
+    const FOUNDER_VAULT_KEY = 'osp_vault_founder_hamza';
+    const TEST_GEMINI_KEY = 'AIzaSyAgwg5qPUybsBZcfboFy5mgZwoSp58_aYE';
+
+    let founderLeads = [];
+    let currentFounderIndustry = 'all';
+    let currentFounderStage = 'ALL';
+    let currentFounderSearch = '';
+    let currentFounderLens = 'all';
+    let activeModalLead = null;
+    let activeOutreachChannel = 'whatsapp';
+    let autoTypeInterval = null;
+
+    // Viral Scripts Data for Hamza's Promo Videos
+    const VIRAL_SCRIPTS = {
+      1: {
+        title: "Dubai Agency Retainers ($3,000 - $5,000/mo)",
+        body: `🎥 <strong>Hook (0-5s):</strong><br>
+"Agar tum abhi bhi $50 ke Upwork projects pe bid kar rahe ho, toh stop scrolling right now."<br><br>
+📈 <strong>Core Demonstration (5-25s):</strong><br>
+"Yeh dekho mera personal CRM — Outreach Studio Pro. Isme Dubai ke top 52 verified high-ticket clients already pre-loaded hain — jaise #ABtalks, Apex Supercars, Roja Parfums Mayfair. Har ek lead ka missing revenue leak aur audit report already ready hai."<br><br>
+⚡ <strong>Call To Action (25-35s):</strong><br>
+"Sirf 1-click WhatsApp button dabaya aur tailored pitch seedha client ke DM mein. Ek bhi spam nahi, 100% genuine audit. Lifetime access sirf ₹1,999 mein mil raha hai bio ke link se!"`
+      },
+      2: {
+        title: "The Zero-Spam Audit Pitch Technique",
+        body: `🎥 <strong>Hook (0-5s):</strong><br>
+"Clients tumhare cold emails ko ignore kyu karte hain? Kyunki tum wahi ghatiya copy-paste spam bhejte ho."<br><br>
+📈 <strong>Core Demonstration (5-25s):</strong><br>
+"Real client acquisition aise hota hai: Hamara CRM har business ka specific audit nikalta hai. Jaise iss Dubai podcast ke 2.5 Million subs hain, par daily TikTok shorts missing hain. Humne unhe ek complimentary 45-second high-retention reel offer ki."<br><br>
+⚡ <strong>Call To Action (25-35s):</strong><br>
+"Jab tum audit ke sath pitch karte ho, toh response rate 38% cross karta hai. Tool ka link bio mein hai!"`
+      },
+      3: {
+        title: "₹1,999 One-Time vs Apollo $149/mo Scam",
+        body: `🎥 <strong>Hook (0-5s):</strong><br>
+"Apollo aur Instantly har mahine $140 dollar kyu charge karte hain jab saara data internet pe publicly available hai?"<br><br>
+📈 <strong>Core Demonstration (5-25s):</strong><br>
+"Maine yeh CRM banaya agencies ke liye jahan 0 monthly fee hai. Ek baar ₹1,999 pay karo, lifetime commercial license milta hai with full source code, unlimited scrapers, aur 52 ready-to-pitch global leads."<br><br>
+⚡ <strong>Call To Action (25-35s):</strong><br>
+"Ek foreign client close karo aur apni ₹1,999 ki investment 100x karlo. Check bio!"`
+      },
+      4: {
+        title: "1-Click WhatsApp Client Closing",
+        body: `🎥 <strong>Hook (0-5s):</strong><br>
+"Email outreach mar chuka hai — 2026 mein real high-ticket deals WhatsApp aur Instagram DM pe close hoti hain."<br><br>
+📈 <strong>Core Demonstration (5-25s):</strong><br>
+"Dekho kaise Outreach Studio Pro mein 1-click karte hi client ka WhatsApp chat khulta hai with a pre-written, personalized audit pitch. Koi copy-paste ka jhanjhat nahi."<br><br>
+⚡ <strong>Call To Action (25-35s):</strong><br>
+"Apni agency automate karo. Aaj hi secure karo ₹1,999 lifetime deal!"`
+      }
+    };
+
+    // 1. Initialize Founder Master Vault
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFounderVault();
+      renderFounderDashboard();
+      showScriptTab(1);
+    });
+
+    function loadFounderVault() {
+      try {
+        const saved = localStorage.getItem(FOUNDER_VAULT_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            founderLeads = parsed;
+            updateSyncIndicator('Cloud Vault: Synced (Local)');
+            return;
+          }
+        }
+
+        // Initialize with all 52 Leads
+        const allAvailable = window.DEFAULT_GLOBAL_LEADS || [];
+        founderLeads = allAvailable.map(l => {
+          const clone = JSON.parse(JSON.stringify(l));
+          if (!clone.status) clone.status = 'NEW';
+          clone.pitch_message = generateFounderPitch(clone, 'whatsapp', 'video_editing');
+          return clone;
+        });
+
+        saveFounderVault(false);
+      } catch(e) {
+        founderLeads = JSON.parse(JSON.stringify(window.DEFAULT_GLOBAL_LEADS || []));
+      }
+    }
+
+    function saveFounderVault(showSync = true) {
+      try {
+        localStorage.setItem(FOUNDER_VAULT_KEY, JSON.stringify(founderLeads));
+        if (showSync) {
+          updateSyncIndicator('Saved to Cloud Vault');
+          setTimeout(() => updateSyncIndicator('Cloud Vault: Synced (0ms)'), 1500);
+        }
+      } catch(e) {}
+    }
+
+    function updateSyncIndicator(text) {
+      const el = document.getElementById('syncIndicator');
+      if (el) el.textContent = text;
+    }
+
+    function resetFounderVault() {
+      if (confirm("Reset Founder Vault back to all 52 default verified leads?")) {
+        localStorage.removeItem(FOUNDER_VAULT_KEY);
+        loadFounderVault();
+        renderFounderDashboard();
+      }
+    }
+
+    // 2. Pitch Generator across 5 Platforms
+    function cleanHookText(h) {
+      if (!h) return '';
+      return h.replace(/\s*\(\$[\d,\/\w\s\.\–\-]+\)/g, '')
+              .replace(/\s*\([\w\s\.\–\-\$]+\/mo\)/gi, '')
+              .replace(/\s*\([\w\s\.\–\-\$]+retainer\)/gi, '')
+              .replace(/\s*\([\w\s\.\–\-\$]+project\)/gi, '')
+              .trim();
+    }
+
+    function generateFounderPitch(lead, channel = 'whatsapp', lens = 'video_editing') {
+      const company = lead.name || 'Team';
+      const city = lead.city || 'Dubai';
+      const audit = lead.audit_proof || 'Premier brand presence in UAE';
+      
+      let hook = '';
+      if (lens === 'video_editing') hook = cleanHookText(lead.video_hook);
+      else if (lens === 'graphic_design') hook = cleanHookText(lead.design_hook);
+      else if (lens === 'web_dev') hook = cleanHookText(lead.web_hook);
+      else hook = cleanHookText(lead.video_hook || lead.design_hook || lead.web_hook);
+
+      if (!hook) hook = 'high-converting visual storytelling and retention upgrades';
+
+      if (channel === 'whatsapp') {
+        return `Hey team ${company}! 🎬\n\nCame across your brand in ${city} — really impressive presence in ${lead.industry_name || 'your space'}.\n\nRan a quick audit on your channels: ${audit}.\n\nWe specialize in solving exactly this: ${hook}.\n\nWould you be open if I put together 1 complimentary sample concept tailored for ${company} completely free of charge so you can see the visual style?`;
+      } else if (channel === 'instagram') {
+        return `Hey ${company}! 👋 Love what you guys are building in ${city}.\n\nQuick heads up: noticed ${audit.slice(0, 100)}... We help brands upgrade this with ${hook.slice(0, 90)}.\n\nMind if I send over a 30-sec free sample reel over DM?`;
+      } else if (channel === 'email') {
+        return `Subject: Quick visual audit finding for ${company} (${city})\n\nHi team ${company},\n\nCame across your business while auditing top performers in ${city}.\n\nObserved Bottleneck: ${audit}.\n\nProposed Solution: ${hook}.\n\nI have already drafted 1 complimentary sample tailored for ${company}. Where should I send the private link?`;
+      } else if (channel === 'linkedin') {
+        return `Hi ${company} Leadership,\n\nImpressive growth trajectory in ${city}.\n\nDuring a recent industry review, noticed an instant revenue upgrade opportunity: ${audit}.\n\nWe partner with selective leaders to deploy: ${hook}.\n\nOpen to reviewing a 1-page sample audit this week?`;
+      } else if (channel === 'call') {
+        return `"Hi team ${company}, calling briefly from Dubai/India. I noticed your recent campaigns in ${city} — specifically that ${audit.slice(0, 70)}. We specialize in ${hook.slice(0, 70)}. I'm sending a free sample to your WhatsApp right now — who is the best person to review it?"`;
+      }
+      return `Hey ${company}, audit: ${audit}. Solution: ${hook}.`;
+    }
+
+    // 3. Render Dashboard
+    function renderFounderDashboard() {
+      const container = document.getElementById('founderLeadsContainer');
+      if (!container) return;
+
+      const q = currentFounderSearch.toLowerCase();
+      const filtered = founderLeads.filter(lead => {
+        // Industry filter
+        if (currentFounderIndustry !== 'all' && lead.industry !== currentFounderIndustry) return false;
+        // Stage filter
+        if (currentFounderStage !== 'ALL' && lead.status !== currentFounderStage) return false;
+        // Search filter
+        if (q) {
+          const matchName = (lead.name || '').toLowerCase().includes(q);
+          const matchCity = (lead.city || '').toLowerCase().includes(q);
+          const matchCountry = (lead.country || '').toLowerCase().includes(q);
+          const matchPhone = (lead.phone || '').toLowerCase().includes(q);
+          const matchAudit = (lead.audit_proof || '').toLowerCase().includes(q);
+          const matchHook = (lead.video_hook || lead.design_hook || lead.web_hook || '').toLowerCase().includes(q);
+          if (!matchName && !matchCity && !matchCountry && !matchPhone && !matchAudit && !matchHook) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('resultsCountLabel').textContent = `Showing ${filtered.length} of ${founderLeads.length} Verified Global Prospects`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full p-12 text-center founder-card rounded-3xl">
+            <i class="fas fa-search text-3xl text-amber-500/50 mb-3 block"></i>
+            <h4 class="text-white font-bold text-base mb-1">No leads match your active filters</h4>
+            <p class="text-xs text-slate-400 mb-4">Try clearing your search query or selecting 'All Industries'.</p>
+            <button onclick="setFounderIndustry('all'); document.getElementById('founderSearchInput').value=''; currentFounderSearch='';" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs">Reset All Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(lead => {
+        const cleanPhone = (lead.phone || '').replace(/\D/g, '');
+        const waMsg = encodeURIComponent(lead.pitch_message || generateFounderPitch(lead, 'whatsapp', currentFounderLens));
+        const waLink = `https://wa.me/${cleanPhone}?text=${waMsg}`;
+
+        const statusColors = {
+          NEW: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+          AUDITED: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
+          PITCH_SENT: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+          MEETING_BOOKED: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
+          CLOSED: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40 font-bold'
+        };
+
+        const activeHook = (currentFounderLens === 'graphic_design' ? lead.design_hook : (currentFounderLens === 'web_dev' ? lead.web_hook : lead.video_hook)) || lead.video_hook || lead.design_hook;
+
+        return `
+          <div class="founder-card p-5 rounded-3xl flex flex-col justify-between relative group hover:border-amber-500/40">
+            <!-- Header Strip -->
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase ${statusColors[lead.status] || 'bg-slate-800 text-slate-300'} border">
+                  ${lead.status || 'NEW'}
+                </span>
+                <span class="text-[10px] font-mono text-slate-400 flex items-center gap-1">
+                  <i class="fas fa-location-dot text-amber-400 text-[10px]"></i> ${lead.city}, ${lead.country}
+                </span>
+              </div>
+
+              <h4 class="text-base font-black text-white font-heading group-hover:text-amber-400 transition mb-1 leading-snug">
+                ${lead.name}
+              </h4>
+              <p class="text-[11px] text-slate-400 font-mono mb-3">
+                ${lead.industry_name || lead.category || 'High-Ticket Brand'}
+              </p>
+
+              <!-- Audit Snippet (Key Video Pitch Element) -->
+              <div class="p-3 rounded-2xl bg-slate-950/80 border border-white/[0.06] mb-3 text-[11px] leading-relaxed">
+                <span class="text-[9px] font-mono font-bold text-amber-400 uppercase block mb-1">
+                  <i class="fas fa-bug mr-1"></i> Missing Revenue Leak:
+                </span>
+                <p class="text-slate-300 line-clamp-2">${lead.audit_proof || 'High traffic brand with under-monetized organic reach.'}</p>
+              </div>
+
+              <!-- Tailored Hook Highlight -->
+              <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[10px] text-amber-300 font-mono mb-4 flex items-center justify-between">
+                <span class="truncate"><i class="fas fa-bolt mr-1 text-amber-400"></i> ${cleanHookText(activeHook)}</span>
+              </div>
+            </div>
+
+            <!-- Footer Action Controls -->
+            <div class="pt-3 border-t border-white/[0.08] space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <!-- Status Changer -->
+                <select onchange="updateFounderStatus('${lead.id}', this.value)" class="text-[10px] font-mono bg-slate-900 border border-white/[0.1] rounded-lg px-2 py-1 text-slate-300 outline-none cursor-pointer">
+                  <option value="NEW" ${lead.status==='NEW'?'selected':''}>New</option>
+                  <option value="AUDITED" ${lead.status==='AUDITED'?'selected':''}>Audited</option>
+                  <option value="PITCH_SENT" ${lead.status==='PITCH_SENT'?'selected':''}>Pitch Sent</option>
+                  <option value="MEETING_BOOKED" ${lead.status==='MEETING_BOOKED'?'selected':''}>Booked</option>
+                  <option value="CLOSED" ${lead.status==='CLOSED'?'selected':''}>Closed Deal 🏆</option>
+                </select>
+
+                <div class="flex items-center gap-1.5">
+                  <button onclick="openFounderAuditModal('${lead.id}')" title="View Full Audit Dossier" class="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-blue-400 border border-white/[0.08] text-xs cursor-pointer">
+                    <i class="fas fa-circle-info"></i>
+                  </button>
+                  <button onclick="openFounderNotesModal('${lead.id}')" title="Internal Deal Notes" class="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-purple-400 border border-white/[0.08] text-xs cursor-pointer">
+                    <i class="fas fa-sticky-note"></i>
+                  </button>
+                  <button onclick="openFounderPitchModal('${lead.id}')" title="Open AI Pitch Suite" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[11px] font-bold cursor-pointer">
+                    <i class="fas fa-sparkles mr-1"></i> AI Pitch
+                  </button>
+                </div>
+              </div>
+
+              <!-- Direct WhatsApp Outreach Button -->
+              <a href="${waLink}" target="_blank" onclick="markPitchSent('${lead.id}')" class="w-full py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition">
+                <i class="fab fa-whatsapp"></i>
+                <span>Direct WhatsApp (${lead.phone || 'Ready'})</span>
+              </a>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 4. Filter Handlers
+    function setFounderIndustry(ind) {
+      currentFounderIndustry = ind;
+      const allTabs = ['all', 'creators_podcasts', 'd2c_ecommerce', 'car_rentals_detailing', 'fashion_ecommerce', 'real_estate', 'salons_clinics'];
+      allTabs.forEach(id => {
+        const btn = document.getElementById('tabNiche_' + id);
+        if (btn) {
+          if (id === ind) {
+            btn.className = "pill-active-niche px-4 py-2 rounded-xl border border-white/[0.1] whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer";
+          } else {
+            btn.className = "px-4 py-2 rounded-xl border border-white/[0.08] bg-slate-900/80 text-slate-300 hover:text-white whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer";
+          }
+        }
+      });
+      renderFounderDashboard();
+    }
+
+    function handleFounderSearch(val) {
+      currentFounderSearch = val.trim();
+      renderFounderDashboard();
+    }
+
+    function changeFounderServiceLens(lens) {
+      currentFounderLens = lens;
+      founderLeads.forEach(l => {
+        l.pitch_message = generateFounderPitch(l, activeOutreachChannel, currentFounderLens);
+      });
+      renderFounderDashboard();
+    }
+
+    function changeFounderStageFilter(st) {
+      currentFounderStage = st;
+      renderFounderDashboard();
+    }
+
+    function updateFounderStatus(id, newStatus) {
+      const lead = founderLeads.find(l => l.id === id);
+      if (lead) {
+        lead.status = newStatus;
+        saveFounderVault(true);
+        renderFounderDashboard();
+      }
+    }
+
+    function markPitchSent(id) {
+      const lead = founderLeads.find(l => l.id === id);
+      if (lead && lead.status === 'NEW') {
+        lead.status = 'PITCH_SENT';
+        saveFounderVault(false);
+        renderFounderDashboard();
+      }
+    }
+
+    // 5. Pitch Suite Modal Controller
+    function openFounderPitchModal(leadId) {
+      activeModalLead = founderLeads.find(l => l.id === leadId);
+      if (!activeModalLead) return;
+
+      document.getElementById('modalLeadName').textContent = activeModalLead.name;
+      document.getElementById('modalLeadLocation').textContent = `${activeModalLead.city}, ${activeModalLead.country} &bull; ${activeModalLead.phone || ''}`;
+      document.getElementById('modalLeadIndustryBadge').textContent = activeModalLead.industry_name || activeModalLead.category || 'High-Ticket Brand';
+      document.getElementById('modalAuditText').textContent = activeModalLead.audit_proof || 'Premier brand in UAE';
+
+      activeOutreachChannel = 'whatsapp';
+      updatePitchText();
+
+      const modal = document.getElementById('founderPitchModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeFounderPitchModal() {
+      if (autoTypeInterval) clearInterval(autoTypeInterval);
+      const modal = document.getElementById('founderPitchModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function switchOutreachChannel(chan) {
+      activeOutreachChannel = chan;
+      const channels = ['whatsapp', 'instagram', 'email', 'linkedin', 'call'];
+      channels.forEach(c => {
+        const btn = document.getElementById('tabChan_' + c);
+        if (btn) {
+          if (c === chan) {
+            btn.className = "flex-1 py-1.5 px-2.5 rounded-lg bg-emerald-600 text-white shadow transition whitespace-nowrap";
+          } else {
+            btn.className = "flex-1 py-1.5 px-2.5 rounded-lg text-slate-400 hover:text-white transition whitespace-nowrap";
+          }
+        }
+      });
+      updatePitchText();
+    }
+
+    function updatePitchText() {
+      if (!activeModalLead) return;
+      const pitch = generateFounderPitch(activeModalLead, activeOutreachChannel, currentFounderLens);
+      const textarea = document.getElementById('modalPitchText');
+      if (textarea) textarea.value = pitch;
+
+      const words = pitch.split(/\s+/).filter(Boolean).length;
+      document.getElementById('modalPitchWordCount').textContent = `~${words} words &bull; ${activeOutreachChannel.toUpperCase()}`;
+
+      // Update WhatsApp Send link
+      const btnWA = document.getElementById('btnSendWhatsAppModal');
+      if (btnWA) {
+        const cleanPhone = (activeModalLead.phone || '').replace(/\D/g, '');
+        btnWA.href = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(pitch)}`;
+      }
+    }
+
+    // 6. Interactive Real-Time Auto-Type Simulator (For Video Recordings!)
+    function triggerAutoTypeDemo() {
+      if (!activeModalLead) return;
+      const textarea = document.getElementById('modalPitchText');
+      if (!textarea) return;
+
+      const fullPitch = generateFounderPitch(activeModalLead, activeOutreachChannel, currentFounderLens);
+      textarea.value = '';
+      if (autoTypeInterval) clearInterval(autoTypeInterval);
+
+      let idx = 0;
+      autoTypeInterval = setInterval(() => {
+        if (idx < fullPitch.length) {
+          textarea.value += fullPitch[idx];
+          idx++;
+          textarea.scrollTop = textarea.scrollHeight;
+        } else {
+          clearInterval(autoTypeInterval);
+        }
+      }, 18); // ~50 chars/second speed
+    }
+
+    function copyFounderPitch() {
+      const textarea = document.getElementById('modalPitchText');
+      const btn = document.getElementById('btnCopyPitch');
+      if (textarea) {
+        navigator.clipboard.writeText(textarea.value).then(() => {
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check text-emerald-400"></i> Copied!';
+            setTimeout(() => { btn.innerHTML = orig; }, 1800);
+          }
+        });
+      }
+    }
+
+    // 7. Live Google Gemini 3.5 Generator in Founder Suite
+    async function generateLiveFounderPitch(provider) {
+      if (!activeModalLead) return;
+      const textarea = document.getElementById('modalPitchText');
+      if (!textarea) return;
+
+      textarea.value = `⚡ Contacting ${provider === 'gemini' ? 'Google Gemini 3.5 Flash' : 'Claude 3.7 Sonnet'} neural engine... Drafting tailored high-ticket pitch...`;
+
+      try {
+        const prompt = `Write a personalized, high-converting cold outreach ${activeOutreachChannel} pitch for ${activeModalLead.name} located in ${activeModalLead.city}, ${activeModalLead.country}.
+Company Industry / Category: ${activeModalLead.industry_name}.
+Observed Audit Bottleneck: ${activeModalLead.audit_proof}.
+Specific Service Hook: ${activeModalLead.video_hook || activeModalLead.design_hook}.
+Channel: ${activeOutreachChannel}.
+Keep it under 65 words, conversational, direct, anti-spam, offering a 1-page/sample proof.`;
+
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${TEST_GEMINI_KEY}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+
+        if (resp.ok) {
+          const data = await resp.json();
+          const generated = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (generated) {
+            textarea.value = generated.trim();
+            activeModalLead.pitch_message = generated.trim();
+            saveFounderVault(false);
+            return;
+          }
+        }
+        throw new Error('API Fallback');
+      } catch(e) {
+        // Instant Fallback
+        textarea.value = generateFounderPitch(activeModalLead, activeOutreachChannel, currentFounderLens);
+      }
+    }
+
+    // 8. Audit Dossier & Notes Modals
+    function openFounderAuditModal(leadId) {
+      const lead = founderLeads.find(l => l.id === leadId);
+      if (!lead) return;
+      document.getElementById('dossierName').textContent = lead.name;
+      document.getElementById('dossierMeta').textContent = `${lead.city}, ${lead.country} &bull; ${lead.industry_name || lead.category}`;
+      document.getElementById('dossierAudit').textContent = lead.audit_proof || 'High traffic brand with under-monetized organic reach.';
+      document.getElementById('dossierVideo').textContent = cleanHookText(lead.video_hook) || 'N/A';
+      document.getElementById('dossierDesign').textContent = cleanHookText(lead.design_hook) || 'N/A';
+      document.getElementById('dossierWeb').textContent = cleanHookText(lead.web_hook) || 'N/A';
+      document.getElementById('dossierPhone').textContent = lead.phone || 'Verified Direct Line';
+      
+      const m = document.getElementById('founderAuditModal');
+      if (m) m.classList.remove('hidden');
+    }
+    function closeFounderAuditModal() {
+      const m = document.getElementById('founderAuditModal');
+      if (m) m.classList.add('hidden');
+    }
+
+    let notesTargetLead = null;
+    function openFounderNotesModal(leadId) {
+      notesTargetLead = founderLeads.find(l => l.id === leadId);
+      if (!notesTargetLead) return;
+      document.getElementById('notesLeadName').textContent = `Deal Notes &bull; ${notesTargetLead.name}`;
+      document.getElementById('founderNotesInput').value = notesTargetLead.notes || '';
+      const m = document.getElementById('founderNotesModal');
+      if (m) m.classList.remove('hidden');
+    }
+    function closeFounderNotesModal() {
+      const m = document.getElementById('founderNotesModal');
+      if (m) m.classList.add('hidden');
+    }
+    function saveFounderNotes() {
+      if (!notesTargetLead) return;
+      notesTargetLead.notes = document.getElementById('founderNotesInput').value.trim();
+      saveFounderVault(true);
+      closeFounderNotesModal();
+      renderFounderDashboard();
+    }
+
+    // 9. Promo Scripts Teleprompter
+    function openPromoScriptsModal() {
+      const m = document.getElementById('promoScriptsModal');
+      if (m) m.classList.remove('hidden');
+    }
+    function closePromoScriptsModal() {
+      const m = document.getElementById('promoScriptsModal');
+      if (m) m.classList.add('hidden');
+    }
+    function showScriptTab(num) {
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById('btnScriptTab_' + i);
+        if (btn) {
+          if (i === num) {
+            btn.className = "px-3.5 py-1.5 rounded-xl bg-cyan-600 text-white border border-cyan-400 transition whitespace-nowrap";
+          } else {
+            btn.className = "px-3.5 py-1.5 rounded-xl bg-slate-900 border border-white/[0.08] text-slate-400 hover:text-white transition whitespace-nowrap";
+          }
+        }
+      }
+      const data = VIRAL_SCRIPTS[num];
+      if (data) {
+        document.getElementById('scriptContentBox').innerHTML = `
+          <h4 class="text-white font-bold text-base mb-2 font-heading">${data.title}</h4>
+          <div class="text-slate-300 leading-relaxed text-xs sm:text-sm font-sans">${data.body}</div>
+        `;
+      }
+    }
+    function copyCurrentScript() {
+      const box = document.getElementById('scriptContentBox');
+      if (box) {
+        navigator.clipboard.writeText(box.innerText).then(() => alert("Script copied! Paste it in your notes or teleprompter app."));
+      }
+    }
+
+    // 10. Video Recording Mode Toggle (Clean Fullscreen Presentation)
+    let isVideoMode = false;
+    function toggleVideoMode() {
+      isVideoMode = !isVideoMode;
+      document.body.classList.toggle('video-mode-active', isVideoMode);
+      const text = document.getElementById('videoModeText');
+      if (text) text.textContent = isVideoMode ? "🔴 Exit Video Mode" : "🎥 Video Recording HUD";
+    }
+
+    // 11. AI Copilot Modal
+    function openCopilotModal() {
+      const m = document.getElementById('copilotModal');
+      if (m) m.classList.remove('hidden');
+    }
+    function closeCopilotModal() {
+      const m = document.getElementById('copilotModal');
+      if (m) m.classList.add('hidden');
+    }
+    async function sendCopilotMsg() {
+      const input = document.getElementById('copilotInput');
+      const box = document.getElementById('copilotChatMessages');
+      const msg = input ? input.value.trim() : '';
+      if (!msg) return;
+
+      input.value = '';
+      box.innerHTML += `
+        <div class="p-2.5 rounded-xl bg-blue-600/30 border border-blue-500/40 text-white text-right">
+          ${msg}
+        </div>
+      `;
+      box.scrollTop = box.scrollHeight;
+
+      const loadingId = 'copilot_loading_' + Date.now();
+      box.innerHTML += `<div id="${loadingId}" class="p-2.5 rounded-xl bg-indigo-950/40 border border-indigo-500/20 text-slate-400 text-xs"><i class="fas fa-spinner fa-spin mr-1"></i> Thinking...</div>`;
+      box.scrollTop = box.scrollHeight;
+
+      try {
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${TEST_GEMINI_KEY}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: `You are the master client acquisition copilot for Mohammad Hamza. Reply in confident, direct Hinglish/English. User question: ${msg}` }] }] })
+        });
+        const data = await resp.json();
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Let's pitch this client with a direct video audit and clear pricing.";
+        document.getElementById(loadingId).outerHTML = `
+          <div class="p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/20 text-slate-200">
+            ${reply.replace(/\n/g, '<br>')}
+          </div>
+        `;
+      } catch(e) {
+        document.getElementById(loadingId).outerHTML = `
+          <div class="p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/20 text-slate-200">
+            High-ticket rule: Always lead with their missing audit finding, offer 1 free sample reel/concept, and quote $2,500/mo retainer.
+          </div>
+        `;
+      }
+      box.scrollTop = box.scrollHeight;
+    }
+
+    // 12. Export CSV
+    function exportFounderCSV() {
+      if (!founderLeads || founderLeads.length === 0) return;
+      const headers = ['ID', 'Name', 'City', 'Country', 'Phone', 'Category', 'Status', 'Audit_Proof', 'Video_Hook', 'Design_Hook', 'Web_Hook', 'Pitch_Message', 'Notes'];
+      const rows = founderLeads.map(l => [
+        `"${(l.id||'').replace(/"/g, '""')}"`,
+        `"${(l.name||'').replace(/"/g, '""')}"`,
+        `"${(l.city||'').replace(/"/g, '""')}"`,
+        `"${(l.country||'').replace(/"/g, '""')}"`,
+        `"${(l.phone||'').replace(/"/g, '""')}"`,
+        `"${(l.industry_name||l.category||'').replace(/"/g, '""')}"`,
+        `"${(l.status||'NEW').replace(/"/g, '""')}"`,
+        `"${(l.audit_proof||'').replace(/"/g, '""')}"`,
+        `"${(cleanHookText(l.video_hook)||'').replace(/"/g, '""')}"`,
+        `"${(cleanHookText(l.design_hook)||'').replace(/"/g, '""')}"`,
+        `"${(cleanHookText(l.web_hook)||'').replace(/"/g, '""')}"`,
+        `"${(l.pitch_message||'').replace(/"/g, '""')}"`,
+        `"${(l.notes||'').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `Mohammad_Hamza_Master_Vault_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>

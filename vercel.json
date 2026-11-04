@@ -3,6 +3,8 @@
   "rewrites": [
     { "source": "/app", "destination": "/crm.html" },
     { "source": "/crm", "destination": "/crm.html" },
+    { "source": "/founder", "destination": "/founder.html" },
+    { "source": "/master", "destination": "/founder.html" },
     { "source": "/login", "destination": "/login.html" },
     { "source": "/admin", "destination": "/admin.html" }
   ]
