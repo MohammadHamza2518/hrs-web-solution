@@ -40,35 +40,43 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Custom CRM Glass & Table Styles */
+    /* Ultra-Professional Enterprise SaaS Styles */
     .crm-card {
-      background: rgba(13, 19, 36, 0.75);
+      background: #0d1424;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .crm-card:hover {
-      border-color: rgba(59, 130, 246, 0.35);
-      box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.65);
     }
     .crm-tab-active {
-      background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%) !important;
+      background: #2563EB !important;
       color: #FFFFFF !important;
-      border-color: rgba(96, 165, 250, 0.5) !important;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+      border-color: #3B82F6 !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
-    .status-badge-NEW { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border-color: rgba(59, 130, 246, 0.3); }
-    .status-badge-AUDITED { background: rgba(168, 85, 247, 0.15); color: #C084FC; border-color: rgba(168, 85, 247, 0.3); }
-    .status-badge-PITCH_SENT { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border-color: rgba(245, 158, 11, 0.3); }
-    .status-badge-MEETING_BOOKED { background: rgba(6, 182, 212, 0.15); color: #22D3EE; border-color: rgba(6, 182, 212, 0.3); }
-    .status-badge-CLOSED { background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(16, 185, 129, 0.4); font-weight: bold; }
+    .ind-pill-active {
+      background: #2563EB !important;
+      color: #FFFFFF !important;
+      border-color: #3B82F6 !important;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    .status-badge-NEW { background: rgba(59, 130, 246, 0.12); color: #93C5FD; border: 1px solid rgba(59, 130, 246, 0.25); }
+    .status-badge-AUDITED { background: rgba(139, 92, 246, 0.12); color: #C4B5FD; border: 1px solid rgba(139, 92, 246, 0.25); }
+    .status-badge-PITCH_SENT { background: rgba(245, 158, 11, 0.12); color: #FCD34D; border: 1px solid rgba(245, 158, 11, 0.25); }
+    .status-badge-MEETING_BOOKED { background: rgba(6, 182, 212, 0.12); color: #67E8F9; border: 1px solid rgba(6, 182, 212, 0.25); }
+    .status-badge-CLOSED { background: rgba(16, 185, 129, 0.15); color: #6EE7B7; border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 700; }
   </style>
 
   <!-- Preloaded Global Verified Leads Vault -->
   <script src="assets/js/preloaded_leads.js"></script>
 </head>
-<body class="bg-[#040711] text-slate-100 min-h-screen relative bg-mesh-grid flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="bg-[#070b14] text-slate-100 min-h-screen relative flex flex-col selection:bg-blue-600 selection:text-white">
 
   <!-- Ambient Glows -->
   <div class="ambient-glow-top"></div>
@@ -153,57 +161,57 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         
         <!-- Metric 1: Total Leads -->
-        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center text-sm flex-shrink-0">
-            <i class="fas fa-users-viewfinder"></i>
+        <div class="p-3 sm:p-3.5 rounded-xl bg-[#0d1424] border border-slate-800/80 flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xs flex-shrink-0">
+            <i class="fas fa-layer-group"></i>
           </div>
           <div>
-            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Prospects Vault</div>
-            <div class="text-base sm:text-lg font-black text-white font-mono" id="statTotalLeads">28</div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase font-medium">Pipeline Prospects</div>
+            <div class="text-base sm:text-lg font-bold text-white font-mono" id="statTotalLeads">0</div>
           </div>
         </div>
 
         <!-- Metric 2: Pitches Sent -->
-        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-sm flex-shrink-0">
+        <div class="p-3 sm:p-3.5 rounded-xl bg-[#0d1424] border border-slate-800/80 flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xs flex-shrink-0">
             <i class="fas fa-paper-plane"></i>
           </div>
           <div>
-            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Pitches Sent</div>
-            <div class="text-base sm:text-lg font-black text-white font-mono" id="statPitchesSent">0</div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase font-medium">Pitches Sent</div>
+            <div class="text-base sm:text-lg font-bold text-white font-mono" id="statPitchesSent">0</div>
           </div>
         </div>
 
         <!-- Metric 3: Meetings Booked -->
-        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-sm flex-shrink-0">
+        <div class="p-3 sm:p-3.5 rounded-xl bg-[#0d1424] border border-slate-800/80 flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs flex-shrink-0">
             <i class="fas fa-calendar-check"></i>
           </div>
           <div>
-            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Meetings Set</div>
-            <div class="text-base sm:text-lg font-black text-white font-mono" id="statMeetingsBooked">0</div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase font-medium">Meetings Set</div>
+            <div class="text-base sm:text-lg font-bold text-white font-mono" id="statMeetingsBooked">0</div>
           </div>
         </div>
 
         <!-- Metric 4: Deals Closed -->
-        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-sm flex-shrink-0">
+        <div class="p-3 sm:p-3.5 rounded-xl bg-[#0d1424] border border-slate-800/80 flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs flex-shrink-0">
             <i class="fas fa-trophy"></i>
           </div>
           <div>
-            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Retainers Closed</div>
-            <div class="text-base sm:text-lg font-black text-emerald-400 font-mono" id="statDealsClosed">0</div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase font-medium">Deals Closed</div>
+            <div class="text-base sm:text-lg font-bold text-emerald-400 font-mono" id="statDealsClosed">0</div>
           </div>
         </div>
 
         <!-- Metric 5: Estimated Pipeline Value -->
-        <div class="p-3 sm:p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-3 col-span-2 sm:col-span-1">
-          <div class="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-sm flex-shrink-0">
+        <div class="p-3 sm:p-3.5 rounded-xl bg-[#0d1424] border border-slate-800/80 flex items-center gap-3 col-span-2 sm:col-span-1">
+          <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs flex-shrink-0">
             <i class="fas fa-sack-dollar"></i>
           </div>
           <div>
-            <div class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Pipeline Value</div>
-            <div class="text-base sm:text-lg font-black text-white font-mono" id="statPipelineValue">$14,500</div>
+            <div class="text-[10px] text-slate-400 font-mono uppercase font-medium">Pipeline Value</div>
+            <div class="text-base sm:text-lg font-bold text-white font-mono" id="statPipelineValue">$0</div>
           </div>
         </div>
 
@@ -213,6 +221,53 @@
 
   <!-- Main CRM Application Workspace -->
   <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
+    
+    <!-- Licensed Plan & Leads Quota Entitlement Banner -->
+    <div id="licenseQuotaBanner" class="mb-5 p-4 sm:p-5 rounded-2xl bg-[#0d1424] border border-blue-500/25 shadow-xl shadow-black/40">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        
+        <!-- Left: Category Identity & Entitlement -->
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-lg flex-shrink-0" id="quotaIconBox">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                Your Licensed Industry
+              </span>
+              <span id="quotaPlanTier" class="text-[10px] font-mono text-slate-400">Lifetime Commercial Pro</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-white font-heading leading-tight" id="quotaCategoryName">
+              Loading Licensed Category...
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5" id="quotaDescription">
+              Loading leads allocation...
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Quota Numbers & 1-Click Extraction Action -->
+        <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 pt-3 md:pt-0 border-white/[0.08]">
+          <div class="text-left md:text-right pr-2">
+            <div class="text-[10px] font-mono text-slate-400 uppercase">Available Leads Quota</div>
+            <div class="text-sm font-bold font-mono text-emerald-400" id="quotaAvailableCount">-- Prospects Available</div>
+            <div class="text-[10px] text-slate-500 font-mono" id="quotaActiveLoaded">0 In Active Pipeline</div>
+          </div>
+
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <button onclick="extractUserLicensedLeads()" id="btnExtractLicensedLeads" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-600/30 flex items-center gap-2 cursor-pointer transition">
+              <i class="fas fa-bolt text-amber-300"></i>
+              <span id="btnExtractLicensedText">Extract My Leads</span>
+            </button>
+            <button onclick="clearWorkingPipeline()" id="btnClearPipeline" title="Clear pipeline back to 0 leads" class="p-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-rose-500/40 text-slate-400 hover:text-rose-400 text-xs transition cursor-pointer">
+              <i class="fas fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
     
     
     <!-- Industry / Niche Filter Ribbon -->
@@ -309,27 +364,27 @@
     </div>
 
     <!-- Empty State -->
-    <div id="emptyState" class="hidden text-center py-16 px-4">
-      <div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-amber-500/20 to-blue-600/30 border border-amber-500/30 flex items-center justify-center text-amber-300 text-2xl mx-auto mb-4 shadow-xl">
-        <i class="fas fa-radar"></i>
+    <div id="emptyState" class="hidden text-center py-16 px-4 max-w-xl mx-auto">
+      <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-blue-400 text-xl mx-auto mb-4 shadow-lg shadow-blue-500/10">
+        <i class="fas fa-inbox"></i>
       </div>
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-mono mb-2">
-        <i class="fas fa-bolt text-amber-300"></i> Lead Discovery &amp; Extraction Engine
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-mono mb-2">
+        <i class="fas fa-shield-check"></i> Clean Pipeline &bull; Ready for Extraction
       </div>
-      <h3 class="text-lg sm:text-xl font-bold text-white mb-2 font-heading">
-        Your CRM Pipeline is Ready!
+      <h3 class="text-xl font-bold text-white mb-2 font-heading" id="emptyStateTitle">
+        Your Working Pipeline is Ready (0 Leads)
       </h3>
-      <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto mb-6 leading-relaxed">
-        Aapko kis niche aur country ke leads chahiye? Apni pasand ke verified prospects filter karke extract karein aur unke tailored pitches ke sath direct client acquisition shuru karein.
+      <p class="text-xs text-slate-400 mb-6 leading-relaxed" id="emptyStateDescription">
+        You are licensed for <span class="text-white font-semibold" id="emptyStateCategoryName">your chosen category</span>. Extract your verified prospects into your pipeline to start personalized AI outreach.
       </p>
       <div class="flex items-center justify-center gap-3 flex-wrap">
-        <button onclick="openExtractLeadsModal()" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-xs sm:text-sm shadow-xl shadow-amber-500/30 flex items-center gap-2 cursor-pointer transition">
-          <i class="fas fa-bolt text-sm"></i>
-          <span>Extract Leads for My Niche &rarr;</span>
+        <button onclick="extractUserLicensedLeads()" class="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-blue-600/30 flex items-center gap-2 cursor-pointer transition">
+          <i class="fas fa-bolt text-amber-300"></i>
+          <span id="emptyStateBtnText">Extract My Licensed Leads Now &rarr;</span>
         </button>
-        <button onclick="openAddLeadModal()" class="px-4 py-3 rounded-xl btn-glass text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer">
-          <i class="fas fa-plus text-slate-400"></i>
-          <span>Add Custom Prospect</span>
+        <button onclick="openExtractLeadsModal()" class="px-4 py-3 rounded-xl bg-slate-900 border border-white/10 hover:border-white/20 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer">
+          <i class="fas fa-filter text-slate-400"></i>
+          <span>Custom Filter Extraction</span>
         </button>
       </div>
     </div>
@@ -732,6 +787,7 @@
         } else {
           currentIndustryFilter = 'ALL';
         }
+        updateLicensedQuotaDisplay();
 
         if (avatarEl) {
           const initials = (currentUser.name || 'FO').split(' ').map(n=>n[0]).join('').slice(0, 2).toUpperCase();
@@ -806,34 +862,13 @@
           }
         }
 
-        // First-run experience for a fresh client:
-        // Automatically provide high-converting starter leads matching their chosen skill!
-        const userSkill = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches[0] : 'video_editing';
-        const allAvailable = window.DEFAULT_GLOBAL_LEADS || [];
-        
-        let starterLeads = allAvailable;
-        if (userSkill === 'video_editing') {
-          starterLeads = allAvailable.filter(l => l.industry === 'creators_podcasts');
-        } else if (userSkill === 'graphic_design') {
-          starterLeads = allAvailable.filter(l => l.industry === 'd2c_ecommerce');
-        } else if (userSkill === 'web_dev') {
-          starterLeads = allAvailable.filter(l => l.industry === 'real_estate');
-        }
-
-        if (!starterLeads || starterLeads.length === 0) starterLeads = allAvailable;
-
-        leadsVault = starterLeads.slice(0, 10).map(l => {
-          const clone = JSON.parse(JSON.stringify(l));
-          clone.status = 'NEW';
-          clone.extractedSkill = userSkill;
-          clone.pitch_message = generateDefaultPitch(clone, 'claude', userSkill);
-          return clone;
-        });
-
+        // Fresh client first-run: Clean pipeline with 0 leads loaded!
+        // Client extracts their licensed leads on-demand using the Licensed Quota banner!
+        leadsVault = [];
         saveLeadsToVault(false);
       } catch(e) {
         console.error("Vault read error:", e);
-        leadsVault = (window.DEFAULT_GLOBAL_LEADS || []).slice(0, 10);
+        leadsVault = [];
       }
     }
 
@@ -858,8 +893,167 @@
     }
 
     // 3. Render Dashboard Grid & KPIs
+    
+    // Toast Notification System
+    function showToast(msg, type = 'info') {
+      let toastBox = document.getElementById('globalToastBox');
+      if (!toastBox) {
+        toastBox = document.createElement('div');
+        toastBox.id = 'globalToastBox';
+        toastBox.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none';
+        document.body.appendChild(toastBox);
+      }
+
+      const toast = document.createElement('div');
+      const isSuccess = type === 'success';
+      const borderCol = isSuccess ? 'border-emerald-500/40 bg-emerald-950/90 text-emerald-300' : 'border-blue-500/40 bg-slate-900/95 text-slate-200';
+      const icon = isSuccess ? 'fa-circle-check text-emerald-400' : 'fa-circle-info text-blue-400';
+
+      toast.className = `px-4 py-2.5 rounded-xl border ${borderCol} shadow-2xl backdrop-blur-md text-xs font-medium flex items-center gap-2.5 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto`;
+      toast.innerHTML = `<i class="fas ${icon} text-sm"></i><span>${msg}</span>`;
+      toastBox.appendChild(toast);
+
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-2', 'opacity-0');
+        });
+      }
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.remove(), 350);
+      }, 3000);
+    }
+
+    // =========================================================================
+    // LICENSED CATEGORY & LEADS QUOTA CONTROLLER
+    // =========================================================================
+    const NICHE_ENTITLEMENT_MAP = {
+      video_editing: {
+        industry: 'creators_podcasts',
+        name: 'Top Creators & Podcasts',
+        skillName: 'Short-Form Video Editing & Reels',
+        count: 10,
+        icon: 'fa-film',
+        desc: '10 Verified high-ticket creators & podcast channels in Dubai and London hiring video editors.'
+      },
+      graphic_design: {
+        industry: 'd2c_ecommerce',
+        name: 'D2C Brands & Luxury E-Commerce',
+        skillName: 'Graphic Design & Brand Identity',
+        count: 10,
+        icon: 'fa-palette',
+        desc: '10 Verified D2C brands spending AED 200k+ on ads needing lookbooks, carousels & Meta ad creatives.'
+      },
+      web_dev: {
+        industry: 'real_estate',
+        name: 'Luxury Real Estate & Architecture',
+        skillName: 'Web Development & CRO Funnels',
+        count: 8,
+        icon: 'fa-building',
+        desc: '8 Verified high-ticket developers & interior firms needing speed, mobile UI & WhatsApp booking funnels.'
+      },
+      marketing_ads: {
+        industry: 'car_rentals_detailing',
+        name: 'Supercars & Luxury Car Rentals',
+        skillName: 'Paid Ads & Social Media Marketing',
+        count: 8,
+        icon: 'fa-car-side',
+        desc: '8 Verified supercar rental & detailing brands in Dubai needing high-ROAS Meta & TikTok ads.'
+      },
+      automation_ai: {
+        industry: 'salons_clinics',
+        name: 'Aesthetic Clinics & Medical Spas',
+        skillName: 'AI Automation & Chatbots',
+        count: 8,
+        icon: 'fa-spa',
+        desc: '8 Verified aesthetic clinics & medical spas needing automated patient lead capture & booking bots.'
+      },
+      all: {
+        industry: 'all',
+        name: 'All Industries (Full Global Vault)',
+        skillName: 'Full Agency (All Services)',
+        count: 52,
+        icon: 'fa-earth-americas',
+        desc: 'All 52 verified high-ticket companies across Dubai, UK & Zurich across all 6 high-margin niches.'
+      }
+    };
+
+    function updateLicensedQuotaDisplay() {
+      const userSkill = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches[0] : 'video_editing';
+      const isAll = (currentUser && currentUser.targetNiches && currentUser.targetNiches.includes('all'));
+      const planData = isAll ? NICHE_ENTITLEMENT_MAP.all : (NICHE_ENTITLEMENT_MAP[userSkill] || NICHE_ENTITLEMENT_MAP.video_editing);
+
+      const catEl = document.getElementById('quotaCategoryName');
+      const descEl = document.getElementById('quotaDescription');
+      const availEl = document.getElementById('quotaAvailableCount');
+      const activeEl = document.getElementById('quotaActiveLoaded');
+      const iconBox = document.getElementById('quotaIconBox');
+      const btnText = document.getElementById('btnExtractLicensedText');
+      const emptyCat = document.getElementById('emptyStateCategoryName');
+      const emptyBtn = document.getElementById('emptyStateBtnText');
+
+      if (catEl) catEl.textContent = `${planData.name} (${planData.skillName})`;
+      if (descEl) descEl.textContent = planData.desc;
+      if (availEl) availEl.textContent = `${planData.count} Verified Prospects Available`;
+      if (activeEl) activeEl.textContent = `${leadsVault.length} / ${planData.count} Loaded in Pipeline`;
+      if (iconBox) iconBox.innerHTML = `<i class="fas ${planData.icon} text-blue-400"></i>`;
+      if (emptyCat) emptyCat.textContent = planData.name;
+      if (emptyBtn) emptyBtn.textContent = `Extract My ${planData.count} Licensed Leads Now →`;
+
+      if (btnText) {
+        if (leadsVault.length === 0) {
+          btnText.textContent = `Extract My Leads (${planData.count} Ready)`;
+        } else {
+          btnText.textContent = `Re-Extract Leads (${planData.count})`;
+        }
+      }
+    }
+
+    window.extractUserLicensedLeads = function() {
+      const userSkill = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches[0] : 'video_editing';
+      const isAll = (currentUser && currentUser.targetNiches && currentUser.targetNiches.includes('all'));
+      const allAvailable = window.DEFAULT_GLOBAL_LEADS || [];
+      
+      let targetLeads = allAvailable;
+      if (!isAll) {
+        if (userSkill === 'video_editing') targetLeads = allAvailable.filter(l => l.industry === 'creators_podcasts');
+        else if (userSkill === 'graphic_design') targetLeads = allAvailable.filter(l => l.industry === 'd2c_ecommerce');
+        else if (userSkill === 'web_dev') targetLeads = allAvailable.filter(l => l.industry === 'real_estate');
+        else if (userSkill === 'marketing_ads') targetLeads = allAvailable.filter(l => l.industry === 'car_rentals_detailing');
+        else if (userSkill === 'automation_ai') targetLeads = allAvailable.filter(l => l.industry === 'salons_clinics');
+      }
+
+      if (!targetLeads || targetLeads.length === 0) targetLeads = allAvailable;
+
+      leadsVault = targetLeads.map(l => {
+        const clone = JSON.parse(JSON.stringify(l));
+        clone.status = 'NEW';
+        clone.extractedSkill = isAll ? 'video_editing' : userSkill;
+        clone.pitch_message = generateDefaultPitch(clone, 'claude', clone.extractedSkill);
+        return clone;
+      });
+
+      saveLeadsToVault(true);
+      currentIndustryFilter = 'MY_NICHES';
+      renderDashboard();
+      updateLicensedQuotaDisplay();
+      showToast(`✅ Successfully extracted ${leadsVault.length} licensed leads into your pipeline!`, "success");
+    };
+
+    window.clearWorkingPipeline = function() {
+      if (confirm("Clear your working pipeline back to 0 leads? (You can re-extract your licensed leads anytime)")) {
+        leadsVault = [];
+        saveLeadsToVault(true);
+        renderDashboard();
+        updateLicensedQuotaDisplay();
+        showToast("Pipeline cleared to 0 prospects.", "info");
+      }
+    };
+
     function renderDashboard() {
       updateKPIStats();
+      updateLicensedQuotaDisplay();
 
       const grid = document.getElementById('leadsGrid');
       const emptyState = document.getElementById('emptyState');
@@ -923,47 +1117,47 @@
       const cleanPhone = (activeLead.phone || '').replace(/[^0-9]/g, '');
       const flag = getCountryFlag(activeLead.country);
       const statusClass = `status-badge-${activeLead.status || 'NEW'}`;
-      const statusLabel = getStatusLabel(activeLead.status || 'NEW');
 
       const pitchText = activeLead.pitch_message || generateDefaultPitch(activeLead, 'claude', activePitchService || (currentUser?.targetNiches?.[0]) || 'video_editing');
       const encodedPitch = encodeURIComponent(pitchText);
       const waUrl = `https://web.whatsapp.com/send?phone=${cleanPhone}&text=${encodedPitch}`;
 
       return `
-        <div class="crm-card rounded-2xl p-4 flex flex-col justify-between text-left relative overflow-hidden" id="card-${activeLead.id}">
+        <div class="crm-card rounded-xl p-4 flex flex-col justify-between text-left relative overflow-hidden" id="card-${activeLead.id}">
           
           <!-- Top Row: Company Name & Status Selector -->
           <div>
-            <div class="flex items-start justify-between gap-2 mb-2">
+            <div class="flex items-start justify-between gap-2 mb-2.5">
               <div>
-                <h4 class="font-bold text-white text-sm font-heading leading-snug truncate max-w-[200px]" title="${escapeHtml(activeLead.name)}">
-                  ${escapeHtml(activeLead.name)}
+                <h4 class="font-bold text-white text-[14px] sm:text-[15px] font-heading leading-tight truncate max-w-[210px] flex items-center gap-1.5" title="${escapeHtml(activeLead.name)}">
+                  <span>${escapeHtml(activeLead.name)}</span>
+                  <i class="fas fa-circle-check text-blue-400 text-xs flex-shrink-0" title="Verified Business"></i>
                 </h4>
-                <div class="flex items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
-                  <span>${flag} ${escapeHtml(activeLead.city || 'Global')}</span>
+                <div class="flex items-center gap-1.5 text-[11px] text-slate-400 mt-1 font-mono">
+                  <span class="text-slate-300 font-medium">${flag} ${escapeHtml(activeLead.city || 'Global')}</span>
                   <span>&bull;</span>
-                  <span class="truncate max-w-[120px] text-blue-400" title="${escapeHtml(activeLead.category)}">${escapeHtml(activeLead.category || 'High-Ticket B2B')}</span>
+                  <span class="truncate max-w-[140px] text-slate-400" title="${escapeHtml(activeLead.category)}">${escapeHtml(activeLead.category || 'High-Ticket B2B')}</span>
                 </div>
               </div>
 
               <!-- Status Dropdown -->
-              <select onchange="updateLeadStatus('${activeLead.id}', this.value)" class="text-[10px] font-mono px-2 py-1 rounded-full border ${statusClass} focus:outline-none cursor-pointer">
+              <select onchange="updateLeadStatus('${activeLead.id}', this.value)" class="text-[10px] font-mono px-2.5 py-1 rounded-md border ${statusClass} focus:outline-none cursor-pointer">
                 <option value="NEW" ${activeLead.status === 'NEW' ? 'selected' : ''}>NEW</option>
                 <option value="AUDITED" ${activeLead.status === 'AUDITED' ? 'selected' : ''}>AUDITED</option>
                 <option value="PITCH_SENT" ${activeLead.status === 'PITCH_SENT' ? 'selected' : ''}>PITCH SENT</option>
                 <option value="MEETING_BOOKED" ${activeLead.status === 'MEETING_BOOKED' ? 'selected' : ''}>MEETING SET</option>
-                <option value="CLOSED" ${activeLead.status === 'CLOSED' ? 'selected' : ''}>CLOSED 🎉</option>
+                <option value="CLOSED" ${activeLead.status === 'CLOSED' ? 'selected' : ''}>CLOSED 🏆</option>
               </select>
             </div>
 
             <!-- Contact & Social Details -->
-            <div class="flex items-center gap-3 py-2 border-y border-white/[0.06] text-xs text-slate-300 font-mono mb-3">
-              <div class="flex items-center gap-1 text-emerald-400 font-bold">
-                <i class="fab fa-whatsapp"></i>
+            <div class="flex items-center justify-between py-2 border-y border-white/[0.06] text-xs font-mono mb-3">
+              <div class="flex items-center gap-1.5 text-slate-200">
+                <i class="fab fa-whatsapp text-emerald-400"></i>
                 <span>${escapeHtml(activeLead.phone || 'No phone')}</span>
               </div>
               ${activeLead.website ? `
-                <a href="${escapeHtml(activeLead.website)}" target="_blank" class="text-blue-400 hover:underline flex items-center gap-1 truncate max-w-[130px]" title="${escapeHtml(activeLead.website)}">
+                <a href="${escapeHtml(activeLead.website)}" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center gap-1 truncate max-w-[140px] transition" title="${escapeHtml(activeLead.website)}">
                   <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
                   <span>${activeLead.website.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0]}</span>
                 </a>
@@ -975,34 +1169,34 @@
 
             <!-- Deep Audit Accordion -->
             <div class="mb-3">
-              <button onclick="toggleAuditDetails('${activeLead.id}')" class="w-full text-left flex items-center justify-between text-[11px] text-slate-400 hover:text-white py-1 transition font-mono">
+              <button onclick="toggleAuditDetails('${activeLead.id}')" class="w-full text-left flex items-center justify-between text-[11px] text-slate-400 hover:text-slate-200 py-1 transition font-mono">
                 <span class="flex items-center gap-1.5">
-                  <i class="fas fa-stethoscope text-indigo-400"></i>
+                  <i class="fas fa-magnifying-glass-chart text-blue-400"></i>
                   <span>Digital Audit Findings</span>
                 </span>
                 <i id="auditIcon-${activeLead.id}" class="fas fa-chevron-down text-[10px] text-slate-500"></i>
               </button>
-              <div id="auditBox-${activeLead.id}" class="hidden p-2.5 rounded-xl bg-slate-950/70 border border-white/[0.06] text-[11px] text-slate-300 leading-relaxed mt-1 font-sans">
-                ${escapeHtml(activeLead.audit_proof || 'Verified local business in high-margin service sector. Opportunity for WhatsApp booking funnel optimization.')}
+              <div id="auditBox-${activeLead.id}" class="hidden p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/70 text-[11px] text-slate-300 leading-relaxed mt-1 font-sans">
+                ${escapeHtml(activeLead.audit_proof || 'Verified business with active revenue stream. Immediate opportunity for inbound WhatsApp funnel optimization.')}
               </div>
             </div>
 
             <!-- Personal Notes -->
             <div class="mb-3">
-              <input type="text" value="${escapeHtml(activeLead.notes || '')}" onblur="saveLeadNote('${activeLead.id}', this.value)" placeholder="Add private note (e.g. Call Friday)..." class="w-full px-2.5 py-1.5 rounded-lg bg-black/40 border border-white/[0.08] text-[11px] text-slate-300 placeholder-slate-600 focus:border-blue-500 focus:outline-none transition font-sans">
+              <input type="text" value="${escapeHtml(activeLead.notes || '')}" onblur="saveLeadNote('${activeLead.id}', this.value)" placeholder="Add private note (e.g. Call Friday)..." class="w-full px-2.5 py-1.5 rounded-lg bg-slate-950/60 border border-slate-800 text-[11px] text-slate-300 placeholder-slate-600 focus:border-blue-500/60 focus:outline-none transition font-sans">
             </div>
           </div>
 
           <!-- Card Footer Actions -->
-          <div class="pt-2 border-t border-white/[0.06] flex items-center gap-2">
+          <div class="pt-2.5 border-t border-white/[0.06] flex items-center gap-2">
             <!-- Open AI Pitch Modal Button -->
-            <button onclick="openAIPitchModal('${activeLead.id}')" class="flex-1 py-2 rounded-xl btn-glass text-xs font-semibold text-indigo-300 hover:text-white flex items-center justify-center gap-1.5 transition cursor-pointer">
-              <i class="fas fa-magic text-[11px] text-indigo-400"></i>
+            <button onclick="openAIPitchModal('${activeLead.id}')" class="flex-1 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700/90 border border-slate-700/60 text-xs font-semibold text-slate-200 hover:text-white flex items-center justify-center gap-1.5 transition cursor-pointer">
+              <i class="fas fa-sparkles text-[11px] text-blue-400"></i>
               <span>AI Pitch</span>
             </button>
 
             <!-- Direct 1-Click WhatsApp Trigger -->
-            <a href="${waUrl}" target="_blank" onclick="markLeadSent('${activeLead.id}')" class="flex-1 py-2 rounded-xl btn-whatsapp-glow text-xs font-bold text-white flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20 cursor-pointer">
+            <a href="${waUrl}" target="_blank" onclick="markLeadSent('${activeLead.id}')" class="flex-1 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white flex items-center justify-center gap-1.5 shadow-sm transition cursor-pointer">
               <i class="fab fa-whatsapp"></i>
               <span>Outreach &rarr;</span>
             </a>
@@ -1332,12 +1526,16 @@
         }
 
         html += `
-          <div class="p-2.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] mb-2.5 shadow-sm">
-            <div class="flex items-center justify-between text-purple-300 font-bold mb-1">
-              <span class="flex items-center gap-1.5"><i class="fas fa-film text-purple-400"></i> Video Editing Angle</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30">$1,500/mo retainer</span>
+          <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs mb-3">
+            <div class="flex items-center justify-between text-slate-200 font-semibold mb-1.5">
+              <span class="flex items-center gap-1.5 text-blue-400 text-xs">
+                <i class="fas fa-film"></i> Video Editing Angle
+              </span>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 font-medium">
+                $1,500/mo retainer
+              </span>
             </div>
-            <p class="text-slate-300 leading-snug font-sans">${escapeHtml(vHook)}</p>
+            <p class="text-slate-300 leading-snug font-sans text-[11px]">${escapeHtml(vHook)}</p>
           </div>
         `;
       }
@@ -1354,24 +1552,32 @@
         }
 
         html += `
-          <div class="p-2.5 rounded-xl bg-pink-950/40 border border-pink-500/30 text-[11px] mb-2.5 shadow-sm">
-            <div class="flex items-center justify-between text-pink-300 font-bold mb-1">
-              <span class="flex items-center gap-1.5"><i class="fas fa-paint-brush text-pink-400"></i> Graphic Design Angle</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 font-bold border border-pink-500/30">$1,200/mo retainer</span>
+          <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs mb-3">
+            <div class="flex items-center justify-between text-slate-200 font-semibold mb-1.5">
+              <span class="flex items-center gap-1.5 text-blue-400 text-xs">
+                <i class="fas fa-paint-brush"></i> Graphic Design Angle
+              </span>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 font-medium">
+                $1,200/mo retainer
+              </span>
             </div>
-            <p class="text-slate-300 leading-snug font-sans">${escapeHtml(dHook)}</p>
+            <p class="text-slate-300 leading-snug font-sans text-[11px]">${escapeHtml(dHook)}</p>
           </div>
         `;
       }
 
       if (!isVideo && !isDesign && isWeb) {
         html += `
-          <div class="p-2.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-[11px] mb-2.5 shadow-sm">
-            <div class="flex items-center justify-between text-blue-300 font-bold mb-1">
-              <span class="flex items-center gap-1.5"><i class="fas fa-laptop-code text-blue-400"></i> Web Dev Angle</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold border border-blue-500/30">$2,000 project</span>
+          <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs mb-3">
+            <div class="flex items-center justify-between text-slate-200 font-semibold mb-1.5">
+              <span class="flex items-center gap-1.5 text-blue-400 text-xs">
+                <i class="fas fa-laptop-code"></i> Web Dev Angle
+              </span>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 font-medium">
+                $2,000 project
+              </span>
             </div>
-            <p class="text-slate-300 leading-snug font-sans">${escapeHtml(lead.audit_proof || 'Needs speed optimization, instant WhatsApp booking & mobile UI redesign.')}</p>
+            <p class="text-slate-300 leading-snug font-sans text-[11px]">${escapeHtml(lead.audit_proof || 'Needs speed optimization, instant WhatsApp booking & mobile UI redesign.')}</p>
           </div>
         `;
       }
@@ -2579,14 +2785,11 @@ CRITICAL RULES (MUST FOLLOW STRICTLY):
   <!-- =========================================================================
        AI OUTREACH COPILOT — FLOATING TRIGGER BUTTON
        ========================================================================= -->
-  <div id="floatingCopilotBtn" class="fixed bottom-6 right-6 z-40 transition-transform duration-300 hover:scale-105 active:scale-95">
-    <button onclick="toggleAICopilot()" class="px-4 py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-bold text-xs sm:text-sm shadow-2xl shadow-indigo-600/50 border border-white/20 flex items-center gap-2.5 cursor-pointer backdrop-blur-md">
-      <div class="relative">
-        <i class="fas fa-brain-circuit text-amber-300 text-base"></i>
-        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-950 animate-pulse"></span>
-      </div>
-      <span class="tracking-tight">AI Outreach Copilot</span>
-      <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-black/30 font-mono text-cyan-300 border border-cyan-400/30">BYOK</span>
+  <div id="floatingCopilotBtn" class="fixed bottom-6 right-6 z-40 transition-transform duration-200 hover:scale-105 active:scale-95">
+    <button onclick="toggleAICopilot()" class="px-4 py-2.5 rounded-full bg-slate-900/95 hover:bg-slate-800 border border-slate-700/80 hover:border-blue-500/50 text-white font-semibold text-xs shadow-2xl shadow-black/80 flex items-center gap-2.5 cursor-pointer backdrop-blur-md">
+      <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+      <span class="font-heading">AI Copilot</span>
+      <span class="text-[10px] px-1.5 py-0.2 rounded font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">PRO</span>
     </button>
   </div>
 
