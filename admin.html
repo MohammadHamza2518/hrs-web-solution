@@ -1532,7 +1532,9 @@
     };
 
     function downloadFile(content, fileName, mimeType) {
-      const blob = new Blob([content], { type: mimeType });
+      const isCsv = (mimeType && mimeType.includes('csv')) || (fileName && fileName.endsWith('.csv'));
+      const payload = isCsv ? ("\uFEFF" + content) : content;
+      const blob = new Blob([payload], { type: mimeType });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -1540,7 +1542,7 @@
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     // 15. Toast & Copy Utilities

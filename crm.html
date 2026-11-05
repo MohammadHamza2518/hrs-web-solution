@@ -3354,6 +3354,7 @@ function getInitialGlobalLeads() {
                         });
 
                         leadsVault = Array.from(existingMap.values());
+                        window.leadsVault = leadsVault;
                         saveLeadsToStore();
                         return;
                     }
@@ -3364,10 +3365,12 @@ function getInitialGlobalLeads() {
 
             // Fresh initial load
             leadsVault = defaults;
+            window.leadsVault = leadsVault;
             saveLeadsToStore();
         }
 
         function saveLeadsToStore() {
+            window.leadsVault = leadsVault;
             try {
                 localStorage.setItem(LS_LEADS, JSON.stringify(leadsVault));
             } catch (e) {
@@ -3642,6 +3645,16 @@ function getInitialGlobalLeads() {
             if (countDisp) countDisp.innerText = `Showing ${filtered.length} of ${leadsVault.length} leads`;
         }
 
+        
+        // Safe external URL helper to prevent broken relative links
+        function formatExternalUrl(url) {
+            if (!url || typeof url !== 'string') return '#';
+            const trimmed = url.trim();
+            if (!trimmed || trimmed === '#' || trimmed.startsWith('javascript:')) return '#';
+            if (/^https?:\/\//i.test(trimmed)) return trimmed;
+            return 'https://' + trimmed;
+        }
+
         function renderLeadsTable(leads) {
             const tbody = document.getElementById("leadsTableBody");
             if (!tbody) return;
@@ -3719,7 +3732,7 @@ function getInitialGlobalLeads() {
                 if (!hasWeb) {
                     webBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30">🚫 No Website</span>`;
                 } else {
-                    webBadge = `<a href="${lead.website || lead.website_url}" target="_blank" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition">🌐 Official Website</a>`;
+                    webBadge = `<a href="${formatExternalUrl(lead.website || lead.website_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition">🌐 Official Website</a>`;
                 }
 
                 let srcBadge = "";
@@ -3773,7 +3786,7 @@ function getInitialGlobalLeads() {
                             <div class="font-bold text-slate-100 flex items-center gap-1.5 text-xs">
                                 <span>${escapeHtml(bName)}</span>
                                 ${catBadge}
-                                <a href="${lead.website || lead.source_url || '#'}" target="_blank" class="text-slate-500 hover:text-cyan-400 text-[11px]" title="Open Website">
+                                <a href="${formatExternalUrl(lead.website || lead.source_url)}" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-400 text-[11px]" title="Open Website">
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </a>
                             </div>
@@ -3798,7 +3811,7 @@ function getInitialGlobalLeads() {
                             <div class="flex items-center gap-1.5 flex-wrap">
                                 ${srcBadge}
                                 ${lead.website ? `
-                                    <a href="${lead.website}" target="_blank" class="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-1" title="Open Link">
+                                    <a href="${formatExternalUrl(lead.website)}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-1" title="Open Link">
                                         <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
                                         <span class="underline">Proof</span>
                                     </a>
@@ -4067,7 +4080,17 @@ function getInitialGlobalLeads() {
                 return;
             }
 
-            const cleanPhone = lead.phone.replace(/[^0-9]/g, '');
+            let cleanPhone = (lead.phone || '').replace(/[^0-9]/g, '');
+            if (cleanPhone.startsWith('00')) cleanPhone = cleanPhone.substring(2);
+            if (cleanPhone.startsWith('0') && cleanPhone.length === 11) cleanPhone = '91' + cleanPhone.substring(1);
+            if (cleanPhone.length === 10) {
+                const c = (lead.country || '').toLowerCase();
+                if (c.includes('usa') || c.includes('america') || c.includes('canada')) {
+                    cleanPhone = '1' + cleanPhone;
+                } else {
+                    cleanPhone = '91' + cleanPhone;
+                }
+            }
             const bizName = lead.business_name || lead.name || 'Owner';
             const senderName = getSetting('senderName') || (currentUser ? currentUser.name : 'Alex Morgan');
             const agencyName = getSetting('agencyName') || 'HRS Web Solutions';
@@ -4955,41 +4978,79 @@ Output ONLY raw JSON.`;
         }
 
         // =========================================================================
-        // ADD LEAD MODAL
+        // ADD LEAD MODAL & FORM CONTROLLER
         // =========================================================================
+        function resetManualLeadForm() {
+            const fieldIds = [
+                'manualBizName', 'addLeadName',
+                'manualCity', 'addLeadCity',
+                'manualCategory', 'addLeadCategory',
+                'manualPhone', 'addLeadPhone',
+                'manualEmail', 'addLeadEmail',
+                'manualWebsite', 'addLeadWebsite'
+            ];
+            fieldIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            const rEl = document.getElementById("manualRating");
+            if (rEl) rEl.value = '4.9';
+            const revEl = document.getElementById("manualReviews");
+            if (revEl) revEl.value = '35';
+        }
+
         function openAddLeadModal() {
+            resetManualLeadForm();
             const m = document.getElementById("addLeadModal");
             if (m) m.classList.remove("hidden");
+            const firstInput = document.getElementById("manualBizName") || document.getElementById("addLeadName");
+            if (firstInput) setTimeout(() => firstInput.focus(), 50);
         }
 
         function closeAddLeadModal() {
             const m = document.getElementById("addLeadModal");
             if (m) m.classList.add("hidden");
+            resetManualLeadForm();
         }
 
         function submitManualLead(e) {
             if (e && e.preventDefault) e.preventDefault();
-            const bName = document.getElementById("addLeadName")?.value || '';
-            if (!bName) { showToast("Company name is required", true); return; }
+            const bName = (document.getElementById("manualBizName")?.value || document.getElementById("addLeadName")?.value || '').trim();
+            if (!bName) { 
+                showToast("Business / Company name is required", true); 
+                return; 
+            }
+
+            const country = (document.getElementById("manualCountry")?.value || document.getElementById("addLeadCountry")?.value || 'UAE').trim();
+            const city = (document.getElementById("manualCity")?.value || document.getElementById("addLeadCity")?.value || 'Dubai').trim();
+            const category = (document.getElementById("manualCategory")?.value || document.getElementById("addLeadCategory")?.value || 'High-Ticket Client').trim();
+            const phone = (document.getElementById("manualPhone")?.value || document.getElementById("addLeadPhone")?.value || '').trim();
+            const email = (document.getElementById("manualEmail")?.value || document.getElementById("addLeadEmail")?.value || '').trim();
+            const website = (document.getElementById("manualWebsite")?.value || document.getElementById("addLeadWebsite")?.value || '').trim();
+            const rating = parseFloat(document.getElementById("manualRating")?.value) || 5.0;
+            const reviews = parseInt(document.getElementById("manualReviews")?.value) || 20;
 
             const newLead = {
                 id: 'LEAD-MANUAL-' + Date.now(),
                 business_name: bName,
-                city: document.getElementById("addLeadCity")?.value || 'Dubai',
-                country: document.getElementById("addLeadCountry")?.value || 'UAE',
-                category: document.getElementById("addLeadCategory")?.value || 'High-Ticket Client',
-                phone: document.getElementById("addLeadPhone")?.value || '',
-                email: document.getElementById("addLeadEmail")?.value || '',
-                website: document.getElementById("addLeadWebsite")?.value || '',
-                rating: 5.0,
-                reviews_count: 12,
+                name: bName,
+                city: city,
+                country: country,
+                category: category,
+                phone: phone,
+                email: email,
+                website: website,
+                rating: rating,
+                reviews_count: reviews,
                 status: 'NEW',
                 source: 'Manual Add',
-                audit_proof: 'Added manually via Outreach Studio PRO command center.'
+                audit_proof: `Verified direct prospect: ${category} in ${city}, ${country}. Added via Outreach Studio PRO command center.`
             };
 
             leadsVault.unshift(newLead);
+            window.leadsVault = leadsVault;
             saveLeadsToStore();
+            resetManualLeadForm();
             closeAddLeadModal();
             loadStats();
             loadLeads();
@@ -4997,7 +5058,7 @@ Output ONLY raw JSON.`;
         }
 
         // =========================================================================
-        // CSV EXPORT
+        // CSV EXPORT (RFC-4180 Standard Blob + UTF-8 BOM for Excel)
         // =========================================================================
         function exportLeadsCsv() {
             if (!leadsVault || leadsVault.length === 0) {
@@ -5005,7 +5066,7 @@ Output ONLY raw JSON.`;
                 return;
             }
 
-            const headers = ["Business Name", "City", "Country", "Phone", "Email", "Website", "Category", "Rating", "Status", "Source"];
+            const headers = ["Business Name", "City", "Country", "Phone", "Email", "Website", "Category", "Rating", "Reviews", "Status", "Source", "Audit Proof"];
             const rows = leadsVault.map(l => [
                 `"${(l.business_name || l.name || '').replace(/"/g, '""')}"`,
                 `"${(l.city || '').replace(/"/g, '""')}"`,
@@ -5015,18 +5076,22 @@ Output ONLY raw JSON.`;
                 `"${(l.website || '').replace(/"/g, '""')}"`,
                 `"${(l.category || '').replace(/"/g, '""')}"`,
                 l.rating || 4.9,
+                l.reviews_count || 0,
                 `"${(l.status || 'NEW').replace(/"/g, '""')}"`,
-                `"${(l.source || 'Verified Global Vault').replace(/"/g, '""')}"`
+                `"${(l.source || 'Verified Global Vault').replace(/"/g, '""')}"`,
+                `"${(l.audit_proof || '').replace(/"/g, '""').replace(/\r?\n/g, ' ')}"`
             ]);
 
-            const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-            const encodedUri = encodeURI(csvContent);
+            const csvString = "\uFEFF" + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `outreach_studio_leads_${new Date().toISOString().split('T')[0]}.csv`);
+            link.href = url;
+            link.download = `outreach_studio_leads_${new Date().toISOString().split('T')[0]}.csv`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
             showToast("CSV exported successfully!");
         }
 
