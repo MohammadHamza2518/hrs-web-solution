@@ -871,8 +871,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch custom Google Drive download link from admin settings or default
     let downloadLink = 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro';
     try {
-      const settings = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
-      if (settings.downloadLink) downloadLink = settings.downloadLink;
+      const s1 = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
+      const s2 = JSON.parse(localStorage.getItem('osp_admin_settings')) || {};
+      downloadLink = localStorage.getItem('osp_download_link') || s1.downloadLink || s1.dlLink || s2.downloadLink || s2.dlLink || downloadLink;
     } catch(e) {}
 
     try {

@@ -681,6 +681,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       initClock();
       checkAuth();
+      loadAdminSettings();
       seedDataIfEmpty();
       renderDashboard();
     });
@@ -785,7 +786,12 @@
 
     function getSetting(key, defVal) {
       try {
-        const s = JSON.parse(localStorage.getItem(LS_SETTINGS)) || {};
+        const s1 = JSON.parse(localStorage.getItem(LS_SETTINGS)) || {};
+        const s2 = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
+        const s = { ...s2, ...s1 };
+        if (key === 'downloadLink') {
+          return s.downloadLink || s.dlLink || localStorage.getItem('osp_download_link') || defVal;
+        }
         return s[key] !== undefined ? s[key] : defVal;
       } catch(e) {
         return defVal;
@@ -901,6 +907,7 @@
           if (btn) btn.classList.add('active');
           if (content) content.classList.remove('hidden');
           if (t === 'users') renderUsers();
+          if (t === 'settings') loadAdminSettings();
         } else {
           if (btn) btn.classList.remove('active');
           if (content) content.classList.add('hidden');
@@ -1181,24 +1188,52 @@
     };
 
     // 12. Settings Management
+    function loadAdminSettings() {
+      try {
+        const s1 = JSON.parse(localStorage.getItem(LS_SETTINGS)) || {};
+        const s2 = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
+        const s = { ...s2, ...s1 };
+
+        const priceInput = document.getElementById('settingPrice');
+        const rzpInput = document.getElementById('settingRazorpayKey');
+        const dlInput = document.getElementById('settingDownloadLink');
+        const waInput = document.getElementById('settingWhatsApp');
+        const emailInput = document.getElementById('settingEmail');
+        const passInput = document.getElementById('settingAdminPasscode');
+
+        if (priceInput && s.price) priceInput.value = s.price;
+        if (rzpInput && s.rzpKey) rzpInput.value = s.rzpKey;
+        const currentDl = s.downloadLink || s.dlLink || localStorage.getItem('osp_download_link');
+        if (dlInput && currentDl) dlInput.value = currentDl;
+        if (waInput && s.wa) waInput.value = s.wa;
+        if (emailInput && s.email) emailInput.value = s.email;
+        if (passInput && (s.adminPasscode || s.passcode)) passInput.value = s.adminPasscode || s.passcode;
+      } catch(e) {}
+    }
+
     window.saveAdminSettings = function() {
-      const price = document.getElementById('settingPrice').value;
-      const rzpKey = document.getElementById('settingRazorpayKey').value;
-      const dlLink = document.getElementById('settingDownloadLink').value;
-      const wa = document.getElementById('settingWhatsApp').value;
-      const email = document.getElementById('settingEmail').value;
-      const passcode = document.getElementById('settingAdminPasscode').value;
+      const price = document.getElementById('settingPrice').value.trim();
+      const rzpKey = document.getElementById('settingRazorpayKey').value.trim();
+      const dlLink = document.getElementById('settingDownloadLink').value.trim();
+      const wa = document.getElementById('settingWhatsApp').value.trim();
+      const email = document.getElementById('settingEmail').value.trim();
+      const passcode = document.getElementById('settingAdminPasscode').value.trim();
 
       const settings = {
-        price,
-        rzpKey,
-        dlLink,
-        wa,
-        email,
-        adminPasscode: passcode
+        price: price || '1999',
+        rzpKey: rzpKey,
+        downloadLink: dlLink,
+        dlLink: dlLink,
+        wa: wa,
+        email: email,
+        adminPasscode: passcode || 'hamza2518'
       };
 
       localStorage.setItem(LS_SETTINGS, JSON.stringify(settings));
+      localStorage.setItem('osp_site_settings', JSON.stringify(settings));
+      if (dlLink) {
+        localStorage.setItem('osp_download_link', dlLink);
+      }
       showToast("All settings saved successfully!", "success");
       renderDashboard();
     };
