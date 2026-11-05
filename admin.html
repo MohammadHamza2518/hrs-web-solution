@@ -54,6 +54,14 @@
       color: #FFFFFF;
       box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
     }
+    /* Native App Mobile Horizontal Swipe Scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="bg-[#030712] text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white relative font-sans antialiased">
@@ -131,33 +139,35 @@
        ========================================================================= -->
   <div id="adminPortalView" class="hidden relative z-10 flex flex-col min-h-screen">
     
-        <!-- Top Nav Header (Luxury SaaS Command Center Edition) -->
+        <!-- Top Nav Header (Luxury SaaS Command Center Edition - 100% Mobile & PC Responsive) -->
     <header class="sticky top-0 z-40 bg-[#030712]/95 backdrop-blur-2xl border-b border-white/[0.08] shadow-2xl shadow-black/90">
       <!-- High-Tech Neon Cyber Accent Line -->
       <div class="h-[2px] w-full bg-gradient-to-r from-transparent via-cyan-400 via-blue-500 to-transparent shadow-[0_0_15px_rgba(6,182,212,0.8)]"></div>
 
-      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-4">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2.5 sm:gap-4">
         
-        <!-- Left: Glowing Brand Identity & Founder Info -->
+        <!-- Left: Brand Identity & Founder Info -->
         <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
           <!-- Glassmorphism Glowing Logo Capsule -->
           <a href="index.html" target="_blank" class="relative group flex-shrink-0" title="Open Public Website">
-            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur-xs opacity-50 group-hover:opacity-100 transition duration-300"></div>
-            <div class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-b from-slate-900 via-[#0a0f1d] to-[#030712] border border-cyan-400/40 p-1.5 sm:p-2 flex items-center justify-center shadow-xl shadow-cyan-950/50">
+            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl sm:rounded-2xl blur-xs opacity-50 group-hover:opacity-100 transition duration-300"></div>
+            <div class="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-b from-slate-900 via-[#0a0f1d] to-[#030712] border border-cyan-400/40 p-1.5 flex items-center justify-center shadow-lg shadow-cyan-950/50">
               <img src="assets/images/hrs_icon.png" alt="HRS Logo" class="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(6,182,212,0.7)]">
             </div>
           </a>
 
           <!-- Brand Title & Live Status -->
           <div class="min-w-0">
-            <div class="flex items-center gap-1.5 sm:gap-2.5 flex-wrap">
-              <h1 class="text-sm sm:text-base lg:text-lg font-black text-white font-heading tracking-tight leading-none flex items-center gap-1">
-                <span class="truncate">Outreach Studio</span>
-                <span class="px-1.5 sm:px-2 py-0.5 rounded-md bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 border border-cyan-400/50 text-cyan-300 font-mono text-[9px] sm:text-xs font-black tracking-wider shadow-[0_0_10px_rgba(6,182,212,0.3)]">PRO</span>
-              </h1>
-
+            <!-- Row 1: App Name + PRO + Live Badge (Strictly Single Row) -->
+            <div class="flex items-center gap-1.5 whitespace-nowrap leading-none">
+              <span class="text-sm sm:text-base lg:text-lg font-black text-white font-heading tracking-tight leading-none">
+                Outreach Studio
+              </span>
+              <span class="px-1.5 py-0.5 rounded-md bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 border border-cyan-400/50 text-cyan-300 font-mono text-[9px] sm:text-[11px] font-black tracking-wider shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                PRO
+              </span>
               <!-- Live Pulsing Beacon -->
-              <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[9px] sm:text-[10px] font-mono font-bold tracking-wider">
+              <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[9px] sm:text-[10px] font-mono font-bold tracking-wider">
                 <span class="relative flex h-1.5 w-1.5">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
@@ -166,36 +176,35 @@
               </span>
             </div>
 
-            <!-- Founder Sub-Telemetry Row -->
-            <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono mt-1 text-slate-400 flex-wrap">
-              <!-- Founder Tag -->
-              <div class="flex items-center gap-1.5 bg-white/[0.03] px-2 py-0.5 rounded-md border border-white/[0.08]">
-                <div class="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 text-white text-[8px] font-black flex items-center justify-center font-mono">
+            <!-- Row 2: Founder Tag & Realtime IST Clock (Single Line No Wrap) -->
+            <div class="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono mt-1 text-slate-400 whitespace-nowrap overflow-hidden text-ellipsis">
+              <div class="inline-flex items-center gap-1 bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.08] flex-shrink-0">
+                <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 text-white text-[8px] font-black flex items-center justify-center font-mono">
                   MH
-                </div>
-                <span class="text-slate-200 font-semibold truncate">Mohammad Hamza</span>
-                <span class="text-[9px] text-cyan-400 font-bold px-1 rounded bg-cyan-500/10 border border-cyan-500/20 hidden sm:inline">SUPER ADMIN</span>
+                </span>
+                <span class="text-slate-200 font-semibold truncate max-w-[95px] xs:max-w-none">Mohammad Hamza</span>
+                <span class="text-[8px] text-cyan-400 font-bold px-1 rounded bg-cyan-500/10 border border-cyan-500/20 hidden sm:inline">SUPER ADMIN</span>
               </div>
-
+              <span class="text-slate-600 hidden xs:inline">•</span>
               <!-- Real-Time Clock with Cyan LED style -->
-              <div class="flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-950/40 border border-cyan-500/20 text-cyan-300">
-                <i class="far fa-clock text-[9px] sm:text-[10px] text-cyan-400"></i>
+              <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/20 text-cyan-300 flex-shrink-0">
+                <i class="far fa-clock text-[9px] text-cyan-400"></i>
                 <span id="liveClock" class="font-bold font-mono">--:--:-- IST</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right: Action Buttons (PC & Mobile Optimized) -->
-        <div class="flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
+        <!-- Right: Action Buttons (Touch Friendly & Sleek) -->
+        <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           <!-- View Site Button -->
-          <a href="index.html" target="_blank" class="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/[0.04] hover:bg-cyan-500/10 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm group" title="Open Public Website in New Tab">
+          <a href="index.html" target="_blank" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-cyan-500/10 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm group" title="Open Public Website">
             <i class="fas fa-arrow-up-right-from-square text-[11px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
-            <span class="hidden sm:inline">View Live Site</span>
+            <span class="hidden sm:inline">View Site</span>
           </a>
 
-          <!-- Logout Button with Smooth Red Glow -->
-          <button onclick="handleAdminLogout()" class="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 hover:border-rose-500/50 text-rose-400 hover:text-rose-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(244,63,94,0.3)]" title="Logout from Admin Portal">
+          <!-- Logout Button -->
+          <button onclick="handleAdminLogout()" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 hover:border-rose-500/50 text-rose-400 hover:text-rose-200 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(244,63,94,0.3)]" title="Logout from Admin">
             <i class="fas fa-power-off text-[11px]"></i>
             <span class="hidden sm:inline">Logout</span>
           </button>
@@ -204,120 +213,124 @@
       </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+    <!-- Main Container (Generous Bottom Clearance for JARVIS Floating Orb) -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 pb-32 sm:pb-20 flex-1 w-full space-y-4 sm:space-y-6">
       
-      <!-- Executive KPI Cards -->
-      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Executive KPI Cards (Consistent Pro Heights on Mobile & Desktop) -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
         
         <!-- Metric 1: Total Revenue -->
-        <div class="admin-card rounded-2xl p-5 border-white/[0.08] relative overflow-hidden">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span class="font-mono uppercase font-semibold">Total Revenue</span>
-            <span class="w-8 h-8 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-sm border border-emerald-500/30">
+        <div class="admin-card rounded-2xl p-3.5 sm:p-5 border-white/[0.08] relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-400 mb-1 sm:mb-2">
+            <span class="font-mono uppercase font-semibold text-[10px] sm:text-xs tracking-wider truncate">Total Revenue</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xs sm:text-sm border border-emerald-500/30 flex-shrink-0">
               <i class="fas fa-indian-rupee-sign"></i>
             </span>
           </div>
-          <div id="statTotalRevenue" class="text-2xl sm:text-3xl font-black text-white font-mono">
+          <div id="statTotalRevenue" class="text-xl sm:text-2xl lg:text-3xl font-black text-white font-mono tracking-tight my-0.5">
             &#8377;0
           </div>
-          <div class="text-[11px] text-emerald-400 flex items-center gap-1 mt-1">
-            <i class="fas fa-arrow-trend-up text-[10px]"></i>
-            <span id="statOrdersCount">0</span> Lifetime Commercial Deals
+          <div class="text-[10px] sm:text-[11px] text-emerald-400 flex items-center gap-1 truncate mt-0.5">
+            <i class="fas fa-arrow-trend-up text-[9px] flex-shrink-0"></i>
+            <span class="truncate"><span id="statOrdersCount">0</span> Deals Closed</span>
           </div>
         </div>
 
         <!-- Metric 2: Paid Customers -->
-        <div class="admin-card rounded-2xl p-5 border-white/[0.08] relative overflow-hidden">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span class="font-mono uppercase font-semibold">Total Customers</span>
-            <span class="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center text-sm border border-blue-500/30">
+        <div class="admin-card rounded-2xl p-3.5 sm:p-5 border-white/[0.08] relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-400 mb-1 sm:mb-2">
+            <span class="font-mono uppercase font-semibold text-[10px] sm:text-xs tracking-wider truncate">Total Buyers</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center text-xs sm:text-sm border border-blue-500/30 flex-shrink-0">
               <i class="fas fa-users"></i>
             </span>
           </div>
-          <div id="statTotalCustomers" class="text-2xl sm:text-3xl font-black text-white font-mono">
+          <div id="statTotalCustomers" class="text-xl sm:text-2xl lg:text-3xl font-black text-white font-mono tracking-tight my-0.5">
             0
           </div>
-          <div class="text-[11px] text-blue-300 mt-1">
-            Active Verified License Holders
+          <div class="text-[10px] sm:text-[11px] text-blue-300 flex items-center gap-1 truncate mt-0.5">
+            <i class="fas fa-certificate text-[9px] text-blue-400 flex-shrink-0"></i>
+            <span class="truncate">Active Licenses</span>
           </div>
         </div>
 
         <!-- Metric 3: Leads In Vault -->
-        <div class="admin-card rounded-2xl p-5 border-white/[0.08] relative overflow-hidden">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span class="font-mono uppercase font-semibold">Global Prospects</span>
-            <span class="w-8 h-8 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-sm border border-purple-500/30">
+        <div class="admin-card rounded-2xl p-3.5 sm:p-5 border-white/[0.08] relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-400 mb-1 sm:mb-2">
+            <span class="font-mono uppercase font-semibold text-[10px] sm:text-xs tracking-wider truncate">Prospects</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center text-xs sm:text-sm border border-purple-500/30 flex-shrink-0">
               <i class="fas fa-database"></i>
             </span>
           </div>
-          <div id="statTotalLeads" class="text-2xl sm:text-3xl font-black text-white font-mono">
+          <div id="statTotalLeads" class="text-xl sm:text-2xl lg:text-3xl font-black text-white font-mono tracking-tight my-0.5">
             28+
           </div>
-          <div class="text-[11px] text-purple-300 mt-1">
-            Dubai, UK, Swiss High-Ticket Firms
+          <div class="text-[10px] sm:text-[11px] text-purple-300 flex items-center gap-1 truncate mt-0.5">
+            <i class="fas fa-globe text-[9px] text-purple-400 flex-shrink-0"></i>
+            <span class="truncate">Dubai, UK &amp; Global</span>
           </div>
         </div>
 
         <!-- Metric 4: Software Price -->
-        <div class="admin-card rounded-2xl p-5 border-white/[0.08] relative overflow-hidden">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span class="font-mono uppercase font-semibold">Live CRM Price</span>
-            <span class="w-8 h-8 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-sm border border-amber-500/30">
+        <div class="admin-card rounded-2xl p-3.5 sm:p-5 border-white/[0.08] relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-center justify-between text-slate-400 mb-1 sm:mb-2">
+            <span class="font-mono uppercase font-semibold text-[10px] sm:text-xs tracking-wider truncate">CRM Price</span>
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-xs sm:text-sm border border-amber-500/30 flex-shrink-0">
               <i class="fas fa-bolt"></i>
             </span>
           </div>
-          <div id="statCurrentPrice" class="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">
+          <div id="statCurrentPrice" class="text-xl sm:text-2xl lg:text-3xl font-black text-emerald-400 font-mono tracking-tight my-0.5">
             &#8377;1,999
           </div>
-          <div class="text-[11px] text-slate-400 mt-1">
-            Razorpay Live Active &bull; No Fees
+          <div class="text-[10px] sm:text-[11px] text-slate-400 flex items-center gap-1 truncate mt-0.5">
+            <i class="fas fa-circle-check text-[9px] text-emerald-400 flex-shrink-0"></i>
+            <span class="truncate">Razorpay Live Active</span>
           </div>
         </div>
 
       </section>
 
-      <!-- Navigation Tabs (Sleek Glass Segmented Bar) -->
-      <section class="flex items-center justify-between flex-wrap gap-4 border-b border-white/[0.08] pb-4">
+      <!-- Navigation Tabs & Actions (Swipeable Segmented Bar + Balanced Mobile Action Grid) -->
+      <section class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4 border-b border-white/[0.08] pb-3 sm:pb-4">
         
-        <div class="flex items-center gap-2 overflow-x-auto p-1 rounded-2xl bg-slate-900/80 border border-white/[0.08]">
-          <button onclick="switchAdminTab('orders')" id="tabBtn-orders" class="admin-tab-btn active px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer">
-            <i class="fas fa-receipt"></i>
-            <span>Customer Orders</span>
-            <span id="badgeOrdersCount" class="px-1.5 py-0.5 rounded-full bg-white/20 text-[10px] font-mono">0</span>
+        <!-- Smooth Native Horizontal Scroll Segmented Tabs (Never Wraps Internally) -->
+        <div class="w-full lg:w-auto overflow-x-auto no-scrollbar scroll-smooth flex items-center gap-1 sm:gap-1.5 p-1 rounded-2xl bg-slate-900/80 border border-white/[0.08] flex-shrink-0">
+          <button onclick="switchAdminTab('orders')" id="tabBtn-orders" class="admin-tab-btn active whitespace-nowrap flex-shrink-0 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-receipt text-xs"></i>
+            <span>Orders</span>
+            <span id="badgeOrdersCount" class="px-1.5 py-0.2 rounded-full bg-white/20 text-[10px] font-mono">0</span>
           </button>
 
-          <button onclick="switchAdminTab('leads')" id="tabBtn-leads" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-2 cursor-pointer">
-            <i class="fas fa-building-user"></i>
-            <span>Leads Vault (52+)</span>
+          <button onclick="switchAdminTab('leads')" id="tabBtn-leads" class="admin-tab-btn whitespace-nowrap flex-shrink-0 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-building-user text-xs"></i>
+            <span>Leads (52+)</span>
           </button>
 
-          <button onclick="switchAdminTab('settings')" id="tabBtn-settings" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-2 cursor-pointer">
-            <i class="fas fa-sliders"></i>
-            <span>Live Site Settings</span>
+          <button onclick="switchAdminTab('settings')" id="tabBtn-settings" class="admin-tab-btn whitespace-nowrap flex-shrink-0 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-sliders text-xs"></i>
+            <span>Settings</span>
           </button>
 
-          <button onclick="switchAdminTab('users')" id="tabBtn-users" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-2 cursor-pointer">
-            <i class="fas fa-users-gear"></i>
+          <button onclick="switchAdminTab('users')" id="tabBtn-users" class="admin-tab-btn whitespace-nowrap flex-shrink-0 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-users-gear text-xs"></i>
             <span>CRM Users</span>
-            <span id="badgeUsersCount" class="px-1.5 py-0.5 rounded-full bg-white/20 text-[10px] font-mono">0</span>
+            <span id="badgeUsersCount" class="px-1.5 py-0.2 rounded-full bg-white/20 text-[10px] font-mono">0</span>
           </button>
 
-          <button onclick="switchAdminTab('generator')" id="tabBtn-generator" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-2 cursor-pointer">
-            <i class="fas fa-key"></i>
-            <span>License Generator</span>
+          <button onclick="switchAdminTab('generator')" id="tabBtn-generator" class="admin-tab-btn whitespace-nowrap flex-shrink-0 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-key text-xs"></i>
+            <span>License Gen</span>
           </button>
         </div>
 
-        <!-- Quick Create Action -->
-        <div class="flex items-center gap-2.5">
-          <button onclick="openManualOrderModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-emerald-500/20 transition cursor-pointer">
-            <i class="fas fa-plus-circle"></i>
-            <span>Add Manual UPI Order</span>
+        <!-- Quick Actions: Symmetrical 50/50 Grid on Mobile, Clean Flex on Desktop -->
+        <div class="grid grid-cols-2 gap-2 w-full lg:w-auto lg:flex lg:items-center flex-shrink-0">
+          <button onclick="openManualOrderModal()" class="w-full lg:w-auto px-3.5 py-2.5 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/20 transition cursor-pointer whitespace-nowrap">
+            <i class="fas fa-plus-circle text-xs"></i>
+            <span>+ Manual Order</span>
           </button>
-          <button onclick="exportOrdersToCSV()" class="px-3.5 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
-            <i class="fas fa-file-arrow-down"></i>
-            <span class="hidden sm:inline">Export CSV</span>
+          <button onclick="exportOrdersToCSV()" class="w-full lg:w-auto px-3.5 py-2.5 sm:py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] text-xs font-semibold text-slate-200 hover:text-white transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap">
+            <i class="fas fa-file-arrow-down text-xs"></i>
+            <span>Export CSV</span>
           </button>
         </div>
 
@@ -328,24 +341,24 @@
            ========================================================================= -->
       <section id="tabContent-orders" class="space-y-4">
         
-        <!-- Table Filter / Search Header -->
-        <div class="flex items-center justify-between gap-4 flex-wrap">
+        <!-- Table Filter / Search Header (Mobile-Optimized Clean Inputs) -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4">
           <div class="relative w-full sm:w-80">
             <input 
               type="text" 
               id="orderSearchInput" 
               oninput="filterOrdersTable()" 
-              placeholder="Search by buyer name, phone, or payment ID..." 
-              class="w-full py-2.5 pl-10 pr-4 rounded-xl bg-slate-900/80 border border-white/[0.08] text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 font-sans"
+              placeholder="Search orders, customer, phone, ID..." 
+              class="w-full py-2.5 pl-9 pr-3 rounded-xl bg-slate-900/80 border border-white/[0.08] text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 font-sans"
             >
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs">
               <i class="fas fa-search"></i>
             </div>
           </div>
 
-          <div class="flex items-center gap-2 text-xs">
-            <span class="text-slate-400">Filter Status:</span>
-            <select id="orderStatusFilter" onchange="filterOrdersTable()" class="bg-slate-900 border border-white/[0.1] text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none font-medium">
+          <div class="flex items-center justify-between sm:justify-end gap-2 text-xs">
+            <span class="text-slate-400 font-medium">Filter Status:</span>
+            <select id="orderStatusFilter" onchange="filterOrdersTable()" class="bg-slate-900 border border-white/[0.1] text-xs text-slate-200 rounded-xl px-3 py-2 focus:outline-none font-medium">
               <option value="all">All Orders</option>
               <option value="PAID">Paid / Active</option>
               <option value="MANUAL">Manual UPI</option>
@@ -390,17 +403,17 @@
            ========================================================================= -->
       <section id="tabContent-leads" class="hidden space-y-4">
         
-        <div class="flex items-center justify-between gap-4 flex-wrap">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
             <h3 class="text-base font-bold text-white font-heading">Pre-Loaded Global Prospects Vault</h3>
             <p class="text-xs text-slate-400">Verified commercial firms in Dubai, UK, Switzerland &amp; Europe with high ratings &amp; NO website.</p>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openAddLeadModal()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+          <div class="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center">
+            <button onclick="openAddLeadModal()" class="w-full sm:w-auto px-3.5 py-2.5 sm:py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap">
               <i class="fas fa-plus"></i> Add New Lead
             </button>
-            <button onclick="exportLeadsToCSV()" class="px-3.5 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+            <button onclick="exportLeadsToCSV()" class="w-full sm:w-auto px-3.5 py-2.5 sm:py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] text-xs font-semibold text-slate-300 hover:text-white transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap">
               <i class="fas fa-download"></i> Export Vault
             </button>
           </div>
@@ -532,23 +545,23 @@
       <section id="tabContent-users" class="hidden space-y-4">
         
         <!-- Controls Bar -->
-        <div class="flex items-center justify-between flex-wrap gap-4 admin-card p-4 rounded-2xl border border-white/[0.08]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 admin-card p-3.5 sm:p-4 rounded-2xl border border-white/[0.08]">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg border border-indigo-500/30">
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-base sm:text-lg border border-indigo-500/30 flex-shrink-0">
               <i class="fas fa-users-gear"></i>
             </div>
             <div>
-              <h2 class="text-sm font-bold text-white font-heading">CRM Workspace Accounts</h2>
-              <p class="text-[11px] text-slate-400">Buyers registered & accessing the Cloud CRM with Lifetime Commercial licenses</p>
+              <h2 class="text-xs sm:text-sm font-bold text-white font-heading">CRM Workspace Accounts</h2>
+              <p class="text-[10px] sm:text-[11px] text-slate-400">Buyers registered & accessing Cloud CRM</p>
             </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="renderUsers()" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5 border border-white/10 cursor-pointer">
+          <div class="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center">
+            <button onclick="renderUsers()" class="w-full sm:w-auto px-3 py-2 sm:py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 hover:text-white transition flex items-center justify-center gap-1.5 border border-white/10 cursor-pointer whitespace-nowrap">
               <i class="fas fa-rotate"></i>
               <span>Refresh</span>
             </button>
-            <button onclick="exportUsersCSV()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-300 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+            <button onclick="exportUsersCSV()" class="w-full sm:w-auto px-3.5 py-2 sm:py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-300 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap">
               <i class="fas fa-file-csv"></i>
               <span>Export CSV</span>
             </button>
@@ -683,7 +696,7 @@
     <!-- =========================================================================
        JARVIS VOICE AI HUD & ARC REACTOR CONTROLLER (FOUNDER SPECIAL)
        ========================================================================= -->
-  <div id="jarvisContainer" class="fixed bottom-5 right-5 z-50 font-sans">
+  <div id="jarvisContainer" class="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 font-sans">
     
     <!-- JARVIS Interactive HUD (Collapsible) -->
     <div id="jarvisHud" class="hidden mb-3 w-[92vw] max-w-[360px] sm:max-w-[400px] bg-[#030712]/95 border border-cyan-500/40 backdrop-blur-2xl rounded-2xl p-4 shadow-2xl shadow-cyan-950/80 transition-all duration-300 transform scale-100">
@@ -782,7 +795,7 @@
         type="button" 
         id="jarvisArcReactorBtn" 
         onclick="handleJarvisToggle()" 
-        class="relative w-14 h-14 rounded-full bg-gradient-to-tr from-black via-slate-950 to-cyan-950 border-2 border-cyan-400 p-1 shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:shadow-[0_0_35px_rgba(6,182,212,0.9)] transition-all duration-300 transform active:scale-95 flex items-center justify-center cursor-pointer select-none"
+        class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-black via-slate-950 to-cyan-950 border-2 border-cyan-400 p-1 shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:shadow-[0_0_35px_rgba(6,182,212,0.9)] transition-all duration-300 transform active:scale-95 flex items-center justify-center cursor-pointer select-none"
         title="Tap to speak with JARVIS"
       >
         <!-- Outer Glowing Pulse Ring (Animated when listening) -->
