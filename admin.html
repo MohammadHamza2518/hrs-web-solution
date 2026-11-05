@@ -769,19 +769,28 @@
           <span class="text-cyan-400/80">Tap to execute</span>
         </div>
         <div class="flex flex-wrap gap-1.5">
-          <button type="button" onclick="jarvisExecuteText('total revenue kitna hai')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
-            💰 Revenue
-          </button>
           <button type="button" onclick="jarvisExecuteText('orders dikhao')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
             📦 Orders
+          </button>
+          <button type="button" onclick="jarvisExecuteText('total revenue kitna hai')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            💰 Revenue
           </button>
           <button type="button" onclick="jarvisExecuteText('naya license key banao')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
             🔑 New Key
           </button>
+          <button type="button" onclick="jarvisExecuteText('leads vault dikhao')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            🌍 Leads (52+)
+          </button>
           <button type="button" onclick="jarvisExecuteText('registered users dikhao')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
             👥 CRM Users
           </button>
-          <button type="button" onclick="jarvisExecuteText('export orders')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+          <button type="button" onclick="jarvisExecuteText('live settings kholo')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            ⚙️ Settings
+          </button>
+          <button type="button" onclick="jarvisExecuteText('manual order add karo')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            ➕ Add Order
+          </button>
+          <button type="button" onclick="jarvisExecuteText('export orders to csv')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
             ⚡ Export CSV
           </button>
         </div>
@@ -1488,7 +1497,7 @@
     // 14. CSV Export Helpers
     window.exportOrdersToCSV = function() {
       const orders = getOrders();
-      if (!orders.length) return alert("No orders to export.");
+      if (!orders.length) { showToast("No orders available to export yet", "info"); return; }
 
       let csv = "Order ID,Customer Name,Phone,Email,Amount,Gateway,Payment ID,License Key,Date,Status\n";
       orders.forEach(o => {
@@ -1566,7 +1575,7 @@
         jarvisGlobalAudio = new Audio();
       }
       if (!jarvisAudioUnlocked) {
-        // Silent 0.01s base64 wav buffer to prime iOS WebKit and Android Chrome audio thread
+        // Silent base64 buffer primes the mobile WebKit audio output thread
         jarvisGlobalAudio.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
         const p = jarvisGlobalAudio.play();
         if (p !== undefined) {
@@ -1608,7 +1617,9 @@
         icon.className = jarvisMuted ? "fas fa-volume-mute text-rose-400" : "fas fa-volume-up text-cyan-300";
       }
       if (jarvisMuted) {
-        if (jarvisGlobalAudio) jarvisGlobalAudio.pause();
+        if (jarvisGlobalAudio) {
+          try { jarvisGlobalAudio.pause(); } catch(e) {}
+        }
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
       }
       showToast(jarvisMuted ? "JARVIS Voice Muted" : "JARVIS Voice Active", "info");
@@ -1760,8 +1771,9 @@
           const audioUrl = URL.createObjectURL(blob);
 
           return new Promise((resolve, reject) => {
-            jarvisGlobalAudio.pause();
+            try { jarvisGlobalAudio.pause(); } catch(e) {}
             jarvisGlobalAudio.src = audioUrl;
+            try { jarvisGlobalAudio.load(); } catch(e) {}
 
             jarvisGlobalAudio.onplay = () => {
               jarvisSpeaking = true;
@@ -1872,7 +1884,7 @@
       }
     }
 
-    // F. Speech Recognition Engine (Cross-Browser & iOS Resilient)
+    // F. Speech Recognition Engine (Cross-Browser & Strictly Synchronous User Gesture)
     function initJarvisRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) return null;
@@ -1880,7 +1892,7 @@
       const rec = new SpeechRecognition();
       rec.continuous = false;
       rec.interimResults = true;
-      rec.lang = 'en-IN'; // Recognizes Indian English, Hinglish terms, and English
+      rec.lang = 'en-IN'; // Indian English, Hinglish phonetics
       rec.maxAlternatives = 1;
 
       let capturedText = '';
@@ -1920,19 +1932,21 @@
         jarvisListening = false;
         setJarvisVisualState('idle');
         const statusText = document.getElementById('jarvisStatusText');
-        if (e.error === 'not-allowed') {
-          showToast("Microphone permission denied. Allow mic access in browser.", "error");
+        if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+          showToast("Microphone permission blocked. Please allow mic in browser.", "error");
           if (statusText) statusText.textContent = "Mic access blocked • Allow in browser";
+          jarvisSpeak("Sir, microphone access blocked hai. Browser address bar mein mic access allow karein.");
         } else if (e.error === 'no-speech') {
           if (statusText) statusText.textContent = "No voice heard • Tap mic & speak";
         } else if (e.error === 'network') {
           showToast("Speech recognition network error. Please retry.", "error");
+          if (statusText) statusText.textContent = "Network error • Tap to retry";
         }
       };
 
       rec.onend = () => {
         jarvisListening = false;
-        // Resilient mobile execution: If text was heard but 'isFinal' was never emitted by mobile engine
+        // Resilient execution: If speech was heard but mobile browser never flagged isFinal
         if (capturedText && !commandHandled) {
           commandHandled = true;
           jarvisHandleCommand(capturedText);
@@ -1944,8 +1958,8 @@
       return rec;
     }
 
-    // G. Arc Reactor Main Toggle Button
-    window.handleJarvisToggle = async function() {
+    // G. Arc Reactor Main Toggle Button (STRICTLY SYNCHRONOUS to preserve user activation!)
+    window.handleJarvisToggle = function() {
       unlockJarvisAudio();
       openJarvisHud();
 
@@ -1963,35 +1977,24 @@
         return;
       }
 
-      // Explicitly check/prompt mic permissions on iOS Safari & Android Chrome
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          stream.getTracks().forEach(track => track.stop());
-        } catch(err) {
-          console.warn("Mic permission prompt:", err);
-          if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-            showToast("Microphone permission denied. Allow mic in browser settings.", "error");
-            setJarvisVisualState('idle');
-            return;
-          }
-        }
-      }
-
       if (!jarvisRecognition) {
         jarvisRecognition = initJarvisRecognition();
       }
 
       try {
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-        if (jarvisGlobalAudio) jarvisGlobalAudio.pause();
+        if (jarvisGlobalAudio) {
+          try { jarvisGlobalAudio.pause(); } catch(e) {}
+        }
+        // Direct synchronous start preserves user activation in Chrome and Safari
         jarvisRecognition.start();
       } catch(e) {
+        console.error("Speech recognition start failed, attempting retry:", e);
         try {
           jarvisRecognition.stop();
-          setTimeout(() => { jarvisRecognition.start(); }, 150);
+          jarvisRecognition.start();
         } catch(err) {
-          console.error("Failed to start speech recognition:", err);
+          console.error("Retry failed:", err);
         }
       }
     };
@@ -2014,15 +2017,15 @@
       jarvisExecuteText(cmd);
     };
 
-    // I. Core Intent & Action Controller (Extensive Hinglish + English Support)
+    // I. Core Intent & Action Controller (Extensive Hinglish, English, & Devanagari Hindi Support!)
     function jarvisHandleCommand(transcript) {
       const clean = transcript.toLowerCase().trim();
 
       // Action 1: Export Orders to CSV
-      if (/(?:export|download.*csv|csv|backup|sheet|excel)/i.test(clean)) {
+      if (/(?:export|download.*csv|csv|backup|sheet|excel|एक्सपोर्ट|डाउनलोड|सीएसवी|बैकअप|एक्सेल)/i.test(clean)) {
         if (typeof exportOrdersToCSV === 'function') {
           exportOrdersToCSV();
-          jarvisSpeak("Exporting all customer orders to CSV now, Sir.");
+          jarvisSpeak("Exporting all customer orders to CSV file now, Sir.");
         } else {
           jarvisSpeak("Export feature is ready Sir.");
         }
@@ -2030,87 +2033,94 @@
       }
 
       // Action 2: New Commercial License Key Generation
-      if (/(?:(?:naya|new|generate|create).*key|license|key banao|key chahiye|code banao)/i.test(clean)) {
+      if (/(?:(?:naya|new|generate|create|नया|बनाओ).*key|license|लाइसेंस|चाबी|key.*banao|code.*banao)/i.test(clean)) {
+        switchAdminTab('generator');
         if (typeof generateNewLicenseKey === 'function') {
-          switchAdminTab('generator');
           generateNewLicenseKey();
-          const keyInput = document.getElementById('generatedKeyBox');
-          const generatedKey = keyInput ? keyInput.textContent.trim() : 'OSP-LIFETIME-PRO';
-          jarvisSpeak(`New lifetime commercial license key generated and copied to your clipboard, Sir: ${generatedKey}`);
-        } else {
-          jarvisSpeak("Generating new license key now, Sir.");
         }
+        const keyBox = document.getElementById('generatedKeyBox');
+        const generatedKey = keyBox ? keyBox.textContent.trim() : 'OSP-LIFETIME-PRO';
+        try { navigator.clipboard.writeText(generatedKey); } catch(e) {}
+        showToast(`Key Generated: ${generatedKey}`, "success");
+        jarvisSpeak(`Naya Lifetime Commercial Key generate kar diya hai aur clipboard par copy ho gaya hai, Sir: ${generatedKey}`);
         return;
       }
 
       // Action 3: Revenue / Sales Inquiry
-      if (/(?:revenue|kamai|income|paise|kitna kamaya|paisa|how much (?:made|revenue|sales)|earnings?|total sale)/i.test(clean)) {
+      if (/(?:revenue|kamai|income|paise|kitna.*kamaya|kitni.*kamai|paisa|how much (?:made|revenue|sales)|earnings?|total sale|रेवेन्यू|कमाई|इनकम|पैसे|पैसा)/i.test(clean)) {
+        switchAdminTab('orders');
         const orders = typeof getOrders === 'function' ? getOrders() : [];
         let totalRev = 0;
         orders.forEach(o => {
           if (o.status === 'PAID') totalRev += (parseInt(o.amount) || 1999);
         });
         const revStr = `₹${totalRev.toLocaleString('en-IN')}`;
+        showToast(`Total Revenue: ${revStr}`, "success");
         jarvisSpeak(`Sir, aapka total revenue abhi ${revStr} hai across ${orders.length} total orders. Razorpay Live active hai.`);
         return;
       }
 
       // Action 4: Orders Feed Tab
-      if (/(?:orders?|sales? feed|order dikhao|show orders?|open orders?|kitne orders?|bikri|orders dekhna)/i.test(clean)) {
+      if (/(?:orders?|sales? feed|order dikhao|show orders?|open orders?|kitne orders?|bikri|orders dekhna|ऑर्डर्स?|आर्डर|दिखाओ|बिक्री)/i.test(clean)) {
         switchAdminTab('orders');
         const orders = typeof getOrders === 'function' ? getOrders() : [];
+        showToast(`Orders: ${orders.length} Records`, "success");
         jarvisSpeak(`Orders tab open kar diya hai Sir. Total ${orders.length} orders recorded hain.`);
         return;
       }
 
       // Action 5: Registered Users / CRM Clients
-      if (/(?:users?|clients?|customers?|registered|founders?|kitne log|accounts?|workspace)/i.test(clean)) {
+      if (/(?:users?|clients?|customers?|registered|founders?|kitne log|accounts?|workspace|यूजर्स?|यूजर|सीआरएम|क्लाइंट|फाउंडर)/i.test(clean)) {
         switchAdminTab('users');
         let users = [];
         try { users = JSON.parse(localStorage.getItem('osp_registered_users')) || []; } catch(e) {}
+        showToast(`CRM Users: ${users.length} Active Accounts`, "success");
         jarvisSpeak(`Registered Cloud CRM Users tab open kar diya hai Sir. Total ${users.length} active founders hain.`);
         return;
       }
 
       // Action 6: Leads Vault
-      if (/(?:leads?|vault|prospects?|global leads?|database|foreign)/i.test(clean)) {
+      if (/(?:leads?|vault|prospects?|global leads?|database|foreign|लीड्स?|लीड|वॉल्ट|प्रॉस्पेक्ट|दुबई)/i.test(clean)) {
         switchAdminTab('leads');
         const leads = typeof getLeads === 'function' ? getLeads() : [];
-        jarvisSpeak(`Global Leads Vault open ho gaya hai Sir, with ${leads.length} pre-loaded verified prospects across Dubai, UK, and Switzerland.`);
+        showToast(`Leads Vault: ${leads.length} Prospects`, "success");
+        jarvisSpeak(`Global Leads Vault open kar diya hai Sir, with ${leads.length} pre-loaded verified prospects across Dubai, UK, and Switzerland.`);
         return;
       }
 
       // Action 7: Settings Tab & Google Drive Link
-      if (/(?:settings?|config|passcode|password|drive link|download link|price|pricing)/i.test(clean)) {
+      if (/(?:settings?|config|passcode|password|drive link|download link|price|pricing|सेटिंग्स?|सेटिंग|प्राइस|रेट|पासकोड)/i.test(clean)) {
         switchAdminTab('settings');
         const price = getSetting('crmPrice', '1999');
+        showToast("Master Settings Opened", "info");
         jarvisSpeak(`Master Settings panel open kar diya hai Sir. Live CRM price ₹${price} set hai aur Google Drive delivery link active hai.`);
         return;
       }
 
       // Action 8: Manual UPI Order Modal
-      if (/(?:manual|upi order|add order|naya order add|offline order)/i.test(clean)) {
+      if (/(?:manual|upi order|add order|naya order add|offline order|मैन्युअल|यूपीआई)/i.test(clean)) {
         if (typeof openManualOrderModal === 'function') {
           openManualOrderModal();
-          jarvisSpeak("Manual UPI Order registration modal open kar diya hai Sir.");
+          showToast("Manual Order Modal Opened", "info");
+          jarvisSpeak("Manual UPI Order registration modal open kar diya hai Sir. Yahan se naya order create kar sakte hain.");
         }
         return;
       }
 
       // Action 9: Greeting / Personal Assistant
-      if (/(?:jarvis|hello|hi|namaste|kaise ho|who are you|tum kaun ho|suno|sun rahe ho)/i.test(clean)) {
+      if (/(?:jarvis|hello|hi|namaste|kaise ho|who are you|tum kaun ho|suno|sun rahe ho|जार्विस|नमस्ते|हेलो|हाय)/i.test(clean)) {
         jarvisSpeak("Namaste Mohammad Hamza Sir! Main aapka JARVIS AI assistant hoon. Main aapke command par admin panel ko realtime control karne ke liye online hoon.");
         return;
       }
 
       // Action 10: Help & Capabilities
-      if (/(?:help|commands?|kya kar sakte ho|features?|options?|madad)/i.test(clean)) {
+      if (/(?:help|commands?|kya kar sakte ho|features?|options?|madad|मदद|कमांड)/i.test(clean)) {
         jarvisSpeak("Sir, aap bol sakte hain: Revenue kitna hai, Orders dikhao, Naya key banao, CRM users dikhao, Leads vault kholo, ya Export CSV karo.");
         return;
       }
 
       // Fallback
-      jarvisSpeak(`Command received: "${transcript}". Sir, aap quick buttons se bhi command de sakte hain ya niche type kar sakte hain.`);
+      jarvisSpeak(`Command received: "${transcript}". Sir, aap screen par diye buttons se ya bolkar admin panel realtime control kar sakte hain.`);
     }
   </script>
 </body>
