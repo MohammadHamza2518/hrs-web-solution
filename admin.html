@@ -620,7 +620,124 @@
   </div>
 
   <!-- Toast Notification Container -->
-  <div id="toastBox" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <!-- =========================================================================
+       JARVIS VOICE AI HUD & ARC REACTOR CONTROLLER (FOUNDER SPECIAL)
+       ========================================================================= -->
+  <div id="jarvisContainer" class="hidden fixed bottom-5 right-5 z-50 font-sans">
+    
+    <!-- JARVIS Interactive HUD (Collapsible) -->
+    <div id="jarvisHud" class="hidden mb-3 w-[92vw] max-w-[360px] sm:max-w-[400px] bg-[#030712]/95 border border-cyan-500/40 backdrop-blur-2xl rounded-2xl p-4 shadow-2xl shadow-cyan-950/80 transition-all duration-300 transform scale-100">
+      <!-- HUD Header -->
+      <div class="flex items-center justify-between border-b border-cyan-500/20 pb-2.5 mb-3">
+        <div class="flex items-center gap-2">
+          <div class="relative flex items-center justify-center">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span class="absolute w-4 h-4 rounded-full bg-cyan-400/30 animate-ping"></span>
+          </div>
+          <div>
+            <div class="text-xs font-black text-cyan-300 tracking-wider font-mono flex items-center gap-1.5">
+              <span>J.A.R.V.I.S.</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 font-bold">VOICE AI</span>
+            </div>
+            <div id="jarvisStatusText" class="text-[10px] text-slate-400 font-mono">Ready &bull; Tap mic to speak</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button type="button" onclick="toggleJarvisMute()" id="btnJarvisMute" class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-300 transition text-xs" title="Mute/Unmute Speech">
+            <i id="jarvisMuteIcon" class="fas fa-volume-up"></i>
+          </button>
+          <button type="button" onclick="toggleJarvisHud()" class="p-1.5 rounded-lg text-slate-400 hover:text-white transition text-xs" title="Minimize HUD">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Transcript & AI Reply Box -->
+      <div class="space-y-2 mb-3 max-h-48 overflow-y-auto pr-1 text-xs font-mono" id="jarvisDialogBox">
+        <div class="p-2.5 rounded-xl bg-slate-900/90 border border-white/[0.08] text-slate-300">
+          <div class="text-[10px] text-cyan-400 font-bold mb-0.5 flex items-center gap-1">
+            <i class="fas fa-robot text-[9px]"></i> JARVIS:
+          </div>
+          <div id="jarvisSpeechReply" class="leading-relaxed">
+            Namaste Mohammad Hamza Sir! JARVIS online hai. Aap Hindi ya English mein bolkar admin panel realtime control kar sakte hain.
+          </div>
+        </div>
+        
+        <div id="jarvisUserTranscriptContainer" class="hidden p-2.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-cyan-200">
+          <div class="text-[10px] text-cyan-400 font-bold mb-0.5 flex items-center gap-1">
+            <i class="fas fa-user text-[9px]"></i> YOU:
+          </div>
+          <div id="jarvisUserTranscript" class="italic text-white">Listening...</div>
+        </div>
+      </div>
+
+      <!-- Voice Visualizer Waves (Shown while listening/speaking) -->
+      <div id="jarvisWaveVisualizer" class="hidden flex items-center justify-center gap-1 py-1.5 mb-2.5 bg-black/40 rounded-lg border border-cyan-500/20">
+        <span class="w-1 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:0ms]"></span>
+        <span class="w-1 h-5 bg-cyan-400 rounded-full animate-bounce [animation-delay:150ms]"></span>
+        <span class="w-1 h-2 bg-cyan-400 rounded-full animate-bounce [animation-delay:300ms]"></span>
+        <span class="w-1 h-6 bg-cyan-400 rounded-full animate-bounce [animation-delay:450ms]"></span>
+        <span class="w-1 h-3 bg-cyan-400 rounded-full animate-bounce [animation-delay:600ms]"></span>
+        <span class="text-[10px] font-mono text-cyan-300 ml-2">Voice Active &bull; Processing...</span>
+      </div>
+
+      <!-- Quick 1-Tap Command Chips (Mobile / iPhone Friendly) -->
+      <div>
+        <div class="text-[9px] font-mono uppercase tracking-wider text-slate-500 mb-1.5 flex items-center justify-between">
+          <span>Quick Voice Commands</span>
+          <span class="text-cyan-400/80">Tap to execute</span>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          <button type="button" onclick="jarvisExecuteText('total revenue kitna hai')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            💰 Revenue
+          </button>
+          <button type="button" onclick="jarvisExecuteText('orders dikhao')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            📦 Orders
+          </button>
+          <button type="button" onclick="jarvisExecuteText('naya license key banao')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            🔑 New Key
+          </button>
+          <button type="button" onclick="jarvisExecuteText('registered users dikhao')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            👥 CRM Users
+          </button>
+          <button type="button" onclick="jarvisExecuteText('export orders')" class="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-500/40 text-slate-300 hover:text-cyan-300 text-[10px] font-mono transition">
+            ⚡ Export CSV
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Arc Reactor Trigger Button -->
+    <div class="relative group flex items-center justify-end">
+      <!-- Tooltip Label for Desktop -->
+      <span class="hidden sm:inline-block mr-3 px-3 py-1 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-[11px] font-mono text-cyan-300 shadow-xl opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none">
+        Talk to JARVIS (Voice AI)
+      </span>
+
+      <!-- The Button with Arc Reactor Glow -->
+      <button 
+        type="button" 
+        id="jarvisArcReactorBtn" 
+        onclick="handleJarvisToggle()" 
+        class="relative w-14 h-14 rounded-full bg-gradient-to-tr from-black via-slate-950 to-cyan-950 border-2 border-cyan-400 p-1 shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:shadow-[0_0_35px_rgba(6,182,212,0.9)] transition-all duration-300 transform active:scale-95 flex items-center justify-center cursor-pointer select-none"
+        title="Tap to speak with JARVIS"
+      >
+        <!-- Outer Glowing Pulse Ring (Animated when listening) -->
+        <span id="jarvisPulseRing" class="hidden absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping pointer-events-none"></span>
+        
+        <!-- Rotating Arc Reactor Segments -->
+        <div class="w-full h-full rounded-full border border-dashed border-cyan-300/40 flex items-center justify-center">
+          <!-- Inner Core -->
+          <div id="jarvisCoreGlow" class="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(6,182,212,0.8)]">
+            <i id="jarvisCoreIcon" class="fas fa-microphone text-sm"></i>
+          </div>
+        </div>
+      </button>
+    </div>
+
+  </div>
+
+  <div id="toastBox" class="fixed bottom-24 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
     <div class="px-4 py-3 rounded-2xl bg-slate-900 border border-blue-500/40 text-white text-xs font-semibold shadow-2xl flex items-center gap-2.5">
       <i class="fas fa-check-circle text-emerald-400 text-sm" id="toastIcon"></i>
       <span id="toastMsg">Action completed successfully!</span>
@@ -1323,6 +1440,321 @@
         toast.classList.add('opacity-0', 'translate-y-20');
       }, 2800);
     }
+
+    // =========================================================================
+    // 16. J.A.R.V.I.S. VOICE AI SYSTEM FOR FOUNDER (MOHAMMAD HAMZA)
+    // =========================================================================
+    let jarvisRecognition = null;
+    let jarvisListening = false;
+    let jarvisSpeaking = false;
+    let jarvisMuted = false;
+    let jarvisPrimed = false;
+
+    // A. Prime Audio Engine (Crucial for iOS Safari / iPhone / iPad touch gesture requirement)
+    function primeJarvisAudio() {
+      if (jarvisPrimed) return;
+      if ('speechSynthesis' in window) {
+        try {
+          const silent = new SpeechSynthesisUtterance(' ');
+          silent.volume = 0.01;
+          window.speechSynthesis.speak(silent);
+          jarvisPrimed = true;
+        } catch(e) {}
+      }
+    }
+
+    // B. Toggle HUD Open / Closed
+    window.toggleJarvisHud = function() {
+      const hud = document.getElementById('jarvisHud');
+      if (hud) hud.classList.toggle('hidden');
+    };
+
+    window.openJarvisHud = function() {
+      const hud = document.getElementById('jarvisHud');
+      if (hud && hud.classList.contains('hidden')) {
+        hud.classList.remove('hidden');
+      }
+    };
+
+    // C. Toggle Mute
+    window.toggleJarvisMute = function() {
+      jarvisMuted = !jarvisMuted;
+      const icon = document.getElementById('jarvisMuteIcon');
+      if (icon) {
+        icon.className = jarvisMuted ? "fas fa-volume-mute text-rose-400" : "fas fa-volume-up text-cyan-300";
+      }
+      if (jarvisMuted && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      showToast(jarvisMuted ? "JARVIS Voice Muted" : "JARVIS Voice Active", "info");
+    };
+
+    // D. Update Visual States
+    function setJarvisVisualState(state) {
+      const pulseRing = document.getElementById('jarvisPulseRing');
+      const coreGlow = document.getElementById('jarvisCoreGlow');
+      const coreIcon = document.getElementById('jarvisCoreIcon');
+      const visualizer = document.getElementById('jarvisWaveVisualizer');
+      const statusText = document.getElementById('jarvisStatusText');
+
+      if (state === 'listening') {
+        if (pulseRing) pulseRing.classList.remove('hidden');
+        if (coreGlow) coreGlow.className = "w-8 h-8 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 flex items-center justify-center text-white shadow-[0_0_20px_rgba(16,185,129,0.8)]";
+        if (coreIcon) coreIcon.className = "fas fa-microphone-lines text-sm animate-pulse";
+        if (visualizer) visualizer.classList.remove('hidden');
+        if (statusText) statusText.textContent = "Listening to you, Sir...";
+      } else if (state === 'speaking') {
+        if (pulseRing) pulseRing.classList.remove('hidden');
+        if (coreGlow) coreGlow.className = "w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 flex items-center justify-center text-white shadow-[0_0_20px_rgba(6,182,212,0.8)]";
+        if (coreIcon) coreIcon.className = "fas fa-volume-high text-sm";
+        if (visualizer) visualizer.classList.remove('hidden');
+        if (statusText) statusText.textContent = "JARVIS speaking...";
+      } else {
+        if (pulseRing) pulseRing.classList.add('hidden');
+        if (coreGlow) coreGlow.className = "w-8 h-8 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(6,182,212,0.8)]";
+        if (coreIcon) coreIcon.className = "fas fa-microphone text-sm";
+        if (visualizer) visualizer.classList.add('hidden');
+        if (statusText) statusText.textContent = "Ready • Tap mic to speak";
+      }
+    }
+
+    // E. Speech Synthesis
+    function jarvisSpeak(text) {
+      const replyBox = document.getElementById('jarvisSpeechReply');
+      if (replyBox) replyBox.textContent = text;
+
+      if (jarvisMuted || !('speechSynthesis' in window)) return;
+
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.05;
+        utterance.pitch = 1.0;
+
+        const voices = window.speechSynthesis.getVoices() || [];
+        const preferred = voices.find(v => 
+          v.lang.includes('en-IN') || 
+          v.name.includes('India') || 
+          v.name.includes('Ravi') || 
+          v.name.includes('Google UK English Male') ||
+          v.lang.includes('hi-IN')
+        ) || voices.find(v => v.lang.startsWith('en')) || voices[0];
+
+        if (preferred) utterance.voice = preferred;
+
+        utterance.onstart = () => {
+          jarvisSpeaking = true;
+          setJarvisVisualState('speaking');
+        };
+        utterance.onend = () => {
+          jarvisSpeaking = false;
+          setJarvisVisualState('idle');
+        };
+        utterance.onerror = () => {
+          jarvisSpeaking = false;
+          setJarvisVisualState('idle');
+        };
+
+        window.speechSynthesis.speak(utterance);
+      } catch(e) {
+        console.error("Jarvis speak error:", e);
+        setJarvisVisualState('idle');
+      }
+    }
+
+    function showJarvisUserTranscript(txt) {
+      const container = document.getElementById('jarvisUserTranscriptContainer');
+      const el = document.getElementById('jarvisUserTranscript');
+      if (container && el) {
+        container.classList.remove('hidden');
+        el.textContent = txt;
+      }
+    }
+
+    // F. Speech Recognition Engine (Cross-Browser: Chrome, Edge, Safari iOS 14.5+)
+    function initJarvisRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return null;
+
+      const rec = new SpeechRecognition();
+      rec.continuous = false;
+      rec.interimResults = true;
+      rec.lang = 'en-IN'; // Recognizes Indian English, Hinglish terms, and English
+      rec.maxAlternatives = 1;
+
+      rec.onstart = () => {
+        jarvisListening = true;
+        setJarvisVisualState('listening');
+      };
+
+      rec.onresult = (event) => {
+        let final = '';
+        let interim = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            final += event.results[i][0].transcript;
+          } else {
+            interim += event.results[i][0].transcript;
+          }
+        }
+        showJarvisUserTranscript(final || interim);
+        if (final) {
+          jarvisHandleCommand(final);
+        }
+      };
+
+      rec.onerror = (e) => {
+        console.warn("JARVIS speech recognition error:", e.error);
+        jarvisListening = false;
+        setJarvisVisualState('idle');
+        if (e.error === 'not-allowed') {
+          showToast("Microphone permission denied. Allow mic access in browser.", "error");
+        }
+      };
+
+      rec.onend = () => {
+        jarvisListening = false;
+        if (!jarvisSpeaking) {
+          setJarvisVisualState('idle');
+        }
+      };
+
+      return rec;
+    }
+
+    // G. Arc Reactor Main Toggle Button
+    window.handleJarvisToggle = function() {
+      primeJarvisAudio();
+      openJarvisHud();
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast("Speech Recognition not supported on this browser. Use quick command buttons below!", "info");
+        jarvisSpeak("Sir, voice recognition is not supported on this browser engine. Please use the quick action buttons on screen.");
+        return;
+      }
+
+      if (!jarvisRecognition) {
+        jarvisRecognition = initJarvisRecognition();
+      }
+
+      if (jarvisListening) {
+        try { jarvisRecognition.stop(); } catch(e) {}
+        jarvisListening = false;
+        setJarvisVisualState('idle');
+      } else {
+        try {
+          if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+          jarvisRecognition.start();
+        } catch(e) {
+          try {
+            jarvisRecognition.stop();
+            setTimeout(() => { jarvisRecognition.start(); }, 150);
+          } catch(err) {
+            console.error("Failed to start speech recognition:", err);
+          }
+        }
+      }
+    };
+
+    // H. Execute Command from Text / Quick Chips
+    window.jarvisExecuteText = function(text) {
+      primeJarvisAudio();
+      openJarvisHud();
+      showJarvisUserTranscript(text);
+      jarvisHandleCommand(text);
+    };
+
+    // I. Core Intent & Action Controller (Hinglish + English)
+    function jarvisHandleCommand(transcript) {
+      const clean = transcript.toLowerCase().trim();
+
+      // Action 1: Export Orders to CSV
+      if (/(?:export|download csv|csv|backup)/i.test(clean)) {
+        if (typeof exportOrdersToCSV === 'function') {
+          exportOrdersToCSV();
+          jarvisSpeak("Exporting all orders to CSV now, Sir.");
+        } else {
+          jarvisSpeak("Export feature is ready Sir.");
+        }
+        return;
+      }
+
+      // Action 2: New Commercial License Key Generation
+      if (/(?:(?:naya|new|generate|create).*key|license|key banao|key chahiye)/i.test(clean)) {
+        if (typeof generateNewLicenseKey === 'function') {
+          switchAdminTab('generator');
+          generateNewLicenseKey();
+          const keyInput = document.getElementById('generatedKeyBox');
+          const generatedKey = keyInput ? keyInput.value : 'OSP-PRO-LIVE';
+          jarvisSpeak(`New lifetime commercial license key generated and copied to your clipboard, Sir: ${generatedKey}`);
+        } else {
+          jarvisSpeak("Generating new license key now, Sir.");
+        }
+        return;
+      }
+
+      // Action 3: Revenue / Sales Inquiry
+      if (/(?:revenue|kamai|income|paise|kitna kamaya|paisa|how much (?:made|revenue|sales))/i.test(clean)) {
+        const orders = typeof getOrders === 'function' ? getOrders() : [];
+        let totalRev = 0;
+        orders.forEach(o => {
+          if (o.status === 'PAID') totalRev += (parseInt(o.amount) || 1999);
+        });
+        const revStr = `₹${totalRev.toLocaleString('en-IN')}`;
+        jarvisSpeak(`Sir, aapka total revenue abhi ${revStr} hai across ${orders.length} total orders.`);
+        return;
+      }
+
+      // Action 4: Orders Feed Tab
+      if (/(?:orders?|sales? feed|order dikhao|show orders?|open orders?|kitne orders?)/i.test(clean)) {
+        switchAdminTab('orders');
+        const orders = typeof getOrders === 'function' ? getOrders() : [];
+        jarvisSpeak(`Orders tab open kar diya hai Sir. Total ${orders.length} orders recorded hain.`);
+        return;
+      }
+
+      // Action 5: Registered Users / CRM Clients
+      if (/(?:users?|clients?|customers?|registered|founders?|kitne log)/i.test(clean)) {
+        switchAdminTab('users');
+        let users = [];
+        try { users = JSON.parse(localStorage.getItem('osp_registered_users')) || []; } catch(e) {}
+        jarvisSpeak(`Registered Cloud CRM Users tab open kar diya hai Sir. Total ${users.length} active founders hain.`);
+        return;
+      }
+
+      // Action 6: Leads Vault
+      if (/(?:leads?|vault|prospects?|global leads?|database)/i.test(clean)) {
+        switchAdminTab('leads');
+        const leads = typeof getLeads === 'function' ? getLeads() : [];
+        jarvisSpeak(`Global Leads Vault open ho gaya hai Sir, with ${leads.length} verified foreign prospects.`);
+        return;
+      }
+
+      // Action 7: Settings Tab & Google Drive Link
+      if (/(?:settings?|config|passcode|drive link|price)/i.test(clean)) {
+        switchAdminTab('settings');
+        const dlLink = getSetting('downloadLink', 'Default Google Drive Folder');
+        jarvisSpeak("Master Settings panel open kar diya hai Sir. Google Drive delivery link aur pricing active hai.");
+        return;
+      }
+
+      // Action 8: Greeting / Personal Assistant
+      if (/(?:jarvis|hello|hi|namaste|kaise ho|who are you|tum kaun ho)/i.test(clean)) {
+        jarvisSpeak("Hello Mohammad Hamza Sir! Main aapka JARVIS AI assistant hoon. Main aapke admin panel ko realtime control karne ke liye online hoon.");
+        return;
+      }
+
+      // Action 9: Help & Capabilities
+      if (/(?:help|commands?|kya kar sakte ho|features?|options?)/i.test(clean)) {
+        jarvisSpeak("Sir, aap bol sakte hain: Revenue kitna hai, Orders dikhao, Naya key banao, CRM users dikhao, ya CSV export karo.");
+        return;
+      }
+
+      // Fallback
+      jarvisSpeak(`Command received: "${transcript}". Sir, aap quick buttons se bhi command de sakte hain ya 'help' bol sakte hain.`);
+    }
+
   </script>
 </body>
 </html>
