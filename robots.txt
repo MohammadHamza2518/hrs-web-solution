@@ -1,0 +1,35 @@
+# Robots.txt for HRS Web Solutions / Outreach Studio Pro (HRS CRM)
+# Website: https://www.hrswebsolution.online
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /founder.html
+Allow: /pricing.html
+Allow: /features.html
+Allow: /how-it-works.html
+Allow: /contact.html
+Allow: /leads-vault.html
+Allow: /services.html
+Allow: /portfolio.html
+Allow: /why-us.html
+Allow: /ecommerce-portfolio.html
+Allow: /education-portfolio.html
+Allow: /finance-portfolio.html
+Allow: /fitness-portfolio.html
+Allow: /grocery-portfolio.html
+Allow: /realestate-portfolio.html
+Allow: /salon-portfolio.html
+Allow: /shopping-portfolio.html
+Allow: /assets/
+
+# Secure Private Application Routes
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /login
+Disallow: /login.html
+Disallow: /crm
+Disallow: /crm.html
+
+# XML Sitemap Index
+Sitemap: https://www.hrswebsolution.online/sitemap.xml
