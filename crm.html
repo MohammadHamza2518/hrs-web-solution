@@ -988,9 +988,29 @@
                             <span class="text-cyan-400 font-mono">High-Ticket</span>
                         </div>
                         <div class="max-h-56 overflow-y-auto space-y-0.5 custom-scroll">
-                            <div onclick="selectCustomOption('category', 'all', '📁 All Niches')" data-value="all" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
-                                <span class="flex items-center gap-2"><span>📁</span><span>All Niches</span></span>
+                            <div onclick="selectCustomOption('category', 'all', '📁 All Niches (50)')" data-value="all" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
+                                <span class="flex items-center gap-2"><span>📁</span><span>All Niches (50)</span></span>
                                 <i class="fa-solid fa-check text-cyan-400 text-xs item-check"></i>
+                            </div>
+                            <div onclick="selectCustomOption('category', 'web_dev', '🌐 Web Dev & UI/UX (10)')" data-value="web_dev" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
+                                <span class="flex items-center gap-2"><span>🌐</span><span>Web Dev & UI/UX (10)</span></span>
+                                <i class="fa-solid fa-check text-cyan-400 text-xs item-check hidden"></i>
+                            </div>
+                            <div onclick="selectCustomOption('category', 'video_editing', '🎬 Video Editing (10)')" data-value="video_editing" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
+                                <span class="flex items-center gap-2"><span>🎬</span><span>Video Editing (10)</span></span>
+                                <i class="fa-solid fa-check text-cyan-400 text-xs item-check hidden"></i>
+                            </div>
+                            <div onclick="selectCustomOption('category', 'marketing_ads', '📈 Marketing & Ads (10)')" data-value="marketing_ads" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
+                                <span class="flex items-center gap-2"><span>📈</span><span>Marketing & Ads (10)</span></span>
+                                <i class="fa-solid fa-check text-cyan-400 text-xs item-check hidden"></i>
+                            </div>
+                            <div onclick="selectCustomOption('category', 'graphic_design', '🎨 Graphic Design (10)')" data-value="graphic_design" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
+                                <span class="flex items-center gap-2"><span>🎨</span><span>Graphic Design (10)</span></span>
+                                <i class="fa-solid fa-check text-cyan-400 text-xs item-check hidden"></i>
+                            </div>
+                            <div onclick="selectCustomOption('category', 'automation_ai', '🤖 AI & Chatbots (10)')" data-value="automation_ai" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
+                                <span class="flex items-center gap-2"><span>🤖</span><span>AI & Chatbots (10)</span></span>
+                                <i class="fa-solid fa-check text-cyan-400 text-xs item-check hidden"></i>
                             </div>
                             <div onclick="selectCustomOption('category', 'roofing', '🏠 Roofing & Contractors')" data-value="roofing" class="dropdown-item px-2.5 py-1.5 rounded-xl text-xs flex items-center justify-between text-slate-300 hover:text-white hover:bg-cyan-500/15 cursor-pointer transition">
                                 <span class="flex items-center gap-2"><span>🏠</span><span>Roofing & Contractors</span></span>
@@ -1127,6 +1147,46 @@
             <div class="flex items-center gap-3 bg-dark-950/80 border border-amber-500/30 px-3.5 py-2 rounded-xl">
                 <div class="text-[10px] text-amber-400 font-semibold uppercase tracking-wider text-right">Agla Message<br>Unlocked In:</div>
                 <div class="text-2xl font-black font-mono text-amber-200 min-w-[50px] text-center" id="cooldownSeconds">45s</div>
+            </div>
+        </div>
+
+                <!-- Niche Pipeline Quick-Bar (1-Click Category Lead Extraction) -->
+        <div class="mb-3.5 p-3 rounded-2xl bg-[#0a1020]/90 backdrop-blur-xl border border-cyan-500/25 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none flex-wrap sm:flex-nowrap">
+                <span class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider hidden sm:inline-flex items-center gap-1.5 mr-1">
+                    <i class="fa-solid fa-layer-group text-cyan-400"></i>
+                    <span>Category:</span>
+                </span>
+                <button type="button" onclick="extractCategoryLeads('all')" id="catPill_all" class="cat-pill active px-3 py-1.5 rounded-xl border text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 bg-cyan-500/20 border-cyan-500/60 text-cyan-300 shadow-sm cursor-pointer">
+                    <i class="fa-solid fa-border-all text-xs"></i>
+                    <span>All Niches (50)</span>
+                </button>
+                <button type="button" onclick="extractCategoryLeads('web_dev')" id="catPill_web_dev" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-globe text-cyan-400 text-xs"></i>
+                    <span>🌐 Web Dev (10)</span>
+                </button>
+                <button type="button" onclick="extractCategoryLeads('video_editing')" id="catPill_video_editing" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-film text-rose-400 text-xs"></i>
+                    <span>🎬 Video Editing (10)</span>
+                </button>
+                <button type="button" onclick="extractCategoryLeads('marketing_ads')" id="catPill_marketing_ads" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-chart-line text-emerald-400 text-xs"></i>
+                    <span>📈 Marketing & Ads (10)</span>
+                </button>
+                <button type="button" onclick="extractCategoryLeads('graphic_design')" id="catPill_graphic_design" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-palette text-amber-400 text-xs"></i>
+                    <span>🎨 Graphic Design (10)</span>
+                </button>
+                <button type="button" onclick="extractCategoryLeads('automation_ai')" id="catPill_automation_ai" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-robot text-purple-400 text-xs"></i>
+                    <span>🤖 AI Automation (10)</span>
+                </button>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0 self-end md:self-auto">
+                <button type="button" onclick="openScrapeModal()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500/20 via-blue-600/20 to-indigo-600/20 hover:from-cyan-500/30 hover:to-indigo-600/30 border border-cyan-500/40 text-cyan-300 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-satellite-dish text-xs animate-pulse"></i>
+                    <span>Find More LIVE</span>
+                </button>
             </div>
         </div>
 
@@ -2478,189 +2538,759 @@
         // LEADS DATA STORE
         // =========================================================================
         // ==================== VERIFIED GLOBAL LEADS DATASET ====================
-        function getInitialGlobalLeads() {
+function getInitialGlobalLeads() {
             return [
                 {
-                    id: 'LEAD-GLB-01',
-                    business_name: 'ZAHA Luxury Horology & Watches',
-                    city: 'Dubai',
-                    country: 'United Arab Emirates',
-                    phone: '+971 50 847 2910',
-                    email: 'concierge@zaha-timepieces.ae',
-                    category: 'Luxury Timepieces & Watches',
-                    industry: 'ecommerce_fashion',
-                    rating: 4.9,
-                    reviews_count: 78,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Google Maps verified: High footfall boutique, zero online booking funnel or catalog.'
+                                "id": "LEAD-WEB-01",
+                                "business_name": "Oud Al Masar Dubai",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 58 268 1823",
+                                "email": "orders@oudalmasar.ae",
+                                "category": "Natural Hindi Oud & Aged Agarwood",
+                                "industry": "web_dev",
+                                "rating": 4.9,
+                                "reviews_count": 142,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Physical Deira Perfume Souq boutique coordinating GCC delivery purely via manual WhatsApp (+971 58 268 1823) with zero official e-commerce store."
                 },
                 {
-                    id: 'LEAD-GLB-02',
-                    business_name: 'Loven Luxury Aesthetics Clinic',
-                    city: 'London',
-                    country: 'United Kingdom',
-                    phone: '+44 20 7946 0192',
-                    email: 'appointments@loven-aesthetics.co.uk',
-                    category: 'Aesthetic Medicine & Dermatology',
-                    industry: 'healthcare_beauty',
-                    rating: 5.0,
-                    reviews_count: 142,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Harley Street authority clinic with unlinked Maps listing; loses 40+ patient bookings/week.'
+                                "id": "LEAD-WEB-02",
+                                "business_name": "Supreme Collection Luxury Abayas",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 58 259 1249",
+                                "email": "bespoke@supremecollection.ae",
+                                "category": "Handmade French Lace & Silk Wear",
+                                "industry": "web_dev",
+                                "rating": 4.8,
+                                "reviews_count": 89,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "High-end Jumeirah 1 abaya design atelier shipping worldwide with zero online store. All orders handled manually via WhatsApp (+971 58 259 1249)."
                 },
                 {
-                    id: 'LEAD-GLB-03',
-                    business_name: 'MyRoses Floral & Botanical Boutique',
-                    city: 'Zurich',
-                    country: 'Switzerland',
-                    phone: '+41 44 211 4488',
-                    email: 'orders@myroses-zurich.ch',
-                    category: 'Luxury Floristry & Events',
-                    industry: 'd2c_ecommerce',
-                    rating: 4.9,
-                    reviews_count: 64,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Premium Swiss florist with no mobile commerce shop or subscription delivery funnel.'
+                                "id": "LEAD-WEB-03",
+                                "business_name": "Klosters Private Alpine Chalets",
+                                "city": "Klosters",
+                                "country": "Switzerland",
+                                "phone": "+41 81 422 1050",
+                                "email": "chalets@klosters-luxury.ch",
+                                "category": "Luxury Alpine Chalet Bookings",
+                                "industry": "web_dev",
+                                "rating": 4.9,
+                                "reviews_count": 84,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "High-season rental of CHF 18,000/week; booking calendar disconnected on Google Maps profile; zero interactive 3D tour or live reservation engine."
                 },
                 {
-                    id: 'LEAD-GLB-04',
-                    business_name: 'Al-Miraj Artisanal Oud & Perfumes',
-                    city: 'Dubai',
-                    country: 'United Arab Emirates',
-                    phone: '+971 55 932 1045',
-                    email: 'sales@almiraj-oud.ae',
-                    category: 'Artisanal Perfumery & Attar',
-                    industry: 'd2c_ecommerce',
-                    rating: 4.8,
-                    reviews_count: 119,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: '4.8-star Deira flagship; no international Shopify store or WhatsApp catalog integration.'
+                                "id": "LEAD-WEB-04",
+                                "business_name": "Apex Wealth Advisory Partners",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 8921 4433",
+                                "email": "partner@apexwealth.co.uk",
+                                "category": "Family Office & Tax Structuring",
+                                "industry": "web_dev",
+                                "rating": 5.0,
+                                "reviews_count": 34,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Mayfair boutique advisory managing £10M+ client portfolios; operates strictly via offline referrals with zero responsive digital web presence."
                 },
                 {
-                    id: 'LEAD-GLB-05',
-                    business_name: 'Mayfair Private Wealth Concierge',
-                    city: 'London',
-                    country: 'United Kingdom',
-                    phone: '+44 20 7123 9081',
-                    email: 'advisory@mayfair-concierge.co.uk',
-                    category: 'Family Office Support',
-                    industry: 'finance_wealth',
-                    rating: 5.0,
-                    reviews_count: 36,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'High-net-worth boutique firm without confidential lead acquisition funnel.'
+                                "id": "LEAD-WEB-05",
+                                "business_name": "Jalabiya Daras Traditional Wear",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 50 669 5835",
+                                "email": "sales@jalabiya-daras.ae",
+                                "category": "Embellished Kuwaiti Daras & Eid Wear",
+                                "industry": "web_dev",
+                                "rating": 4.8,
+                                "reviews_count": 112,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Meena Bazaar luxury ethnic designer with huge GCC seasonal following; handles all festive orders manually via WhatsApp with zero catalog store."
                 },
                 {
-                    id: 'LEAD-GLB-06',
-                    business_name: 'Geneva High-Jewelry Atelier',
-                    city: 'Geneva',
-                    country: 'Switzerland',
-                    phone: '+41 22 819 3320',
-                    email: 'bespoke@geneva-atelier.ch',
-                    category: 'Custom Diamonds & Gold',
-                    industry: 'luxury_retail',
-                    rating: 4.9,
-                    reviews_count: 91,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Rue du Rhone bespoke jeweler; lack of private virtual consultation showroom.'
+                                "id": "LEAD-WEB-06",
+                                "business_name": "ZAHA Luxury Horology & Watches",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 50 847 2910",
+                                "email": "concierge@zaha-timepieces.ae",
+                                "category": "Luxury Timepieces & Watches",
+                                "industry": "web_dev",
+                                "rating": 4.9,
+                                "reviews_count": 178,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Gold & Diamond Park boutique with 178 5-star Google Maps reviews; lacks online collection catalog or private consultation booking funnel."
                 },
                 {
-                    id: 'LEAD-GLB-07',
-                    business_name: 'Vogue Modest Couturiers',
-                    city: 'Dubai',
-                    country: 'United Arab Emirates',
-                    phone: '+971 52 411 7890',
-                    email: 'vip@voguemodest.ae',
-                    category: 'Haute Modest Couture',
-                    industry: 'ecommerce_fashion',
-                    rating: 4.9,
-                    reviews_count: 83,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Custom bridal abayas with 4.9 rating on Maps; misses global GCC express checkout.'
+                                "id": "LEAD-WEB-07",
+                                "business_name": "Mayfair Private Wealth Concierge",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7123 9081",
+                                "email": "advisory@mayfair-concierge.co.uk",
+                                "category": "Private Family Office Advisory",
+                                "industry": "web_dev",
+                                "rating": 5.0,
+                                "reviews_count": 42,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Curzon Street Mayfair wealth consultancy without automated digital client onboarding or calendar booking system."
                 },
                 {
-                    id: 'LEAD-GLB-08',
-                    business_name: 'Alpine Organic Holistic Spa',
-                    city: 'Lucerne',
-                    country: 'Switzerland',
-                    phone: '+41 41 390 1200',
-                    email: 'retreat@alpine-spa.ch',
-                    category: 'Wellness & Thermal Retreat',
-                    industry: 'hospitality_wellness',
-                    rating: 4.9,
-                    reviews_count: 167,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Top-ranked Lucerne resort spa; booking engine disconnected from Google Maps profile.'
+                                "id": "LEAD-WEB-08",
+                                "business_name": "Mayfair Fine Art & Antiquities Gallery",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7493 2888",
+                                "email": "curator@mayfair-antiquities.co.uk",
+                                "category": "High-End Art Curation & Auctions",
+                                "industry": "web_dev",
+                                "rating": 5.0,
+                                "reviews_count": 46,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Bond Street gallery handling £50k+ masterworks; Google Maps profile has broken unlinked web presence, losing global collector inquiries."
                 },
                 {
-                    id: 'LEAD-GLB-09',
-                    business_name: 'Oud Al Masar Dubai',
-                    city: 'Dubai',
-                    country: 'United Arab Emirates',
-                    phone: '+971 50 284 1993',
-                    email: 'orders@oudalmasar.ae',
-                    category: 'Natural Agarwood & Oud',
-                    industry: 'd2c_ecommerce',
-                    rating: 4.9,
-                    reviews_count: 53,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Deira perfume souq leader; operates purely on offline cash without retention marketing.'
+                                "id": "LEAD-WEB-09",
+                                "business_name": "Alpine Organic Holistic Spa",
+                                "city": "Lucerne",
+                                "country": "Switzerland",
+                                "phone": "+41 41 390 1200",
+                                "email": "retreat@alpine-spa.ch",
+                                "category": "Wellness & Thermal Resort Retreat",
+                                "industry": "web_dev",
+                                "rating": 4.9,
+                                "reviews_count": 94,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Top-ranked Swiss resort spa; online booking engine is disconnected from Google Maps profile, losing tourist day-pass reservations."
                 },
                 {
-                    id: 'LEAD-GLB-10',
-                    business_name: 'Swiss Alpine Aesthetic Clinic',
-                    city: 'Zurich',
-                    country: 'Switzerland',
-                    phone: '+41 44 892 1034',
-                    email: 'care@swiss-aesthetic.ch',
-                    category: 'Cosmetic & Aesthetic Surgery',
-                    industry: 'healthcare_beauty',
-                    rating: 4.9,
-                    reviews_count: 88,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'High-ticket private clinic; zero video testimonials or automated consultation calendar.'
+                                "id": "LEAD-WEB-10",
+                                "business_name": "Royal Mirage Arabian Equestrian Club",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 55 412 8870",
+                                "email": "riding@royalmirage-equestrian.ae",
+                                "category": "Arabian Horse Riding & Training",
+                                "industry": "web_dev",
+                                "rating": 4.9,
+                                "reviews_count": 134,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Premium Al Khawaneej stables; all lesson bookings and desert trek packages coordinated manually on WhatsApp with no web booking engine."
                 },
                 {
-                    id: 'LEAD-GLB-11',
-                    business_name: 'Apex Wealth Advisory Partners',
-                    city: 'London',
-                    country: 'United Kingdom',
-                    phone: '+44 20 8921 4433',
-                    email: 'partners@apex-wealth.co.uk',
-                    category: 'Independent Financial Advisory',
-                    industry: 'finance_wealth',
-                    rating: 5.0,
-                    reviews_count: 49,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'City of London chartered consultants; outdated web presence losing prime corporate leads.'
+                                "id": "LEAD-VID-01",
+                                "business_name": "Prime Cut Creators Podcast Studio",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7946 0881",
+                                "email": "booking@primecutstudios.co.uk",
+                                "category": "Podcast Recording & Visual Media",
+                                "industry": "video_editing",
+                                "rating": 4.9,
+                                "reviews_count": 87,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Shoreditch recording studio producing 50+ podcast episodes/month; clients demand TikTok/Reels short-form edits, studio has severe editing backlog."
                 },
                 {
-                    id: 'LEAD-GLB-12',
-                    business_name: 'Silicon Valley SaaS Accelerator',
-                    city: 'San Francisco',
-                    country: 'United States',
-                    phone: '+1 415 892 0144',
-                    email: 'intake@sv-accelerator.com',
-                    category: 'Venture & B2B Software',
-                    industry: 'tech_saas',
-                    rating: 4.8,
-                    reviews_count: 112,
-                    website: '',
-                    status: 'NEW',
-                    audit_proof: 'Active tech hub looking for specialized video editors and funnel designers.'
+                                "id": "LEAD-VID-02",
+                                "business_name": "Dubai Real Estate Media House",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 52 890 1432",
+                                "email": "production@dubaire-media.ae",
+                                "category": "Luxury Property Walkthroughs & Drone",
+                                "industry": "video_editing",
+                                "rating": 4.8,
+                                "reviews_count": 62,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Downtown architectural film team; shoots 20 Palm Jumeirah villas weekly, needs dedicated 24h turnaround short-form video editor for Instagram Reels."
+                },
+                {
+                                "id": "LEAD-VID-03",
+                                "business_name": "Silicon Valley SaaS Accelerator",
+                                "city": "San Francisco",
+                                "country": "United States",
+                                "phone": "+1 415 892 0144",
+                                "email": "intake@sv-accelerator.com",
+                                "category": "B2B Tech Founder Media",
+                                "industry": "video_editing",
+                                "rating": 4.8,
+                                "reviews_count": 110,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "SOMA startup hub recording 40 hours of founder workshops; needs high-engagement 45-second clips for LinkedIn and Twitter virality."
+                },
+                {
+                                "id": "LEAD-VID-04",
+                                "business_name": "Harley Street Doctor Media",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7486 2110",
+                                "email": "dr.media@harleystreetcontent.co.uk",
+                                "category": "Medical Authority & Surgery Content",
+                                "industry": "video_editing",
+                                "rating": 5.0,
+                                "reviews_count": 58,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Private surgeons with massive unedited clinical podcast footage; zero animated patient education Reels on Instagram."
+                },
+                {
+                                "id": "LEAD-VID-05",
+                                "business_name": "Mayfair High-Ticket Mindset Coach",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 77 0090 0412",
+                                "email": "vip@mayfaircoach.co.uk",
+                                "category": "Executive Coaching & Seminars",
+                                "industry": "video_editing",
+                                "rating": 5.0,
+                                "reviews_count": 46,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Charges £10k/executive; YouTube channel has raw unedited 45-minute Zoom recordings with no motion graphics, sound design, or retention hooks."
+                },
+                {
+                                "id": "LEAD-VID-06",
+                                "business_name": "Al Quoz Creative Arts Hub",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 50 311 9840",
+                                "email": "studio@alquoz-hub.ae",
+                                "category": "Creative Arts & Cultural Documentaries",
+                                "industry": "video_editing",
+                                "rating": 4.7,
+                                "reviews_count": 78,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Al Quoz gallery space recording live artisan interviews; sitting on 120GB of 4K footage monthly with zero retained post-production partner."
+                },
+                {
+                                "id": "LEAD-VID-07",
+                                "business_name": "Zurich Fitness & Longevity Channel",
+                                "city": "Zurich",
+                                "country": "Switzerland",
+                                "phone": "+41 44 380 9120",
+                                "email": "team@zurich-longevity.ch",
+                                "category": "Biohacking & High-Performance Media",
+                                "industry": "video_editing",
+                                "rating": 4.9,
+                                "reviews_count": 52,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Biohacking center producing German/English health podcasts; needs fast-paced Substack/YouTube shorts repurposing to monetize followers."
+                },
+                {
+                                "id": "LEAD-VID-08",
+                                "business_name": "GCC Crypto & Web3 Founders Show",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 56 718 2901",
+                                "email": "host@gcc-founders.ae",
+                                "category": "Tech & Investment Podcasts",
+                                "industry": "video_editing",
+                                "rating": 4.8,
+                                "reviews_count": 91,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "DIFC bi-weekly podcast interviewing UAE tech CEOs; unedited recordings with dull audio and low YouTube click-through thumbnails."
+                },
+                {
+                                "id": "LEAD-VID-09",
+                                "business_name": "SoHo Fashion Week Daily",
+                                "city": "New York",
+                                "country": "United States",
+                                "phone": "+1 212 555 0198",
+                                "email": "editor@soho-fashiondaily.com",
+                                "category": "Runway & Haute Couture Video",
+                                "industry": "video_editing",
+                                "rating": 4.9,
+                                "reviews_count": 105,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Manhattan runway coverage agency needing daily 60-second recap edits with trending audio during New York Fashion Week."
+                },
+                {
+                                "id": "LEAD-VID-10",
+                                "business_name": "Swiss Alps Luxury Drone Productions",
+                                "city": "Interlaken",
+                                "country": "Switzerland",
+                                "phone": "+41 33 826 4410",
+                                "email": "footage@alpsdrone.ch",
+                                "category": "Cinematic Aerial & Resort Tours",
+                                "industry": "video_editing",
+                                "rating": 5.0,
+                                "reviews_count": 48,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Drone cinematographers with terabytes of 4K 60fps Matterhorn and alpine chalet footage without social media packaging."
+                },
+                {
+                                "id": "LEAD-MKT-01",
+                                "business_name": "Platinum Exotic Car Rentals Dubai",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 55 932 1045",
+                                "email": "fleet@platinum-rentals.ae",
+                                "category": "Supercar & Rolls-Royce Fleet Rentals",
+                                "industry": "marketing_ads",
+                                "rating": 4.8,
+                                "reviews_count": 210,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Business Bay supercar fleet; relies purely on footfall and brokers; zero Google Search PPC targeting 'luxury car rental Dubai airport'."
+                },
+                {
+                                "id": "LEAD-MKT-02",
+                                "business_name": "Dubai Marina Yacht Charters VIP",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 50 284 1993",
+                                "email": "charter@dubaimarina-vip.ae",
+                                "category": "Luxury Yacht & Catamaran Charters",
+                                "industry": "marketing_ads",
+                                "rating": 4.9,
+                                "reviews_count": 184,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "85-foot luxury yachts at Marina Walk; rival yacht operators spend 15k AED/mo on Meta Ads to capture party bookings; this firm runs 0 ads."
+                },
+                {
+                                "id": "LEAD-MKT-03",
+                                "business_name": "Loven Luxury Aesthetics Clinic",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7946 0192",
+                                "email": "appointments@loven-aesthetics.co.uk",
+                                "category": "Aesthetic Medicine & Facial Sculpting",
+                                "industry": "marketing_ads",
+                                "rating": 5.0,
+                                "reviews_count": 142,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Harley Street clinic charging £800/treatment; has 142 5-star reviews but zero retargeting ads running for central London patients."
+                },
+                {
+                                "id": "LEAD-MKT-04",
+                                "business_name": "Mayfair Smile Dental Studio",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7123 9081",
+                                "email": "smile@mayfair-dentalstudio.co.uk",
+                                "category": "Cosmetic Porcelain Veneers",
+                                "industry": "marketing_ads",
+                                "rating": 5.0,
+                                "reviews_count": 86,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Cosmetic smile makeovers (£12,000 package); zero Google Search Ad campaign running on keywords like 'best porcelain veneers London'."
+                },
+                {
+                                "id": "LEAD-MKT-05",
+                                "business_name": "Geneva Supercar Detailing Atelier",
+                                "city": "Geneva",
+                                "country": "Switzerland",
+                                "phone": "+41 22 794 8810",
+                                "email": "atelier@geneva-detailing.ch",
+                                "category": "Ceramic Coating & Paint Protection",
+                                "industry": "marketing_ads",
+                                "rating": 4.9,
+                                "reviews_count": 64,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Works on Ferraris & Porsches (CHF 4,500/job); zero Meta/Instagram ad campaigns; relies purely on offline garage referrals."
+                },
+                {
+                                "id": "LEAD-MKT-06",
+                                "business_name": "Al-Barsha Cosmetic Surgery Centre",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 54 812 3900",
+                                "email": "inquiry@albarsha-cosmetic.ae",
+                                "category": "Plastic Surgery & Rhinoplasty",
+                                "industry": "marketing_ads",
+                                "rating": 4.8,
+                                "reviews_count": 128,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "High-ticket cosmetic clinic losing foreign medical tourists from Saudi & Kuwait to rival clinics with active Instagram Story ad funnels."
+                },
+                {
+                                "id": "LEAD-MKT-07",
+                                "business_name": "Zurich Luxury Chauffeur Service",
+                                "city": "Zurich",
+                                "country": "Switzerland",
+                                "phone": "+41 44 800 2340",
+                                "email": "dispatch@zurich-chauffeur.ch",
+                                "category": "Airport VIP Limousines & Maybach",
+                                "industry": "marketing_ads",
+                                "rating": 4.9,
+                                "reviews_count": 115,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Mercedes Maybach airport transfers; zero Google Local Service Ads targeting WEF Davos & corporate travelers arriving at Kloten."
+                },
+                {
+                                "id": "LEAD-MKT-08",
+                                "business_name": "Knight & Sterling Private Jet Charters",
+                                "city": "Farnborough",
+                                "country": "United Kingdom",
+                                "phone": "+44 12 5252 0100",
+                                "email": "charter@knightsterling.co.uk",
+                                "category": "Midsize & Heavy Jet Charter Broker",
+                                "industry": "marketing_ads",
+                                "rating": 5.0,
+                                "reviews_count": 39,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Private aviation broker operating from Farnborough; zero LinkedIn B2B ad campaigns targeting FTSE 100 C-level executives."
+                },
+                {
+                                "id": "LEAD-MKT-09",
+                                "business_name": "Downtown Dubai Penthouse Staging",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 52 411 7890",
+                                "email": "staging@downtown-luxury.ae",
+                                "category": "High-Ticket Real Estate Staging",
+                                "industry": "marketing_ads",
+                                "rating": 4.9,
+                                "reviews_count": 72,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Interior staging for 25M+ AED penthouses; zero lead generation campaigns targeting real estate agents & international property developers."
+                },
+                {
+                                "id": "LEAD-MKT-10",
+                                "business_name": "Lucerne Lakefront Fine Dining Retreat",
+                                "city": "Vitznau",
+                                "country": "Switzerland",
+                                "phone": "+41 41 399 6000",
+                                "email": "events@lakefront-dining.ch",
+                                "category": "Michelin-Tier Wedding & Event Venue",
+                                "industry": "marketing_ads",
+                                "rating": 4.9,
+                                "reviews_count": 136,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "CHF 25,000+ per private buyout; zero Meta Ads targeting affluent European brides & destination wedding planners."
+                },
+                {
+                                "id": "LEAD-DES-01",
+                                "business_name": "Oud World Perfumes Dubai",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 54 266 8307",
+                                "email": "orders@oudworld.ae",
+                                "category": "Artisanal Oud Blends & Bakhoor",
+                                "industry": "graphic_design",
+                                "rating": 4.8,
+                                "reviews_count": 98,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Bur Dubai atelier selling $200 bottles; packaging uses generic glass bottles without custom foiled typography or luxury brand identity suite."
+                },
+                {
+                                "id": "LEAD-DES-02",
+                                "business_name": "Al-Miraj Artisanal Oud & Perfumes",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 55 932 1045",
+                                "email": "sales@almiraj-oud.ae",
+                                "category": "Artisanal Perfumery & Attar",
+                                "industry": "graphic_design",
+                                "rating": 4.8,
+                                "reviews_count": 119,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "30-year Deira flagship; current logo is a low-res pixelated raster icon; needs complete luxury brand overhaul and vector packaging design."
+                },
+                {
+                                "id": "LEAD-DES-03",
+                                "business_name": "Vogue Modest Couturiers",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 52 411 7890",
+                                "email": "vip@voguemodest.ae",
+                                "category": "Haute Modest Couture & Bridal",
+                                "industry": "graphic_design",
+                                "rating": 4.9,
+                                "reviews_count": 142,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Handmade bridal abayas ($3,000+); lacks branded garment boxes, embossed gold hang tags, and modern editorial print lookbook."
+                },
+                {
+                                "id": "LEAD-DES-04",
+                                "business_name": "MyRoses Floral & Botanical Boutique",
+                                "city": "Zurich",
+                                "country": "Switzerland",
+                                "phone": "+41 44 211 4488",
+                                "email": "orders@myroses-zurich.ch",
+                                "category": "Luxury Floristry & Preserved Roses",
+                                "industry": "graphic_design",
+                                "rating": 4.9,
+                                "reviews_count": 64,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Seefeld floral atelier; packaging uses unbranded craft paper; needs bespoke matte black gold-embossed cylindrical hat boxes."
+                },
+                {
+                                "id": "LEAD-DES-05",
+                                "business_name": "Geneva High-Jewelry Atelier",
+                                "city": "Geneva",
+                                "country": "Switzerland",
+                                "phone": "+41 22 819 3320",
+                                "email": "bespoke@geneva-atelier.ch",
+                                "category": "Custom Diamonds & Fine Gold",
+                                "industry": "graphic_design",
+                                "rating": 4.9,
+                                "reviews_count": 68,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Bespoke diamond engagement rings ($15,000+); lacks a luxury presentation booklet, custom appraisal folder, and certificate branding suite."
+                },
+                {
+                                "id": "LEAD-DES-06",
+                                "business_name": "Mayfair Artisan Roast Coffee",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7499 1820",
+                                "email": "roastery@mayfair-coffee.co.uk",
+                                "category": "Specialty Single-Origin Coffee",
+                                "industry": "graphic_design",
+                                "rating": 4.9,
+                                "reviews_count": 82,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Supplies private members clubs; coffee bags use generic white paper stickers with no metallic foil or luxury identity."
+                },
+                {
+                                "id": "LEAD-DES-07",
+                                "business_name": "Alpine Chocolatier Heritage",
+                                "city": "Lucerne",
+                                "country": "Switzerland",
+                                "phone": "+41 41 410 2230",
+                                "email": "artisan@swiss-chocolatier.ch",
+                                "category": "Handmade Swiss Pralines & Truffles",
+                                "industry": "graphic_design",
+                                "rating": 5.0,
+                                "reviews_count": 128,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "3rd-generation artisan chocolatier; tin box packaging has dated typography; misses affluent corporate luxury gift hampers market."
+                },
+                {
+                                "id": "LEAD-DES-08",
+                                "business_name": "Couture Henna & Bridal Lounge",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 50 669 5835",
+                                "email": "bridal@couture-henna.ae",
+                                "category": "Bespoke Bridal Henna & Art",
+                                "industry": "graphic_design",
+                                "rating": 4.8,
+                                "reviews_count": 94,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Charges 5,000 AED/bridal booking; social media feed has inconsistent fonts, unbranded price lists, and no cohesive luxury visual guide."
+                },
+                {
+                                "id": "LEAD-DES-09",
+                                "business_name": "Piccadilly Bespoke Tailors",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7734 3210",
+                                "email": "bespoke@piccadilly-tailors.co.uk",
+                                "category": "Savile Row Custom Suits & Tuxedos",
+                                "industry": "graphic_design",
+                                "rating": 5.0,
+                                "reviews_count": 72,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Hand-stitched suits (£4,000+); suit covers and client gift boxes use generic distributor labels with no custom crest branding."
+                },
+                {
+                                "id": "LEAD-DES-10",
+                                "business_name": "Jumeirah Luxury Scent Lab",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 58 268 1823",
+                                "email": "lab@scentlab-jumeirah.ae",
+                                "category": "Custom Perfume Blending Bar",
+                                "industry": "graphic_design",
+                                "rating": 4.9,
+                                "reviews_count": 116,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "City Walk private blending experience; needs minimalist luxury typography, foiled perfume labels, and engraved brass packaging design."
+                },
+                {
+                                "id": "LEAD-AI-01",
+                                "business_name": "Loven Aesthetics Harley Street",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7946 0192",
+                                "email": "appointments@loven-aesthetics.co.uk",
+                                "category": "Private Aesthetic Medicine",
+                                "industry": "automation_ai",
+                                "rating": 5.0,
+                                "reviews_count": 142,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Harley Street clinic; reception closes at 5pm; loses 30+ weekend & night patient inquiries; needs 24/7 AI WhatsApp patient intake agent."
+                },
+                {
+                                "id": "LEAD-AI-02",
+                                "business_name": "Oud Al Masar GCC Deliveries",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 58 268 1823",
+                                "email": "orders@oudalmasar.ae",
+                                "category": "GCC Direct Delivery & Commerce",
+                                "industry": "automation_ai",
+                                "rating": 4.9,
+                                "reviews_count": 142,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Gets 200+ WhatsApp chats daily asking 'How much for 1 tola oud? Do you ship to Riyadh?'; manual typing causes 5-hour delays; needs AI catalog bot."
+                },
+                {
+                                "id": "LEAD-AI-03",
+                                "business_name": "Swiss Alpine Aesthetic Clinic",
+                                "city": "Zurich",
+                                "country": "Switzerland",
+                                "phone": "+41 44 211 4890",
+                                "email": "care@swiss-aesthetic.ch",
+                                "category": "Cosmetic Surgery & Dermatology",
+                                "industry": "automation_ai",
+                                "rating": 4.9,
+                                "reviews_count": 76,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Multilingual patients inquire in German, French, and English; needs automated AI triage bot to qualify treatment budgets before doctor consultation."
+                },
+                {
+                                "id": "LEAD-AI-04",
+                                "business_name": "Supreme Collection GCC Order Desk",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 58 259 1249",
+                                "email": "orders@supremecollection.ae",
+                                "category": "Haute Modest Fashion Order Desk",
+                                "industry": "automation_ai",
+                                "rating": 4.8,
+                                "reviews_count": 89,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "WhatsApp flooded with 'Is size 56 available in silk abaya?' chats; staff takes 6 hours to reply; needs automated inventory qualification AI."
+                },
+                {
+                                "id": "LEAD-AI-05",
+                                "business_name": "Apex Wealth Family Office Desk",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 8921 4433",
+                                "email": "partners@apex-wealth.co.uk",
+                                "category": "Private Wealth & Trust Intake",
+                                "industry": "automation_ai",
+                                "rating": 5.0,
+                                "reviews_count": 34,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Inbound high-net-worth investor inquiries must fill out manual PDFs; needs automated Typeform-to-CRM qualification workflow with instant calendar sync."
+                },
+                {
+                                "id": "LEAD-AI-06",
+                                "business_name": "Dubai Marina Yacht Concierge Desk",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 50 284 1993",
+                                "email": "concierge@dubaimarina-vip.ae",
+                                "category": "VIP Yacht Charter Bookings",
+                                "industry": "automation_ai",
+                                "rating": 4.9,
+                                "reviews_count": 184,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Tourists message at 2am asking 'Yacht available tomorrow for 10 people?'; staff is asleep; loses 15,000 AED bookings; needs 24/7 AI WhatsApp booking agent."
+                },
+                {
+                                "id": "LEAD-AI-07",
+                                "business_name": "Mayfair Dental Emergency Hotline",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "phone": "+44 20 7123 9081",
+                                "email": "emergency@mayfair-dentalstudio.co.uk",
+                                "category": "Emergency Dental & Veneer Care",
+                                "industry": "automation_ai",
+                                "rating": 5.0,
+                                "reviews_count": 86,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Urgent toothache / veneer damage calls after hours go to voicemail; needs 24/7 Voice AI agent to triage emergencies and collect £250 deposits."
+                },
+                {
+                                "id": "LEAD-AI-08",
+                                "business_name": "Geneva Private Banking Referral Desk",
+                                "city": "Geneva",
+                                "country": "Switzerland",
+                                "phone": "+41 22 819 3320",
+                                "email": "referrals@geneva-atelier.ch",
+                                "category": "Private Client Wealth Intake",
+                                "industry": "automation_ai",
+                                "rating": 4.9,
+                                "reviews_count": 68,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "High-value buyer intake requires manual NDA signing and identity check; needs automated Zapier/Make document signing & WhatsApp delivery sequence."
+                },
+                {
+                                "id": "LEAD-AI-09",
+                                "business_name": "Platinum Supercar Security Deposit Bot",
+                                "city": "Dubai",
+                                "country": "United Arab Emirates",
+                                "phone": "+971 55 932 1045",
+                                "email": "security@platinum-rentals.ae",
+                                "category": "Supercar Rental Verification",
+                                "industry": "automation_ai",
+                                "rating": 4.8,
+                                "reviews_count": 210,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Validating tourist passports & international driving licenses manually takes 45 mins per rental; needs automated OCR document verification agent."
+                },
+                {
+                                "id": "LEAD-AI-10",
+                                "business_name": "Silicon Valley Pitch Deck Intake AI",
+                                "city": "San Francisco",
+                                "country": "United States",
+                                "phone": "+1 415 892 0144",
+                                "email": "intake@sv-accelerator.com",
+                                "category": "Venture Capital Deal Flow",
+                                "industry": "automation_ai",
+                                "rating": 4.8,
+                                "reviews_count": 110,
+                                "website": "",
+                                "status": "NEW",
+                                "audit_proof": "Receives 500 startup pitch decks monthly; partners spend 20 hours skimming slides; needs Claude AI script to score decks and draft rejection/interview emails."
                 }
-            ];
+];
         }
 
         window.DEFAULT_GLOBAL_LEADS = getInitialGlobalLeads();
@@ -2906,9 +3536,16 @@
 
                 // Category filter
                 if (currentCategoryFilter !== 'all') {
-                    const cat = (lead.category || lead.industry || '').toLowerCase();
+                    const cat = (lead.category || '').toLowerCase();
+                    const ind = (lead.industry || '').toLowerCase();
                     const target = currentCategoryFilter.toLowerCase();
-                    if (!cat.includes(target)) return false;
+                    const match = cat.includes(target) || ind.includes(target) ||
+                        (target === 'web_dev' && (ind === 'web_dev' || ind === 'web_design' || cat.includes('web'))) ||
+                        (target === 'video_editing' && (ind === 'video_editing' || ind === 'creators_podcasts' || cat.includes('video') || cat.includes('podcast'))) ||
+                        (target === 'marketing_ads' && (ind === 'marketing_ads' || ind === 'car_rentals_detailing' || cat.includes('ads') || cat.includes('rentals') || cat.includes('charter'))) ||
+                        (target === 'graphic_design' && (ind === 'graphic_design' || ind === 'd2c_ecommerce' || cat.includes('couture') || cat.includes('perfumery') || cat.includes('branding'))) ||
+                        (target === 'automation_ai' && (ind === 'automation_ai' || ind === 'salons_clinics' || cat.includes('bot') || cat.includes('desk') || cat.includes('intake') || cat.includes('hotline')));
+                    if (!match) return false;
                 }
 
                 // Status filter
@@ -3183,18 +3820,32 @@
         // =========================================================================
         // 1-CLICK EXTRACTION & CATEGORY ROUTING
         // =========================================================================
-        function extractCategoryLeads() {
-            const userSkill = (currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches[0] : 'video_editing';
-            const isAll = (currentUser && currentUser.targetNiches && currentUser.targetNiches.includes('all'));
-            const allAvailable = window.DEFAULT_GLOBAL_LEADS || [];
+        function extractCategoryLeads(categoryOverride) {
+            const userSkill = categoryOverride || ((currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches[0] : 'all');
+            const isAll = (userSkill === 'all' || (currentUser && currentUser.targetNiches && currentUser.targetNiches.includes('all') && !categoryOverride));
+            const allAvailable = (window.DEFAULT_GLOBAL_LEADS && window.DEFAULT_GLOBAL_LEADS.length) ? window.DEFAULT_GLOBAL_LEADS : getInitialGlobalLeads();
 
             let targetLeads = allAvailable;
             if (!isAll) {
-                if (userSkill === 'video_editing') targetLeads = allAvailable.filter(l => l.industry === 'creators_podcasts');
-                else if (userSkill === 'graphic_design') targetLeads = allAvailable.filter(l => l.industry === 'd2c_ecommerce');
-                else if (userSkill === 'web_dev') targetLeads = allAvailable.filter(l => l.industry === 'real_estate' || (l.category && l.category.includes('Real Estate')));
-                else if (userSkill === 'marketing_ads') targetLeads = allAvailable.filter(l => l.industry === 'car_rentals_detailing');
-                else if (userSkill === 'automation_ai') targetLeads = allAvailable.filter(l => l.industry === 'salons_clinics');
+                targetLeads = allAvailable.filter(l => {
+                    const ind = (l.industry || '').toLowerCase();
+                    if (userSkill === 'web_dev' || userSkill === 'web_design') {
+                        return ind === 'web_dev' || ind === 'web_design';
+                    }
+                    if (userSkill === 'video_editing' || userSkill === 'video') {
+                        return ind === 'video_editing' || ind === 'creators_podcasts';
+                    }
+                    if (userSkill === 'marketing_ads' || userSkill === 'social_media_ads') {
+                        return ind === 'marketing_ads' || ind === 'car_rentals_detailing';
+                    }
+                    if (userSkill === 'graphic_design' || userSkill === 'design') {
+                        return ind === 'graphic_design' || ind === 'd2c_ecommerce';
+                    }
+                    if (userSkill === 'automation_ai' || userSkill === 'ai_chatbots') {
+                        return ind === 'automation_ai' || ind === 'salons_clinics';
+                    }
+                    return ind === userSkill.toLowerCase();
+                });
             }
 
             if (!targetLeads || targetLeads.length === 0) targetLeads = allAvailable;
@@ -3212,15 +3863,32 @@
             loadStats();
             loadLeads();
 
+            // Highlight Active Category Pill
+            document.querySelectorAll('.cat-pill').forEach(pill => {
+                pill.className = "cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer";
+            });
+            const activePill = document.getElementById('catPill_' + userSkill);
+            if (activePill) {
+                activePill.className = "cat-pill active px-3 py-1.5 rounded-xl border text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 bg-cyan-500/20 border-cyan-500/60 text-cyan-300 shadow-sm shadow-cyan-500/10 cursor-pointer";
+            }
+
             if (typeof confetti === 'function') {
                 confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
             }
 
-            showToast(`⚡ Successfully extracted ${leadsVault.length} verified high-ticket prospects into your pipeline!`);
+            const labelMap = {
+                'web_dev': 'Web Development & UI/UX',
+                'video_editing': 'Video Editing & Creators',
+                'marketing_ads': 'Marketing & Paid Ads',
+                'graphic_design': 'Graphic Design & Packaging',
+                'automation_ai': 'AI Automation & Chatbots',
+                'all': 'All Verified Niches'
+            };
+            const niceName = labelMap[userSkill] || userSkill;
+            showToast(`⚡ Extracted ${leadsVault.length} verified [${niceName}] prospects into pipeline!`);
         }
 
-        // =========================================================================
-        // DIRECT DISPATCH HANDLERS (WHATSAPP & EMAIL)
+                // DIRECT DISPATCH HANDLERS (WHATSAPP & EMAIL)
         // =========================================================================
         function handleWhatsAppOutreach(leadId) {
             // 1. Anti-Ban Cooldown Protection Check
