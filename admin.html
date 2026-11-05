@@ -623,7 +623,7 @@
     <!-- =========================================================================
        JARVIS VOICE AI HUD & ARC REACTOR CONTROLLER (FOUNDER SPECIAL)
        ========================================================================= -->
-  <div id="jarvisContainer" class="hidden fixed bottom-5 right-5 z-50 font-sans">
+  <div id="jarvisContainer" class="fixed bottom-5 right-5 z-50 font-sans">
     
     <!-- JARVIS Interactive HUD (Collapsible) -->
     <div id="jarvisHud" class="hidden mb-3 w-[92vw] max-w-[360px] sm:max-w-[400px] bg-[#030712]/95 border border-cyan-500/40 backdrop-blur-2xl rounded-2xl p-4 shadow-2xl shadow-cyan-950/80 transition-all duration-300 transform scale-100">
@@ -818,12 +818,15 @@
       const isAuth = localStorage.getItem(LS_AUTH) === 'true';
       const gate = document.getElementById('loginGateView');
       const portal = document.getElementById('adminPortalView');
+      const jarvis = document.getElementById('jarvisContainer');
       if (isAuth) {
         if (gate) gate.classList.add('hidden');
         if (portal) portal.classList.remove('hidden');
+        if (jarvis) jarvis.classList.remove('hidden');
       } else {
         if (gate) gate.classList.remove('hidden');
         if (portal) portal.classList.add('hidden');
+        if (jarvis) jarvis.classList.add('hidden');
       }
     }
 
