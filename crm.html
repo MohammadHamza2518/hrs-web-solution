@@ -1150,34 +1150,34 @@
             </div>
         </div>
 
-                <!-- Niche Pipeline Quick-Bar (1-Click Category Lead Extraction) -->
+                <!-- Niche Pipeline Quick-Bar (Multi-Category Workspace & Campaign Switcher) -->
         <div class="mb-3.5 p-3 rounded-2xl bg-[#0a1020]/90 backdrop-blur-xl border border-cyan-500/25 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none flex-wrap sm:flex-nowrap">
                 <span class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider hidden sm:inline-flex items-center gap-1.5 mr-1">
                     <i class="fa-solid fa-layer-group text-cyan-400"></i>
-                    <span>Category:</span>
+                    <span>Campaign:</span>
                 </span>
-                <button type="button" onclick="extractCategoryLeads('all')" id="catPill_all" class="cat-pill active px-3 py-1.5 rounded-xl border text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 bg-cyan-500/20 border-cyan-500/60 text-cyan-300 shadow-sm cursor-pointer">
+                <button type="button" onclick="switchCategoryWorkspace('all')" id="catPill_all" class="cat-pill active px-3 py-1.5 rounded-xl border text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 bg-cyan-500/20 border-cyan-500/60 text-cyan-300 shadow-sm cursor-pointer">
                     <i class="fa-solid fa-border-all text-xs"></i>
                     <span>All Niches (50)</span>
                 </button>
-                <button type="button" onclick="extractCategoryLeads('web_dev')" id="catPill_web_dev" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                <button type="button" onclick="switchCategoryWorkspace('web_dev')" id="catPill_web_dev" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-globe text-cyan-400 text-xs"></i>
                     <span>🌐 Web Dev (10)</span>
                 </button>
-                <button type="button" onclick="extractCategoryLeads('video_editing')" id="catPill_video_editing" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                <button type="button" onclick="switchCategoryWorkspace('video_editing')" id="catPill_video_editing" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-film text-rose-400 text-xs"></i>
                     <span>🎬 Video Editing (10)</span>
                 </button>
-                <button type="button" onclick="extractCategoryLeads('marketing_ads')" id="catPill_marketing_ads" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                <button type="button" onclick="switchCategoryWorkspace('marketing_ads')" id="catPill_marketing_ads" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-chart-line text-emerald-400 text-xs"></i>
                     <span>📈 Marketing & Ads (10)</span>
                 </button>
-                <button type="button" onclick="extractCategoryLeads('graphic_design')" id="catPill_graphic_design" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                <button type="button" onclick="switchCategoryWorkspace('graphic_design')" id="catPill_graphic_design" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-palette text-amber-400 text-xs"></i>
                     <span>🎨 Graphic Design (10)</span>
                 </button>
-                <button type="button" onclick="extractCategoryLeads('automation_ai')" id="catPill_automation_ai" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                <button type="button" onclick="switchCategoryWorkspace('automation_ai')" id="catPill_automation_ai" class="cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-robot text-purple-400 text-xs"></i>
                     <span>🤖 AI Automation (10)</span>
                 </button>
@@ -1187,6 +1187,23 @@
                     <i class="fa-solid fa-satellite-dish text-xs animate-pulse"></i>
                     <span>Find More LIVE</span>
                 </button>
+            </div>
+        </div>
+
+        <!-- Dynamic Campaign HUD (Today's Focus Mode & Safety Quota) -->
+        <div id="campaignHud" class="mb-3.5 px-4 py-2.5 rounded-xl bg-dark-900/90 border border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs shadow-md">
+            <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span class="font-bold text-white flex items-center gap-1.5">
+                    <span>🎯 Active Campaign:</span>
+                    <span class="text-cyan-300 font-mono" id="campaignHudNicheName">✨ All Agency Niches (Full Suite)</span>
+                </span>
+                <span class="hidden sm:inline text-slate-600">•</span>
+                <span class="text-slate-400" id="campaignHudStats">50 Total Prospects • 0 Pitched • 50 Pending</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px]">
+                <span class="text-slate-400 font-medium">Safe Outreach:</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-mono font-bold" id="campaignQuotaDisplay">30/30 WhatsApp Left Today</span>
             </div>
         </div>
 
@@ -2155,6 +2172,7 @@
             initLeadsStore();
             initDailyLimits();
             initWaCooldown();
+            initCategoryWorkspace();
             loadStats();
             loadLeads();
         });
@@ -3296,21 +3314,50 @@ function getInitialGlobalLeads() {
         window.DEFAULT_GLOBAL_LEADS = getInitialGlobalLeads();
 
         function initLeadsStore() {
+            const defaults = getInitialGlobalLeads();
+            window.DEFAULT_GLOBAL_LEADS = defaults;
+
             try {
                 const stored = localStorage.getItem(LS_LEADS);
                 if (stored) {
-                    leadsVault = JSON.parse(stored);
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        const existingMap = new Map();
+                        parsed.forEach(l => {
+                            const key = l.id || l.business_name || l.name;
+                            if (key) existingMap.set(key, l);
+                        });
+
+                        // Merge default global leads while 100% preserving user progress!
+                        defaults.forEach(defLead => {
+                            const key = defLead.id || defLead.business_name;
+                            if (existingMap.has(key)) {
+                                const existing = existingMap.get(key);
+                                existing.industry = defLead.industry || existing.industry;
+                                existing.category = defLead.category || existing.category;
+                                existing.audit_proof = existing.audit_proof || defLead.audit_proof;
+                                existing.phone = existing.phone || defLead.phone;
+                                existing.email = existing.email || defLead.email;
+                                existing.city = existing.city || defLead.city;
+                                existing.country = existing.country || defLead.country;
+                                existingMap.set(key, existing);
+                            } else {
+                                existingMap.set(key, JSON.parse(JSON.stringify(defLead)));
+                            }
+                        });
+
+                        leadsVault = Array.from(existingMap.values());
+                        saveLeadsToStore();
+                        return;
+                    }
                 }
             } catch (e) {
-                leadsVault = [];
+                console.error("Vault read error:", e);
             }
 
-            // If empty, auto-populate verified global dataset!
-            if (!leadsVault || leadsVault.length === 0) {
-                leadsVault = getInitialGlobalLeads();
-                saveLeadsToStore();
-            }
-            window.DEFAULT_GLOBAL_LEADS = getInitialGlobalLeads();
+            // Fresh initial load
+            leadsVault = defaults;
+            saveLeadsToStore();
         }
 
         function saveLeadsToStore() {
@@ -3509,6 +3556,20 @@ function getInitialGlobalLeads() {
         // =========================================================================
         function loadLeads() {
             let filtered = leadsVault.filter(lead => {
+                // 0. Active Category Workspace Filter (Preserves user pipeline across category switching)
+                const activeWs = window.activeCategoryWorkspace || 'all';
+                if (activeWs !== 'all') {
+                    const ind = (lead.industry || '').toLowerCase();
+                    let match = false;
+                    if (activeWs === 'web_dev' || activeWs === 'web_design') match = (ind === 'web_dev' || ind === 'web_design');
+                    else if (activeWs === 'video_editing' || activeWs === 'video') match = (ind === 'video_editing' || ind === 'creators_podcasts');
+                    else if (activeWs === 'marketing_ads' || activeWs === 'social_media_ads') match = (ind === 'marketing_ads' || ind === 'car_rentals_detailing');
+                    else if (activeWs === 'graphic_design' || activeWs === 'design') match = (ind === 'graphic_design' || ind === 'd2c_ecommerce');
+                    else if (activeWs === 'automation_ai' || activeWs === 'ai_chatbots') match = (ind === 'automation_ai' || ind === 'salons_clinics');
+                    else match = (ind === activeWs.toLowerCase());
+                    if (!match) return false;
+                }
+
                 // Sent stage filter
                 const isWa = Boolean(lead.sent_at || lead.status === 'PITCHED_WHATSAPP' || lead.status === 'PITCHED_BOTH');
                 const isEm = Boolean(lead.email_sent_at || lead.status === 'PITCHED_EMAIL' || lead.status === 'PITCHED_BOTH');
@@ -3684,12 +3745,27 @@ function getInitialGlobalLeads() {
                 const cleanPhone = lead.phone ? lead.phone.replace(/[^0-9]/g, '') : '';
                 const leadIdStr = String(lead.id);
 
+                const catBadgeMap = {
+                    'web_dev': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-cyan-950/80 border border-cyan-500/40 text-cyan-300">🌐 Web</span>',
+                    'web_design': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-cyan-950/80 border border-cyan-500/40 text-cyan-300">🌐 Web</span>',
+                    'video_editing': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-rose-950/80 border border-rose-500/40 text-rose-300">🎬 Video</span>',
+                    'creators_podcasts': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-rose-950/80 border border-rose-500/40 text-rose-300">🎬 Video</span>',
+                    'marketing_ads': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-emerald-950/80 border border-emerald-500/40 text-emerald-300">📈 Ads</span>',
+                    'car_rentals_detailing': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-emerald-950/80 border border-emerald-500/40 text-emerald-300">📈 Ads</span>',
+                    'graphic_design': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-amber-950/80 border border-amber-500/40 text-amber-300">🎨 Design</span>',
+                    'd2c_ecommerce': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-amber-950/80 border border-amber-500/40 text-amber-300">🎨 Design</span>',
+                    'automation_ai': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-purple-950/80 border border-purple-500/40 text-purple-300">🤖 AI Bot</span>',
+                    'salons_clinics': '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-purple-950/80 border border-purple-500/40 text-purple-300">🤖 AI Bot</span>'
+                };
+                const catBadge = catBadgeMap[lead.industry] || '';
+
                 return `
                     <tr class="${isBothSent ? 'hover:bg-purple-950/25 bg-purple-950/10 transition border-l-2 border-l-purple-500' : 'hover:bg-dark-800/50 transition'}">
                         <!-- Business & Location -->
                         <td class="py-3 px-4">
                             <div class="font-bold text-slate-100 flex items-center gap-1.5 text-xs">
                                 <span>${escapeHtml(bName)}</span>
+                                ${catBadge}
                                 <a href="${lead.website || lead.source_url || '#'}" target="_blank" class="text-slate-500 hover:text-cyan-400 text-[11px]" title="Open Website">
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </a>
@@ -3820,73 +3896,143 @@ function getInitialGlobalLeads() {
         // =========================================================================
         // 1-CLICK EXTRACTION & CATEGORY ROUTING
         // =========================================================================
-        function extractCategoryLeads(categoryOverride) {
-            const userSkill = categoryOverride || ((currentUser && currentUser.targetNiches && currentUser.targetNiches.length) ? currentUser.targetNiches[0] : 'all');
-            const isAll = (userSkill === 'all' || (currentUser && currentUser.targetNiches && currentUser.targetNiches.includes('all') && !categoryOverride));
-            const allAvailable = (window.DEFAULT_GLOBAL_LEADS && window.DEFAULT_GLOBAL_LEADS.length) ? window.DEFAULT_GLOBAL_LEADS : getInitialGlobalLeads();
+        // =========================================================================
+        // MULTI-CATEGORY WORKSPACE & CAMPAIGN CONTROLLER
+        // =========================================================================
+        window.activeCategoryWorkspace = 'all';
 
-            let targetLeads = allAvailable;
-            if (!isAll) {
-                targetLeads = allAvailable.filter(l => {
-                    const ind = (l.industry || '').toLowerCase();
-                    if (userSkill === 'web_dev' || userSkill === 'web_design') {
-                        return ind === 'web_dev' || ind === 'web_design';
-                    }
-                    if (userSkill === 'video_editing' || userSkill === 'video') {
-                        return ind === 'video_editing' || ind === 'creators_podcasts';
-                    }
-                    if (userSkill === 'marketing_ads' || userSkill === 'social_media_ads') {
-                        return ind === 'marketing_ads' || ind === 'car_rentals_detailing';
-                    }
-                    if (userSkill === 'graphic_design' || userSkill === 'design') {
-                        return ind === 'graphic_design' || ind === 'd2c_ecommerce';
-                    }
-                    if (userSkill === 'automation_ai' || userSkill === 'ai_chatbots') {
-                        return ind === 'automation_ai' || ind === 'salons_clinics';
-                    }
-                    return ind === userSkill.toLowerCase();
-                });
+        function initCategoryWorkspace() {
+            try {
+                const savedWs = localStorage.getItem('osp_active_category_workspace');
+                if (savedWs) {
+                    window.activeCategoryWorkspace = savedWs;
+                } else if (currentUser && currentUser.targetNiches && currentUser.targetNiches.length && !currentUser.targetNiches.includes('all')) {
+                    // Single-niche plan user: default to their licensed niche!
+                    window.activeCategoryWorkspace = currentUser.targetNiches[0];
+                } else {
+                    window.activeCategoryWorkspace = 'all';
+                }
+            } catch (e) {
+                window.activeCategoryWorkspace = 'all';
+            }
+            switchCategoryWorkspace(window.activeCategoryWorkspace, false);
+        }
+
+        function switchCategoryWorkspace(categoryKey, showNotification = true) {
+            const targetKey = categoryKey || 'all';
+
+            // Plan Access Gatekeeper: Check if user has bundle plan or single-niche license
+            const isBundle = (!currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle')));
+            if (!isBundle && targetKey !== 'all') {
+                const userNiches = currentUser.targetNiches || [];
+                const allowed = userNiches.includes(targetKey) || (targetKey === 'web_dev' && userNiches.includes('web_design')) || (targetKey === 'video_editing' && userNiches.includes('video'));
+                if (!allowed) {
+                    showToast(`🔒 ${targetKey.toUpperCase()} is locked on your Single-Niche Plan. Upgrade to All-In-One Bundle to unlock all pipelines!`, true);
+                    return;
+                }
             }
 
-            if (!targetLeads || targetLeads.length === 0) targetLeads = allAvailable;
+            window.activeCategoryWorkspace = targetKey;
+            try {
+                localStorage.setItem('osp_active_category_workspace', targetKey);
+            } catch (e) {}
 
-            leadsVault = targetLeads.map((l, idx) => {
-                const clone = JSON.parse(JSON.stringify(l));
-                clone.id = clone.id || ('LEAD-' + (idx + 1));
-                clone.business_name = clone.business_name || clone.name;
-                clone.status = 'NEW';
-                clone.email = clone.email || (clone.business_name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@agency-client.com');
-                return clone;
-            });
-
-            saveLeadsToStore();
-            loadStats();
-            loadLeads();
-
-            // Highlight Active Category Pill
+            // Update UI pills styling
             document.querySelectorAll('.cat-pill').forEach(pill => {
                 pill.className = "cat-pill px-3 py-1.5 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white hover:border-cyan-500/50 text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 cursor-pointer";
             });
-            const activePill = document.getElementById('catPill_' + userSkill);
+            const activePill = document.getElementById('catPill_' + targetKey);
             if (activePill) {
                 activePill.className = "cat-pill active px-3 py-1.5 rounded-xl border text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 bg-cyan-500/20 border-cyan-500/60 text-cyan-300 shadow-sm shadow-cyan-500/10 cursor-pointer";
             }
 
-            if (typeof confetti === 'function') {
-                confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+            // Sync with category filter dropdown
+            const catSelect = document.getElementById('categorySelect');
+            if (catSelect) catSelect.value = targetKey;
+            const catLabel = document.getElementById('selectedCategoryLabel');
+            if (catLabel) {
+                const labelMap = {
+                    'web_dev': '🌐 Web Dev & UI/UX (10)',
+                    'video_editing': '🎬 Video Editing (10)',
+                    'marketing_ads': '📈 Marketing & Ads (10)',
+                    'graphic_design': '🎨 Graphic Design (10)',
+                    'automation_ai': '🤖 AI & Chatbots (10)',
+                    'all': '📁 All Niches (50)'
+                };
+                catLabel.innerHTML = `<span>${labelMap[targetKey] || '📁 All Niches'}</span>`;
             }
 
-            const labelMap = {
-                'web_dev': 'Web Development & UI/UX',
-                'video_editing': 'Video Editing & Creators',
-                'marketing_ads': 'Marketing & Paid Ads',
-                'graphic_design': 'Graphic Design & Packaging',
-                'automation_ai': 'AI Automation & Chatbots',
-                'all': 'All Verified Niches'
-            };
-            const niceName = labelMap[userSkill] || userSkill;
-            showToast(`⚡ Extracted ${leadsVault.length} verified [${niceName}] prospects into pipeline!`);
+            updateCampaignHud();
+            loadStats();
+            loadLeads();
+
+            if (showNotification) {
+                const labelMap = {
+                    'web_dev': 'Web Development & UI/UX',
+                    'video_editing': 'Video Editing & Creators',
+                    'marketing_ads': 'Marketing & Paid Ads',
+                    'graphic_design': 'Graphic Design & Packaging',
+                    'automation_ai': 'AI Automation & Chatbots',
+                    'all': 'All Agency Niches'
+                };
+                const niceName = labelMap[targetKey] || targetKey;
+                showToast(`📂 Switched active workspace to [${niceName}] • Progress saved!`);
+            }
         }
+
+        function extractCategoryLeads(categoryOverride) {
+            // Friendly non-destructive alias for category switching
+            switchCategoryWorkspace(categoryOverride, true);
+        }
+
+        function updateCampaignHud() {
+            const activeWs = window.activeCategoryWorkspace || 'all';
+            const labelMap = {
+                'web_dev': '🌐 Web Development & UI/UX',
+                'video_editing': '🎬 Video Editing & Creators',
+                'marketing_ads': '📈 Marketing & Paid Ads',
+                'graphic_design': '🎨 Graphic Design & Packaging',
+                'automation_ai': '🤖 AI Automation & Chatbots',
+                'all': '✨ All Agency Niches (Full Suite)'
+            };
+
+            const leadsInWorkspace = leadsVault.filter(l => {
+                if (activeWs === 'all') return true;
+                const ind = (l.industry || '').toLowerCase();
+                if (activeWs === 'web_dev' || activeWs === 'web_design') return ind === 'web_dev' || ind === 'web_design';
+                if (activeWs === 'video_editing' || activeWs === 'video') return ind === 'video_editing' || ind === 'creators_podcasts';
+                if (activeWs === 'marketing_ads' || activeWs === 'social_media_ads') return ind === 'marketing_ads' || ind === 'car_rentals_detailing';
+                if (activeWs === 'graphic_design' || activeWs === 'design') return ind === 'graphic_design' || ind === 'd2c_ecommerce';
+                if (activeWs === 'automation_ai' || activeWs === 'ai_chatbots') return ind === 'automation_ai' || ind === 'salons_clinics';
+                return ind === activeWs.toLowerCase();
+            });
+
+            const total = leadsInWorkspace.length;
+            const contacted = leadsInWorkspace.filter(l => Boolean(l.sent_at || l.status === 'PITCHED_WHATSAPP' || l.status === 'PITCHED_EMAIL' || l.status === 'PITCHED_BOTH' || l.status === 'MEETING_BOOKED' || l.status === 'CLOSED')).length;
+            const meetings = leadsInWorkspace.filter(l => l.status === 'MEETING_BOOKED' || l.status === 'CLOSED').length;
+            const pending = total - contacted;
+
+            const nameEl = document.getElementById('campaignHudNicheName');
+            const statsEl = document.getElementById('campaignHudStats');
+            const quotaEl = document.getElementById('campaignQuotaDisplay');
+
+            if (nameEl) nameEl.textContent = labelMap[activeWs] || activeWs;
+            if (statsEl) {
+                statsEl.innerHTML = `<span class="font-bold text-white">${total}</span> Total Prospects • <span class="font-bold text-emerald-400">${contacted}</span> Pitched • <span class="font-bold text-purple-400">${meetings}</span> Booked • <span class="font-bold text-amber-400">${pending}</span> Pending`;
+            }
+
+            const todayWa = getDailyCount('wa');
+            const remaining = Math.max(0, 30 - todayWa);
+            if (quotaEl) {
+                quotaEl.textContent = `${remaining}/30 WhatsApp Left Today`;
+                if (remaining <= 5) {
+                    quotaEl.className = "px-2.5 py-0.5 rounded-full bg-rose-950/80 border border-rose-500/40 text-rose-300 font-mono font-bold";
+                } else {
+                    quotaEl.className = "px-2.5 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-mono font-bold";
+                }
+            }
+        }
+
 
                 // DIRECT DISPATCH HANDLERS (WHATSAPP & EMAIL)
         // =========================================================================
