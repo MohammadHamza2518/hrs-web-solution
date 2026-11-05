@@ -955,9 +955,10 @@
         const cleanPhone = ord.phone ? ord.phone.replace(/[^0-9]/g, '') : '';
         const waLink = `https://wa.me/91${cleanPhone.slice(-10)}?text=${encodeURIComponent(
           `Hi ${ord.name}, thank you for purchasing Outreach Studio Pro Lifetime License! 🎉\n\n` +
-          `📁 Google Drive ZIP Download Link:\n${getSetting('downloadLink', 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro')}\n\n` +
+          `🌐 Instant Cloud CRM (Direct Browser Access):\nhttps://www.hrswebsolution.online/crm\n\n` +
+          `📁 Desktop ZIP Download Link:\n${getSetting('downloadLink', 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro')}\n\n` +
           `🔑 Your Lifetime Commercial Key:\n${ord.licenseKey || 'OSP-PRO-9842-LIVE'}\n\n` +
-          `🚀 Quick Start: Unzip the file and double-click LAUNCH_GLOBAL_OUTREACH_STUDIO.bat to launch your offline workspace pre-seeded with 28+ foreign leads.\n\n` +
+          `🚀 Quick Start: You can login to Cloud CRM right away in your browser, or unzip the desktop ZIP and run LAUNCH_GLOBAL_OUTREACH_STUDIO.bat on your PC.\n\n` +
           `Need any technical setup support? I'm available directly here on WhatsApp.\n` +
           `— Mohammad Hamza, Founder (HRS Web Solutions)`
         )}`;

@@ -958,9 +958,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const successNichesText = document.getElementById('successNichesText');
     if (successNichesText) successNichesText.textContent = nichesDisplay;
 
+    const paidAmt = customer.amount || 1999;
+    const planName = customer.planTier || (paidAmt === 3200 ? 'All Services Master Bundle' : 'Custom Specialist Plan');
+    const badgeText = document.getElementById('successPaymentBadgeText');
+    if (badgeText) {
+      badgeText.textContent = `Payment Confirmed (₹${Number(paidAmt).toLocaleString('en-IN')})`;
+    }
+
     if (successWhatsAppBtn) {
       const waMsg = encodeURIComponent(
-        `Hi Hamza, I have successfully paid Rs 1,999 for Outreach Studio Pro via Razorpay! 🎉\n\n` +
+        `Hi Hamza, I have successfully paid Rs ${Number(paidAmt).toLocaleString('en-IN')} for ${planName} via Razorpay! 🎉\n\n` +
         `• Name: ${customer.name}\n` +
         `• WhatsApp: ${customer.phone}\n` +
         `• Payment ID: ${paymentId}\n` +
