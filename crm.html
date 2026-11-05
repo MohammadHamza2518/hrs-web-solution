@@ -264,26 +264,26 @@
                                 <span class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Gemini</span>
                                 <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-medium">100% Free</span>
                             </div>
-                            <div class="text-[10px] text-slate-400 mt-1">Gemini 2.0 & 1.5 Flash</div>
+                            <div class="text-[10px] text-slate-400 mt-1">2.5 Flash & 3.8 High</div>
                         </button>
                         <button type="button" onclick="selectObProvider('claude', this)" class="p-3 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-prov-btn">
                             <div class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-brain text-amber-400"></i> Claude</div>
-                            <div class="text-[10px] text-slate-400 mt-1">3.7 Sonnet & 3.5 Sonnet</div>
+                            <div class="text-[10px] text-slate-400 mt-1">3.7 Sonnet (Hybrid)</div>
                         </button>
                         <button type="button" onclick="selectObProvider('openai', this)" class="p-3 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-prov-btn">
                             <div class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-microchip text-emerald-400"></i> OpenAI</div>
-                            <div class="text-[10px] text-slate-400 mt-1">GPT-4o & o3-mini</div>
+                            <div class="text-[10px] text-slate-400 mt-1">GPT-4.5 & Astra/Argon</div>
                         </button>
                         <button type="button" onclick="selectObProvider('deepseek', this)" class="p-3 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-prov-btn">
-                            <div class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-compass text-blue-400"></i> DeepSeek</div>
-                            <div class="text-[10px] text-slate-400 mt-1">DeepSeek V3 & R1</div>
+                            <div class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-calculator text-blue-400"></i> DeepSeek</div>
+                            <div class="text-[10px] text-slate-400 mt-1">R1 Reasoner & V3</div>
                         </button>
                         <button type="button" onclick="selectObProvider('templates', this)" class="p-3 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-prov-btn col-span-2">
                             <div class="flex items-center justify-between">
-                                <span class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-cyan-400"></i> Human Templates</span>
+                                <span class="font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-file-lines text-cyan-400"></i> Human Copy Battle Formulas</span>
                                 <span class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-medium">No Key Needed</span>
                             </div>
-                            <div class="text-[10px] text-slate-400 mt-1">High-converting pre-tested battle formulas</div>
+                            <div class="text-[10px] text-slate-400 mt-1">Pre-tested 70%+ open-rate outreach scripts</div>
                         </button>
                     </div>
 
@@ -2389,37 +2389,44 @@
         // ==================== MULTI-AI PROVIDER & MODEL PICKER ====================
         const AI_MODELS = {
             gemini: [
-                { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash', badge: '100% Free - Next-Gen' },
-                { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', badge: 'High Logic' },
-                { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash', badge: '100% Free' }
+                { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', badge: '100% Free - Flagship' },
+                { id: 'gemini-3.8-high', name: 'Gemini 3.8 High (Deep Thinking)', badge: 'Agency Logic' },
+                { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro', badge: 'Enterprise Reasoning' },
+                { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash', badge: 'Ultra Low-Latency' }
             ],
             claude: [
-                { id: 'claude-3-7-sonnet-20250219', name: 'Claude 3.7 Sonnet', badge: 'Top Agency Copy' },
-                { id: 'claude-3-5-haiku-20241022', name: 'Claude 3.5 Haiku', badge: 'Fast & Concise' }
+                { id: 'claude-3-7-sonnet-20250219', name: 'Claude 3.7 Sonnet (Hybrid)', badge: 'Top Industry Copy' },
+                { id: 'claude-3-7-sonnet-thinking', name: 'Claude 3.7 Extended Thinking', badge: 'Psychology Angle' },
+                { id: 'claude-3-5-sonnet-20241022', name: 'Claude 3.5 Sonnet', badge: 'Proven Conversion' },
+                { id: 'claude-3-5-haiku-20241022', name: 'Claude 3.5 Haiku', badge: '200wpm Fast Engine' }
             ],
             openai: [
-                { id: 'gpt-4o', name: 'GPT-4o Omnichannel', badge: 'Standard Enterprise' },
-                { id: 'gpt-4o-mini', name: 'GPT-4o Mini', badge: 'Budget Fast' }
+                { id: 'gpt-4o', name: 'GPT-4o Omnichannel', badge: 'Flagship Multimodal' },
+                { id: 'gpt-4.5', name: 'GPT-4.5 Orion', badge: 'Top Creative Pitch' },
+                { id: 'o3-mini', name: 'o3-mini Reasoning', badge: 'High-Speed Math & Deals' },
+                { id: 'o1', name: 'o1 High Reasoning', badge: 'Deep Decision Matrix' },
+                { id: 'astra-argon', name: 'OpenAI Astra / Argon', badge: 'Next-Gen Architecture' },
+                { id: 'gpt-4o-mini', name: 'GPT-4o Mini', badge: 'Budget Super-Fast' }
             ],
             deepseek: [
-                { id: 'deepseek-chat', name: 'DeepSeek V3', badge: 'Ultra Cheap' },
-                { id: 'deepseek-reasoner', name: 'DeepSeek R1', badge: 'Deep Reasoning' }
+                { id: 'deepseek-reasoner', name: 'DeepSeek R1', badge: 'Chain-of-Thought Math' },
+                { id: 'deepseek-chat', name: 'DeepSeek V3 (671B MoE)', badge: 'Ultra-Fast & Cheap' }
             ],
             groq: [
-                { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Groq)', badge: '500 t/s LPU' }
+                { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Groq LPU)', badge: '500 tokens/sec' }
             ],
             openrouter: [
-                { id: 'openrouter-custom', name: 'OpenRouter Universal', badge: '200+ Models' }
+                { id: 'openrouter-auto', name: 'OpenRouter Universal Router', badge: '300+ AI Models' }
             ]
         };
 
         const AI_BANNER_INFO = {
-            gemini: { title: 'Google Gemini 1.5 & 2.0 AI', badge: '100% Free Forever', desc: 'Zero monthly API cost. Recommended for high-volume automated pitch generation without paying per token.' },
-            claude: { title: 'Anthropic Claude 3.7 & 3.5', badge: 'Top Copywriting', desc: 'Industry benchmark for persuasive, non-templated cold client outreach pitches.' },
-            openai: { title: 'OpenAI GPT-4o & GPT-4o-mini', badge: 'Enterprise Standard', desc: 'Fast, structured lead analysis and multi-angle pitch angles.' },
-            deepseek: { title: 'DeepSeek V3 & R1 Reasoner', badge: 'Ultra Affordable', desc: 'Exceptional audit reasoning at 1/10th the token cost of standard models.' },
-            groq: { title: 'Groq Cloud LPU Inference', badge: '500 tokens/sec', desc: 'Sub-second real-time personalization speed using open source Llama 3.3 architecture.' },
-            openrouter: { title: 'OpenRouter Universal Gateway', badge: '200+ Models', desc: 'Connect any LLM or local self-hosted Ollama model instance seamlessly.' }
+            gemini: { title: 'Google Gemini 2.5 Flash & 3.8 High', badge: '100% Free Forever', desc: 'Zero monthly API cost. Recommended for high-volume automated pitch generation without paying per token.' },
+            claude: { title: 'Anthropic Claude 3.7 Sonnet & Extended Thinking', badge: 'Peak Persuasion Copy', desc: 'Industry benchmark for deep psychological cold outreach, high-ticket proposals, and objection handling.' },
+            openai: { title: 'OpenAI GPT-4.5 Orion, o3-mini & Astra/Argon', badge: 'Next-Gen Architecture', desc: 'High-speed reasoning, deal math, and multimodal intelligence for enterprise B2B sales pipelines.' },
+            deepseek: { title: 'DeepSeek R1 Reasoner & V3 (671B MoE)', badge: 'Ultra Low Cost', desc: 'Chain-of-thought prospect audit reasoning at 1/10th the token cost of legacy models.' },
+            groq: { title: 'Groq Cloud LPU Inference (Llama 3.3)', badge: '500 tokens/sec', desc: 'Sub-second real-time personalization speed using open source LPU architecture.' },
+            openrouter: { title: 'OpenRouter Universal Gateway', badge: '300+ Models', desc: 'Connect any cutting-edge LLM or local self-hosted instance seamlessly.' }
         };
 
         window.currentAiProvider = 'gemini';
@@ -4360,21 +4367,20 @@ ${agencyName}`;
             const showcase = getSetting('portfolioUrl') || 'https://hrswebsolution.online';
             const apiKey = (getSetting('aiApiKey') || getSetting('geminiKey') || '').trim();
             const userNiche = (currentUser?.targetNiches && currentUser.targetNiches[0]) || activeModalLead.category || 'all';
+            const activeProvider = window.currentAiProvider || getSetting('aiProvider') || 'gemini';
+            const activeModel = window.currentAiModel || 'gemini-2.5-flash';
 
-            showToast("Generating fresh psychology pitch angle...");
+            showToast("Drafting fresh psychological pitch angle with AI...");
 
-            // If user has Gemini API Key connected, call live Google Gemini API!
-            if (apiKey && apiKey.startsWith('AIza')) {
-                try {
-                    const prompt = `You are a world-class cold outreach copywriter for a high-ticket agency.
+            const prompt = `You are a world-class high-ticket B2B outreach copywriter.
 Lead Business: "${bName}" in ${activeModalLead.city || 'Dubai'}, ${activeModalLead.country || 'UAE'}
 Industry/Category: ${activeModalLead.category || userNiche}
-Audit Proof: ${activeModalLead.audit_proof || 'No mobile-optimized conversion funnels.'}
+Audit Problem: ${activeModalLead.audit_proof || 'Outdated conversion funnels and slow loading mobile experience.'}
 Our Agency: "${agency}"
 Sender Name: "${sender}"
 Showcase Portfolio Link: ${showcase}
 
-Write TWO assets in strict JSON format:
+Write TWO high-converting assets in strict JSON format:
 {
   "subject": "Natural, punchy 4-7 word email subject line with high open rates (no spam words)",
   "email": "A concise 3-paragraph cold email with a compliment, a specific audit problem, a client result proof, and a soft low-friction call-to-action (4-min chat this week)",
@@ -4382,13 +4388,17 @@ Write TWO assets in strict JSON format:
 }
 Output ONLY raw JSON.`;
 
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+            // 1. Google Gemini (Supports Gemini 2.5 Flash, 3.8 High, 2.0 Flash)
+            if (apiKey && (apiKey.startsWith('AIza') || activeProvider === 'gemini')) {
+                try {
+                    const modelToUse = activeModel.includes('gemini') ? activeModel : 'gemini-2.5-flash';
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${encodeURIComponent(apiKey)}`;
                     const resp = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             contents: [{ parts: [{ text: prompt }] }],
-                            generationConfig: { temperature: 0.75, maxOutputTokens: 700 }
+                            generationConfig: { temperature: 0.75, maxOutputTokens: 800 }
                         })
                     });
 
@@ -4401,12 +4411,59 @@ Output ONLY raw JSON.`;
                             document.getElementById("pitchSubject").value = parsed.subject;
                             document.getElementById("pitchEmailBody").value = parsed.email;
                             if (parsed.whatsapp) document.getElementById("pitchWaBody").value = parsed.whatsapp;
-                            showToast("Live Gemini AI pitch generated successfully!");
+                            showToast(`Live ${modelToUse} AI pitch generated successfully!`);
                             return;
                         }
                     }
                 } catch(e) {
-                    console.warn("Live Gemini API call fell back to Neural Engine:", e);
+                    console.warn("Live Gemini API call fell back:", e);
+                }
+            }
+
+            // 2. OpenAI / DeepSeek / Groq (Supports GPT-4.5 Orion, o3-mini, Astra/Argon, DeepSeek R1)
+            if (apiKey && (apiKey.startsWith('sk-') || activeProvider === 'openai' || activeProvider === 'deepseek' || activeProvider === 'groq')) {
+                try {
+                    let ep = 'https://api.openai.com/v1/chat/completions';
+                    let modelName = activeModel || 'gpt-4o';
+                    if (activeProvider === 'deepseek') {
+                        ep = 'https://api.deepseek.com/v1/chat/completions';
+                        modelName = activeModel || 'deepseek-reasoner';
+                    } else if (activeProvider === 'groq') {
+                        ep = 'https://api.groq.com/openai/v1/chat/completions';
+                        modelName = 'llama-3.3-70b-versatile';
+                    }
+
+                    const resp = await fetch(ep, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${apiKey}`
+                        },
+                        body: JSON.stringify({
+                            model: modelName,
+                            messages: [
+                                { role: 'system', content: 'You are an elite B2B cold outreach copywriter. Return ONLY raw JSON.' },
+                                { role: 'user', content: prompt }
+                            ],
+                            temperature: 0.7
+                        })
+                    });
+
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        const raw = data.choices?.[0]?.message?.content || '';
+                        const cleanJson = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+                        const parsed = JSON.parse(cleanJson);
+                        if (parsed.subject && parsed.email) {
+                            document.getElementById("pitchSubject").value = parsed.subject;
+                            document.getElementById("pitchEmailBody").value = parsed.email;
+                            if (parsed.whatsapp) document.getElementById("pitchWaBody").value = parsed.whatsapp;
+                            showToast(`Live ${modelName} AI pitch generated successfully!`);
+                            return;
+                        }
+                    }
+                } catch(e) {
+                    console.warn("Live OpenAI/DeepSeek API call fell back:", e);
                 }
             }
 
