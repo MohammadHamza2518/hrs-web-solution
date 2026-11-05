@@ -644,7 +644,7 @@
           <span>Copy Text</span>
         </button>
 
-        <a id="btnSendWhatsAppModal" href="#" target="_blank" onclick="markLeadContactedFromModal()" class="px-5 py-2.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center gap-2 shadow-lg shadow-emerald-500/30">
+        <a id="btnSendWhatsAppModal" href="javascript:void(0)" target="_blank" onclick="markLeadContactedFromModal()" class="px-5 py-2.5 rounded-xl btn-whatsapp-glow text-xs font-bold flex items-center gap-2 shadow-lg shadow-emerald-500/30">
           <i class="fab fa-whatsapp text-sm"></i>
           <span>Send on WhatsApp &rarr;</span>
         </a>
@@ -1694,7 +1694,7 @@
 
       const pitchText = activeLead.pitch_message || generateDefaultPitch(activeLead, 'claude', activePitchService || (currentUser?.targetNiches?.[0]) || 'video_editing');
       const encodedPitch = encodeURIComponent(pitchText);
-      const waUrl = `https://web.whatsapp.com/send?phone=${cleanPhone}&text=${encodedPitch}`;
+      const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodedPitch}`;
 
       return `
         <div class="crm-card rounded-2xl p-4 flex flex-col justify-between text-left relative overflow-hidden" id="card-${activeLead.id}">
@@ -2392,14 +2392,24 @@ STRICT RULES:
       if (!activeModalLead) return;
       const editor = document.getElementById('pitchEditorText');
       const waBtn = document.getElementById('btnSendWhatsAppModal');
-      const cleanPhone = (activeModalLead.phone || '').replace(/[^0-9]/g, '');
+      let cleanPhone = (activeModalLead.phone || '').replace(/[^0-9]/g, '');
+      if (cleanPhone.startsWith('00')) cleanPhone = cleanPhone.substring(2);
+      if (cleanPhone.startsWith('0') && cleanPhone.length === 11) cleanPhone = '91' + cleanPhone.substring(1);
+      if (cleanPhone.length === 10) {
+        const c = (activeModalLead.country || '').toLowerCase();
+        if (c.includes('usa') || c.includes('america') || c.includes('canada')) {
+          cleanPhone = '1' + cleanPhone;
+        } else {
+          cleanPhone = '91' + cleanPhone;
+        }
+      }
 
       const pitch = editor ? editor.value : '';
       activeModalLead.pitch_message = pitch;
       saveLeadsToVault(false);
 
       if (waBtn) {
-        waBtn.href = `https://web.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(pitch)}`;
+        waBtn.href = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(pitch)}`;
       }
     }
 

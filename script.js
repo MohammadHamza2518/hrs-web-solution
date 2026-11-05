@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const u = JSON.parse(localStorage.getItem('osp_auth_user'));
       if (u && (u.email || u.licenseKey)) {
-        navLoginBtn.href = '/crm';
+        navLoginBtn.href = window.location.protocol === 'file:' ? 'crm.html' : '/crm';
         navLoginBtn.innerHTML = '<i class="fas fa-rocket text-amber-300"></i><span>My CRM</span>';
         navLoginBtn.className = 'whitespace-nowrap text-emerald-400 hover:text-emerald-300 font-bold transition-colors flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 shadow-sm';
       }
@@ -855,11 +855,11 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
 
     // Redirect to CRM
-    window.location.href = '/crm';
+    window.location.href = window.location.protocol === 'file:' ? 'crm.html' : '/crm';
   };
 
   window.skipKeyAndLaunchCRM = function() {
-    window.location.href = '/crm';
+    window.location.href = window.location.protocol === 'file:' ? 'crm.html' : '/crm';
   };
 
   window.handlePaymentSuccess = function(response, customer) {
@@ -981,7 +981,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Copy Desktop CRM Link for Customer
   window.copyDesktopStudioLink = function(btn) {
-    const crmUrl = window.location.origin + '/crm';
+    const crmUrl = window.location.protocol === 'file:' ? 'crm.html' : (window.location.origin + '/crm');
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(crmUrl).then(() => {
         const originalText = btn.innerHTML;
