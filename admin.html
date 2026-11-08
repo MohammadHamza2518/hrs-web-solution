@@ -469,8 +469,15 @@
 
             <div>
               <label class="block text-xs font-semibold text-slate-300 mb-1">Google Drive Product Delivery ZIP Link</label>
-              <input type="url" id="settingDownloadLink" value="https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro" class="w-full py-2.5 px-3.5 rounded-xl bg-slate-900 border border-white/[0.1] text-xs text-white font-mono focus:border-blue-500 focus:outline-none">
+              <input type="url" id="settingDownloadLink" value="/assets/downloads/Outreach_Studio_Pro_v1.0.zip" class="w-full py-2.5 px-3.5 rounded-xl bg-slate-900 border border-white/[0.1] text-xs text-white font-mono focus:border-blue-500 focus:outline-none">
               <span class="text-[11px] text-slate-500">Link delivered to customer WhatsApp &amp; Email upon payment.</span>
+            </div>
+            <div class="pt-2">
+              <a href="pricing.html?test_pay=1" target="_blank" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-bold transition">
+                <i class="fas fa-bolt text-yellow-400"></i>
+                <span>Test Live Razorpay Gateway (₹1.00 Verification)</span>
+              </a>
+              <span class="block text-[10px] text-slate-500 mt-1">Opens live checkout for ₹1 to verify real UPI / bank settlement.</span>
             </div>
           </div>
 
@@ -1201,7 +1208,7 @@
         const waLink = `https://wa.me/91${cleanPhone.slice(-10)}?text=${encodeURIComponent(
           `Hi ${ord.name}, thank you for purchasing Outreach Studio Pro Lifetime License! 🎉\n\n` +
           `🌐 Instant Cloud CRM (Direct Browser Access):\nhttps://www.hrswebsolution.online/crm\n\n` +
-          `📁 Desktop ZIP Download Link:\n${getSetting('downloadLink', 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro')}\n\n` +
+          `📁 Desktop ZIP Download Link:\n${getSetting('downloadLink', '/assets/downloads/Outreach_Studio_Pro_v1.0.zip')}\n\n` +
           `🔑 Your Lifetime Commercial Key:\n${ord.licenseKey || 'OSP-PRO-9842-LIVE'}\n\n` +
           `🚀 Quick Start: You can login to Cloud CRM right away in your browser, or unzip the desktop ZIP and run LAUNCH_GLOBAL_OUTREACH_STUDIO.bat on your PC.\n\n` +
           `Need any technical setup support? I'm available directly here on WhatsApp.\n` +

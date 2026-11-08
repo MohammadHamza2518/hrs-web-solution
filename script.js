@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const bname = localStorage.getItem('osp_buyer_name') || 'Valued Customer';
           const bphone = localStorage.getItem('osp_buyer_phone') || '';
           const lkey = localStorage.getItem('osp_license_key') || 'OSP-PRO-9842-7104-LIVE';
-          let dlLink = localStorage.getItem('osp_download_link') || 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro';
+          let dlLink = localStorage.getItem('osp_download_link') || '/assets/downloads/Outreach_Studio_Pro_v1.0.zip';
           try {
             const settings = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
             if (settings.downloadLink) dlLink = settings.downloadLink;
@@ -663,10 +663,19 @@ document.addEventListener('DOMContentLoaded', () => {
       payBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Opening Secure Razorpay Gateway...';
     }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const isLiveTestMode = urlParams.get('test_pay') === '1' || urlParams.get('test') === 'live1';
+
     const isAllBundle = window.selectedNichesState && window.selectedNichesState.includes('all');
-    const paymentAmountPaise = isAllBundle ? 320000 : 199900;
-    const paymentAmountDisplay = isAllBundle ? '₹3,200' : '₹1,999';
-    const planTitle = isAllBundle ? 'Outreach Studio Pro (All Services Master Bundle)' : 'Outreach Studio Pro (Custom 3-Category Plan)';
+    let paymentAmountPaise = isAllBundle ? 320000 : 199900;
+    let paymentAmountDisplay = isAllBundle ? '₹3,200' : '₹1,999';
+    let planTitle = isAllBundle ? 'Outreach Studio Pro (All Services Master Bundle)' : 'Outreach Studio Pro (Custom 3-Category Plan)';
+
+    if (isLiveTestMode) {
+      paymentAmountPaise = 100; // ₹1.00 for live settlement verification
+      paymentAmountDisplay = '₹1 (Live Test)';
+      planTitle = 'Outreach Studio Pro — Live Gateway Verification Test (₹1)';
+    }
 
     // Exact key from BlackRoots with dynamic bundle pricing
     const rzpOptions = {
@@ -869,7 +878,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nichesList = (customer.targetNiches && customer.targetNiches.length) ? customer.targetNiches : ['all'];
 
     // Fetch custom Google Drive download link from admin settings or default
-    let downloadLink = 'https://drive.google.com/drive/folders/176iX2P-7yT_demo_outreach_studio_pro';
+    let downloadLink = '/assets/downloads/Outreach_Studio_Pro_v1.0.zip';
     try {
       const s1 = JSON.parse(localStorage.getItem('osp_site_settings')) || {};
       const s2 = JSON.parse(localStorage.getItem('osp_admin_settings')) || {};
