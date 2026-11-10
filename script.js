@@ -923,29 +923,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.handleSaveKeyAndLaunchCRM = function() {
     const input = document.getElementById('onboardApiKeyInput');
-    const keyVal = (input ? input.value : '').trim();
-    const provider = window.activeOnboardProvider || 'gemini';
+    let keyVal = (input ? input.value : '').trim();
+    keyVal = keyVal.replace(/^[\"\']|[\"\']$/g, '').trim();
 
-    if (!keyVal || keyVal.length < 8) {
-      alert("Please enter a valid API key, or click 'skip for now' below to launch CRM directly.");
-      if (input) input.focus();
-      return;
+    if (keyVal) {
+      let keys = {};
+      try { keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {}; } catch(e) {}
+      const prov = window.activeOnboardProvider || 'gemini';
+      keys[prov] = keyVal;
+      localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
+
+      try {
+        const s = JSON.parse(localStorage.getItem('osp_settings_v3') || '{}');
+        if (prov === 'gemini') s.geminiKey = keyVal;
+        else if (prov === 'claude') s.claudeKey = keyVal;
+        else if (prov === 'openai') s.openaiKey = keyVal;
+        else if (prov === 'deepseek') s.deepseekKey = keyVal;
+        s.aiProvider = prov;
+        localStorage.setItem('osp_settings_v3', JSON.stringify(s));
+      } catch(e) {}
     }
 
-    if (provider === 'gemini' && !keyVal.startsWith('AIzaSy')) {
-      if (!confirm("⚠️ Note: Google Gemini API keys hamesha 'AIzaSy...' se start hoti hain. Jo aapne enter kiya hai wo OAuth token ya doosri key lag rahi hai.\n\nKya aap fir bhi save karke aage badhna chahte hain?\n(Free Gemini Key 30s me yahan se milti hai: https://aistudio.google.com/app/apikey)")) {
-        if (input) input.focus();
-        return;
-      }
-    }
-
-    // Save key locally
-    let keys = {};
-    try { keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {}; } catch(e) {}
-    keys[window.activeOnboardProvider || 'gemini'] = keyVal;
-    localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
-
-    // Redirect to CRM
+    // Direct, seamless redirect to CRM without any blocking alerts
     window.location.href = window.location.protocol === 'file:' ? 'crm.html' : '/crm';
   };
 

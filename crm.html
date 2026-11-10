@@ -2269,19 +2269,78 @@
         window.selectedObNiche = 'web_design';
         window.selectedObProvider = 'gemini';
 
+        function updateOnboardSummary() {
+            const sName = (document.getElementById('obSenderName')?.value || '').trim();
+            const sPhone = (document.getElementById('obSenderPhone')?.value || '').trim();
+            const sEmail = (document.getElementById('obSenderEmail')?.value || '').trim();
+            const aName = (document.getElementById('obAgencyName')?.value || '').trim();
+            const pUrl = (document.getElementById('obPortfolioUrl')?.value || '').trim();
+
+            const nicheMap = {
+                web_design: "Web Design",
+                funnels: "Funnels & Leads",
+                shopify_ecom: "E-Commerce",
+                local_seo: "Local SEO",
+                video_editing: "Video & Reels",
+                social_media_ads: "Ads & Growth"
+            };
+            const currentNiche = window.selectedObNiche || 'web_design';
+            const nicheLabel = nicheMap[currentNiche] || currentNiche;
+
+            const providerMap = {
+                gemini: "Google Gemini (2.5 Flash & 3.8 High)",
+                claude: "Claude 3.7 Sonnet (Hybrid)",
+                openai: "OpenAI GPT-4.5 & Astra/Argon",
+                deepseek: "DeepSeek R1 Reasoner & V3",
+                templates: "Human Copy Battle Formulas (No Key Needed)"
+            };
+            const currentProv = window.selectedObProvider || 'gemini';
+            const provLabel = providerMap[currentProv] || currentProv;
+
+            const elName = document.getElementById('revSenderName');
+            const elPhone = document.getElementById('revSenderPhone');
+            const elEmail = document.getElementById('revSenderEmail');
+            const elAgency = document.getElementById('revAgencyOffer');
+            const elPort = document.getElementById('revPortfolioUrl');
+            const elAi = document.getElementById('revAiModel');
+
+            if (elName) elName.textContent = sName || "Mohammad Hamza";
+            if (elPhone) elPhone.textContent = sPhone || "+91 8808129388";
+            if (elEmail) elEmail.textContent = sEmail || "hamza@agency.com";
+            if (elAgency) elAgency.textContent = (aName || "Agency") + " • " + nicheLabel;
+            if (elPort) elPort.textContent = pUrl || "Direct Portfolio Demo";
+            if (elAi) elAi.textContent = provLabel;
+        }
+
         function checkFirstTimeOnboarding() {
             const done = localStorage.getItem('osp_onboarding_completed') === 'true';
             const gatekeeper = document.getElementById('onboardingGatekeeper');
             if (!done && !currentUser?.isDemo) {
                 if (gatekeeper) {
                     gatekeeper.classList.remove('hidden');
+
+                    let saved = {};
+                    try { saved = JSON.parse(localStorage.getItem(LS_SETTINGS) || '{}'); } catch(e) {}
+
+                    const elName = document.getElementById('obSenderName');
+                    const elPhone = document.getElementById('obSenderPhone');
+                    const elEmail = document.getElementById('obSenderEmail');
+                    const elAgency = document.getElementById('obAgencyName');
+                    const elPort = document.getElementById('obPortfolioUrl');
+                    const elKey = document.getElementById('obApiKey');
+
+                    if (elName) elName.value = currentUser?.name || saved.senderName || localStorage.getItem('osp_buyer_name') || 'Mohammad Hamza';
+                    if (elPhone) elPhone.value = currentUser?.phone || saved.senderPhone || localStorage.getItem('osp_buyer_phone') || '+91 8808129388';
+                    if (elEmail) elEmail.value = currentUser?.email || saved.senderEmail || localStorage.getItem('osp_buyer_email') || 'hamza@agency.com';
+                    if (elAgency) elAgency.value = saved.agencyName || '';
+                    if (elPort) elPort.value = saved.portfolioUrl || '';
+                    if (elKey) {
+                        let byok = {};
+                        try { byok = JSON.parse(localStorage.getItem('osp_byok_keys') || '{}'); } catch(e) {}
+                        elKey.value = byok.gemini || saved.geminiKey || '';
+                    }
+
                     goOnboardStep(1);
-                    if (document.getElementById('obSenderName') && currentUser?.name) {
-                        document.getElementById('obSenderName').value = currentUser.name;
-                    }
-                    if (document.getElementById('obSenderEmail') && currentUser?.email) {
-                        document.getElementById('obSenderEmail').value = currentUser.email;
-                    }
                 }
             } else {
                 if (gatekeeper) gatekeeper.classList.add('hidden');
@@ -2297,6 +2356,9 @@
         }
 
         function goOnboardStep(step) {
+            if (step === 4) {
+                updateOnboardSummary();
+            }
             for (let i = 1; i <= 4; i++) {
                 const s = document.getElementById('obStep' + i);
                 const t = document.getElementById('stepTab' + i);
