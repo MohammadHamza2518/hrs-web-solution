@@ -54,11 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('osp_buyer_name');
     localStorage.removeItem('osp_buyer_phone');
     localStorage.removeItem('osp_buyer_email');
-    if (urlParams.get('test') === '1') {
-      window.location.href = window.location.pathname + '?test=1';
-    } else {
-      window.location.href = window.location.pathname;
-    }
+    urlParams.delete('reset');
+    const remaining = urlParams.toString();
+    window.location.href = window.location.pathname + (remaining ? '?' + remaining : '');
     return;
   }
 
@@ -433,7 +431,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPayOldAmount = document.getElementById('btnPayOldAmount');
     const nicheCountBadge = document.getElementById('nicheCountBadge');
 
-    if (isAll) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isLiveTestMode = urlParams.get('test_pay') === '1' || urlParams.get('test') === 'live1';
+
+    if (isLiveTestMode) {
+      if (modalOldPrice) modalOldPrice.textContent = isAll ? '₹3,200' : '₹1,999';
+      if (modalPrice) modalPrice.textContent = '₹1';
+      if (modalSaveBadge) modalSaveBadge.textContent = '1-RUPEE TEST';
+      if (modalSubtitle) modalSubtitle.textContent = 'Founder Live Gateway Test Mode (Real ₹1.00 UPI / Card Settlement)';
+      if (btnPayAmount) btnPayAmount.textContent = '₹1 (Live Test)';
+      if (btnPayOldAmount) btnPayOldAmount.textContent = isAll ? '₹3,200' : '₹1,999';
+      if (nicheCountBadge) {
+        nicheCountBadge.textContent = '₹1 Live Verification';
+        nicheCountBadge.className = 'text-[10px] font-mono font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-md border border-emerald-500/30';
+      }
+    } else if (isAll) {
       if (modalOldPrice) modalOldPrice.textContent = '₹14,999';
       if (modalPrice) modalPrice.textContent = '₹3,200';
       if (modalSaveBadge) modalSaveBadge.textContent = 'SAVE 78%';
