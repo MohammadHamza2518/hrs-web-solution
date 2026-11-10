@@ -310,6 +310,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const formView = document.getElementById('checkoutFormView');
     const successView = document.getElementById('checkoutSuccessView');
+    const urlParamsCheck = new URLSearchParams(window.location.search);
+    if (urlParamsCheck.get('test_pay') === '1' || urlParamsCheck.get('test') === 'live1' || window.isForced1RupeeTest) {
+      localStorage.removeItem('osp_license_paid');
+    }
     if (modal) {
       if (formView && successView) {
         if (localStorage.getItem('osp_license_paid')) {
@@ -367,6 +371,61 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === modal) closeCheckoutModal();
     });
   }
+
+  // 1-Rupee Live Gateway Test Helpers
+  window.open1RupeeTestModal = function() {
+    localStorage.removeItem('osp_license_paid');
+    localStorage.removeItem('osp_auth_user');
+    window.isForced1RupeeTest = true;
+    window.openCheckoutModal('custom');
+    if (typeof window.enableLiveTestPayMode === 'function') {
+      window.enableLiveTestPayMode();
+    }
+  };
+
+  window.resetBuyerSessionAndPayAgain = function() {
+    localStorage.removeItem('osp_auth_user');
+    localStorage.removeItem('osp_license_paid');
+    localStorage.removeItem('osp_payment_id');
+    localStorage.removeItem('osp_license_key');
+    const formView = document.getElementById('checkoutFormView');
+    const successView = document.getElementById('checkoutSuccessView');
+    if (formView && successView) {
+      formView.classList.remove('hidden');
+      successView.classList.add('hidden');
+    }
+    if (typeof window.enableLiveTestPayMode === 'function') {
+      window.enableLiveTestPayMode();
+    }
+  };
+
+  window.enableLiveTestPayMode = function() {
+    window.isForced1RupeeTest = true;
+    const modalOldPrice = document.getElementById('checkoutModalOldPrice');
+    const modalPrice = document.getElementById('checkoutModalPrice');
+    const modalSaveBadge = document.getElementById('checkoutModalSaveBadge');
+    const modalSubtitle = document.getElementById('checkoutModalPlanSubtitle');
+    const btnPayAmount = document.getElementById('btnPayAmount');
+    const btnPayOldAmount = document.getElementById('btnPayOldAmount');
+    const nicheCountBadge = document.getElementById('nicheCountBadge');
+
+    if (modalOldPrice) modalOldPrice.textContent = '₹1,999';
+    if (modalPrice) modalPrice.textContent = '₹1';
+    if (modalSaveBadge) modalSaveBadge.textContent = '1-RUPEE TEST';
+    if (modalSubtitle) modalSubtitle.textContent = 'Founder Live Gateway Test Mode (Real ₹1.00 UPI / Card Settlement)';
+    if (btnPayAmount) btnPayAmount.textContent = '₹1 (Live Test)';
+    if (btnPayOldAmount) btnPayOldAmount.textContent = '₹1,999';
+    if (nicheCountBadge) {
+      nicheCountBadge.textContent = '₹1 Live Verification';
+      nicheCountBadge.className = 'text-[10px] font-mono font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-md border border-emerald-500/30';
+    }
+  };
+
+  window.startRazorpayPaymentTest1 = function() {
+    window.isForced1RupeeTest = true;
+    window.enableLiveTestPayMode();
+    startRazorpayPayment();
+  };
 
   // Founder Simulated Payment for Live Demo Testing
   window.simulateTestCheckout = function() {
@@ -432,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nicheCountBadge = document.getElementById('nicheCountBadge');
 
     const urlParams = new URLSearchParams(window.location.search);
-    const isLiveTestMode = urlParams.get('test_pay') === '1' || urlParams.get('test') === 'live1';
+    const isLiveTestMode = window.isForced1RupeeTest || urlParams.get('test_pay') === '1' || urlParams.get('test') === 'live1';
 
     if (isLiveTestMode) {
       if (modalOldPrice) modalOldPrice.textContent = isAll ? '₹3,200' : '₹1,999';
@@ -676,7 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const urlParams = new URLSearchParams(window.location.search);
-    const isLiveTestMode = urlParams.get('test_pay') === '1' || urlParams.get('test') === 'live1';
+    const isLiveTestMode = window.isForced1RupeeTest || urlParams.get('test_pay') === '1' || urlParams.get('test') === 'live1';
 
     const isAllBundle = window.selectedNichesState && window.selectedNichesState.includes('all');
     let paymentAmountPaise = isAllBundle ? 320000 : 199900;
