@@ -54,7 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('osp_buyer_name');
     localStorage.removeItem('osp_buyer_phone');
     localStorage.removeItem('osp_buyer_email');
+    sessionStorage.setItem('osp_auto_open_modal', 'true');
     urlParams.delete('reset');
+    urlParams.delete('test_pay');
+    urlParams.delete('test');
     const remaining = urlParams.toString();
     window.location.href = window.location.pathname + (remaining ? '?' + remaining : '');
     return;
@@ -388,14 +391,22 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('osp_license_paid');
     localStorage.removeItem('osp_payment_id');
     localStorage.removeItem('osp_license_key');
+    localStorage.removeItem('osp_buyer_name');
+    localStorage.removeItem('osp_buyer_phone');
+    localStorage.removeItem('osp_buyer_email');
+
+    const nameInput = document.getElementById('checkoutName');
+    const phoneInput = document.getElementById('checkoutPhone');
+    const emailInput = document.getElementById('checkoutEmail');
+    if (nameInput) nameInput.value = '';
+    if (phoneInput) phoneInput.value = '';
+    if (emailInput) emailInput.value = '';
+
     const formView = document.getElementById('checkoutFormView');
     const successView = document.getElementById('checkoutSuccessView');
     if (formView && successView) {
       formView.classList.remove('hidden');
       successView.classList.add('hidden');
-    }
-    if (typeof window.enableLiveTestPayMode === 'function') {
-      window.enableLiveTestPayMode();
     }
   };
 
@@ -437,9 +448,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let phone = phoneInput ? phoneInput.value.trim() : '';
     let email = emailInput ? emailInput.value.trim() : '';
 
-    if (!name) name = "Agency Client";
-    if (!phone) phone = "9876543210";
-    if (!email) email = "client@agency.com";
+    if (!name) name = "Mohammad Hamza";
+    if (!phone) phone = "8808129388";
+    if (!email) email = "hamza@agency.com";
 
     if (nameInput) nameInput.value = name;
     if (phoneInput) phoneInput.value = phone;
