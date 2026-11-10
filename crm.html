@@ -112,25 +112,25 @@
                 </div>
             </div>
 
-            <!-- Wizard Step Progress -->
-            <div class="mb-7">
+            <!-- Wizard Step Progress (Fully Clickable & Interactive) -->
+            <div class="mb-6">
                 <div class="grid grid-cols-4 gap-2">
-                    <div id="stepTab1" class="flex flex-col items-center text-center p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/40 text-cyan-300 transition">
-                        <div class="w-6 h-6 rounded-full bg-cyan-500 text-dark-900 font-bold text-xs flex items-center justify-center mb-1">1</div>
-                        <span class="text-[11px] font-semibold">Identity</span>
-                    </div>
-                    <div id="stepTab2" class="flex flex-col items-center text-center p-2 rounded-xl bg-slate-800/40 border border-slate-700/50 text-slate-400 transition">
+                    <button type="button" onclick="goOnboardStep(1)" id="stepTab1" class="flex flex-col items-center text-center p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/40 text-cyan-300 transition cursor-pointer hover:border-cyan-400">
+                        <div class="w-6 h-6 rounded-full bg-cyan-500 text-dark-900 font-bold text-xs flex items-center justify-center mb-1 shadow-sm">1</div>
+                        <span class="text-[11px] font-semibold tracking-tight">Identity</span>
+                    </button>
+                    <button type="button" onclick="goOnboardStep(2)" id="stepTab2" class="flex flex-col items-center text-center p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/50 text-slate-400 transition cursor-pointer hover:border-slate-500">
                         <div class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 font-bold text-xs flex items-center justify-center mb-1">2</div>
-                        <span class="text-[11px] font-semibold">Agency</span>
-                    </div>
-                    <div id="stepTab3" class="flex flex-col items-center text-center p-2 rounded-xl bg-slate-800/40 border border-slate-700/50 text-slate-400 transition">
+                        <span class="text-[11px] font-semibold tracking-tight">Agency</span>
+                    </button>
+                    <button type="button" onclick="goOnboardStep(3)" id="stepTab3" class="flex flex-col items-center text-center p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/50 text-slate-400 transition cursor-pointer hover:border-slate-500">
                         <div class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 font-bold text-xs flex items-center justify-center mb-1">3</div>
-                        <span class="text-[11px] font-semibold">AI Engine</span>
-                    </div>
-                    <div id="stepTab4" class="flex flex-col items-center text-center p-2 rounded-xl bg-slate-800/40 border border-slate-700/50 text-slate-400 transition">
+                        <span class="text-[11px] font-semibold tracking-tight">AI Engine</span>
+                    </button>
+                    <button type="button" onclick="goOnboardStep(4)" id="stepTab4" class="flex flex-col items-center text-center p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/50 text-slate-400 transition cursor-pointer hover:border-slate-500">
                         <div class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 font-bold text-xs flex items-center justify-center mb-1">4</div>
-                        <span class="text-[11px] font-semibold">Launch</span>
-                    </div>
+                        <span class="text-[11px] font-semibold tracking-tight">Launch</span>
+                    </button>
                 </div>
             </div>
 
@@ -148,7 +148,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">Your Full Name (Sender) <span class="text-rose-400">*</span></label>
                         <div class="relative">
                             <i class="fa-solid fa-user absolute left-3 top-3 text-slate-500 text-xs"></i>
-                            <input type="text" id="obSenderName" placeholder="e.g. Alex Morgan" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="text" id="obSenderName" oninput="updateOnboardSummary()" placeholder="e.g. Alex Morgan" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <span class="text-[10px] text-slate-500 mt-0.5 block">Used in greeting sign-offs (e.g., 'Best, [Your Name]').</span>
                     </div>
@@ -157,7 +157,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">WhatsApp / Phone Number <span class="text-rose-400">*</span></label>
                         <div class="relative">
                             <i class="fa-brands fa-whatsapp absolute left-3 top-3 text-emerald-400 text-sm"></i>
-                            <input type="text" id="obSenderPhone" placeholder="e.g. +1 555 123 4567" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="text" id="obSenderPhone" oninput="updateOnboardSummary()" placeholder="e.g. +1 555 123 4567" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <span class="text-[10px] text-slate-500 mt-0.5 block">1-Click 'Chat on WhatsApp' links will dispatch from your device with this number.</span>
                     </div>
@@ -166,7 +166,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">Official Outreach Email <span class="text-rose-400">*</span></label>
                         <div class="relative">
                             <i class="fa-solid fa-envelope absolute left-3 top-3 text-slate-500 text-xs"></i>
-                            <input type="email" id="obSenderEmail" placeholder="e.g. yourname@agency.com" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="email" id="obSenderEmail" oninput="updateOnboardSummary()" placeholder="e.g. yourname@agency.com" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <span class="text-[10px] text-slate-500 mt-0.5 block">Replies from clients will be directed to this address.</span>
                     </div>
@@ -194,7 +194,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">Agency / Company Name <span class="text-rose-400">*</span></label>
                         <div class="relative">
                             <i class="fa-solid fa-briefcase absolute left-3 top-3 text-slate-500 text-xs"></i>
-                            <input type="text" id="obAgencyName" placeholder="e.g. Apex Growth Studio" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="text" id="obAgencyName" oninput="updateOnboardSummary()" placeholder="e.g. Apex Growth Studio" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                     </div>
 
@@ -278,7 +278,7 @@
                         <label class="block text-xs font-medium text-slate-300 mb-1">Portfolio or Showcase Demo Link</label>
                         <div class="relative">
                             <i class="fa-solid fa-link absolute left-3 top-3 text-slate-500 text-xs"></i>
-                            <input type="url" id="obPortfolioUrl" placeholder="e.g. https://myagencyshowcase.com" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="url" id="obPortfolioUrl" oninput="updateOnboardSummary()" placeholder="e.g. https://myagencyshowcase.com" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <span class="text-[10px] text-emerald-400/90 mt-0.5 block"><i class="fa-solid fa-bolt mr-1"></i> Dynamically appended to your pitches so clients can see live proof of your work.</span>
                     </div>
@@ -343,7 +343,7 @@
                             </a>
                         </div>
                         <div class="relative">
-                            <input type="password" id="obApiKey" placeholder="Paste your API key here..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+                            <input type="password" id="obApiKey" oninput="updateOnboardSummary()" placeholder="Paste your API key here..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
                         </div>
                         <div class="flex items-center justify-between pt-1">
                             <button type="button" onclick="testObAiKey()" id="obTestKeyBtn" class="px-3 py-1.5 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 text-xs font-semibold transition flex items-center gap-1.5">
@@ -374,31 +374,66 @@
                     <p class="text-xs text-slate-400 mt-1">Review your setup below. Clicking activate will personalize all 28+ leads with your identity.</p>
                 </div>
 
-                <!-- Summary Card -->
-                <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5 text-xs">
-                    <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
-                        <span class="text-slate-400">Sender Identity:</span>
-                        <span class="font-semibold text-white" id="revSenderName">--</span>
+                <!-- Summary Card (Enterprise Verified Review) -->
+                <div class="p-4 rounded-2xl bg-gradient-to-b from-slate-900/95 to-slate-950/95 border border-slate-700/80 shadow-xl space-y-3 text-xs">
+                    
+                    <!-- Sender Row -->
+                    <div class="flex justify-between items-center py-1.5 border-b border-slate-800/90">
+                        <span class="text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-user-check text-emerald-400 text-xs"></i>
+                            <span>Sender Identity:</span>
+                        </span>
+                        <span class="font-bold text-white text-xs" id="revSenderName">Mohammad Hamza</span>
                     </div>
-                    <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
-                        <span class="text-slate-400">WhatsApp Dispatch Number:</span>
-                        <span class="font-semibold text-emerald-400" id="revSenderPhone">--</span>
+
+                    <!-- WhatsApp Row -->
+                    <div class="flex justify-between items-center py-1.5 border-b border-slate-800/90">
+                        <span class="text-slate-400 flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i>
+                            <span>WhatsApp Dispatch:</span>
+                        </span>
+                        <span class="font-bold text-emerald-300 font-mono text-xs" id="revSenderPhone">+91 8808129388</span>
                     </div>
-                    <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
-                        <span class="text-slate-400">Outreach Email:</span>
-                        <span class="font-semibold text-white" id="revSenderEmail">--</span>
+
+                    <!-- Email Row -->
+                    <div class="flex justify-between items-center py-1.5 border-b border-slate-800/90">
+                        <span class="text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-cyan-400 text-xs"></i>
+                            <span>Outreach Email:</span>
+                        </span>
+                        <span class="font-bold text-slate-200 text-xs" id="revSenderEmail">hamza@agency.com</span>
                     </div>
-                    <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
-                        <span class="text-slate-400">Agency & Niche:</span>
-                        <span class="font-semibold text-cyan-300" id="revAgencyOffer">--</span>
+
+                    <!-- Agency & Niche Row -->
+                    <div class="flex justify-between items-center py-1.5 border-b border-slate-800/90">
+                        <span class="text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-building text-amber-400 text-xs"></i>
+                            <span>Agency &amp; Niches:</span>
+                        </span>
+                        <span class="font-bold text-cyan-300 text-xs flex items-center gap-1.5 text-right" id="revAgencyOffer">
+                            HRS Web Solutions • All Services (Master Bundle)
+                        </span>
                     </div>
-                    <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
-                        <span class="text-slate-400">Showcase / Portfolio:</span>
-                        <span class="font-semibold text-white truncate max-w-[220px]" id="revPortfolioUrl">--</span>
+
+                    <!-- Showcase Link Row -->
+                    <div class="flex justify-between items-center py-1.5 border-b border-slate-800/90">
+                        <span class="text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-link text-blue-400 text-xs"></i>
+                            <span>Showcase / Proof:</span>
+                        </span>
+                        <span class="font-mono text-slate-300 text-[11px] truncate max-w-[220px]" id="revPortfolioUrl">https://hrswebsolution.online</span>
                     </div>
-                    <div class="flex justify-between items-center py-1">
-                        <span class="text-slate-400">AI Intelligence Engine:</span>
-                        <span class="font-semibold text-purple-300" id="revAiModel">--</span>
+
+                    <!-- AI Model Row -->
+                    <div class="flex justify-between items-center py-1.5">
+                        <span class="text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-brain text-purple-400 text-xs"></i>
+                            <span>AI Intelligence Engine:</span>
+                        </span>
+                        <span class="font-bold text-purple-300 text-xs flex items-center gap-1.5" id="revAiModel">
+                            <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                            <span>Google Gemini (2.5 Flash &amp; 3.8 High)</span>
+                        </span>
                     </div>
                 </div>
 
@@ -2425,20 +2460,22 @@
         }
 
         function goOnboardStep(step) {
-            if (step === 4) {
-                updateOnboardSummary();
-            }
+            updateOnboardSummary();
             for (let i = 1; i <= 4; i++) {
                 const s = document.getElementById('obStep' + i);
                 const t = document.getElementById('stepTab' + i);
                 if (s) s.classList.toggle('hidden', i !== step);
                 if (t) {
+                    const badge = t.querySelector('.w-6');
                     if (i === step) {
-                        t.className = "flex-1 py-2 text-center text-xs font-bold border-b-2 border-cyan-400 text-cyan-300";
+                        t.className = "flex flex-col items-center text-center p-2.5 rounded-xl bg-cyan-500/15 border border-cyan-500/50 text-cyan-300 transition cursor-pointer shadow-md shadow-cyan-500/10";
+                        if (badge) badge.className = "w-6 h-6 rounded-full bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center mb-1 shadow-sm";
                     } else if (i < step) {
-                        t.className = "flex-1 py-2 text-center text-xs font-medium border-b-2 border-emerald-500/50 text-emerald-400";
+                        t.className = "flex flex-col items-center text-center p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 transition cursor-pointer hover:border-emerald-400";
+                        if (badge) badge.className = "w-6 h-6 rounded-full bg-emerald-500/30 text-emerald-300 border border-emerald-400/50 font-bold text-xs flex items-center justify-center mb-1";
                     } else {
-                        t.className = "flex-1 py-2 text-center text-xs font-medium border-b-2 border-slate-700 text-slate-500";
+                        t.className = "flex flex-col items-center text-center p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/50 text-slate-400 transition cursor-pointer hover:border-slate-500";
+                        if (badge) badge.className = "w-6 h-6 rounded-full bg-slate-800 text-slate-400 font-bold text-xs flex items-center justify-center mb-1";
                     }
                 }
             }
@@ -2461,6 +2498,7 @@
                     targetBtn.className = "p-2.5 rounded-xl border-2 border-cyan-400 bg-cyan-500/15 text-left transition text-xs ob-niche-btn shadow-md shadow-cyan-500/10";
                 }
             }
+            updateOnboardSummary();
         }
 
         function selectObProvider(provKey, btn) {
