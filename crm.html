@@ -198,32 +198,78 @@
                         </div>
                     </div>
 
+                    <!-- Plan License Status Dynamic Ribbon -->
+                    <div id="obPlanBadgeStrip" class="p-2.5 rounded-xl bg-gradient-to-r from-amber-500/15 via-blue-500/15 to-purple-500/15 border border-amber-500/30 flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-crown text-amber-400"></i>
+                            <span class="text-white font-bold" id="obPlanBadgeText">All Services Master Bundle Active (₹3,200 Plan)</span>
+                        </div>
+                        <span id="obPlanTagBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 font-bold border border-amber-400/30">
+                            ALL NICHES UNLOCKED
+                        </span>
+                    </div>
+
                     <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1">Primary Outreach Offer / Niche</label>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label class="block text-xs font-semibold text-slate-200">Agency Service Scope &amp; Niches</label>
+                            <span class="text-[10px] text-cyan-400 font-mono" id="obNicheHelperText">Full Agency or Single Focus</span>
+                        </div>
+
+                        <!-- Top Master Option: All 5/6 Niches Included (Default for Agency Plan) -->
+                        <div class="mb-2.5">
+                            <button type="button" id="obNiche_all" onclick="selectObNiche('all', this)" class="w-full p-3 rounded-xl border-2 border-cyan-400 bg-gradient-to-r from-cyan-500/20 via-blue-600/15 to-indigo-600/20 text-left transition text-xs ob-niche-btn shadow-lg shadow-cyan-500/15 flex items-center justify-between group">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 flex items-center justify-center text-sm shadow-md flex-shrink-0">
+                                        <i class="fa-solid fa-crown text-amber-300"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-white text-xs flex items-center gap-1.5 flex-wrap">
+                                            <span>All Niches Included (Full Agency Master Bundle)</span>
+                                            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">&#10003; UNLIMITED</span>
+                                        </div>
+                                        <div class="text-[10px] text-slate-300 truncate mt-0.5">
+                                            Web Design + Funnels + E-Commerce + SEO + Video &amp; Reels + Paid Ads (All 52+ Leads)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 flex-shrink-0 ml-2">
+                                    <span class="w-5 h-5 rounded-md border border-cyan-400 bg-cyan-500 text-white flex items-center justify-center text-[10px] shadow-sm">
+                                        <i class="fa-solid fa-check"></i>
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+
+                        <!-- Or individual niche specialization grid -->
+                        <div class="text-[11px] text-slate-400 mb-1.5 font-medium flex items-center justify-between">
+                            <span>Or pick a specific specialist focus:</span>
+                            <span class="text-[10px] text-slate-500 font-mono">Custom Plan Mode</span>
+                        </div>
+
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="obNicheSelector">
-                            <button type="button" onclick="selectObNiche('web_design', this)" class="p-2.5 rounded-xl border border-cyan-500/50 bg-cyan-500/10 text-left transition text-xs ob-niche-btn">
-                                <div class="font-medium text-white">🌐 Web Design</div>
-                                <div class="text-[10px] text-slate-400">No Website Pitches</div>
+                            <button type="button" id="obNiche_web_design" onclick="selectObNiche('web_design', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
+                                <div class="font-medium text-white flex items-center gap-1.5">🌐 Web Design</div>
+                                <div class="text-[10px] text-slate-400 mt-0.5">No Website Pitches</div>
                             </button>
-                            <button type="button" onclick="selectObNiche('funnels', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
-                                <div class="font-medium text-white">🚀 Funnels & Leads</div>
-                                <div class="text-[10px] text-slate-400">Direct Inquiries</div>
+                            <button type="button" id="obNiche_funnels" onclick="selectObNiche('funnels', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
+                                <div class="font-medium text-white flex items-center gap-1.5">🚀 Funnels &amp; Leads</div>
+                                <div class="text-[10px] text-slate-400 mt-0.5">Direct Inquiries</div>
                             </button>
-                            <button type="button" onclick="selectObNiche('shopify_ecom', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
-                                <div class="font-medium text-white">📱 E-Commerce</div>
-                                <div class="text-[10px] text-slate-400">Store Architecture</div>
+                            <button type="button" id="obNiche_shopify_ecom" onclick="selectObNiche('shopify_ecom', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
+                                <div class="font-medium text-white flex items-center gap-1.5">📱 E-Commerce</div>
+                                <div class="text-[10px] text-slate-400 mt-0.5">Store Architecture</div>
                             </button>
-                            <button type="button" onclick="selectObNiche('local_seo', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
-                                <div class="font-medium text-white">🎯 Local SEO</div>
-                                <div class="text-[10px] text-slate-400">Google Maps Rank</div>
+                            <button type="button" id="obNiche_local_seo" onclick="selectObNiche('local_seo', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
+                                <div class="font-medium text-white flex items-center gap-1.5">🎯 Local SEO</div>
+                                <div class="text-[10px] text-slate-400 mt-0.5">Google Maps Rank</div>
                             </button>
-                            <button type="button" onclick="selectObNiche('video_editing', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
-                                <div class="font-medium text-white">🎬 Video & Reels</div>
-                                <div class="text-[10px] text-slate-400">Viral Short-form</div>
+                            <button type="button" id="obNiche_video_editing" onclick="selectObNiche('video_editing', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
+                                <div class="font-medium text-white flex items-center gap-1.5">🎬 Video &amp; Reels</div>
+                                <div class="text-[10px] text-slate-400 mt-0.5">Viral Short-form</div>
                             </button>
-                            <button type="button" onclick="selectObNiche('social_media_ads', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
-                                <div class="font-medium text-white">💡 Ads & Growth</div>
-                                <div class="text-[10px] text-slate-400">Meta / Google Ads</div>
+                            <button type="button" id="obNiche_social_media_ads" onclick="selectObNiche('social_media_ads', this)" class="p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn">
+                                <div class="font-medium text-white flex items-center gap-1.5">💡 Ads &amp; Growth</div>
+                                <div class="text-[10px] text-slate-400 mt-0.5">Meta / Google Ads</div>
                             </button>
                         </div>
                     </div>
@@ -2277,12 +2323,13 @@
             const pUrl = (document.getElementById('obPortfolioUrl')?.value || '').trim();
 
             const nicheMap = {
-                web_design: "Web Design",
+                all: "All Services / Full Agency (Master Bundle)",
+                web_design: "Web Design & UI/UX",
                 funnels: "Funnels & Leads",
-                shopify_ecom: "E-Commerce",
-                local_seo: "Local SEO",
+                shopify_ecom: "E-Commerce Architecture",
+                local_seo: "Local SEO & Maps",
                 video_editing: "Video & Reels",
-                social_media_ads: "Ads & Growth"
+                social_media_ads: "Paid Ads & Growth"
             };
             const currentNiche = window.selectedObNiche || 'web_design';
             const nicheLabel = nicheMap[currentNiche] || currentNiche;
@@ -2340,6 +2387,28 @@
                         elKey.value = byok.gemini || saved.geminiKey || '';
                     }
 
+                    // Plan detection: ₹3,200 All Services Master Bundle vs Custom Plan
+                    const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all');
+                    const badgeText = document.getElementById('obPlanBadgeText');
+                    const tagBadge = document.getElementById('obPlanTagBadge');
+                    if (isAllBundle) {
+                        if (badgeText) badgeText.textContent = "All Services Master Bundle Active (₹3,200 Plan) • All Niches Unlocked";
+                        if (tagBadge) {
+                            tagBadge.textContent = "ALL NICHES UNLOCKED";
+                            tagBadge.className = "text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 font-bold border border-amber-400/30";
+                        }
+                        window.selectedObNiche = 'all';
+                    } else {
+                        if (badgeText) badgeText.textContent = "Custom Specialist Plan (₹1,999 Plan)";
+                        if (tagBadge) {
+                            tagBadge.textContent = "CUSTOM SPECIALIST";
+                            tagBadge.className = "text-[10px] font-mono px-2 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-400/30";
+                        }
+                        const firstNiche = (currentUser.targetNiches && currentUser.targetNiches[0]) || 'web_design';
+                        window.selectedObNiche = firstNiche;
+                    }
+                    selectObNiche(window.selectedObNiche);
+
                     goOnboardStep(1);
                 }
             } else {
@@ -2378,10 +2447,19 @@
         function selectObNiche(nicheKey, btn) {
             window.selectedObNiche = nicheKey;
             document.querySelectorAll('.ob-niche-btn').forEach(b => {
-                b.className = "p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn";
+                if (b.id === 'obNiche_all') {
+                    b.className = "w-full p-3 rounded-xl border border-white/10 bg-slate-900/60 hover:border-white/20 text-left transition text-xs ob-niche-btn flex items-center justify-between group";
+                } else {
+                    b.className = "p-2.5 rounded-xl border border-slate-700/80 bg-slate-900/60 hover:border-slate-600 text-left transition text-xs ob-niche-btn";
+                }
             });
-            if (btn) {
-                btn.className = "p-2.5 rounded-xl border border-cyan-500 bg-cyan-500/15 text-left transition text-xs ob-niche-btn shadow-md shadow-cyan-500/10";
+            const targetBtn = btn || document.getElementById('obNiche_' + nicheKey) || document.getElementById('obNiche_all');
+            if (targetBtn) {
+                if (nicheKey === 'all') {
+                    targetBtn.className = "w-full p-3 rounded-xl border-2 border-cyan-400 bg-gradient-to-r from-cyan-500/20 via-blue-600/15 to-indigo-600/20 text-left transition text-xs ob-niche-btn shadow-lg shadow-cyan-500/15 flex items-center justify-between";
+                } else {
+                    targetBtn.className = "p-2.5 rounded-xl border-2 border-cyan-400 bg-cyan-500/15 text-left transition text-xs ob-niche-btn shadow-md shadow-cyan-500/10";
+                }
             }
         }
 
