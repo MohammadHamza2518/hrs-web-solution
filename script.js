@@ -1125,6 +1125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       allOrders.unshift(newOrder);
       localStorage.setItem('osp_orders_db', JSON.stringify(allOrders));
+      localStorage.setItem('osp_orders', JSON.stringify(allOrders));
     } catch(e) {}
 
     const formView = document.getElementById('checkoutFormView');
