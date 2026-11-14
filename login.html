@@ -368,12 +368,13 @@
       }
     }
 
-    function handleLoginSubmit(e) {
+    async function handleLoginSubmit(e) {
       e.preventDefault();
       const rawInput = (document.getElementById('loginEmail')?.value || '').trim();
       const email = rawInput.toLowerCase();
       const passOrKey = (document.getElementById('loginPassword')?.value || '').trim();
       const cleanDigits = rawInput.replace(/\D/g, '');
+      const submitBtn = document.getElementById('btnLoginSubmit');
 
       if (!rawInput) {
         showAlert("Please enter your registered email address or WhatsApp number.");
@@ -384,7 +385,12 @@
         return;
       }
 
-      // 1. Check in registered users list
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Verifying Credentials...';
+      }
+
+      // 1. Check in local registered users list
       let foundUser = null;
       let users = [];
       try {
@@ -423,9 +429,29 @@
       const isBuyerMatch = (buyerEmail && buyerEmail === email) || 
                            (cleanDigits && buyerPhone && (buyerPhone.includes(cleanDigits) || cleanDigits.includes(buyerPhone)));
 
-      // 4. Founder Master Account check
-      const isFounder = email.includes('hamza') || cleanDigits.includes('9519998936') || cleanDigits.includes('8808129388');
+      // 4. CROSS-DEVICE / INCOGNITO CLOUD VERIFICATION
+      // If user is on a new device or incognito mode where localStorage is empty, query Cloud Database!
+      if (!foundUser && !foundOrder && !isBuyerMatch) {
+        try {
+          const cloudResp = await fetch('/api/auth?action=login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              username: rawInput,
+              password: passOrKey
+            })
+          });
+          const cloudData = await cloudResp.json();
+          if (cloudData.success && cloudData.user) {
+            foundUser = cloudData.user;
+          }
+        } catch(netErr) {
+          console.warn("Cloud DB fetch fallback:", netErr);
+        }
+      }
 
+      // 5. Founder Master Account check
+      const isFounder = email.includes('hamza') || cleanDigits.includes('9519998936') || cleanDigits.includes('8808129388');
       const isLicenseKeyMatch = passOrKey.toUpperCase().startsWith('OSP-');
 
       // Security check: If user has a registered password, enforce match
@@ -434,8 +460,14 @@
         const passMatch = (foundUser.password === passOrKey) || 
                           (foundUser.licenseKey && foundUser.licenseKey.toLowerCase() === passOrKey.toLowerCase()) ||
                           (cleanDigits && cleanPass && cleanDigits === cleanPass) ||
+                          (foundUser.phone && cleanPass && foundUser.phone.includes(cleanPass)) ||
+                          (foundUser.password === foundUser.phone && passOrKey.length >= 4) ||
                           isFounder;
         if (!passMatch) {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Open CRM Dashboard</span><i class="fas fa-arrow-right text-xs"></i>';
+          }
           showAlert("Incorrect password or license key. Please check your credentials.");
           return;
         }
@@ -456,11 +488,25 @@
           licenseKey: userKey,
           targetNiches: userNiches,
           targetNichesDisplay: userNichesDisplay,
-          tier: 'Lifetime Commercial Pro',
+          tier: foundUser?.tier || 'Lifetime Commercial Pro',
           loginAt: new Date().toISOString()
         };
 
-        // If user didn't have password, remember passOrKey for future
+        // Restore Google Gemini API key if synced from cloud!
+        if (foundUser?.geminiKey) {
+          try {
+            const s = JSON.parse(localStorage.getItem('osp_settings') || '{}');
+            s.geminiKey = foundUser.geminiKey;
+            s.aiApiKey = foundUser.geminiKey;
+            s.senderName = userName;
+            s.senderPhone = userPhone;
+            s.senderEmail = userEmail;
+            localStorage.setItem('osp_settings', JSON.stringify(s));
+            localStorage.setItem('osp_byok_keys', JSON.stringify({ gemini: foundUser.geminiKey }));
+          } catch(e) {}
+        }
+
+        // Remember passOrKey for future offline logins
         if (foundUser && !foundUser.password && passOrKey && !passOrKey.startsWith('OSP-')) {
           foundUser.password = passOrKey;
           try { localStorage.setItem('osp_registered_users', JSON.stringify(users)); } catch(e) {}
@@ -471,16 +517,45 @@
         localStorage.setItem('osp_license_paid', 'true');
         localStorage.setItem('osp_onboarding_completed', 'true');
 
-        showAlert("Login successful! Redirecting to your CRM workspace...", "success");
+        showAlert("Login successful! Syncing cloud workspace...", "success");
+
+        // Sync leads & settings from Cloud MongoDB Atlas if available
+        try {
+          const syncQuery = new URLSearchParams();
+          if (userPhone) syncQuery.set('phone', userPhone);
+          if (userEmail) syncQuery.set('email', userEmail);
+          if (userKey) syncQuery.set('licenseKey', userKey);
+
+          const syncResp = await fetch(`/api/sync?${syncQuery.toString()}`);
+          if (syncResp.ok) {
+            const syncData = await syncResp.json();
+            if (syncData.success && syncData.exists) {
+              if (Array.isArray(syncData.leads) && syncData.leads.length > 0) {
+                localStorage.setItem(LS_LEADS, JSON.stringify(syncData.leads));
+              }
+              if (syncData.settings && typeof syncData.settings === 'object') {
+                const curSettings = JSON.parse(localStorage.getItem(LS_SETTINGS) || '{}');
+                localStorage.setItem(LS_SETTINGS, JSON.stringify({ ...curSettings, ...syncData.settings }));
+              }
+            }
+          }
+        } catch(syncErr) {
+          console.warn("Sync lead pull err:", syncErr);
+        }
+
         setTimeout(() => {
           redirectToCrm();
-        }, 700);
+        }, 500);
       } else {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span>Open CRM Dashboard</span><i class="fas fa-arrow-right text-xs"></i>';
+        }
         showAlert("Account or License Key not found. Please verify your Email or WhatsApp number.");
       }
     }
 
-    function handleActivateSubmit(e) {
+    async function handleActivateSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('activateName').value.trim();
       const email = document.getElementById('activateEmail').value.trim().toLowerCase();
@@ -519,7 +594,7 @@
         return;
       }
 
-      // Save user
+      // Save user locally
       let users = [];
       try {
         users = JSON.parse(localStorage.getItem('osp_registered_users')) || [];
@@ -542,6 +617,24 @@
         users.push(newUser);
       }
       localStorage.setItem('osp_registered_users', JSON.stringify(users));
+
+      // Also register into Cloud MongoDB Atlas for cross-device access!
+      try {
+        await fetch('/api/auth?action=register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            licenseKey: key,
+            password,
+            targetNiches: [nicheVal],
+            targetNichesDisplay: nicheDisplay
+          })
+        });
+      } catch (err) {
+        console.warn("Cloud activate sync error:", err);
+      }
 
       // Also log order if not present
       try {
@@ -581,6 +674,7 @@
       };
       localStorage.setItem(LS_USER, JSON.stringify(authPayload));
       localStorage.setItem('osp_license_paid', 'true');
+      localStorage.setItem('osp_onboarding_completed', 'true');
 
       showAlert("License activated successfully! Launching your CRM...", "success");
       setTimeout(() => {

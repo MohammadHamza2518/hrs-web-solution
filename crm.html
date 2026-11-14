@@ -3695,6 +3695,7 @@ function getInitialGlobalLeads() {
                         leadsVault = Array.from(existingMap.values());
                         window.leadsVault = leadsVault;
                         saveLeadsToStore();
+                        syncWithCloudLeads();
                         return;
                     }
                 }
@@ -3706,14 +3707,111 @@ function getInitialGlobalLeads() {
             leadsVault = defaults;
             window.leadsVault = leadsVault;
             saveLeadsToStore();
+            syncWithCloudLeads();
         }
 
+        let _cloudSyncTimeout = null;
         function saveLeadsToStore() {
             window.leadsVault = leadsVault;
             try {
                 localStorage.setItem(LS_LEADS, JSON.stringify(leadsVault));
             } catch (e) {
                 console.error("Error saving leads:", e);
+            }
+
+            // Debounced Cross-Device Cloud Sync to MongoDB Atlas
+            if (_cloudSyncTimeout) clearTimeout(_cloudSyncTimeout);
+            _cloudSyncTimeout = setTimeout(() => {
+                pushLeadsToCloud();
+            }, 1200);
+        }
+
+        async function pushLeadsToCloud() {
+            try {
+                if (!currentUser) return;
+                const phone = (currentUser.phone || '').replace(/\D/g, '');
+                const email = (currentUser.email || '').toLowerCase().trim();
+                const licenseKey = (currentUser.licenseKey || '').trim();
+                if (!phone && !email && !licenseKey) return;
+
+                const curSettings = JSON.parse(localStorage.getItem(LS_SETTINGS) || '{}');
+
+                await fetch('/api/sync', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        phone,
+                        email,
+                        licenseKey,
+                        leads: leadsVault,
+                        settings: curSettings
+                    })
+                });
+            } catch (e) {
+                console.warn("Cloud push error:", e);
+            }
+        }
+
+        async function syncWithCloudLeads() {
+            try {
+                if (!currentUser) return;
+                const phone = (currentUser.phone || '').replace(/\D/g, '');
+                const email = (currentUser.email || '').toLowerCase().trim();
+                const licenseKey = (currentUser.licenseKey || '').trim();
+
+                const q = new URLSearchParams();
+                if (phone) q.set('phone', phone);
+                if (email && email.includes('@')) q.set('email', email);
+                if (licenseKey) q.set('licenseKey', licenseKey);
+
+                if (!phone && !email && !licenseKey) return;
+
+                const resp = await fetch(`/api/sync?${q.toString()}`);
+                if (!resp.ok) return;
+                const data = await resp.json();
+
+                if (data.success && data.exists && Array.isArray(data.leads) && data.leads.length > 0) {
+                    let changed = false;
+                    const cloudMap = new Map();
+                    data.leads.forEach(cl => {
+                        const k = cl.id || cl.business_name || cl.name;
+                        if (k) cloudMap.set(k, cl);
+                    });
+
+                    // Merge cloud progress (statuses, pitches, timestamps) into local vault
+                    leadsVault.forEach(localLead => {
+                        const k = localLead.id || localLead.business_name || localLead.name;
+                        if (cloudMap.has(k)) {
+                            const cl = cloudMap.get(k);
+                            if (cl.status && cl.status !== localLead.status) {
+                                localLead.status = cl.status;
+                                changed = true;
+                            }
+                            if (cl.sent_at) localLead.sent_at = cl.sent_at;
+                            if (cl.email_sent_at) localLead.email_sent_at = cl.email_sent_at;
+                            if (cl.pitch) localLead.pitch = cl.pitch;
+                            if (cl.notes) localLead.notes = cl.notes;
+                        }
+                    });
+
+                    // Add custom leads added from other devices
+                    data.leads.forEach(cl => {
+                        const k = cl.id || cl.business_name || cl.name;
+                        if (!leadsVault.some(l => (l.id || l.business_name || l.name) === k)) {
+                            leadsVault.unshift(cl);
+                            changed = true;
+                        }
+                    });
+
+                    if (changed) {
+                        window.leadsVault = leadsVault;
+                        try { localStorage.setItem(LS_LEADS, JSON.stringify(leadsVault)); } catch(e) {}
+                        if (typeof loadStats === 'function') loadStats();
+                        if (typeof loadLeads === 'function') loadLeads();
+                    }
+                }
+            } catch (err) {
+                console.warn("Cloud background sync error:", err);
             }
         }
 
@@ -5334,6 +5432,24 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 aiModel: document.getElementById("cfgAiModel")?.value || 'gemini-2.0-flash'
             };
             localStorage.setItem(LS_SETTINGS, JSON.stringify(s));
+
+            // Sync API key & settings to Cloud MongoDB Atlas for cross-device persistence
+            if (currentUser) {
+                const phone = (currentUser.phone || '').replace(/\D/g, '');
+                const email = (currentUser.email || '').toLowerCase().trim();
+                const licenseKey = (currentUser.licenseKey || '').trim();
+                if (apiKey) {
+                    fetch('/api/auth?action=save_key', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key: apiKey, geminiKey: apiKey, phone, email, licenseKey })
+                    }).catch(e => console.warn(e));
+                }
+                if (typeof pushLeadsToCloud === 'function') {
+                    pushLeadsToCloud();
+                }
+            }
+
             showToast("Settings saved successfully!");
             closeSettingsModal();
         }

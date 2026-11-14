@@ -975,7 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  window.handleSaveKeyAndLaunchCRM = function() {
+  window.handleSaveKeyAndLaunchCRM = async function() {
     const input = document.getElementById('onboardApiKeyInput');
     let keyVal = (input ? input.value : '').trim();
     keyVal = keyVal.replace(/^["']|["']$/g, '').trim();
@@ -987,6 +987,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       alert('⚠️ AI API Key is required to connect your Copilot and launch CRM. Please enter your Google Gemini or AI API key above.');
       return; // STRICT BLOCK: Cannot proceed to CRM without API key!
+    }
+
+    const launchBtn = document.querySelector('button[onclick="handleSaveKeyAndLaunchCRM()"]');
+    if (launchBtn) {
+      launchBtn.disabled = true;
+      launchBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Connecting AI Copilot & Syncing Cloud...';
     }
 
     let keys = {};
@@ -1033,6 +1039,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mark onboarding completed so user directly gets the unlocked CRM workspace
     localStorage.setItem('osp_onboarding_completed', 'true');
+
+    // SYNC KEY TO CLOUD MONGODB (Cross-device persistence)
+    try {
+      const phone = localStorage.getItem('osp_buyer_phone') || '';
+      const email = localStorage.getItem('osp_buyer_email') || '';
+      const licenseKey = localStorage.getItem('osp_license_key') || '';
+      await fetch('/api/auth?action=save_key', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ geminiKey: keyVal, key: keyVal, phone, email, licenseKey })
+      });
+    } catch(err) {
+      console.warn("Could not sync key to cloud:", err);
+    }
 
     // Direct, seamless redirect to CRM
     window.location.href = window.location.protocol === 'file:' ? 'crm.html' : '/crm';
@@ -1126,6 +1146,26 @@ document.addEventListener('DOMContentLoaded', () => {
       allOrders.unshift(newOrder);
       localStorage.setItem('osp_orders_db', JSON.stringify(allOrders));
       localStorage.setItem('osp_orders', JSON.stringify(allOrders));
+
+      // SYNC REGISTRATION TO CLOUD MONGODB ATLAS (For immediate cross-device login)
+      try {
+        fetch('/api/auth?action=register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: customer.name,
+            phone: customer.phone,
+            email: customer.email || '',
+            licenseKey: randomKey,
+            planTier: customer.planTier || 'Lifetime Commercial Pro',
+            targetNiches: nichesList,
+            targetNichesDisplay: nichesDisplay,
+            password: customer.phone.replace(/\D/g, '') || '123456'
+          })
+        }).catch(err => console.warn('Cloud registration sync warn:', err));
+      } catch(syncErr) {
+        console.warn('Cloud registration sync err:', syncErr);
+      }
     } catch(e) {}
 
     const formView = document.getElementById('checkoutFormView');

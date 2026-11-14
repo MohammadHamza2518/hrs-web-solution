@@ -1,0 +1,9 @@
+{
+  "name": "hrs-web-solution",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HRS Web Solutions • Outreach Studio Pro Platform",
+  "dependencies": {
+    "mongodb": "^6.5.0"
+  }
+}
