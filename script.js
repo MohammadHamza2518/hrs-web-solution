@@ -978,32 +978,74 @@ document.addEventListener('DOMContentLoaded', () => {
   window.handleSaveKeyAndLaunchCRM = function() {
     const input = document.getElementById('onboardApiKeyInput');
     let keyVal = (input ? input.value : '').trim();
-    keyVal = keyVal.replace(/^[\"\']|[\"\']$/g, '').trim();
+    keyVal = keyVal.replace(/^["']|["']$/g, '').trim();
 
-    if (keyVal) {
-      let keys = {};
-      try { keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {}; } catch(e) {}
-      const prov = window.activeOnboardProvider || 'gemini';
-      keys[prov] = keyVal;
-      localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
-
-      try {
-        const s = JSON.parse(localStorage.getItem('osp_settings_v3') || '{}');
-        if (prov === 'gemini') s.geminiKey = keyVal;
-        else if (prov === 'claude') s.claudeKey = keyVal;
-        else if (prov === 'openai') s.openaiKey = keyVal;
-        else if (prov === 'deepseek') s.deepseekKey = keyVal;
-        s.aiProvider = prov;
-        localStorage.setItem('osp_settings_v3', JSON.stringify(s));
-      } catch(e) {}
+    if (!keyVal || keyVal.length < 10) {
+      if (input) {
+        input.classList.add('!border-rose-500', 'ring-1', 'ring-rose-500');
+        input.focus();
+      }
+      alert('⚠️ AI API Key is required to connect your Copilot and launch CRM. Please enter your Google Gemini or AI API key above.');
+      return; // STRICT BLOCK: Cannot proceed to CRM without API key!
     }
 
-    // Direct, seamless redirect to CRM without any blocking alerts
+    let keys = {};
+    try { keys = JSON.parse(localStorage.getItem('osp_byok_keys')) || {}; } catch(e) {}
+    const prov = window.activeOnboardProvider || 'gemini';
+    keys[prov] = keyVal;
+    localStorage.setItem('osp_byok_keys', JSON.stringify(keys));
+
+    // Save to osp_settings (for CRM runtime)
+    try {
+      const s = JSON.parse(localStorage.getItem('osp_settings') || '{}');
+      if (prov === 'gemini') {
+        s.geminiKey = keyVal;
+        s.aiApiKey = keyVal;
+      } else if (prov === 'claude') {
+        s.claudeKey = keyVal;
+        s.aiApiKey = keyVal;
+      } else if (prov === 'openai') {
+        s.openaiKey = keyVal;
+        s.aiApiKey = keyVal;
+      } else if (prov === 'deepseek') {
+        s.deepseekKey = keyVal;
+        s.aiApiKey = keyVal;
+      }
+      s.aiProvider = prov;
+      s.aiModel = prov === 'gemini' ? 'gemini-3.5-flash-lite' : (prov === 'openai' ? 'gpt-4o' : 'claude-3-7-sonnet-20250219');
+      s.senderName = localStorage.getItem('osp_buyer_name') || s.senderName || 'Mohammad Hamza';
+      s.senderPhone = localStorage.getItem('osp_buyer_phone') || s.senderPhone || '+91 8808129388';
+      s.senderEmail = localStorage.getItem('osp_buyer_email') || s.senderEmail || 'hamza@agency.com';
+      s.agencyName = s.agencyName || 'HRS Web Solutions';
+      localStorage.setItem('osp_settings', JSON.stringify(s));
+    } catch(e) {}
+
+    // Save to osp_settings_v3
+    try {
+      const s3 = JSON.parse(localStorage.getItem('osp_settings_v3') || '{}');
+      if (prov === 'gemini') s3.geminiKey = keyVal;
+      else if (prov === 'claude') s3.claudeKey = keyVal;
+      else if (prov === 'openai') s3.openaiKey = keyVal;
+      else if (prov === 'deepseek') s3.deepseekKey = keyVal;
+      s3.aiProvider = prov;
+      localStorage.setItem('osp_settings_v3', JSON.stringify(s3));
+    } catch(e) {}
+
+    // Mark onboarding completed so user directly gets the unlocked CRM workspace
+    localStorage.setItem('osp_onboarding_completed', 'true');
+
+    // Direct, seamless redirect to CRM
     window.location.href = window.location.protocol === 'file:' ? 'crm.html' : '/crm';
   };
 
   window.skipKeyAndLaunchCRM = function() {
-    window.location.href = window.location.protocol === 'file:' ? 'crm.html' : '/crm';
+    const input = document.getElementById('onboardApiKeyInput');
+    if (input) {
+      input.classList.add('!border-rose-500', 'ring-1', 'ring-rose-500');
+      input.focus();
+    }
+    alert('⚠️ AI API Key is required to connect your Copilot and launch CRM. Please enter your Google Gemini or AI API key above.');
+    return; // STRICT BLOCK
   };
 
   window.handlePaymentSuccess = function(response, customer) {

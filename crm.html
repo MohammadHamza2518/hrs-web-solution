@@ -2566,6 +2566,17 @@
                 }
             }
 
+            // If navigating forward past Step 3 (to Step 4 / Launch)
+            if (targetStep > 3) {
+                const key = (document.getElementById('obApiKey')?.value || '').trim();
+                const prov = window.selectedObProvider || 'gemini';
+                if (prov !== 'templates' && (!key || key.length < 10)) {
+                    showToast('⚠️ Please enter your AI API key before proceeding to launch.');
+                    document.getElementById('obApiKey')?.focus();
+                    return false;
+                }
+            }
+
             return true;
         }
 
