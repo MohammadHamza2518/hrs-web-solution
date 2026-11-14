@@ -591,40 +591,38 @@
 
     <!-- Unified Enterprise Command Header (Glassmorphic Top Navigation) -->
     <header class="sticky top-0 z-40 bg-dark-900/95 backdrop-blur-xl border-b border-gray-800/80 shadow-2xl">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        <div class="w-full max-w-[1440px] mx-auto px-3 sm:px-4 lg:px-6 h-16 flex items-center justify-between gap-2 lg:gap-3">
             <!-- Left: Official HRS Brand Logo & Outreach Studio -->
-            <div class="flex items-center space-x-3 sm:space-x-4 flex-shrink-0">
-                <a href="/" class="flex items-center gap-3 sm:gap-3.5 group">
+            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+                <a href="/" class="flex items-center gap-2 sm:gap-3 group">
                     <!-- Brand Logo Visual -->
                     <div class="flex items-center">
                         <!-- Desktop Full Vector Logo Artwork (Optimized for Dark Theme) -->
-                        <img src="assets/images/hrs_logo_dark.png" alt="HRS Web Solutions" class="h-9 sm:h-10 w-auto object-contain hidden sm:block drop-shadow-[0_2px_12px_rgba(6,182,212,0.35)] group-hover:brightness-110 transition duration-200">
+                        <img src="assets/images/hrs_logo_dark.png" alt="HRS Web Solutions" class="h-8 sm:h-9 w-auto object-contain hidden sm:block drop-shadow-[0_2px_12px_rgba(6,182,212,0.35)] group-hover:brightness-110 transition duration-200">
                         
                         <!-- Mobile Hexagon 3D Emblem with Active Indicator -->
                         <div class="sm:hidden relative flex items-center justify-center">
-                            <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center p-1.5 shadow-lg shadow-cyan-500/20">
+                            <div class="w-9 h-9 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center p-1.5 shadow-lg shadow-cyan-500/20">
                                 <img src="assets/images/hrs_icon.png" alt="HRS" class="w-full h-full object-contain">
                             </div>
-                            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-dark-900"></span>
+                            <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border-2 border-dark-900"></span>
                         </div>
                     </div>
 
                     <!-- Subtle Vertical Divider -->
-                    <div class="h-8 w-px bg-slate-700/80 hidden sm:block"></div>
+                    <div class="h-7 w-px bg-slate-700/80 hidden sm:block"></div>
 
                     <!-- Studio Pro Branding & Real-Time Status -->
                     <div>
-                        <div class="flex items-center gap-2">
-                            <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white flex items-center gap-1.5 font-sans">
+                        <div class="flex items-center gap-1.5">
+                            <h1 class="text-xs sm:text-sm font-extrabold tracking-tight text-white flex items-center gap-1 font-sans whitespace-nowrap">
                                 <span class="bg-gradient-to-r from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">OUTREACH STUDIO</span>
                             </h1>
-                            <span class="px-2 py-0.5 rounded-md bg-gradient-to-r from-cyan-950/90 to-blue-950/90 border border-cyan-500/40 text-cyan-300 text-[9px] font-mono font-bold tracking-wider uppercase shadow-sm">Enterprise Pro</span>
+                            <span class="hidden 2xl:inline-block px-1.5 py-0.5 rounded bg-cyan-950/90 text-cyan-300 border border-cyan-500/40 text-[9px] font-mono font-bold tracking-wider uppercase shadow-sm">Enterprise Pro</span>
                         </div>
-                        <p class="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5 font-medium">
-                            <span class="text-slate-300 font-semibold tracking-wide hidden xl:inline">Global Client Acquisition</span>
-                            <span class="text-slate-600 hidden xl:inline">•</span>
+                        <p class="text-[10px] text-slate-400 hidden xl:flex items-center gap-1.5 mt-0.5 font-medium whitespace-nowrap">
                             <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span class="text-emerald-400 text-[10px] font-mono font-semibold">MongoDB Atlas Synced</span>
+                            <span class="text-emerald-400 font-mono font-semibold">MongoDB Atlas Synced</span>
                             <span class="text-slate-600 hidden 2xl:inline">•</span>
                             <span class="text-cyan-400/90 font-mono text-[10px] hidden 2xl:inline">10 Global Markets</span>
                         </p>
@@ -633,66 +631,66 @@
             </div>
 
             <!-- Center: Executive Workspace View Switcher (Floating Segmented Control) -->
-            <nav class="flex items-center gap-1 p-1 bg-slate-950/80 rounded-2xl border border-white/[0.08] backdrop-blur-xl shadow-inner select-none flex-shrink-0">
-                <button onclick="switchWorkspaceView('table')" id="tabNavTable" class="px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-400/80 font-bold text-xs shadow-md shadow-blue-500/20 transition cursor-pointer flex items-center gap-1.5">
+            <nav class="flex items-center gap-0.5 sm:gap-1 p-1 bg-slate-950/80 rounded-2xl border border-white/[0.08] backdrop-blur-xl shadow-inner select-none flex-shrink-0">
+                <button onclick="switchWorkspaceView('table')" id="tabNavTable" class="px-2.5 sm:px-3 py-1.5 rounded-xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-400/80 font-bold text-xs shadow-md shadow-blue-500/20 transition cursor-pointer flex items-center gap-1.5">
                     <i class="fa-solid fa-table-columns text-[11px]"></i>
-                    <span>Pipeline<span class="hidden xl:inline">&nbsp;Table</span></span>
+                    <span>Pipeline<span class="hidden 2xl:inline">&nbsp;Table</span></span>
                 </button>
-                <button onclick="switchWorkspaceView('scraper')" id="tabNavScraper" class="px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
+                <button onclick="switchWorkspaceView('scraper')" id="tabNavScraper" class="px-2.5 sm:px-3 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
                     <i class="fa-solid fa-satellite-dish text-[11px] text-cyan-400"></i>
                     <span>Lead Scraper</span>
                     <span class="px-1.5 py-0.2 rounded-full text-[8px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold tracking-wider">LIVE</span>
                 </button>
-                <button onclick="switchWorkspaceView('records')" id="tabNavRecords" class="px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
+                <button onclick="switchWorkspaceView('records')" id="tabNavRecords" class="px-2.5 sm:px-3 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
                     <i class="fa-solid fa-folder-closed text-[11px] text-purple-400"></i>
                     <span>Records</span>
                 </button>
-                <button onclick="openSettingsModal('ai')" id="tabNavAi" class="px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
+                <button onclick="openSettingsModal('ai')" id="tabNavAi" class="px-2.5 sm:px-3 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
                     <i class="fa-solid fa-wand-magic-sparkles text-[11px] text-amber-400"></i>
                     <span>Multi-AI</span>
                 </button>
             </nav>
 
             <!-- Right: Actions & Settings -->
-            <div class="flex items-center space-x-2.5 flex-shrink-0">
+            <div class="flex items-center space-x-1.5 sm:space-x-2 flex-shrink-0">
                 <!-- Primary Action: Add Lead -->
-                <button onclick="openAddLeadModal()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold transition shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 border border-cyan-400/30 cursor-pointer">
+                <button onclick="openAddLeadModal()" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold transition shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 border border-cyan-400/30 cursor-pointer whitespace-nowrap">
                     <i class="fa-solid fa-plus text-xs"></i>
-                    <span>Add Lead</span>
+                    <span class="hidden sm:inline">Add Lead</span>
                 </button>
 
                 <!-- Export CSV Action -->
-                <a href="javascript:void(0)" onclick="exportLeadsCsv()" class="px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-emerald-300 text-xs font-medium transition flex items-center gap-1.5 cursor-pointer shadow-sm" title="Download Excel CRM Report">
+                <a href="javascript:void(0)" onclick="exportLeadsCsv()" class="p-2 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-emerald-300 text-xs font-medium transition flex items-center gap-1.5 cursor-pointer shadow-sm" title="Download Excel CRM Report">
                     <i class="fa-solid fa-file-excel text-emerald-400 text-xs"></i>
-                    <span class="hidden xl:inline">Export</span>
+                    <span class="hidden 2xl:inline">Export</span>
                 </a>
 
                 <!-- Settings Gear Button -->
-                <button onclick="openSettingsModal('agency')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-cyan-400 text-xs transition cursor-pointer shadow-sm" title="Outreach & AI Configuration">
+                <button onclick="openSettingsModal('agency')" class="w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-cyan-400 text-xs transition cursor-pointer shadow-sm flex items-center justify-center flex-shrink-0" title="Outreach & AI Configuration">
                     <i class="fa-solid fa-gear text-sm"></i>
                 </button>
 
                 <!-- User Account Profile & Logout Dropdown -->
-                <div class="relative" id="userProfileDropdownContainer">
-                    <button type="button" onclick="toggleUserProfileDropdown(event)" class="group flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-slate-800/80 to-slate-900/90 hover:from-slate-800 hover:to-slate-800/90 border border-white/[0.1] hover:border-cyan-500/40 text-xs transition-all duration-200 cursor-pointer select-none shadow-lg shadow-black/20 hover:shadow-cyan-500/10 backdrop-blur-xl">
+                <div class="relative flex-shrink-0" id="userProfileDropdownContainer">
+                    <button type="button" onclick="toggleUserProfileDropdown(event)" class="group flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-2xl bg-gradient-to-r from-slate-900/90 via-slate-800/80 to-slate-900/90 hover:from-slate-800 hover:to-slate-800/90 border border-white/[0.1] hover:border-cyan-500/40 text-xs transition-all duration-200 cursor-pointer select-none shadow-lg shadow-black/20 hover:shadow-cyan-500/10 backdrop-blur-xl">
                         <!-- Avatar with Live Cloud Pulse Indicator -->
-                        <div class="relative">
-                            <div id="userAvatar" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-blue-500/25 ring-1 ring-white/20">
+                        <div class="relative flex-shrink-0">
+                            <div id="userAvatar" class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-blue-500/25 ring-1 ring-white/20">
                                 HA
                             </div>
-                            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 border-2 border-slate-900 rounded-full shadow-sm animate-pulse" title="Cloud Sync Active"></span>
+                            <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-emerald-400 border-2 border-slate-900 rounded-full shadow-sm animate-pulse" title="Cloud Sync Active"></span>
                         </div>
                         <!-- User Name & Tier -->
-                        <div class="text-left hidden md:block leading-tight">
-                            <div class="flex items-center gap-1.5">
-                                <span id="userNameDisplay" class="text-white font-bold text-xs truncate max-w-[110px] tracking-tight">Hamza</span>
-                                <i class="fa-solid fa-circle-check text-blue-400 text-[10px]" title="Verified Licensee"></i>
+                        <div class="text-left hidden xl:block leading-tight min-w-0 max-w-[100px] 2xl:max-w-[125px]">
+                            <div class="flex items-center gap-1">
+                                <span id="userNameDisplay" class="text-white font-bold text-xs truncate tracking-tight">Hamza</span>
+                                <i class="fa-solid fa-circle-check text-blue-400 text-[10px] flex-shrink-0" title="Verified Licensee"></i>
                             </div>
                             <div class="flex items-center gap-1 mt-0.5">
-                                <span id="userTierDisplay" class="text-[9px] font-mono text-cyan-300 font-medium">Lifetime Commercial Pro</span>
+                                <span id="userTierDisplay" class="text-[9px] font-mono text-cyan-300 font-medium truncate block">Master Bundle</span>
                             </div>
                         </div>
-                        <i id="userChevron" class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-cyan-400 transition-transform duration-300 ml-0.5"></i>
+                        <i id="userChevron" class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-cyan-400 transition-transform duration-300 ml-0.5 flex-shrink-0"></i>
                     </button>
 
                     <!-- Dropdown Panel (Sleek Executive Card) -->
@@ -2842,7 +2840,7 @@
             if (keyEl) keyEl.textContent = currentUser.licenseKey || 'OSP-PRO-ACTIVE';
             
             if (tierEl) {
-                tierEl.textContent = isMaster ? 'All Services Master Bundle' : `Specialist Plan (${userNiches.length} Niches)`;
+                tierEl.textContent = isMaster ? 'Master Bundle' : `Specialist (${userNiches.length})`;
             }
             if (nicheEl) {
                 nicheEl.textContent = isMaster 
@@ -6058,10 +6056,10 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             const tabScraper = document.getElementById('tabNavScraper');
             const tabRecords = document.getElementById('tabNavRecords');
 
-            const inactiveTabClass = "px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5";
-            const activeTableClass = "px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-400/80 font-bold text-xs shadow-md shadow-blue-500/20 transition cursor-pointer flex items-center gap-1.5";
-            const activeScraperClass = "px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 text-white border-cyan-400/80 font-bold text-xs shadow-md shadow-cyan-500/25 transition cursor-pointer flex items-center gap-1.5";
-            const activeRecordsClass = "px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-purple-400/80 font-bold text-xs shadow-md shadow-purple-500/20 transition cursor-pointer flex items-center gap-1.5";
+            const inactiveTabClass = "px-2.5 sm:px-3 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5";
+            const activeTableClass = "px-2.5 sm:px-3 py-1.5 rounded-xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-400/80 font-bold text-xs shadow-md shadow-blue-500/20 transition cursor-pointer flex items-center gap-1.5";
+            const activeScraperClass = "px-2.5 sm:px-3 py-1.5 rounded-xl border bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 text-white border-cyan-400/80 font-bold text-xs shadow-md shadow-cyan-500/25 transition cursor-pointer flex items-center gap-1.5";
+            const activeRecordsClass = "px-2.5 sm:px-3 py-1.5 rounded-xl border bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-purple-400/80 font-bold text-xs shadow-md shadow-purple-500/20 transition cursor-pointer flex items-center gap-1.5";
 
             if (viewName === 'scraper') {
                 if (pipelineSec) pipelineSec.classList.add('hidden');
