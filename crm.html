@@ -1523,16 +1523,26 @@
                 </div>
 
                 <!-- Quick High-Ticket Sub-Niche Presets for Selected Service -->
-                <div class="space-y-1.5 pt-1">
-                    <div class="flex items-center justify-between text-xs text-slate-300 font-semibold">
+                <div class="space-y-2 pt-1">
+                    <div class="flex items-center justify-between text-xs text-slate-300 font-semibold flex-wrap gap-1">
                         <span class="flex items-center gap-1.5">
                             <i class="fa-solid fa-bullseye text-amber-400 text-[11px]"></i>
-                            <span>High-Ticket Niche Presets for <strong id="scraperSelectedServiceName" class="text-cyan-300">Web Design</strong>:</span>
+                            <span>High-Ticket Niches for <strong id="scraperSelectedServiceName" class="text-cyan-300">Web Design</strong> (<span id="scraperPresetCount" class="text-amber-400 font-mono font-bold">16</span> Available):</span>
                         </span>
-                        <span class="text-[10px] text-slate-500">Click chip to apply niche</span>
+                        <span class="text-[10px] text-slate-500">Click any niche below or type custom niche</span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5" id="scraperNicheChipsContainer">
+
+                    <!-- Presets Grid -->
+                    <div class="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto no-scrollbar p-0.5" id="scraperNicheChipsContainer">
                         <!-- Populated by JS when service is clicked -->
+                    </div>
+
+                    <!-- Custom Niche Input Option -->
+                    <div class="pt-1 flex items-center gap-2">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-pen-nib absolute left-3 top-2.5 text-amber-400 text-xs"></i>
+                            <input type="text" id="customNicheInput" oninput="applyCustomNiche(this.value)" placeholder="Type any custom niche (e.g. Perfume Shops, Yacht Charters, Tattoo Studios, Pet Groomers)..." class="w-full bg-dark-900/90 border border-slate-700/80 rounded-xl pl-8 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-500/20 outline-none">
+                        </div>
                     </div>
                 </div>
 
@@ -5365,115 +5375,174 @@ Output ONLY raw JSON.`;
         // =========================================================================
         const FREELANCE_SERVICE_DATA = {
             web_design: {
-                label: "Web Design High-Ticket Leads",
-                queryPlaceholder: "e.g. Roofing contractor in Dallas, Texas",
-                defaultQuery: "Roofing contractor in Toronto, Canada",
+                label: "Web Design & Development",
+                queryPlaceholder: "e.g. Roofing Contractors in Business Bay, Dubai",
+                defaultQuery: "Roofing Contractors in Toronto, Canada",
                 filterTitle: "🎯 Target ONLY Businesses with NO Website",
                 filterBadge: "High Converting",
                 filterDesc: "Automatically discards businesses that already have an active website. Only saves high-intent local businesses that need an urgent website built!",
                 presets: [
-                    { label: "🇺🇸 US Roofing", query: "Roofing contractor in Dallas, Texas" },
-                    { label: "🇺🇸 Cosmetic Dentists", query: "Cosmetic Dentistry in Miami, Florida" },
-                    { label: "🇬🇧 UK Accountants", query: "Chartered Accountants in London, UK" },
-                    { label: "🇦🇪 Dubai Luxury Cars", query: "Luxury Car Rental in Dubai, UAE" },
-                    { label: "🇨🇦 Canada HVAC", query: "HVAC and Plumbing in Toronto, Canada" },
-                    { label: "🇨🇭 Swiss Wealth", query: "Wealth Advisory in Zurich, Switzerland" }
+                    { label: "🔨 Roofing Contractors", niche: "Roofing Contractors", query: "Roofing Contractors" },
+                    { label: "🦷 Cosmetic Dental Clinics", niche: "Cosmetic Dental Clinics", query: "Cosmetic Dental Clinics" },
+                    { label: "🚗 Luxury & Exotic Car Rentals", niche: "Luxury Car Rental", query: "Luxury Car Rental" },
+                    { label: "🏡 Real Estate Brokerages", niche: "Real Estate Brokerage", query: "Real Estate Brokerage" },
+                    { label: "❄️ HVAC & Air Conditioning", niche: "HVAC and Air Conditioning", query: "HVAC and Air Conditioning" },
+                    { label: "⚖️ Personal Injury Law Firms", niche: "Personal Injury Law Firm", query: "Personal Injury Law Firm" },
+                    { label: "🏊 Swimming Pool Builders", niche: "Swimming Pool Builders", query: "Swimming Pool Builders" },
+                    { label: "🏥 Aesthetic Clinics & Medspas", niche: "Aesthetic Clinic & Medspa", query: "Aesthetic Clinic & Medspa" },
+                    { label: "🍽️ Fine Dining & Steakhouses", niche: "Fine Dining Restaurant", query: "Fine Dining Restaurant" },
+                    { label: "💼 Wealth Advisors & CPAs", niche: "Chartered Accountants & CPA", query: "Chartered Accountants & CPA" },
+                    { label: "☀️ Solar Energy Installers", niche: "Solar Energy Installation", query: "Solar Energy Installation" },
+                    { label: "🏢 Architects & Interior Design", niche: "Interior Design Studio", query: "Interior Design Studio" },
+                    { label: "🔐 24/7 Emergency Locksmiths", niche: "Emergency Locksmith", query: "Emergency Locksmith" },
+                    { label: "🏨 Boutique Hotels & Resorts", niche: "Boutique Hotel", query: "Boutique Hotel" },
+                    { label: "📦 Moving & Storage Companies", niche: "Moving & Storage Company", query: "Moving & Storage Company" },
+                    { label: "🐾 Veterinary Hospitals", niche: "Veterinary Hospital", query: "Veterinary Hospital" }
                 ]
             },
             video_editing: {
-                label: "Video Editing & Viral Reels Leads",
-                queryPlaceholder: "e.g. Real Estate Agency in Dubai, UAE",
-                defaultQuery: "Real Estate Agency in Dubai, UAE",
+                label: "Video Editing & Viral Reels",
+                queryPlaceholder: "e.g. Business & Tech Podcasts in London, UK",
+                defaultQuery: "Business & Tech Podcasts in London, UK",
                 filterTitle: "🎬 Video & Social Pitch Engine (Auto-Tailored)",
                 filterBadge: "Reels / Shorts",
                 filterDesc: "Generates outreach offering a free 15-second sample reel with viral pacing, dynamic captions, and hook editing to 10x their engagement!",
                 presets: [
-                    { label: "🎙️ US Business Podcasters", query: "Business Podcasts in Los Angeles, California" },
-                    { label: "🏡 Dubai Real Estate", query: "Real Estate Agency in Dubai, UAE" },
-                    { label: "🏋️ UK Gyms & Coaches", query: "Fitness Gym and Personal Trainer in London, UK" },
-                    { label: "🍽️ Miami Luxury Dining", query: "Fine Dining Restaurant in Miami, Florida" },
-                    { label: "👗 NY Fashion Brands", query: "Fashion Boutique in New York, USA" },
-                    { label: "💼 Executive Coaches", query: "Executive Coach in Chicago, Illinois" }
+                    { label: "🎙️ Business & Tech Podcasts", niche: "Business & Tech Podcasts", query: "Business & Tech Podcasts" },
+                    { label: "🏡 Luxury Real Estate Agents", niche: "Luxury Real Estate Agent", query: "Luxury Real Estate Agent" },
+                    { label: "🏋️ Fitness & Bodybuilding Coaches", niche: "Fitness Coach & Personal Trainer", query: "Fitness Coach & Personal Trainer" },
+                    { label: "💼 Executive & Mindset Coaches", niche: "Executive Coaching Firm", query: "Executive Coaching Firm" },
+                    { label: "🍽️ Luxury Hospitality & Lounges", niche: "Luxury Restaurant & Lounge", query: "Luxury Restaurant & Lounge" },
+                    { label: "👗 Fashion & Lifestyle Influencers", niche: "Fashion Boutique & Lifestyle", query: "Fashion Boutique & Lifestyle" },
+                    { label: "🚗 Supercar & Auto Channels", niche: "Supercar & Automotive Showroom", query: "Supercar & Automotive Showroom" },
+                    { label: "💻 SaaS & Startup Founders", niche: "Tech Startup & SaaS Agency", query: "Tech Startup & SaaS Agency" },
+                    { label: "🏥 Plastic Surgeons & Dentists", niche: "Plastic Surgery & Cosmetic Clinic", query: "Plastic Surgery & Cosmetic Clinic" },
+                    { label: "📈 Finance & Trading Mentors", niche: "Financial Trading & Wealth Mentor", query: "Financial Trading & Wealth Mentor" },
+                    { label: "🎤 Keynote Speakers & Authors", niche: "Keynote Speaker & Author", query: "Keynote Speaker & Author" },
+                    { label: "🎓 Online Course & Academy Founders", niche: "Online Academy & Course Creator", query: "Online Academy & Course Creator" },
+                    { label: "🎬 Luxury Wedding Videography", niche: "Luxury Wedding Videographer", query: "Luxury Wedding Videographer" },
+                    { label: "🛍️ D2C Brand Video Showcases", niche: "D2C Brand & Product Studio", query: "D2C Brand & Product Studio" }
                 ]
             },
             graphic_design: {
-                label: "Graphic Design & Branding Leads",
-                queryPlaceholder: "e.g. Specialty Coffee Shop in London, UK",
-                defaultQuery: "Specialty Coffee Shop in London, UK",
+                label: "Graphic Design & Branding",
+                queryPlaceholder: "e.g. Specialty Coffee Roasters in Zurich, Switzerland",
+                defaultQuery: "Specialty Coffee Roasters in Zurich, Switzerland",
                 filterTitle: "🎨 Brand Identity & Visual Mockup Pitch",
                 filterBadge: "Mockup Offer",
                 filterDesc: "Generates outreach offering a free brand mockup, menu upgrade, and high-end social media templates tailored to their aesthetic!",
                 presets: [
-                    { label: "☕ London Coffee Shops", query: "Specialty Coffee Shop in London, UK" },
-                    { label: "👗 NY Boutiques", query: "Boutique Fashion in New York, USA" },
-                    { label: "💅 LA Luxury Spas", query: "Luxury Hair Salon in Los Angeles, California" },
-                    { label: "🍕 Gourmet Bistros", query: "Italian Restaurant in Toronto, Canada" },
-                    { label: "🧴 Aesthetic Clinics", query: "Aesthetic Clinic in Miami, Florida" },
-                    { label: "🧁 Artisan Bakeries", query: "Artisan Bakery in Paris, France" }
+                    { label: "☕ Specialty Cafes & Roasters", niche: "Specialty Coffee Shop & Roaster", query: "Specialty Coffee Shop & Roaster" },
+                    { label: "🍽️ Gourmet Bistros & Steakhouses", niche: "Gourmet Bistro & Restaurant", query: "Gourmet Bistro & Restaurant" },
+                    { label: "👗 Boutique Apparel & Streetwear", niche: "Boutique Fashion Brand", query: "Boutique Fashion Brand" },
+                    { label: "💅 Luxury Hair Salons & Spas", niche: "Luxury Hair Salon & Spa", query: "Luxury Hair Salon & Spa" },
+                    { label: "🧴 Organic Skincare & Cosmetics", niche: "Organic Skincare Brand", query: "Organic Skincare Brand" },
+                    { label: "🧁 Artisan Bakeries & Pastries", niche: "Artisan Bakery & Patisserie", query: "Artisan Bakery & Patisserie" },
+                    { label: "🏋️ CrossFit Boxes & Fitness Gyms", niche: "CrossFit & Fitness Club", query: "CrossFit & Fitness Club" },
+                    { label: "📦 D2C Product Packaging Brands", niche: "D2C Brand & Packaging", query: "D2C Brand & Packaging" },
+                    { label: "🏢 Corporate Identity & Legal", niche: "Corporate Advisory Firm", query: "Corporate Advisory Firm" },
+                    { label: "🌿 Eco-Friendly Food Brands", niche: "Organic & Healthy Food Brand", query: "Organic & Healthy Food Brand" },
+                    { label: "🎨 Contemporary Art Galleries", niche: "Art Gallery & Design Studio", query: "Art Gallery & Design Studio" },
+                    { label: "🍷 Craft Wineries & Breweries", niche: "Craft Brewery & Winery", query: "Craft Brewery & Winery" },
+                    { label: "🕯️ Scented Candles & Home Decor", niche: "Luxury Home Fragrance", query: "Luxury Home Fragrance" },
+                    { label: "💎 Fine Jewelry Boutiques", niche: "Fine Jewelry Boutique", query: "Fine Jewelry Boutique" }
                 ]
             },
             social_media_ads: {
                 label: "Meta Ads & SMMA Lead Gen",
-                queryPlaceholder: "e.g. Medical Spa in Orlando, Florida",
-                defaultQuery: "Medical Spa in Orlando, Florida",
+                queryPlaceholder: "e.g. Medical Spa & Laser Clinic in Miami, Florida",
+                defaultQuery: "Medical Spa & Laser Clinic in Miami, Florida",
                 filterTitle: "📈 Direct Client Acquisition Funnel Pitch",
                 filterBadge: "High-Ticket Client",
                 filterDesc: "Generates outreach offering a proven ad funnel system that brings 15 to 30 qualified booked consultations every month on auto-pilot!",
                 presets: [
-                    { label: "🏥 Florida Medspas", query: "Medical Spa in Orlando, Florida" },
-                    { label: "🦷 Dallas Dentists", query: "Dental Implants in Dallas, Texas" },
-                    { label: "🔨 UK Home Remodelers", query: "Home Renovation in Manchester, UK" },
-                    { label: "🚗 Dubai Exotic Cars", query: "Supercar Rental in Dubai, UAE" },
-                    { label: "⚖️ Texas Injury Law", query: "Personal Injury Lawyer in Houston, Texas" },
-                    { label: "🏊 Pool Builders", query: "Swimming Pool Contractor in Phoenix, Arizona" }
+                    { label: "🏥 Medical Spas & Laser Clinics", niche: "Medical Spa & Laser Clinic", query: "Medical Spa & Laser Clinic" },
+                    { label: "🦷 Dental Implant & Orthodontics", niche: "Dental Implant & Orthodontic Clinic", query: "Dental Implant & Orthodontic Clinic" },
+                    { label: "🔨 Kitchen & Bath Home Remodelers", niche: "Home Remodeling & Renovation", query: "Home Remodeling & Renovation" },
+                    { label: "🚗 Exotic Supercar Chauffeurs", niche: "Exotic Car Rental & Chauffeur", query: "Exotic Car Rental & Chauffeur" },
+                    { label: "⚖️ Personal Injury & Accident Law", niche: "Personal Injury Law Firm", query: "Personal Injury Law Firm" },
+                    { label: "🏊 Inground Pool Contractors", niche: "Swimming Pool Installation", query: "Swimming Pool Installation" },
+                    { label: "⚡ Residential Solar Contractors", niche: "Solar Panel Installation", query: "Solar Panel Installation" },
+                    { label: "❄️ High-Efficiency HVAC Services", niche: "HVAC & Heating Contractor", query: "HVAC & Heating Contractor" },
+                    { label: "🏡 Luxury Real Estate Developments", niche: "Luxury Real Estate Developer", query: "Luxury Real Estate Developer" },
+                    { label: "💇 Hair Restoration Clinics", niche: "Hair Restoration & Transplant Clinic", query: "Hair Restoration & Transplant Clinic" },
+                    { label: "🪟 Roofing & Window Replacements", niche: "Roofing & Window Replacement", query: "Roofing & Window Replacement" },
+                    { label: "🏋️ High-Ticket Transformation Gyms", niche: "Transformation Gym & Personal Training", query: "Transformation Gym & Personal Training" },
+                    { label: "💰 Mortgage & Financial Brokers", niche: "Mortgage Brokerage", query: "Mortgage Brokerage" },
+                    { label: "👶 Wellness & Longevity Clinics", niche: "Longevity & Wellness Center", query: "Longevity & Wellness Center" }
                 ]
             },
             ai_chatbots: {
-                label: "AI Chatbots & Automation Leads",
-                queryPlaceholder: "e.g. Dental Clinic in Miami, Florida",
-                defaultQuery: "Dental Clinic in Miami, Florida",
+                label: "AI Chatbots & Automation",
+                queryPlaceholder: "e.g. Dental Practice in Downtown Dubai, UAE",
+                defaultQuery: "Dental Practice in Downtown Dubai, UAE",
                 filterTitle: "🤖 24/7 AI Receptionist & Booking Bot Pitch",
                 filterBadge: "Missed Call AI",
                 filterDesc: "Generates outreach offering a 24/7 AI Receptionist & WhatsApp bot that answers missed calls and auto-books appointments!",
                 presets: [
-                    { label: "🦷 US Dental Clinics", query: "Dental Clinic in Miami, Florida" },
-                    { label: "🏥 Medspas & Clinics", query: "Medical Aesthetic Clinic in Los Angeles, California" },
-                    { label: "🚗 Dubai Car Rentals", query: "Car Rental Agency in Dubai, UAE" },
-                    { label: "🏡 UK Real Estate", query: "Real Estate Broker in London, UK" },
-                    { label: "🔧 Emergency Plumbers", query: "Emergency Plumbing in Dallas, Texas" },
-                    { label: "⚖️ Law Offices NY", query: "Law Firm in New York, USA" }
+                    { label: "🦷 Dental & Medical Practices", niche: "Dental Practice & Clinic", query: "Dental Practice & Clinic" },
+                    { label: "🚗 Car Dealerships & Rentals", niche: "Car Dealership & Rental Agency", query: "Car Dealership & Rental Agency" },
+                    { label: "🏡 Real Estate Brokerages", niche: "Real Estate Brokerage", query: "Real Estate Brokerage" },
+                    { label: "🏥 Aesthetic & Cosmetic Doctors", niche: "Cosmetic & Plastic Surgery Clinic", query: "Cosmetic & Plastic Surgery Clinic" },
+                    { label: "⚖️ Law Firms & Legal Intake", niche: "Law Firm & Legal Services", query: "Law Firm & Legal Services" },
+                    { label: "🔧 Emergency Plumbers & Locksmiths", niche: "Emergency Plumbing & Locksmith", query: "Emergency Plumbing & Locksmith" },
+                    { label: "🏦 Mortgage & Lending Brokers", niche: "Mortgage Lending Broker", query: "Mortgage Lending Broker" },
+                    { label: "☀️ Solar Sales Companies", niche: "Solar Sales Company", query: "Solar Sales Company" },
+                    { label: "🛡️ Commercial Insurance Brokers", niche: "Insurance Brokerage", query: "Insurance Brokerage" },
+                    { label: "🏨 Luxury Hotels & Resorts", niche: "Luxury Hotel & Resort", query: "Luxury Hotel & Resort" },
+                    { label: "🎓 Private Academies & Institutes", niche: "Private Coaching & Academy", query: "Private Coaching & Academy" },
+                    { label: "📦 E-Commerce Brands (Support Bot)", niche: "E-Commerce Brand Support", query: "E-Commerce Brand Support" },
+                    { label: "🏋️ Fitness Clubs & Crossfit", niche: "Fitness Club & Gym", query: "Fitness Club & Gym" },
+                    { label: "🍽️ High-Volume Dining Venues", niche: "Fine Dining Restaurant & Bar", query: "Fine Dining Restaurant & Bar" }
                 ]
             },
             shopify_ecom: {
-                label: "Shopify & E-com Marketing Leads",
-                queryPlaceholder: "e.g. Jewelry Brand in New York, USA",
-                defaultQuery: "Jewelry Brand in New York, USA",
+                label: "Shopify & E-Commerce Marketing",
+                queryPlaceholder: "e.g. Luxury Jewelry & Watches in Geneva, Switzerland",
+                defaultQuery: "Luxury Jewelry & Watches in Geneva, Switzerland",
                 filterTitle: "🛍️ Abandoned Cart & Klaviyo Flows Pitch",
                 filterBadge: "E-com Revenue",
                 filterDesc: "Generates outreach offering automated abandoned cart & email flows that recover 18-28% of lost checkouts on pure autopilot!",
                 presets: [
-                    { label: "💍 NY Jewelry Brands", query: "Jewelry Brand in New York, USA" },
-                    { label: "👗 LA Fashion Lines", query: "Clothing Brand in Los Angeles, California" },
-                    { label: "🧴 Skincare & Beauty", query: "Organic Skincare Brand in Miami, Florida" },
-                    { label: "🕯️ Artisan Home Goods", query: "Artisan Home Goods in London, UK" },
-                    { label: "☕ Coffee Roasters", query: "Gourmet Coffee Roasters in Toronto, Canada" },
-                    { label: "👜 Leather Goods", query: "Leather Goods Store in Austin, Texas" }
+                    { label: "💍 Luxury Jewelry & Watches", niche: "Luxury Jewelry & Watch Brand", query: "Luxury Jewelry & Watch Brand" },
+                    { label: "👗 Designer Apparel & Fashion Lines", niche: "Designer Fashion & Apparel", query: "Designer Fashion & Apparel" },
+                    { label: "🧴 Organic Skincare & Clean Beauty", niche: "Organic Skincare & Cosmetics", query: "Organic Skincare & Cosmetics" },
+                    { label: "🛋️ Modern Home Decor & Furniture", niche: "Modern Home Decor & Furniture", query: "Modern Home Decor & Furniture" },
+                    { label: "☕ Artisan Coffee & Gourmet Roasters", niche: "Artisan Coffee Roasters", query: "Artisan Coffee Roasters" },
+                    { label: "👜 Premium Leather Handbags & Goods", niche: "Handcrafted Leather Goods", query: "Handcrafted Leather Goods" },
+                    { label: "⚡ Smart Consumer Electronics & Tech", niche: "Consumer Tech & Gadgets", query: "Consumer Tech & Gadgets" },
+                    { label: "🏋️ Activewear & Fitness Supplements", niche: "Activewear & Sports Nutrition", query: "Activewear & Sports Nutrition" },
+                    { label: "👶 Luxury Baby Clothing & Nursery", niche: "Baby Clothing & Nursery Brand", query: "Baby Clothing & Nursery Brand" },
+                    { label: "🍷 Fine Wine & Artisanal Spirits", niche: "Fine Wine & Spirits Boutique", query: "Fine Wine & Spirits Boutique" },
+                    { label: "🐶 Designer Pet Accessories & Food", niche: "Premium Pet Products", query: "Premium Pet Products" },
+                    { label: "🌿 Natural Herbal & Wellness Goods", niche: "Herbal & Wellness Products", query: "Herbal & Wellness Products" },
+                    { label: "🕯️ Scented Candles & Perfumes", niche: "Artisan Perfume & Candle Brand", query: "Artisan Perfume & Candle Brand" },
+                    { label: "🕶️ Designer Eyewear & Sunglasses", niche: "Designer Eyewear Brand", query: "Designer Eyewear Brand" },
+                    { label: "🎨 Art Prints & Canvas Decor", niche: "Art Prints & Wall Decor", query: "Art Prints & Wall Decor" }
                 ]
             },
             google_reviews: {
-                label: "Google Reviews & Reputation Leads",
-                queryPlaceholder: "e.g. Italian Restaurant in Chicago, Illinois",
-                defaultQuery: "Italian Restaurant in Chicago, Illinois",
+                label: "Google Reviews & Local SEO",
+                queryPlaceholder: "e.g. Independent Auto Mechanics in Sydney, Australia",
+                defaultQuery: "Independent Auto Mechanics in Sydney, Australia",
                 filterTitle: "⭐ 5-Star Review Growth & NFC Tap-Card Pitch",
                 filterBadge: "Review Booster",
                 filterDesc: "Generates outreach offering smart NFC tap-cards and automated review boosters to help businesses reach 150+ five-star ratings rapidly!",
                 presets: [
-                    { label: "🍽️ Chicago Restaurants", query: "Italian Restaurant in Chicago, Illinois" },
-                    { label: "🚗 Auto Mechanics", query: "Auto Repair Shop in Houston, Texas" },
-                    { label: "🦷 Family Dentists", query: "Family Dentist in Atlanta, Georgia" },
-                    { label: "💇 London Hair Salons", query: "Hair Salon in London, UK" },
-                    { label: "🏠 Roofing Contractors", query: "Roofing Company in Phoenix, Arizona" },
-                    { label: "☕ Melbourne Bakeries", query: "Bakery in Melbourne, Australia" }
+                    { label: "🍽️ Italian Bistros & Steakhouses", niche: "Italian Restaurant & Steakhouse", query: "Italian Restaurant & Steakhouse" },
+                    { label: "🚗 Auto Repair & Body Mechanics", niche: "Auto Repair & Mechanics Shop", query: "Auto Repair & Mechanics Shop" },
+                    { label: "🦷 Family & Pediatric Dentists", niche: "Family Dentist Clinic", query: "Family Dentist Clinic" },
+                    { label: "💇 Premier Hair Salons & Barbers", niche: "Hair Salon & Barbershop", query: "Hair Salon & Barbershop" },
+                    { label: "🔨 Residential Roofing & Plumbing", niche: "Roofing & Plumbing Contractor", query: "Roofing & Plumbing Contractor" },
+                    { label: "🏨 Boutique Hotels & Motels", niche: "Boutique Hotel", query: "Boutique Hotel" },
+                    { label: "📦 Relocation & Moving Services", niche: "Movers & Relocation Company", query: "Movers & Relocation Company" },
+                    { label: "🐾 Veterinary Clinics & Hospitals", niche: "Veterinary Clinic", query: "Veterinary Clinic" },
+                    { label: "🧘 Yoga, Pilates & Wellness Centers", niche: "Yoga & Pilates Studio", query: "Yoga & Pilates Studio" },
+                    { label: "🚗 Auto Detailing & Ceramic Coatings", niche: "Auto Detailing Studio", query: "Auto Detailing Studio" },
+                    { label: "🧼 Commercial Cleaning & Janitorial", niche: "Commercial Cleaning Service", query: "Commercial Cleaning Service" },
+                    { label: "🎯 Escape Rooms & Family Centers", niche: "Family Entertainment Center", query: "Family Entertainment Center" },
+                    { label: "🔒 Emergency Locksmith Services", niche: "Emergency Locksmith Service", query: "Emergency Locksmith Service" },
+                    { label: "🌳 Tree Care & Landscaping Services", niche: "Landscaping & Tree Service", query: "Landscaping & Tree Service" }
                 ]
             }
         };
@@ -5722,22 +5791,22 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
         // DEDICATED LEAD SCRAPER STUDIO LOGIC & VIEW SWITCHING
         // =========================================================================
         const SCRAPER_COUNTRIES = [
-            { id: 'ae', name: 'UAE (Dubai / Abu Dhabi)', flag: '🇦🇪', code: 'UAE', cities: ['Business Bay, Dubai', 'Downtown Dubai, UAE', 'Palm Jumeirah, Dubai', 'Dubai Marina, UAE', 'Abu Dhabi, UAE', 'Deira, Dubai'] },
-            { id: 'us', name: 'United States', flag: '🇺🇸', code: 'US', cities: ['Miami, Florida', 'New York, USA', 'Dallas, Texas', 'Los Angeles, California', 'Chicago, Illinois', 'Houston, Texas', 'Austin, Texas', 'Phoenix, Arizona'] },
-            { id: 'gb', name: 'United Kingdom', flag: '🇬🇧', code: 'UK', cities: ['London, UK', 'Manchester, UK', 'Birmingham, UK', 'Leeds, UK', 'Glasgow, Scotland', 'Edinburgh, UK'] },
-            { id: 'ca', name: 'Canada', flag: '🇨🇦', code: 'CA', cities: ['Toronto, Ontario', 'Vancouver, BC', 'Montreal, Quebec', 'Calgary, Alberta', 'Ottawa, Ontario'] },
-            { id: 'ch', name: 'Switzerland', flag: '🇨🇭', code: 'CH', cities: ['Zurich, Switzerland', 'Geneva, Switzerland', 'Basel, Switzerland', 'Lausanne, Switzerland', 'Bern, Switzerland'] },
-            { id: 'au', name: 'Australia', flag: '🇦🇺', code: 'AU', cities: ['Sydney, Australia', 'Melbourne, Australia', 'Brisbane, Australia', 'Perth, Australia'] },
-            { id: 'de', name: 'Germany', flag: '🇩🇪', code: 'DE', cities: ['Berlin, Germany', 'Munich, Germany', 'Frankfurt, Germany', 'Hamburg, Germany'] },
-            { id: 'sa', name: 'Saudi Arabia', flag: '🇸🇦', code: 'KSA', cities: ['Riyadh, Saudi Arabia', 'Jeddah, Saudi Arabia', 'Dammam, Saudi Arabia', 'Al Khobar, Saudi Arabia'] },
-            { id: 'in', name: 'India', flag: '🇮🇳', code: 'IN', cities: ['Mumbai, India', 'Bangalore, India', 'Delhi NCR, India', 'Hyderabad, India', 'Pune, India'] },
-            { id: 'global', name: 'Worldwide / Custom', flag: '🌍', code: 'GL', cities: ['Singapore', 'Dublin, Ireland', 'Amsterdam, Netherlands', 'Paris, France'] }
+            { id: 'ae', name: 'UAE (Dubai / Abu Dhabi)', flag: '🇦🇪', code: 'UAE', cities: ['Business Bay, Dubai', 'Downtown Dubai, UAE', 'Palm Jumeirah, Dubai', 'Dubai Marina, UAE', 'Abu Dhabi, UAE', 'Deira, Dubai', 'Jumeirah Lakes Towers, Dubai', 'Sharjah, UAE'] },
+            { id: 'us', name: 'United States', flag: '🇺🇸', code: 'US', cities: ['Miami, Florida', 'New York, USA', 'Dallas, Texas', 'Los Angeles, California', 'Chicago, Illinois', 'Houston, Texas', 'Austin, Texas', 'Phoenix, Arizona', 'Atlanta, Georgia', 'Las Vegas, Nevada'] },
+            { id: 'gb', name: 'United Kingdom', flag: '🇬🇧', code: 'UK', cities: ['Mayfair, London, UK', 'Manchester, UK', 'Birmingham, UK', 'Leeds, UK', 'Glasgow, Scotland', 'Edinburgh, UK', 'Bristol, UK', 'Liverpool, UK'] },
+            { id: 'ca', name: 'Canada', flag: '🇨🇦', code: 'CA', cities: ['Toronto, Ontario', 'Vancouver, BC', 'Montreal, Quebec', 'Calgary, Alberta', 'Ottawa, Ontario', 'Edmonton, Alberta', 'Mississauga, Ontario'] },
+            { id: 'ch', name: 'Switzerland', flag: '🇨🇭', code: 'CH', cities: ['Zurich, Switzerland', 'Geneva, Switzerland', 'Basel, Switzerland', 'Lausanne, Switzerland', 'Bern, Switzerland', 'Lugano, Switzerland'] },
+            { id: 'au', name: 'Australia', flag: '🇦🇺', code: 'AU', cities: ['Sydney, Australia', 'Melbourne, Australia', 'Brisbane, Australia', 'Perth, Australia', 'Adelaide, Australia', 'Gold Coast, Australia'] },
+            { id: 'de', name: 'Germany', flag: '🇩🇪', code: 'DE', cities: ['Berlin, Germany', 'Munich, Germany', 'Frankfurt, Germany', 'Hamburg, Germany', 'Cologne, Germany', 'Dusseldorf, Germany'] },
+            { id: 'sa', name: 'Saudi Arabia', flag: '🇸🇦', code: 'KSA', cities: ['Riyadh, Saudi Arabia', 'Jeddah, Saudi Arabia', 'Dammam, Saudi Arabia', 'Al Khobar, Saudi Arabia', 'Mecca, Saudi Arabia'] },
+            { id: 'in', name: 'India', flag: '🇮🇳', code: 'IN', cities: ['Mumbai, India', 'Bangalore, India', 'Delhi NCR, India', 'Hyderabad, India', 'Pune, India', 'Chennai, India', 'Ahmedabad, India'] },
+            { id: 'global', name: 'Worldwide / Custom', flag: '🌍', code: 'GL', cities: ['Singapore', 'Dublin, Ireland', 'Amsterdam, Netherlands', 'Paris, France', 'Tokyo, Japan', 'Hong Kong'] }
         ];
 
         let currentScraperCountry = 'ae';
         let currentScraperService = 'web_design';
         let currentScraperCity = 'Business Bay, Dubai';
-        let currentScraperNiche = 'Luxury Car Rental';
+        let currentScraperNiche = 'Roofing Contractors';
         let currentScraperBatchSize = 10;
         let discoveredStudioLeads = [];
 
@@ -5934,17 +6003,22 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
 
             // Inject high-ticket sub-niche preset chips
             const nicheContainer = document.getElementById('scraperNicheChipsContainer');
+            const countEl = document.getElementById('scraperPresetCount');
+            if (countEl) countEl.textContent = data.presets.length;
+
             if (nicheContainer) {
                 nicheContainer.innerHTML = data.presets.map((p, idx) => `
-                    <button type="button" onclick="applyNicheChip('${p.label.replace(/'/g, "\\'")}', '${p.query.replace(/'/g, "\\'")}')" class="niche-chip px-2.5 py-1 rounded-lg border text-xs font-medium transition cursor-pointer ${idx === 0 ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 font-semibold' : 'bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white'}">
+                    <button type="button" onclick="applyNicheChip('${p.niche.replace(/'/g, "\\'")}', '${p.label.replace(/'/g, "\\'")}')" data-niche="${p.niche}" class="niche-chip px-2.5 py-1.5 rounded-xl border text-xs font-medium transition cursor-pointer ${idx === 0 ? 'bg-amber-500/25 border-amber-500/60 text-amber-200 font-bold shadow-sm' : 'bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white'}">
                         <span>${p.label}</span>
                     </button>
                 `).join('');
             }
 
             if (data.presets.length > 0) {
-                currentScraperNiche = data.presets[0].label.replace(/^[^\w\s]+/, '').trim();
+                currentScraperNiche = data.presets[0].niche;
             }
+            const customInput = document.getElementById('customNicheInput');
+            if (customInput) customInput.value = '';
             rebuildScraperQuery();
         }
 
@@ -5960,14 +6034,25 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             rebuildScraperQuery();
         }
 
-        function applyNicheChip(nicheLabel, presetQuery) {
-            currentScraperNiche = nicheLabel.replace(/^[^\w\s]+/, '').trim();
+        function applyNicheChip(cleanNiche, displayLabel) {
+            currentScraperNiche = cleanNiche;
             document.querySelectorAll('#scraperNicheChipsContainer .niche-chip').forEach(chip => {
-                if (chip.textContent.includes(nicheLabel)) {
-                    chip.className = "niche-chip px-2.5 py-1 rounded-lg border text-xs font-semibold bg-amber-500/20 border-amber-500/50 text-amber-300 transition cursor-pointer";
+                if (chip.getAttribute('data-niche') === cleanNiche) {
+                    chip.className = "niche-chip active px-2.5 py-1.5 rounded-xl border text-xs font-bold bg-amber-500/25 border-amber-500/60 text-amber-200 shadow-sm transition cursor-pointer";
                 } else {
-                    chip.className = "niche-chip px-2.5 py-1 rounded-lg border text-xs font-medium bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white transition cursor-pointer";
+                    chip.className = "niche-chip px-2.5 py-1.5 rounded-xl border text-xs font-medium bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white transition cursor-pointer";
                 }
+            });
+            const customInput = document.getElementById('customNicheInput');
+            if (customInput) customInput.value = '';
+            rebuildScraperQuery();
+        }
+
+        function applyCustomNiche(customText) {
+            if (!customText || !customText.trim()) return;
+            currentScraperNiche = customText.trim();
+            document.querySelectorAll('#scraperNicheChipsContainer .niche-chip').forEach(chip => {
+                chip.className = "niche-chip px-2.5 py-1.5 rounded-xl border text-xs font-medium bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white transition cursor-pointer";
             });
             rebuildScraperQuery();
         }
