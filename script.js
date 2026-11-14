@@ -152,11 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabContentMap = {
     'crm': {
       src: 'assets/images/hero_clean_dashboard.png',
-      label: 'CRM Workspace &bull; Global Leads Pipeline &bull; Local SQLite Engine'
+      label: 'Global Leads Pipeline &bull; WhatsApp &amp; Email Dispatch &bull; MongoDB Atlas Synced'
     },
     'ai': {
       src: 'assets/images/hero_ai_modal.png',
-      label: 'Multi-AI Setup &bull; Claude 3.7 Sonnet &bull; GPT-4o &bull; Gemini'
+      label: 'Multi-AI Pitch Engine &bull; Claude 3.7 Sonnet &bull; GPT-4o &bull; Gemini'
     },
     'leads': {
       src: 'assets/images/hero_leads_table.png',
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     'filters': {
       src: 'assets/images/hero_scraper_modal.png',
-      label: 'Global Lead Scraper &bull; Google Maps &amp; Meta Ads Engine'
+      label: 'Dedicated Lead Scraper &bull; 10 Global Markets &bull; Google Maps Radar'
     }
   };
 
@@ -172,11 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
     heroTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         heroTabs.forEach(t => {
-          t.classList.remove('bg-blue-600/30', 'text-white', 'border-blue-500/50');
+          t.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'text-white', 'border-blue-400/80', 'font-semibold', 'shadow-sm', 'bg-blue-600/30', 'border-blue-500/50');
           t.classList.add('text-slate-400', 'border-transparent', 'hover:text-slate-200');
         });
         tab.classList.remove('text-slate-400', 'border-transparent', 'hover:text-slate-200');
-        tab.classList.add('bg-blue-600/30', 'text-white', 'border-blue-500/50');
+        tab.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-indigo-600', 'text-white', 'border-blue-400/80', 'font-semibold', 'shadow-sm');
 
         const key = tab.getAttribute('data-tab');
         const info = tabContentMap[key];
