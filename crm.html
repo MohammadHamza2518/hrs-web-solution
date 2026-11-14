@@ -6138,15 +6138,21 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             // 2. Render Countries Grid
             const countryGrid = document.getElementById('scraperCountryGrid');
             if (countryGrid && countryGrid.children.length === 0) {
-                countryGrid.innerHTML = SCRAPER_COUNTRIES.map(c => `
-                    <button type="button" onclick="selectStudioCountry('${c.id}')" id="countryCard_${c.id}" class="country-card p-3 rounded-xl border text-left transition flex items-center gap-2.5 cursor-pointer bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800">
-                        <span class="text-2xl">${c.flag}</span>
+                countryGrid.innerHTML = SCRAPER_COUNTRIES.map(c => {
+                    const flagHtml = c.id === 'global'
+                        ? `<div class="w-8 h-5.5 rounded-md bg-gradient-to-tr from-blue-600 via-cyan-500 to-emerald-400 flex items-center justify-center text-xs shadow-md border border-white/10 flex-shrink-0">🌍</div>`
+                        : `<img src="assets/images/flags/${c.id}.png" alt="${c.name}" class="w-8 h-5.5 object-cover rounded-md shadow-md border border-white/10 flex-shrink-0">`;
+
+                    return `
+                    <button type="button" onclick="selectStudioCountry('${c.id}')" id="countryCard_${c.id}" class="country-card p-2.5 sm:p-3 rounded-xl border text-left transition flex items-center gap-2.5 sm:gap-3 cursor-pointer bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800">
+                        ${flagHtml}
                         <div class="min-w-0 flex-1">
                             <div class="text-xs font-bold text-white truncate">${c.name}</div>
                             <div class="text-[10px] text-slate-500 font-mono">${c.cities.length} top hubs</div>
                         </div>
                     </button>
-                `).join('');
+                    `;
+                }).join('');
             }
 
             // 3. Render Service Buttons (dynamically re-rendered whenever tier/niches change)
@@ -6220,9 +6226,15 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 activeCard.className = "country-card active p-3 rounded-xl border text-left transition flex items-center gap-2.5 cursor-pointer bg-gradient-to-r from-blue-900/40 via-cyan-900/30 to-dark-800 border-cyan-400 text-white shadow-lg shadow-cyan-500/15";
             }
 
-            // Update Selected Country Name text
+            // Update Selected Country Name text with high-res flag
             const nameEl = document.getElementById('scraperSelectedCountryName');
-            if (nameEl) nameEl.textContent = `${cObj.flag} ${cObj.name}`;
+            if (nameEl) {
+                if (cObj.id === 'global') {
+                    nameEl.innerHTML = `<span class="inline-flex items-center gap-1.5 align-middle"><span>🌍</span> <span>${cObj.name}</span></span>`;
+                } else {
+                    nameEl.innerHTML = `<span class="inline-flex items-center gap-1.5 align-middle"><img src="assets/images/flags/${cObj.id}.png" alt="${cObj.name}" class="inline-block w-5 h-3.5 object-cover rounded-sm shadow-sm border border-white/20"> <span>${cObj.name}</span></span>`;
+                }
+            }
 
             // Inject City Chips
             const chipsContainer = document.getElementById('scraperCityChipsContainer');
