@@ -54,6 +54,42 @@
         .animate-popover {
             animation: popoverIn 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        @keyframes radarSweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-radar-sweep {
+            animation: radarSweep 2s linear infinite;
+        }
+        @keyframes radarGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.3), inset 0 0 15px rgba(6, 182, 212, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.55), inset 0 0 20px rgba(6, 182, 212, 0.35); }
+        }
+        .animate-radar-glow {
+            animation: radarGlow 2.5s ease-in-out infinite;
+        }
+        @keyframes cardWaterfall {
+            from {
+                opacity: 0;
+                transform: translateY(22px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .animate-card-waterfall {
+            animation: cardWaterfall 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes progressShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-progress {
+            background-size: 200% 100%;
+            background-image: linear-gradient(90deg, #06b6d4 0%, #3b82f6 30%, #a855f7 60%, #06b6d4 100%);
+            animation: progressShimmer 2s linear infinite;
+        }
         .glow-hover:hover {
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
             border-color: rgba(6, 182, 212, 0.6);
@@ -1636,29 +1672,67 @@
             </div>
 
             <!-- REAL-TIME RADAR TERMINAL & CRAWLER HUD (Shown during search) -->
-            <div id="scraperStudioProgressContainer" class="hidden glass-card rounded-2xl p-5 border border-cyan-500/40 bg-dark-900/95 space-y-3.5 shadow-2xl">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2.5">
-                        <div class="relative w-7 h-7 flex items-center justify-center">
-                            <span class="absolute inset-0 rounded-full bg-cyan-500/30 animate-ping"></span>
-                            <span class="w-3.5 h-3.5 rounded-full bg-cyan-400"></span>
+            <div id="scraperStudioProgressContainer" class="hidden glass-card rounded-3xl p-5 sm:p-6 border border-cyan-500/50 bg-gradient-to-b from-[#081022] to-[#040814] space-y-4 shadow-[0_20px_60px_rgba(6,182,212,0.18)] relative overflow-hidden transition-all duration-300">
+                <!-- Background Ambient Glow -->
+                <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"></div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                    <div class="flex items-center gap-3.5">
+                        <!-- High-Tech Rotating Radar Scanner -->
+                        <div class="relative w-13 h-13 sm:w-14 sm:h-14 rounded-2xl border border-cyan-500/40 bg-slate-950 flex items-center justify-center overflow-hidden shadow-lg shadow-cyan-500/25 flex-shrink-0 animate-radar-glow">
+                            <!-- Concentric Radar Rings -->
+                            <div class="absolute inset-1.5 rounded-xl border border-cyan-500/20"></div>
+                            <div class="absolute inset-3.5 rounded-xl border border-cyan-500/10"></div>
+                            <div class="absolute w-full h-px bg-cyan-500/25"></div>
+                            <div class="absolute h-full w-px bg-cyan-500/25"></div>
+                            <!-- Sweeping Radar Beam -->
+                            <div class="absolute inset-0 animate-radar-sweep" style="background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(6,182,212,0.5) 360deg);"></div>
+                            <i class="fa-solid fa-satellite-dish text-cyan-300 text-sm sm:text-base z-10 animate-pulse"></i>
                         </div>
+
                         <div>
-                            <div class="text-xs font-bold text-white">Live Lead Radar In Progress...</div>
-                            <div class="text-[11px] text-cyan-400 font-mono" id="scraperStudioProgressQuery">Target: Scanning Google Maps &amp; Directories</div>
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-sm sm:text-base font-extrabold text-white tracking-tight flex items-center gap-2">
+                                    <span>Satellite Radar Crawling Google Maps</span>
+                                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                </h4>
+                            </div>
+                            <div class="text-xs text-cyan-300/90 font-mono mt-0.5" id="scraperStudioProgressQuery">Target: Scanning commercial registries &amp; live coordinates</div>
                         </div>
                     </div>
-                    <span class="px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 text-[10px] font-mono border border-cyan-500/30">CRAWLING LIVE</span>
+
+                    <div class="flex items-center gap-2 self-start sm:self-auto">
+                        <!-- Live Extracted Count Display -->
+                        <div class="px-3 py-1.5 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-xs font-mono flex items-center gap-2 shadow-sm">
+                            <span class="text-slate-400">Prospects:</span>
+                            <span id="radarLiveCounter" class="text-cyan-300 font-bold text-sm">0</span>
+                            <span class="text-slate-600">/</span>
+                            <span id="radarTargetCounter" class="text-slate-400 font-semibold">15</span>
+                        </div>
+                        <span class="px-2.5 py-1.5 rounded-xl bg-cyan-950/80 text-cyan-300 text-[10px] font-mono border border-cyan-500/40 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-bolt text-amber-400"></i>
+                            <span>Neural Scan</span>
+                        </span>
+                    </div>
                 </div>
 
-                <!-- Animated Progress Bar -->
-                <div class="w-full bg-dark-800 rounded-full h-2 overflow-hidden border border-gray-700">
-                    <div id="scraperStudioProgressBar" class="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 h-2 rounded-full w-1/4 transition-all duration-300"></div>
+                <!-- Animated Progress Bar with Shimmer -->
+                <div class="space-y-1.5 relative z-10">
+                    <div class="flex items-center justify-between text-[11px] font-mono">
+                        <span id="scraperProgressPhaseText" class="text-cyan-300 font-medium">Phase 1/4: Connecting to local geo-nodes...</span>
+                        <span id="scraperProgressPercentText" class="text-slate-400 font-bold">15%</span>
+                    </div>
+                    <div class="w-full bg-slate-950/90 rounded-full h-2.5 overflow-hidden border border-slate-700/80 p-0.5 shadow-inner">
+                        <div id="scraperStudioProgressBar" class="shimmer-progress h-full rounded-full w-1/6 transition-all duration-500 shadow-sm shadow-cyan-400/50"></div>
+                    </div>
                 </div>
 
-                <!-- Terminal Log Feed -->
-                <div class="p-3 rounded-xl bg-black/80 border border-gray-800 font-mono text-[11px] text-slate-300 space-y-1 max-h-36 overflow-y-auto" id="scraperStudioTerminalLogs">
-                    <div class="text-cyan-400">&gt; Establishing encrypted neural crawler link to Google Maps API...</div>
+                <!-- Live Matrix Telemetry Terminal -->
+                <div class="p-3.5 rounded-2xl bg-black/85 border border-cyan-500/20 font-mono text-xs text-slate-300 space-y-1.5 max-h-32 overflow-y-auto shadow-inner select-none relative z-10" id="scraperStudioTerminalLogs">
+                    <div class="text-cyan-400 flex items-center gap-2">
+                        <i class="fa-solid fa-chevron-right text-[10px] text-cyan-500"></i>
+                        <span>Neural crawler initialized. Handshaking Google Maps &amp; Meta Ad APIs...</span>
+                    </div>
                 </div>
             </div>
 
@@ -6603,30 +6677,56 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             const progressBar = document.getElementById('scraperStudioProgressBar');
             const logsFeed = document.getElementById('scraperStudioTerminalLogs');
             const resultsHub = document.getElementById('scraperStudioResultsHub');
+            const targetCounter = document.getElementById('radarTargetCounter');
+            const liveCounter = document.getElementById('radarLiveCounter');
+            const phaseText = document.getElementById('scraperProgressPhaseText');
+            const percentText = document.getElementById('scraperProgressPercentText');
 
-            if (launchBtn) launchBtn.disabled = true;
+            const originalBtnHtml = launchBtn ? launchBtn.innerHTML : '';
+            if (launchBtn) {
+                launchBtn.disabled = true;
+                launchBtn.innerHTML = `
+                    <i class="fa-solid fa-satellite-dish text-cyan-200 animate-spin text-base"></i>
+                    <span>Radar Scanning Google Maps...</span>
+                    <span class="px-2 py-0.5 rounded-full bg-cyan-950/90 text-cyan-300 text-xs font-mono border border-cyan-400/50 animate-pulse">Scanning Live</span>
+                `;
+            }
             if (resultsHub) resultsHub.classList.add('hidden');
-            if (progress) progress.classList.remove('hidden');
+            if (progress) {
+                progress.classList.remove('hidden');
+                progress.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
             if (progressQuery) progressQuery.textContent = `Target: "${query}" (${batchSize} prospects)`;
+            if (targetCounter) targetCounter.textContent = batchSize;
+            if (liveCounter) liveCounter.textContent = '0';
+
+            const updateRadarProgress = (percent, phaseMsg, currentCount = null) => {
+                if (progressBar) progressBar.style.width = `${percent}%`;
+                if (percentText) percentText.textContent = `${percent}%`;
+                if (phaseText) phaseText.textContent = phaseMsg;
+                if (currentCount !== null && liveCounter) {
+                    liveCounter.textContent = currentCount;
+                }
+            };
 
             const addLog = (msg, color = 'text-cyan-400') => {
                 if (!logsFeed) return;
                 const d = new Date();
                 const timeStr = d.toTimeString().split(' ')[0];
                 const div = document.createElement('div');
-                div.className = color;
-                div.innerHTML = `&gt; [${timeStr}] ${msg}`;
+                div.className = `${color} flex items-center gap-1.5`;
+                div.innerHTML = `<i class="fa-solid fa-chevron-right text-[9px] text-cyan-500"></i><span>[${timeStr}] ${msg}</span>`;
                 logsFeed.appendChild(div);
                 logsFeed.scrollTop = logsFeed.scrollHeight;
             };
 
             if (logsFeed) logsFeed.innerHTML = '';
-            addLog("Establishing encrypted neural crawler link to Google Maps API...", "text-cyan-400");
-            if (progressBar) progressBar.style.width = '20%';
+            updateRadarProgress(20, `Phase 1/4: Pinging satellite geo-nodes in ${currentScraperCity}...`, 0);
+            addLog(`Geo-fencing commercial district in ${currentScraperCity} (${currentScraperCountry.toUpperCase()})...`, "text-cyan-400");
 
-            await new Promise(r => setTimeout(r, 400));
-            addLog(`Scanning business directories in ${currentScraperCity}...`, "text-slate-300");
-            if (progressBar) progressBar.style.width = '45%';
+            await new Promise(r => setTimeout(r, 550));
+            updateRadarProgress(45, `Phase 2/4: Crawling local Google Maps listings without website...`, Math.max(1, Math.floor(batchSize * 0.3)));
+            addLog(`Filtering businesses without active websites or modern landing pages...`, "text-slate-300");
 
             const apiKey = (getSetting('aiApiKey') || getSetting('geminiKey') || '').trim();
             let discoveredLeads = [];
@@ -6689,8 +6789,9 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 }
             }
 
-            if (progressBar) progressBar.style.width = '75%';
+            updateRadarProgress(75, `Phase 3/4: Cross-verifying phone numbers, ratings & pitch hooks...`, Math.max(2, Math.floor(batchSize * 0.75)));
             addLog("Cross-verifying phone numbers, Google ratings and conversion audit hooks...", "text-amber-400");
+            await new Promise(r => setTimeout(r, 600));
 
             // Fallback from global leads if needed
             if (discoveredLeads.length === 0) {
@@ -6704,10 +6805,10 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 });
             }
 
-            if (progressBar) progressBar.style.width = '100%';
+            updateRadarProgress(100, `Phase 4/4: Complete! Compiling ${discoveredLeads.length} verified prospect cards...`, discoveredLeads.length);
             addLog(`Completed! Extracted ${discoveredLeads.length} verified prospects with personalized pitch hooks.`, "text-emerald-400");
 
-            await new Promise(r => setTimeout(r, 500));
+            await new Promise(r => setTimeout(r, 650));
 
             discoveredStudioLeads = discoveredLeads;
 
@@ -6732,15 +6833,18 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 }).catch(() => {});
             } catch (err) {}
 
-            if (launchBtn) launchBtn.disabled = false;
+            if (launchBtn) {
+                launchBtn.disabled = false;
+                launchBtn.innerHTML = originalBtnHtml;
+            }
             if (progress) progress.classList.add('hidden');
 
-            renderStudioDiscoveredLeads(discoveredLeads, query);
+            renderStudioDiscoveredLeads(discoveredStudioLeads, query);
 
             if (typeof confetti === 'function') {
                 confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
             }
-            showToast(`🎯 Extracted ${discoveredLeads.length} verified prospects for "${query}"!`);
+            showToast(`🎯 Extracted ${discoveredStudioLeads.length} verified prospects for "${query}"!`);
         }
 
         function renderStudioDiscoveredLeads(leads, query) {
@@ -6771,7 +6875,7 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 const pitch = lead.pitch_message || `Hi ${name}, saw your impressive Google reviews in ${city}! We noticed your business is missing a dedicated mobile website, causing lost leads. Can we share a 60-second mockup for free?`;
 
                 return `
-                    <div class="glass-card rounded-2xl p-4 border border-gray-800 hover:border-cyan-500/50 transition duration-200 shadow-lg space-y-3 flex flex-col justify-between">
+                    <div class="glass-card rounded-2xl p-4 border border-gray-800 hover:border-cyan-500/50 transition duration-300 shadow-lg space-y-3 flex flex-col justify-between animate-card-waterfall hover:shadow-cyan-500/10 hover:-translate-y-1" style="animation-delay: ${idx * 45}ms;">
                         <div class="space-y-2">
                             <div class="flex items-start justify-between gap-2">
                                 <div>
