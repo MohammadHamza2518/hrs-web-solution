@@ -1520,15 +1520,20 @@
                     </span>
                     <div>
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span>Global Lead Discovery & Scraper</span>
+                            <span>Global Lead Discovery &amp; Scraper</span>
                             <span class="px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 text-[10px] font-mono">Live Engine</span>
                         </h3>
-                        <p class="text-xs text-slate-400">Search Google Maps & directories for high-ticket businesses with NO website</p>
+                        <p class="text-xs text-slate-400">Search Google Maps &amp; directories for high-ticket businesses with NO website</p>
                     </div>
                 </div>
-                <button onclick="closeScrapeModal()" class="text-slate-400 hover:text-white p-1.5 transition">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+                <div class="flex items-center gap-2">
+                    <span id="scraperPlanTierBadge" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/15 border border-amber-500/30 text-amber-300">
+                        <i class="fa-solid fa-crown text-amber-400"></i> All 7 Niches Unlocked
+                    </span>
+                    <button onclick="closeScrapeModal()" class="text-slate-400 hover:text-white p-1.5 transition">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Modal Body -->
@@ -5213,7 +5218,77 @@ Output ONLY raw JSON.`;
             }
         };
 
+        const SVC_TO_NICHE_MAP = {
+            'web_design': 'web_dev',
+            'shopify_ecom': 'web_dev',
+            'video_editing': 'video_editing',
+            'graphic_design': 'graphic_design',
+            'social_media_ads': 'marketing_ads',
+            'google_reviews': 'marketing_ads',
+            'ai_chatbots': 'automation_ai'
+        };
+
+        function isScraperServiceAllowed(svcKey) {
+            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
+            if (isAllBundle) return true;
+            const userNiches = currentUser?.targetNiches || ['web_dev'];
+            const reqNiche = SVC_TO_NICHE_MAP[svcKey] || svcKey;
+            return userNiches.includes(reqNiche) || userNiches.includes(svcKey);
+        }
+
+        function openScrapeModal() {
+            const modal = document.getElementById("scrapeModal");
+            if (modal) modal.classList.remove("hidden");
+
+            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
+            const userNiches = currentUser?.targetNiches || ['web_dev'];
+
+            // Header Plan Badge
+            const badge = document.getElementById("scraperPlanTierBadge");
+            if (badge) {
+                if (isAllBundle) {
+                    badge.className = "hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/15 border border-amber-500/30 text-amber-300";
+                    badge.innerHTML = '<i class="fa-solid fa-crown text-amber-400"></i> All 7 Niches Unlocked (Master Bundle)';
+                } else {
+                    badge.className = "hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500/15 border border-cyan-500/30 text-cyan-300";
+                    badge.innerHTML = `<i class="fa-solid fa-shield-halved text-cyan-400"></i> Specialist Plan (${userNiches.length} Categories)`;
+                }
+            }
+
+            // Decorate buttons with Lock indicators if not in user's plan
+            Object.keys(SVC_TO_NICHE_MAP).forEach(k => {
+                const btn = document.getElementById("svcBtn_" + k);
+                if (!btn) return;
+                const allowed = isScraperServiceAllowed(k);
+                const oldLock = btn.querySelector('.scraper-lock-pill');
+                if (oldLock) oldLock.remove();
+
+                if (!allowed) {
+                    const lockBadge = document.createElement('span');
+                    lockBadge.className = 'scraper-lock-pill text-[9px] font-mono bg-rose-950/80 text-rose-300 border border-rose-500/40 px-1 py-0.2 rounded mt-0.5';
+                    lockBadge.textContent = '🔒 Pro';
+                    btn.appendChild(lockBadge);
+                }
+            });
+
+            // Find first allowed service to select
+            let defaultSvc = "web_design";
+            if (!isScraperServiceAllowed(defaultSvc)) {
+                const firstAllowed = Object.keys(SVC_TO_NICHE_MAP).find(k => isScraperServiceAllowed(k));
+                if (firstAllowed) defaultSvc = firstAllowed;
+            }
+            selectFreelanceService(defaultSvc);
+        }
+
         function selectFreelanceService(svcKey) {
+            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
+            const userNiches = currentUser?.targetNiches || ['web_dev'];
+
+            if (!isScraperServiceAllowed(svcKey)) {
+                showToast("🔒 Category Locked on ₹1,999 Plan! Upgrade to All Services Master Bundle (₹3,200) to search in all 7 industries.");
+                return;
+            }
+
             const data = FREELANCE_SERVICE_DATA[svcKey];
             if (!data) return;
 
@@ -5221,7 +5296,9 @@ Output ONLY raw JSON.`;
             if (hiddenInput) hiddenInput.value = svcKey;
 
             document.querySelectorAll("#serviceSelectorGrid .svc-btn").forEach(btn => {
-                btn.className = "svc-btn px-2.5 py-2 rounded-xl text-center border font-semibold text-[11px] transition flex flex-col items-center gap-1 bg-dark-800 border-gray-700 text-slate-300 hover:text-white hover:border-gray-600";
+                const k = btn.id.replace('svcBtn_', '');
+                const isAllowed = isScraperServiceAllowed(k);
+                btn.className = `svc-btn px-2.5 py-2 rounded-xl text-center border font-semibold text-[11px] transition flex flex-col items-center gap-1 ${isAllowed ? 'bg-dark-800 border-gray-700 text-slate-300 hover:text-white hover:border-gray-600' : 'bg-dark-800/40 border-gray-800/60 text-slate-500 opacity-60'}`;
             });
             const activeBtn = document.getElementById("svcBtn_" + svcKey);
             if (activeBtn) {
@@ -5247,13 +5324,6 @@ Output ONLY raw JSON.`;
             }
         }
 
-        function openScrapeModal() {
-            const modal = document.getElementById("scrapeModal");
-            if (modal) modal.classList.remove("hidden");
-            const curSvc = document.getElementById("selectedServiceType")?.value || "web_design";
-            selectFreelanceService(curSvc);
-        }
-
         function closeScrapeModal() {
             const modal = document.getElementById("scrapeModal");
             if (modal) modal.classList.add("hidden");
@@ -5266,9 +5336,15 @@ Output ONLY raw JSON.`;
 
         async function startScraper() {
             const query = (document.getElementById("scrapeQueryInput")?.value || "").trim();
-            const maxLeads = parseInt(document.getElementById("scrapeMaxInput")?.value || document.getElementById("scrapeMaxLeads")?.value || "5", 10);
+            let maxLeads = parseInt(document.getElementById("scrapeMaxInput")?.value || document.getElementById("scrapeMaxLeads")?.value || "5", 10);
             const btn = document.getElementById("btnStartScraper") || document.getElementById("startScrapeBtn");
             const progress = document.getElementById("scrapeLogsContainer") || document.getElementById("scrapeProgressContainer");
+
+            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
+            if (!isAllBundle && maxLeads > 15) {
+                maxLeads = 15;
+                showToast("⚡ Specialist Plan (₹1,999) searches up to 15 leads per batch. Upgrade to Master Bundle for deep 50+ discovery!");
+            }
 
             if (btn) btn.disabled = true;
             if (progress) progress.classList.remove("hidden");
