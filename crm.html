@@ -588,39 +588,12 @@
 
     <!-- ==================== DESKTOP WORKSPACE WRAPPER (1024px+ VIEWPORTS) ==================== -->
     <div id="desktopWorkspaceWrapper" class="hidden lg:block w-full min-h-screen">
-    <!-- Mac OS Window & App Navigation Bar -->
-    <div class="bg-slate-900/95 border-b border-white/[0.08] px-4 sm:px-6 py-2 flex flex-col sm:flex-row items-center justify-between gap-2.5">
-        <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span class="ml-2 text-[11px] font-mono text-slate-300 font-medium">
-                CRM Workspace &bull; Global Leads Pipeline &bull; Local SQLite Engine
-            </span>
-        </div>
-        <div class="flex items-center gap-1 bg-black/50 p-1 rounded-xl border border-white/[0.06] text-xs font-medium">
-            <button onclick="switchWorkspaceView('table')" id="tabNavTable" class="px-3 py-1 rounded-lg border bg-blue-600 text-white border-blue-500 transition cursor-pointer font-semibold">
-                Pipeline Table
-            </button>
-            <button onclick="openSettingsModal('ai')" id="tabNavAi" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer">
-                Multi-AI Setup
-            </button>
-            <button onclick="switchWorkspaceView('records')" id="tabNavRecords" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer">
-                Lead Records
-            </button>
-            <button onclick="switchWorkspaceView('scraper')" id="tabNavScraper" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer flex items-center gap-1.5">
-                <i class="fa-solid fa-satellite-dish text-[10px] text-cyan-400"></i>
-                <span>Lead Scraper</span>
-            </button>
-        </div>
-    </div>
 
-    <!-- Top Navigation Bar -->
-    <!-- Top Navigation Bar (Sleek Commercial Enterprise Header) -->
+    <!-- Unified Enterprise Command Header (Glassmorphic Top Navigation) -->
     <header class="sticky top-0 z-40 bg-dark-900/95 backdrop-blur-xl border-b border-gray-800/80 shadow-2xl">
-        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             <!-- Left: Official HRS Brand Logo & Outreach Studio -->
-            <div class="flex items-center space-x-3 sm:space-x-4">
+            <div class="flex items-center space-x-3 sm:space-x-4 flex-shrink-0">
                 <a href="/" class="flex items-center gap-3 sm:gap-3.5 group">
                     <!-- Brand Logo Visual -->
                     <div class="flex items-center">
@@ -648,40 +621,54 @@
                             <span class="px-2 py-0.5 rounded-md bg-gradient-to-r from-cyan-950/90 to-blue-950/90 border border-cyan-500/40 text-cyan-300 text-[9px] font-mono font-bold tracking-wider uppercase shadow-sm">Enterprise Pro</span>
                         </div>
                         <p class="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5 font-medium">
-                            <span class="text-slate-300 font-semibold tracking-wide hidden md:inline">Global Client Acquisition</span>
-                            <span class="text-slate-600 hidden md:inline">•</span>
-                            <span class="text-cyan-400/90 font-mono text-[10px]">US • UK • Dubai • Canada • Swiss</span>
-                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5"></span>
-                            <span class="text-emerald-400 text-[10px] font-semibold">Engine Active</span>
+                            <span class="text-slate-300 font-semibold tracking-wide hidden xl:inline">Global Client Acquisition</span>
+                            <span class="text-slate-600 hidden xl:inline">•</span>
+                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-emerald-400 text-[10px] font-mono font-semibold">MongoDB Atlas Synced</span>
+                            <span class="text-slate-600 hidden 2xl:inline">•</span>
+                            <span class="text-cyan-400/90 font-mono text-[10px] hidden 2xl:inline">10 Global Markets</span>
                         </p>
                     </div>
                 </a>
             </div>
 
+            <!-- Center: Executive Workspace View Switcher (Floating Segmented Control) -->
+            <nav class="flex items-center gap-1 p-1 bg-slate-950/80 rounded-2xl border border-white/[0.08] backdrop-blur-xl shadow-inner select-none flex-shrink-0">
+                <button onclick="switchWorkspaceView('table')" id="tabNavTable" class="px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-400/80 font-bold text-xs shadow-md shadow-blue-500/20 transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-table-columns text-[11px]"></i>
+                    <span>Pipeline<span class="hidden xl:inline">&nbsp;Table</span></span>
+                </button>
+                <button onclick="switchWorkspaceView('scraper')" id="tabNavScraper" class="px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-satellite-dish text-[11px] text-cyan-400"></i>
+                    <span>Lead Scraper</span>
+                    <span class="px-1.5 py-0.2 rounded-full text-[8px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold tracking-wider">LIVE</span>
+                </button>
+                <button onclick="switchWorkspaceView('records')" id="tabNavRecords" class="px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-folder-closed text-[11px] text-purple-400"></i>
+                    <span>Records</span>
+                </button>
+                <button onclick="openSettingsModal('ai')" id="tabNavAi" class="px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[11px] text-amber-400"></i>
+                    <span>Multi-AI</span>
+                </button>
+            </nav>
+
             <!-- Right: Actions & Settings -->
-            <div class="flex items-center space-x-3">
-                <!-- Primary Action: Find New Leads -->
-                <button onclick="switchWorkspaceView('scraper')" class="px-4 py-2 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-cyan-500/25 flex items-center gap-2 border border-cyan-400/30 group cursor-pointer">
-                    <i class="fa-solid fa-satellite-dish text-cyan-200 group-hover:rotate-12 transition-transform"></i>
-                    <span>Find New Leads</span>
-                    <span class="px-1.5 py-0.2 rounded-full bg-cyan-950/90 text-cyan-300 text-[9px] border border-cyan-400/40 uppercase tracking-wider font-mono">Live</span>
+            <div class="flex items-center space-x-2.5 flex-shrink-0">
+                <!-- Primary Action: Add Lead -->
+                <button onclick="openAddLeadModal()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold transition shadow-lg shadow-cyan-500/20 flex items-center gap-1.5 border border-cyan-400/30 cursor-pointer">
+                    <i class="fa-solid fa-plus text-xs"></i>
+                    <span>Add Lead</span>
                 </button>
 
-                <!-- Secondary Action Group: Add Lead + Export -->
-                <div class="flex items-center rounded-xl bg-slate-800/80 border border-slate-700/80 p-0.5 shadow-sm">
-                    <button onclick="openAddLeadModal()" class="px-3 py-1.5 hover:bg-slate-700/70 text-slate-300 hover:text-white rounded-lg text-xs font-medium transition flex items-center gap-1.5" title="Add Single Lead Manually">
-                        <i class="fa-solid fa-plus text-cyan-400 text-[10px]"></i>
-                        <span class="hidden sm:inline">Add Lead</span>
-                    </button>
-                    <div class="w-px h-4 bg-slate-700 mx-0.5"></div>
-                    <a href="javascript:void(0)" onclick="exportLeadsCsv()" class="px-3 py-1.5 hover:bg-emerald-500/10 text-emerald-400 hover:text-emerald-300 rounded-lg text-xs font-medium transition flex items-center gap-1.5" title="Download Excel CRM Report">
-                        <i class="fa-solid fa-file-excel text-[11px]"></i>
-                        <span class="hidden sm:inline">Export</span>
-                    </a>
-                </div>
+                <!-- Export CSV Action -->
+                <a href="javascript:void(0)" onclick="exportLeadsCsv()" class="px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-emerald-300 text-xs font-medium transition flex items-center gap-1.5 cursor-pointer shadow-sm" title="Download Excel CRM Report">
+                    <i class="fa-solid fa-file-excel text-emerald-400 text-xs"></i>
+                    <span class="hidden xl:inline">Export</span>
+                </a>
 
                 <!-- Settings Gear Button -->
-                <button onclick="openSettingsModal('agency')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-cyan-400 text-xs transition shadow-sm" title="Outreach & AI Configuration">
+                <button onclick="openSettingsModal('agency')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-300 hover:text-cyan-400 text-xs transition cursor-pointer shadow-sm" title="Outreach & AI Configuration">
                     <i class="fa-solid fa-gear text-sm"></i>
                 </button>
 
@@ -6071,19 +6058,18 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             const tabScraper = document.getElementById('tabNavScraper');
             const tabRecords = document.getElementById('tabNavRecords');
 
+            const inactiveTabClass = "px-3.5 py-1.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/[0.05] transition cursor-pointer font-medium text-xs flex items-center gap-1.5";
+            const activeTableClass = "px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-400/80 font-bold text-xs shadow-md shadow-blue-500/20 transition cursor-pointer flex items-center gap-1.5";
+            const activeScraperClass = "px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 text-white border-cyan-400/80 font-bold text-xs shadow-md shadow-cyan-500/25 transition cursor-pointer flex items-center gap-1.5";
+            const activeRecordsClass = "px-3.5 py-1.5 rounded-xl border bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-purple-400/80 font-bold text-xs shadow-md shadow-purple-500/20 transition cursor-pointer flex items-center gap-1.5";
+
             if (viewName === 'scraper') {
                 if (pipelineSec) pipelineSec.classList.add('hidden');
                 if (scraperSec) scraperSec.classList.remove('hidden');
 
-                if (tabTable) {
-                    tabTable.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
-                }
-                if (tabRecords) {
-                    tabRecords.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
-                }
-                if (tabScraper) {
-                    tabScraper.className = "px-3 py-1 rounded-lg border bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-500 font-bold shadow-md shadow-cyan-500/20 transition cursor-pointer flex items-center gap-1.5";
-                }
+                if (tabTable) tabTable.className = inactiveTabClass;
+                if (tabRecords) tabRecords.className = inactiveTabClass;
+                if (tabScraper) tabScraper.className = activeScraperClass;
 
                 initDedicatedScraperStudio();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -6091,16 +6077,15 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 if (pipelineSec) pipelineSec.classList.remove('hidden');
                 if (scraperSec) scraperSec.classList.add('hidden');
 
-                if (tabScraper) {
-                    tabScraper.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium flex items-center gap-1.5";
-                }
+                if (tabScraper) tabScraper.className = inactiveTabClass;
+
                 if (viewName === 'records') {
-                    if (tabTable) tabTable.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
-                    if (tabRecords) tabRecords.className = "px-3 py-1 rounded-lg border bg-blue-600 text-white border-blue-500 font-bold transition cursor-pointer";
+                    if (tabTable) tabTable.className = inactiveTabClass;
+                    if (tabRecords) tabRecords.className = activeRecordsClass;
                     setSentFilter('all');
                 } else {
-                    if (tabRecords) tabRecords.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
-                    if (tabTable) tabTable.className = "px-3 py-1 rounded-lg border bg-blue-600 text-white border-blue-500 font-bold transition cursor-pointer";
+                    if (tabRecords) tabRecords.className = inactiveTabClass;
+                    if (tabTable) tabTable.className = activeTableClass;
                     setSentFilter('pending');
                 }
                 window.scrollTo({ top: 0, behavior: 'smooth' });
