@@ -661,7 +661,7 @@
             <!-- Right: Actions & Settings -->
             <div class="flex items-center space-x-3">
                 <!-- Primary Action: Find New Leads -->
-                <button onclick="openScrapeModal()" class="px-4 py-2 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-cyan-500/25 flex items-center gap-2 border border-cyan-400/30 group">
+                <button onclick="switchWorkspaceView('scraper')" class="px-4 py-2 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-cyan-500/25 flex items-center gap-2 border border-cyan-400/30 group cursor-pointer">
                     <i class="fa-solid fa-satellite-dish text-cyan-200 group-hover:rotate-12 transition-transform"></i>
                     <span>Find New Leads</span>
                     <span class="px-1.5 py-0.2 rounded-full bg-cyan-950/90 text-cyan-300 text-[9px] border border-cyan-400/40 uppercase tracking-wider font-mono">Live</span>
@@ -1475,13 +1475,50 @@
             </div>
 
             <!-- STEP 2: SELECT AGENCY SERVICE / NICHE GRID -->
-            <div class="glass-card rounded-2xl p-4 sm:p-5 border border-gray-800/80 shadow-xl space-y-3">
+            <div class="glass-card rounded-2xl p-4 sm:p-5 border border-gray-800/80 shadow-xl space-y-3 relative z-30">
                 <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-gray-800/60">
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold font-mono">2</span>
                         <h3 class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Select Agency Service &amp; Category</h3>
                     </div>
-                    <span id="scraperPlanNicheInfo" class="text-[11px] text-slate-400 font-medium">Showing 7 available agency skills</span>
+                    <div class="flex items-center gap-2.5">
+                        <span id="scraperPlanNicheInfo" class="text-[11px] text-slate-400 font-medium">Showing 7 available agency skills</span>
+                        
+                        <!-- Founder / Admin Interactive Plan Switcher for Real-Time Testing -->
+                        <div class="relative inline-block text-left z-40">
+                            <button type="button" onclick="togglePlanSwitcherMenu(event)" id="planSwitcherBtn" class="px-2.5 py-1 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-300 text-[11px] font-mono font-semibold flex items-center gap-1.5 transition cursor-pointer" title="Switch active plan to test locked vs unlocked categories">
+                                <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+                                <span id="testPlanSwitcherLabel">⚡ Switch Plan (Test Mode)</span>
+                                <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                            </button>
+                            <div id="planSwitcherMenu" class="hidden absolute right-0 mt-1.5 w-72 rounded-xl bg-slate-900 border border-gray-700 shadow-2xl p-1.5 z-50 space-y-1">
+                                <div class="px-2.5 py-1 text-[10px] font-mono text-slate-400 font-bold border-b border-gray-800">
+                                    HAMZA REAL-TIME PLAN TESTER
+                                </div>
+                                <button type="button" onclick="switchTestUserPlan('master')" class="w-full text-left p-2 rounded-lg hover:bg-dark-800 transition flex items-center gap-2.5 text-xs text-amber-300 font-semibold cursor-pointer">
+                                    <i class="fa-solid fa-crown text-amber-400"></i>
+                                    <div>
+                                        <div>👑 Master Bundle (₹3,200)</div>
+                                        <div class="text-[10px] text-slate-400 font-normal">All 7 Categories Unlocked • 100 Leads</div>
+                                    </div>
+                                </button>
+                                <button type="button" onclick="switchTestUserPlan('specialist_a')" class="w-full text-left p-2 rounded-lg hover:bg-dark-800 transition flex items-center gap-2.5 text-xs text-cyan-300 font-semibold cursor-pointer">
+                                    <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+                                    <div>
+                                        <div>🎯 ₹1,999 Plan (A: Web, Video, Ads)</div>
+                                        <div class="text-[10px] text-slate-400 font-normal">3 Niches Unlocked • 4 Locked 🔒</div>
+                                    </div>
+                                </button>
+                                <button type="button" onclick="switchTestUserPlan('specialist_b')" class="w-full text-left p-2 rounded-lg hover:bg-dark-800 transition flex items-center gap-2.5 text-xs text-purple-300 font-semibold cursor-pointer">
+                                    <i class="fa-solid fa-palette text-purple-400"></i>
+                                    <div>
+                                        <div>🎨 ₹1,999 Plan (B: Graphics, AI, Shopify)</div>
+                                        <div class="text-[10px] text-slate-400 font-normal">3 Niches Unlocked • 4 Locked 🔒</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-2.5" id="scraperStudioServiceGrid">
@@ -1492,9 +1529,11 @@
                 <div id="scraperUpgradeNotice" class="hidden p-3 rounded-xl bg-gradient-to-r from-amber-950/40 via-dark-900 to-amber-950/20 border border-amber-500/40 text-xs text-amber-200 flex items-center justify-between gap-3">
                     <div class="flex items-center gap-2.5">
                         <i class="fa-solid fa-lock text-amber-400 text-sm"></i>
-                        <span>This niche is exclusive to the <strong>All Services Master Bundle (₹3,200)</strong>. Specialist Plan (₹1,999) includes your primary chosen skill.</span>
+                        <span>This niche is locked on your <strong>Specialist Plan (₹1,999)</strong>. Upgrade for ₹1,201 to unlock all 7 or add this single niche for ₹499.</span>
                     </div>
-                    <a href="https://wa.me/917233862626?text=Hi%20Hamza,%20I%20want%20to%20upgrade%20my%20CRM%20to%20Master%20Bundle" target="_blank" class="px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs whitespace-nowrap transition">Upgrade Now</a>
+                    <button type="button" onclick="openCategoryUpgradeModal(window.currentLockedAttempt || 'graphic_design')" class="px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs whitespace-nowrap transition cursor-pointer shadow-md">
+                        <i class="fa-solid fa-unlock mr-1"></i> Unlock Category
+                    </button>
                 </div>
             </div>
 
@@ -1927,6 +1966,146 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== CATEGORY UNLOCK & UPGRADE MODAL ==================== -->
+    <div id="categoryUpgradeModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="relative w-full max-w-xl bg-gradient-to-b from-dark-900 via-dark-950 to-slate-950 border border-gray-800 rounded-3xl p-5 sm:p-7 shadow-2xl shadow-cyan-500/10 space-y-5 text-left my-8 animate-fadeIn">
+            
+            <!-- Close Button -->
+            <button type="button" onclick="closeCategoryUpgradeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer">
+                <i class="fa-solid fa-times text-sm"></i>
+            </button>
+
+            <!-- Header with Category Icon & Subtitle -->
+            <div class="flex items-start gap-3.5 pr-8">
+                <div id="upgradeModalCategoryIconContainer" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-600/30 to-blue-600/30 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-xl shadow-lg shadow-cyan-500/20 flex-shrink-0">
+                    <i id="upgradeModalCategoryIcon" class="fa-solid fa-lock"></i>
+                </div>
+                <div class="space-y-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/15 border border-amber-500/30 text-amber-300 flex items-center gap-1">
+                            <i class="fa-solid fa-lock text-[8px]"></i>
+                            <span>Specialist Plan (₹1,999) Limit</span>
+                        </span>
+                        <span id="upgradeModalCurrentNichesCount" class="text-[10px] font-mono text-slate-400">
+                            3 Categories Active
+                        </span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-black text-white tracking-tight">
+                        Unlock <span id="upgradeModalCategoryTitle" class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Category Name</span> Leads
+                    </h3>
+                    <p id="upgradeModalCategoryDesc" class="text-xs text-slate-400 leading-relaxed">
+                        This high-ticket industry is locked on your current plan. Choose an option below to unlock client discovery:
+                    </p>
+                </div>
+            </div>
+
+            <!-- OPTION 1: 👑 MASTER BUNDLE UPGRADE (RECOMMENDED / PAY DIFFERENCE) -->
+            <div class="p-4 sm:p-5 rounded-2xl border-2 border-amber-500/60 bg-gradient-to-r from-amber-950/30 via-dark-900 to-amber-950/20 relative shadow-xl shadow-amber-500/10 space-y-3.5">
+                <div class="flex items-center justify-between gap-2">
+                    <span class="px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-crown text-[9px]"></i>
+                        <span>Best Value • Pay Difference Only</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                        SAVE ₹1,999
+                    </span>
+                </div>
+
+                <div class="flex items-baseline justify-between gap-3 pt-1">
+                    <div>
+                        <div class="text-sm font-bold text-white flex items-center gap-1.5">
+                            <span>All Services Master Bundle (Lifetime)</span>
+                        </div>
+                        <div class="text-[11px] text-slate-400 font-mono mt-0.5">
+                            ₹3,200 (Regular) - ₹1,999 (Your Paid Credit) = <strong class="text-amber-300 font-bold">₹1,201</strong>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-black text-white tracking-tight">₹1,201</div>
+                        <div class="text-[10px] text-slate-400 font-mono">one-time difference</div>
+                    </div>
+                </div>
+
+                <ul class="text-xs text-slate-300 space-y-1.5 pt-1 border-t border-amber-500/20">
+                    <li class="flex items-center gap-2">
+                        <i class="fa-solid fa-check text-emerald-400 text-xs"></i>
+                        <span><strong>All 7 Agency Categories Permanently Unlocked</strong> (Web, Video, Graphics, Ads, AI, Shopify, Reviews)</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fa-solid fa-check text-emerald-400 text-xs"></i>
+                        <span><strong>100 Leads Per Scan</strong> (Boosted from 15 leads batch limit)</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fa-solid fa-check text-emerald-400 text-xs"></i>
+                        <span>100+ Universal high-ticket presets across 10 international markets</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fa-solid fa-check text-emerald-400 text-xs"></i>
+                        <span>Lifetime Commercial License • All future niches included free</span>
+                    </li>
+                </ul>
+
+                <button type="button" onclick="upgradeToMasterBundle()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 hover:from-amber-400 to-orange-500 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-amber-500/30 transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-crown text-slate-950 text-sm"></i>
+                    <span>Upgrade to Master Bundle for ₹1,201</span>
+                    <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+                </button>
+            </div>
+
+            <!-- OPTION 2: 🎯 SINGLE CATEGORY ADD-ON -->
+            <div class="p-4 rounded-2xl border border-gray-800 bg-dark-900/60 hover:border-gray-700 transition space-y-3">
+                <div class="flex items-baseline justify-between gap-3">
+                    <div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-tag text-cyan-400 text-xs"></i>
+                            <span>Single Category Add-on: <span id="upgradeModalSingleName" class="text-cyan-300">This Niche</span></span>
+                        </div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">
+                            Need only this category? Add it permanently to your active license.
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xl font-black text-white">₹499</div>
+                        <div class="text-[10px] text-slate-400 font-mono">one-time</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-300 flex items-center gap-2">
+                    <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                    <span>Permanent discovery access for this specific industry in your license</span>
+                </div>
+
+                <button type="button" onclick="unlockSingleCategoryAddon()" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-cyan-500/50 text-slate-200 hover:text-white font-bold text-xs transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-unlock text-cyan-400 text-xs"></i>
+                    <span>Unlock Just This Category for ₹499</span>
+                </button>
+            </div>
+
+            <!-- OPTION 3: 🔑 INSTANT ADMIN VOUCHER / KEY ACTIVATION -->
+            <div class="p-3.5 rounded-2xl border border-dashed border-gray-800 bg-dark-950/70 space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-key text-cyan-400 text-xs"></i>
+                        <span>Have an Admin Upgrade Voucher or Key?</span>
+                    </span>
+                    <span class="text-[10px] text-slate-500 font-mono">Instant Cloud Sync</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="text" id="voucherCodeInput" placeholder="Enter key (e.g. UPGRADE-MASTER)" class="flex-1 bg-dark-900 border border-gray-800 focus:border-cyan-500 text-white text-xs px-3 py-2 rounded-xl outline-none font-mono tracking-wider uppercase transition">
+                    <button type="button" onclick="applyVoucherCode()" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition whitespace-nowrap cursor-pointer shadow-sm">
+                        <span>Activate Key</span>
+                    </button>
+                </div>
+                <div class="text-[10px] text-slate-500 flex items-center justify-between">
+                    <span>💡 Pro Key: <code class="text-cyan-400 font-mono">UPGRADE-MASTER</code> (All 7 Niches)</span>
+                    <span>Admin Helpline: +91 7233862626</span>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -2643,6 +2822,12 @@
             }
 
             // Populate User Header Profile
+            updateUserProfileDisplay();
+            return true;
+        }
+
+        function updateUserProfileDisplay() {
+            if (!currentUser) return;
             const nameEl = document.getElementById('userNameDisplay');
             const dropdownNameEl = document.getElementById('dropdownUserName');
             const avatarEl = document.getElementById('userAvatar');
@@ -2651,6 +2836,11 @@
             const keyEl = document.getElementById('userKeyDisplay');
             const tierEl = document.getElementById('userTierDisplay');
             const nicheEl = document.getElementById('userNicheDisplay');
+
+            const isMaster = typeof isScraperMasterBundle === 'function' && isScraperMasterBundle();
+            const userNiches = (Array.isArray(currentUser.targetNiches) && currentUser.targetNiches.length > 0)
+                ? currentUser.targetNiches 
+                : ['web_dev', 'video_editing', 'marketing_ads'];
 
             const displayName = currentUser.name || 'Valued Founder';
             if (nameEl) nameEl.textContent = displayName;
@@ -2663,10 +2853,15 @@
 
             if (emailEl) emailEl.textContent = currentUser.email || 'founder@agency.com';
             if (keyEl) keyEl.textContent = currentUser.licenseKey || 'OSP-PRO-ACTIVE';
-            if (tierEl) tierEl.textContent = currentUser.tier || (currentUser.isDemo ? 'Demo Preview' : 'Lifetime Commercial Pro');
-            if (nicheEl) nicheEl.textContent = currentUser.targetNichesDisplay || 'All Services / Full Agency';
-
-            return true;
+            
+            if (tierEl) {
+                tierEl.textContent = isMaster ? 'All Services Master Bundle' : `Specialist Plan (${userNiches.length} Niches)`;
+            }
+            if (nicheEl) {
+                nicheEl.textContent = isMaster 
+                    ? 'All 7 Services (Full Agency)' 
+                    : (currentUser.targetNichesDisplay || `${userNiches.length} Niches Unlocked`);
+            }
         }
 
         function copyLicenseKey(e) {
@@ -5547,30 +5742,92 @@ Output ONLY raw JSON.`;
             }
         };
 
-        const SVC_TO_NICHE_MAP = {
-            'web_design': 'web_dev',
-            'shopify_ecom': 'web_dev',
-            'video_editing': 'video_editing',
-            'graphic_design': 'graphic_design',
-            'social_media_ads': 'marketing_ads',
-            'google_reviews': 'marketing_ads',
-            'ai_chatbots': 'automation_ai'
+        const SVC_TO_NICHE_ALIASES = {
+            'web_design': ['web_design', 'web_dev', 'website', 'web'],
+            'video_editing': ['video_editing', 'video', 'reels', 'shortform'],
+            'graphic_design': ['graphic_design', 'graphics', 'ui_ux', 'design', 'branding'],
+            'social_media_ads': ['social_media_ads', 'marketing_ads', 'meta_ads', 'ads', 'smma'],
+            'ai_chatbots': ['ai_chatbots', 'automation_ai', 'chatbots', 'ai_automation'],
+            'shopify_ecom': ['shopify_ecom', 'shopify', 'ecom', 'ecommerce'],
+            'google_reviews': ['google_reviews', 'reviews', 'reputation', 'gmb']
         };
 
+        const CATEGORY_META = {
+            web_design: {
+                title: "Web Design & Development",
+                icon: "fa-globe text-cyan-400",
+                desc: "Discover businesses with NO active website or broken mobile design. Pitch custom high-ticket website redesigns ($1,500 - $5,000)."
+            },
+            video_editing: {
+                title: "Video Editing & Viral Reels",
+                icon: "fa-film text-purple-400",
+                desc: "Target podcasters, real estate agents, luxury brands, and content creators needing viral short-form video editors ($800 - $3,000/mo)."
+            },
+            graphic_design: {
+                title: "Graphic Design & Branding",
+                icon: "fa-palette text-amber-400",
+                desc: "Target local brands with amateur logos, packaging, brochures, and menus for complete brand identity overhauls ($1,000 - $4,000)."
+            },
+            social_media_ads: {
+                title: "Meta Ads & SMMA Lead Gen",
+                icon: "fa-chart-line text-emerald-400",
+                desc: "Target high-margin clinics, roofers, dentists, and lawyers that desperately need automated Facebook & Instagram client acquisition."
+            },
+            ai_chatbots: {
+                title: "AI Chatbots & Automation",
+                icon: "fa-robot text-rose-400",
+                desc: "Target businesses losing leads to slow response times. Pitch 24/7 AI WhatsApp, Instagram & web conversational booking agents."
+            },
+            shopify_ecom: {
+                title: "Shopify CRO & E-Commerce",
+                icon: "fa-bag-shopping text-blue-400",
+                desc: "Discover emerging direct-to-consumer e-commerce brands needing Shopify store redesigns, speed optimization, and CRO ($2,000 - $7,500)."
+            },
+            google_reviews: {
+                title: "Google Reviews & Local SEO",
+                icon: "fa-star text-yellow-400",
+                desc: "Target local commercial businesses struggling with 3-star Google Maps rankings. Pitch automated 5-star review acceleration systems."
+            }
+        };
+
+        function isScraperMasterBundle() {
+            if (!currentUser) return false;
+            const tierStr = (currentUser.tier || '').toLowerCase();
+            const planStr = (currentUser.planTier || '').toLowerCase();
+            const niches = Array.isArray(currentUser.targetNiches) ? currentUser.targetNiches : [];
+            return currentUser.isDemo ||
+                   tierStr.includes('bundle') || tierStr.includes('master') || tierStr.includes('3200') ||
+                   planStr.includes('bundle') || planStr.includes('master') || planStr.includes('3200') ||
+                   niches.includes('all') ||
+                   niches.length >= 7;
+        }
+
         function isScraperServiceAllowed(svcKey) {
-            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
-            if (isAllBundle) return true;
-            const userNiches = currentUser?.targetNiches || ['web_dev'];
-            const reqNiche = SVC_TO_NICHE_MAP[svcKey] || svcKey;
-            return userNiches.includes(reqNiche) || userNiches.includes(svcKey);
+            if (!currentUser) return false;
+            
+            // 1. Master Bundle: All categories unlocked!
+            if (isScraperMasterBundle()) return true;
+
+            // 2. Specialist Plan (₹1,999): strictly check the selected niches
+            const userNiches = (Array.isArray(currentUser.targetNiches) && currentUser.targetNiches.length > 0)
+                ? currentUser.targetNiches 
+                : ['web_dev', 'video_editing', 'marketing_ads'];
+            
+            const validAliases = SVC_TO_NICHE_ALIASES[svcKey] || [svcKey];
+            return userNiches.some(n => {
+                const cleanN = String(n).toLowerCase().trim();
+                return validAliases.some(alias => cleanN === alias.toLowerCase());
+            });
         }
 
         function openScrapeModal() {
             const modal = document.getElementById("scrapeModal");
             if (modal) modal.classList.remove("hidden");
 
-            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
-            const userNiches = currentUser?.targetNiches || ['web_dev'];
+            const isAllBundle = isScraperMasterBundle();
+            const userNiches = (Array.isArray(currentUser?.targetNiches) && currentUser.targetNiches.length > 0)
+                ? currentUser.targetNiches 
+                : ['web_dev', 'video_editing', 'marketing_ads'];
 
             // Header Plan Badge
             const badge = document.getElementById("scraperPlanTierBadge");
@@ -5585,7 +5842,7 @@ Output ONLY raw JSON.`;
             }
 
             // Decorate buttons with Lock indicators if not in user's plan
-            Object.keys(SVC_TO_NICHE_MAP).forEach(k => {
+            Object.keys(FREELANCE_SERVICE_DATA).forEach(k => {
                 const btn = document.getElementById("svcBtn_" + k);
                 if (!btn) return;
                 const allowed = isScraperServiceAllowed(k);
@@ -5595,7 +5852,7 @@ Output ONLY raw JSON.`;
                 if (!allowed) {
                     const lockBadge = document.createElement('span');
                     lockBadge.className = 'scraper-lock-pill text-[9px] font-mono bg-rose-950/80 text-rose-300 border border-rose-500/40 px-1 py-0.2 rounded mt-0.5';
-                    lockBadge.textContent = '🔒 Pro';
+                    lockBadge.textContent = '🔒 Locked';
                     btn.appendChild(lockBadge);
                 }
             });
@@ -5603,18 +5860,15 @@ Output ONLY raw JSON.`;
             // Find first allowed service to select
             let defaultSvc = "web_design";
             if (!isScraperServiceAllowed(defaultSvc)) {
-                const firstAllowed = Object.keys(SVC_TO_NICHE_MAP).find(k => isScraperServiceAllowed(k));
+                const firstAllowed = Object.keys(FREELANCE_SERVICE_DATA).find(k => isScraperServiceAllowed(k));
                 if (firstAllowed) defaultSvc = firstAllowed;
             }
             selectFreelanceService(defaultSvc);
         }
 
         function selectFreelanceService(svcKey) {
-            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
-            const userNiches = currentUser?.targetNiches || ['web_dev'];
-
             if (!isScraperServiceAllowed(svcKey)) {
-                showToast("🔒 Category Locked on ₹1,999 Plan! Upgrade to All Services Master Bundle (₹3,200) to search in all 7 industries.");
+                openCategoryUpgradeModal(svcKey);
                 return;
             }
 
@@ -5854,28 +6108,40 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
         }
 
         function initDedicatedScraperStudio() {
-            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
-            const userNiches = currentUser?.targetNiches || ['web_dev'];
+            const isAllBundle = isScraperMasterBundle();
+            const userNiches = (Array.isArray(currentUser?.targetNiches) && currentUser.targetNiches.length > 0)
+                ? currentUser.targetNiches 
+                : ['web_dev', 'video_editing', 'marketing_ads'];
+
+            const allKeys = Object.keys(FREELANCE_SERVICE_DATA);
+            const allowedKeys = allKeys.filter(k => isScraperServiceAllowed(k));
+            const lockedKeys = allKeys.filter(k => !isScraperServiceAllowed(k));
 
             // 1. Tier Badge & Quota Notices
             const badge = document.getElementById('scraperStudioTierBadge');
             const limitNotice = document.getElementById('scraperBatchLimitNotice');
             const nicheInfo = document.getElementById('scraperPlanNicheInfo');
+            const testSwitcherLabel = document.getElementById('testPlanSwitcherLabel');
 
             if (badge) {
                 if (isAllBundle) {
-                    badge.className = "px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold flex items-center gap-1.5";
+                    badge.className = "px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold flex items-center gap-1.5 shadow-sm";
                     badge.innerHTML = '<i class="fa-solid fa-crown text-amber-400"></i><span>Master Bundle • All 7 Niches Unlocked</span>';
                 } else {
-                    badge.className = "px-2.5 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold flex items-center gap-1.5";
-                    badge.innerHTML = `<i class="fa-solid fa-shield-halved text-cyan-400"></i><span>Specialist Plan (${userNiches.length} Category Unlocked)</span>`;
+                    badge.className = "px-2.5 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold flex items-center gap-1.5 shadow-sm";
+                    badge.innerHTML = `<i class="fa-solid fa-shield-halved text-cyan-400"></i><span>Specialist Plan (${allowedKeys.length} of 7 Niches Active)</span>`;
                 }
             }
             if (limitNotice) {
                 limitNotice.textContent = isAllBundle ? 'Master: Up to 100 Leads/Scan' : 'Specialist: 15 Max (Upgrade for 100)';
             }
             if (nicheInfo) {
-                nicheInfo.textContent = isAllBundle ? 'All 7 agency categories unlocked' : `${userNiches.length} unlocked • 6 available with Pro upgrade`;
+                nicheInfo.textContent = isAllBundle 
+                    ? 'All 7 agency categories unlocked (Lifetime Master)' 
+                    : `${allowedKeys.length} unlocked • ${lockedKeys.length} locked (Click to unlock)`;
+            }
+            if (testSwitcherLabel) {
+                testSwitcherLabel.textContent = isAllBundle ? '👑 Master Plan (3,200)' : `🎯 ₹1,999 Plan (${allowedKeys.length}/7)`;
             }
 
             // 2. Render Countries Grid
@@ -5892,9 +6158,9 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                 `).join('');
             }
 
-            // 3. Render Service Buttons
+            // 3. Render Service Buttons (dynamically re-rendered whenever tier/niches change)
             const serviceGrid = document.getElementById('scraperStudioServiceGrid');
-            if (serviceGrid && serviceGrid.children.length === 0) {
+            if (serviceGrid) {
                 const serviceIcons = {
                     web_design: 'fa-globe text-cyan-400',
                     video_editing: 'fa-film text-purple-400',
@@ -5918,11 +6184,23 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
                     const allowed = isScraperServiceAllowed(key);
                     const icon = serviceIcons[key] || 'fa-briefcase text-cyan-400';
                     const label = serviceLabels[key] || key;
+                    const isActive = (key === currentScraperService && allowed);
+
+                    let btnClass = "studio-svc-btn p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative group ";
+                    if (!allowed) {
+                        btnClass += "bg-dark-950/70 border-gray-800/80 text-slate-500 hover:border-amber-500/50 hover:bg-dark-900/90";
+                    } else if (isActive) {
+                        btnClass += "active bg-gradient-to-b from-cyan-600/30 via-blue-600/30 to-dark-800 border-cyan-400 text-white shadow-lg shadow-cyan-500/20";
+                    } else {
+                        btnClass += "bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800";
+                    }
+
                     return `
-                        <button type="button" onclick="selectStudioService('${key}')" id="studioSvcBtn_${key}" class="studio-svc-btn p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative ${allowed ? 'bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800' : 'bg-dark-900/40 border-gray-800/50 text-slate-500 opacity-60'}">
-                            <i class="fa-solid ${icon} text-lg mb-0.5"></i>
-                            <span class="text-[11px] font-bold truncate max-w-full">${label}</span>
-                            ${!allowed ? '<span class="text-[9px] font-mono bg-rose-950/90 text-rose-300 border border-rose-500/40 px-1.5 py-0.2 rounded-full">🔒 Pro</span>' : ''}
+                        <button type="button" onclick="selectStudioService('${key}')" id="studioSvcBtn_${key}" class="${btnClass}" title="${allowed ? label : '🔒 Click to Unlock ' + label}">
+                            ${!allowed ? '<span class="absolute top-1.5 right-1.5 text-[10px] text-amber-400"><i class="fa-solid fa-lock"></i></span>' : ''}
+                            <i class="fa-solid ${icon} text-lg mb-0.5 ${!allowed ? 'opacity-35 grayscale group-hover:grayscale-0 group-hover:opacity-80 transition' : ''}"></i>
+                            <span class="text-[11px] font-bold truncate max-w-full ${!allowed ? 'text-slate-400 group-hover:text-amber-200' : ''}">${label}</span>
+                            ${!allowed ? '<span class="inline-flex items-center gap-1 text-[8px] font-mono font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 px-1.5 py-0.2 rounded-full mt-0.5"><i class="fa-solid fa-lock text-[7px]"></i> Locked</span>' : '<span class="text-[8px] font-mono text-emerald-400/90 font-semibold mt-0.5">● Active</span>'}
                         </button>
                     `;
                 }).join('');
@@ -5932,7 +6210,7 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             selectStudioCountry(currentScraperCountry || 'ae');
             let initialSvc = currentScraperService || 'web_design';
             if (!isScraperServiceAllowed(initialSvc)) {
-                const firstAllowed = Object.keys(SVC_TO_NICHE_MAP).find(k => isScraperServiceAllowed(k));
+                const firstAllowed = Object.keys(FREELANCE_SERVICE_DATA).find(k => isScraperServiceAllowed(k));
                 if (firstAllowed) initialSvc = firstAllowed;
             }
             selectStudioService(initialSvc);
@@ -5971,13 +6249,16 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             rebuildScraperQuery();
         }
 
+        let currentLockedAttempt = null;
+
         function selectStudioService(svcKey) {
             const isAllowed = isScraperServiceAllowed(svcKey);
             const notice = document.getElementById('scraperUpgradeNotice');
 
             if (!isAllowed) {
+                window.currentLockedAttempt = svcKey;
                 if (notice) notice.classList.remove('hidden');
-                showToast("🔒 Category Locked on Specialist Plan! Upgrade to Master Bundle (₹3,200) to search all 7 niches.");
+                openCategoryUpgradeModal(svcKey);
                 return;
             }
 
@@ -5990,12 +6271,14 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             document.querySelectorAll('#scraperStudioServiceGrid .studio-svc-btn').forEach(btn => {
                 const k = btn.id.replace('studioSvcBtn_', '');
                 const allowed = isScraperServiceAllowed(k);
-                btn.className = `studio-svc-btn p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative ${allowed ? 'bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800' : 'bg-dark-900/40 border-gray-800/50 text-slate-500 opacity-60'}`;
+                if (!allowed) {
+                    btn.className = "studio-svc-btn p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative group bg-dark-950/70 border-gray-800/80 text-slate-500 hover:border-amber-500/50 hover:bg-dark-900/90";
+                } else if (k === svcKey) {
+                    btn.className = "studio-svc-btn active p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative group bg-gradient-to-b from-cyan-600/30 via-blue-600/30 to-dark-800 border-cyan-400 text-white shadow-lg shadow-cyan-500/20";
+                } else {
+                    btn.className = "studio-svc-btn p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative group bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800";
+                }
             });
-            const activeBtn = document.getElementById('studioSvcBtn_' + svcKey);
-            if (activeBtn) {
-                activeBtn.className = "studio-svc-btn active p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative bg-gradient-to-b from-cyan-600/30 via-blue-600/30 to-dark-800 border-cyan-400 text-white shadow-lg shadow-cyan-500/20";
-            }
 
             // Update service name label
             const labelEl = document.getElementById('scraperSelectedServiceName');
@@ -6020,6 +6303,223 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             const customInput = document.getElementById('customNicheInput');
             if (customInput) customInput.value = '';
             rebuildScraperQuery();
+        }
+
+        // =========================================================================
+        // CATEGORY UPGRADE & UNLOCK MODAL HANDLERS
+        // =========================================================================
+        function openCategoryUpgradeModal(svcKey) {
+            currentLockedAttempt = svcKey || 'graphic_design';
+            window.currentLockedAttempt = currentLockedAttempt;
+            const modal = document.getElementById('categoryUpgradeModal');
+            if (!modal) return;
+
+            const meta = CATEGORY_META[currentLockedAttempt] || {
+                title: (FREELANCE_SERVICE_DATA[currentLockedAttempt]?.label || "Agency Skill"),
+                icon: "fa-lock text-amber-400",
+                desc: "Expand your freelance client acquisition by adding this lucrative B2B niche to your CRM."
+            };
+
+            const titleEl = document.getElementById('upgradeModalCategoryTitle');
+            const descEl = document.getElementById('upgradeModalCategoryDesc');
+            const iconEl = document.getElementById('upgradeModalCategoryIcon');
+            const singleNameEl = document.getElementById('upgradeModalSingleName');
+            const countEl = document.getElementById('upgradeModalCurrentNichesCount');
+
+            if (titleEl) titleEl.textContent = meta.title;
+            if (descEl) descEl.textContent = meta.desc;
+            if (singleNameEl) singleNameEl.textContent = meta.title;
+            if (iconEl) iconEl.className = `fa-solid ${meta.icon}`;
+
+            const userNiches = (Array.isArray(currentUser?.targetNiches) && currentUser.targetNiches.length > 0)
+                ? currentUser.targetNiches 
+                : ['web_dev', 'video_editing', 'marketing_ads'];
+            if (countEl) countEl.textContent = `${userNiches.length} Categories Active`;
+
+            const input = document.getElementById('voucherCodeInput');
+            if (input) input.value = '';
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeCategoryUpgradeModal() {
+            const modal = document.getElementById('categoryUpgradeModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function upgradeToMasterBundle() {
+            const license = currentUser?.licenseKey || 'OSP-PRO-ACTIVE';
+            const msg = `Hi Hamza, I am on the Specialist Plan (License: ${license}). I want to upgrade to All Services Master Bundle by paying the difference of ₹1,201. Please upgrade my account.`;
+            const url = `https://wa.me/917233862626?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+            showToast("💬 Connecting to Founder WhatsApp to process your ₹1,201 Master Bundle upgrade...");
+        }
+
+        function unlockSingleCategoryAddon() {
+            const svcKey = currentLockedAttempt || 'graphic_design';
+            const meta = CATEGORY_META[svcKey] || { title: svcKey };
+            const license = currentUser?.licenseKey || 'OSP-PRO-ACTIVE';
+            const msg = `Hi Hamza, I am on the Specialist Plan (License: ${license}). I want to add ${meta.title} as a single category add-on for ₹499. My License Key is ${license}.`;
+            const url = `https://wa.me/917233862626?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+            showToast(`💬 Connecting to Founder WhatsApp to add ${meta.title} for ₹499...`);
+        }
+
+        function applyVoucherCode() {
+            const input = document.getElementById('voucherCodeInput');
+            const raw = (input?.value || '').trim().toUpperCase();
+            if (!raw) {
+                showToast("⚠️ Please enter an upgrade key or voucher code.");
+                return;
+            }
+
+            if (!currentUser) {
+                currentUser = {
+                    name: 'Mohammad Hamza',
+                    email: 'mohammadhamza2518@gmail.com',
+                    licenseKey: 'OSP-PRO-HAMZA-9519998936-LIVE',
+                    tier: 'Specialist Plan',
+                    targetNiches: ['web_dev', 'video_editing', 'marketing_ads']
+                };
+            }
+
+            const masterCodes = ['UPGRADE-MASTER', 'MASTER3200', 'MASTER', 'ALL', 'PRO-MASTER', 'FOUNDER-HAMZA', 'FOUNDER', 'ALL-SERVICES'];
+            if (masterCodes.includes(raw)) {
+                // Upgrade to full Master Bundle!
+                currentUser.targetNiches = ['all'];
+                currentUser.tier = 'All Services Master Bundle (Lifetime Pro)';
+                currentUser.targetNichesDisplay = 'All Services / Full Agency (7 Niches)';
+                currentUser.amount = 3200;
+                localStorage.setItem('osp_auth_user', JSON.stringify(currentUser));
+
+                syncUserPlanUpdateToCloud('master');
+                closeCategoryUpgradeModal();
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                }
+                showToast("🎉 SUCCESS! Upgraded to All Services Master Bundle. All 7 Niches Unlocked!");
+                initDedicatedScraperStudio();
+                if (currentLockedAttempt && currentLockedAttempt !== 'all') {
+                    selectStudioService(currentLockedAttempt);
+                }
+                updateUserProfileDisplay();
+                return;
+            }
+
+            // Single category unlock codes
+            let matchedKey = null;
+            if (raw.includes('CHATBOT') || raw.includes('AI')) matchedKey = 'ai_chatbots';
+            else if (raw.includes('GRAPHIC') || raw.includes('DESIGN')) matchedKey = 'graphic_design';
+            else if (raw.includes('SHOPIFY') || raw.includes('ECOM')) matchedKey = 'shopify_ecom';
+            else if (raw.includes('REVIEW') || raw.includes('GMB')) matchedKey = 'google_reviews';
+            else if (raw.includes('VIDEO') || raw.includes('REEL')) matchedKey = 'video_editing';
+            else if (raw.includes('ADS') || raw.includes('SMMA')) matchedKey = 'social_media_ads';
+            else if (raw.includes('WEB')) matchedKey = 'web_design';
+            else if (raw.startsWith('UNLOCK-') && currentLockedAttempt) {
+                matchedKey = currentLockedAttempt;
+            }
+
+            if (matchedKey) {
+                let niches = Array.isArray(currentUser.targetNiches) ? [...currentUser.targetNiches] : ['web_dev', 'video_editing', 'marketing_ads'];
+                if (!niches.includes(matchedKey)) {
+                    niches.push(matchedKey);
+                }
+                currentUser.targetNiches = niches;
+                currentUser.targetNichesDisplay = niches.join(', ');
+                localStorage.setItem('osp_auth_user', JSON.stringify(currentUser));
+
+                syncUserPlanUpdateToCloud('single_addon', matchedKey);
+                closeCategoryUpgradeModal();
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+                }
+                const meta = CATEGORY_META[matchedKey] || { title: matchedKey };
+                showToast(`🎉 UNLOCKED! ${meta.title} has been permanently added to your license.`);
+                initDedicatedScraperStudio();
+                selectStudioService(matchedKey);
+                updateUserProfileDisplay();
+                return;
+            }
+
+            showToast("❌ Invalid Voucher Key. Please verify or contact Founder on WhatsApp (+91 7233862626).");
+        }
+
+        // =========================================================================
+        // REAL-TIME PLAN TESTER FOR MOHAMMAD HAMZA & DEMO SESSIONS
+        // =========================================================================
+        function switchTestUserPlan(planType) {
+            if (!currentUser) {
+                currentUser = {
+                    name: 'Mohammad Hamza',
+                    email: 'mohammadhamza2518@gmail.com',
+                    licenseKey: 'OSP-PRO-HAMZA-9519998936-LIVE'
+                };
+            }
+
+            const menu = document.getElementById('planSwitcherMenu');
+            if (menu) menu.classList.add('hidden');
+
+            if (planType === 'master') {
+                currentUser.tier = 'All Services Master Bundle (₹3,200)';
+                currentUser.targetNiches = ['all'];
+                currentUser.targetNichesDisplay = 'All Services / Full Agency (7 Niches)';
+                currentUser.amount = 3200;
+                localStorage.setItem('osp_auth_user', JSON.stringify(currentUser));
+                initDedicatedScraperStudio();
+                updateUserProfileDisplay();
+                if (typeof confetti === 'function') confetti({ particleCount: 60, spread: 60 });
+                showToast("👑 Switched to Master Bundle (₹3,200): All 7 Categories Unlocked!");
+            } else if (planType === 'specialist_a') {
+                currentUser.tier = 'Custom Specialist Plan (₹1,999)';
+                currentUser.targetNiches = ['web_dev', 'video_editing', 'marketing_ads'];
+                currentUser.targetNichesDisplay = 'Web Design, Video Editing, Meta Ads (3 Niches)';
+                currentUser.amount = 1999;
+                localStorage.setItem('osp_auth_user', JSON.stringify(currentUser));
+                initDedicatedScraperStudio();
+                updateUserProfileDisplay();
+                showToast("🎯 Switched to Specialist Plan (₹1,999): Web, Video & Meta Ads Unlocked (4 Categories Locked)");
+            } else if (planType === 'specialist_b') {
+                currentUser.tier = 'Custom Specialist Plan (₹1,999)';
+                currentUser.targetNiches = ['graphic_design', 'automation_ai', 'shopify_ecom'];
+                currentUser.targetNichesDisplay = 'Graphic Design, AI Bots, Shopify CRO (3 Niches)';
+                currentUser.amount = 1999;
+                localStorage.setItem('osp_auth_user', JSON.stringify(currentUser));
+                initDedicatedScraperStudio();
+                updateUserProfileDisplay();
+                showToast("🎨 Switched to Specialist Plan (₹1,999): Graphics, AI Bots & Shopify CRO Unlocked (4 Categories Locked)");
+            }
+        }
+
+        function togglePlanSwitcherMenu(e) {
+            if (e) e.stopPropagation();
+            const menu = document.getElementById('planSwitcherMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', () => {
+            const menu = document.getElementById('planSwitcherMenu');
+            if (menu && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        function syncUserPlanUpdateToCloud(type, extra) {
+            try {
+                fetch('/api/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'register',
+                        name: currentUser?.name || 'Valued Founder',
+                        phone: currentUser?.phone || '9519998936',
+                        email: currentUser?.email || 'founder@agency.com',
+                        licenseKey: currentUser?.licenseKey || 'OSP-PRO-LIVE',
+                        planTier: currentUser?.tier || 'Lifetime Commercial Pro',
+                        targetNiches: currentUser?.targetNiches || ['all'],
+                        targetNichesDisplay: currentUser?.targetNichesDisplay || 'All Services (Full Agency)'
+                    })
+                }).catch(() => {});
+            } catch(e) {}
         }
 
         function applyCityChip(cityName) {
