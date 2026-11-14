@@ -2530,7 +2530,49 @@
             }
         }
 
+        function validateObStep(targetStep) {
+            // If navigating forward past Step 1
+            if (targetStep > 1) {
+                const name = document.getElementById('obSenderName')?.value.trim();
+                const phone = document.getElementById('obSenderPhone')?.value.trim();
+                const email = document.getElementById('obSenderEmail')?.value.trim();
+
+                if (!name || name.length < 2) {
+                    showToast('⚠️ Please enter your Full Name before proceeding.');
+                    document.getElementById('obSenderName')?.focus();
+                    return false;
+                }
+                const cleanPhone = (phone || '').replace(/\D/g, '');
+                if (!cleanPhone || cleanPhone.length < 10) {
+                    showToast('⚠️ Please enter a valid 10-digit WhatsApp/phone number.');
+                    document.getElementById('obSenderPhone')?.focus();
+                    return false;
+                }
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email || !emailRegex.test(email)) {
+                    showToast('⚠️ Please enter a valid Outreach Email address.');
+                    document.getElementById('obSenderEmail')?.focus();
+                    return false;
+                }
+            }
+
+            // If navigating forward past Step 2
+            if (targetStep > 2) {
+                const agency = document.getElementById('obAgencyName')?.value.trim();
+                if (!agency || agency.length < 2) {
+                    showToast('⚠️ Please enter your Agency / Company Name.');
+                    document.getElementById('obAgencyName')?.focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         function goOnboardStep(step) {
+            if (!validateObStep(step)) {
+                return; // BLOCK NAVIGATION: Cannot skip without entering required details!
+            }
             updateOnboardSummary();
             for (let i = 1; i <= 4; i++) {
                 const s = document.getElementById('obStep' + i);

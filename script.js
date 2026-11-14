@@ -438,26 +438,92 @@ document.addEventListener('DOMContentLoaded', () => {
     startRazorpayPayment();
   };
 
-  // Founder Simulated Payment for Live Demo Testing
-  window.simulateTestCheckout = function() {
+  // Strict Validation for Checkout / Onboarding Form
+  window.validateCheckoutForm = function() {
     const nameInput = document.getElementById('checkoutName');
     const phoneInput = document.getElementById('checkoutPhone');
     const emailInput = document.getElementById('checkoutEmail');
+    const errBanner = document.getElementById('checkoutFormError');
+    const errMsg = document.getElementById('checkoutFormErrorMsg');
 
-    let name = nameInput ? nameInput.value.trim() : '';
-    let phone = phoneInput ? phoneInput.value.trim() : '';
-    let email = emailInput ? emailInput.value.trim() : '';
+    const showError = (inputEl, message) => {
+      if (errBanner && errMsg) {
+        errMsg.textContent = message;
+        errBanner.classList.remove('hidden');
+        errBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        alert(message);
+      }
+      if (inputEl) {
+        inputEl.classList.add('!border-rose-500', 'ring-1', 'ring-rose-500');
+        inputEl.focus();
+      }
+    };
 
-    if (!name) name = "Mohammad Hamza";
-    if (!phone) phone = "8808129388";
-    if (!email) email = "hamza@agency.com";
+    const clearErrors = () => {
+      if (errBanner) errBanner.classList.add('hidden');
+      [nameInput, phoneInput, emailInput].forEach(inp => {
+        if (inp) inp.classList.remove('!border-rose-500', 'ring-1', 'ring-rose-500');
+      });
+    };
 
-    if (nameInput) nameInput.value = name;
-    if (phoneInput) phoneInput.value = phone;
-    if (emailInput) emailInput.value = email;
+    clearErrors();
 
-    const cleanPhone = phone.replace(/\D/g, '') || '9876543210';
+    const name = nameInput ? nameInput.value.trim() : '';
+    const phone = phoneInput ? phoneInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    if (!name || name.length < 2) {
+      showError(nameInput, 'Please enter your Full Name.');
+      return null;
+    }
+
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (!cleanPhone || cleanPhone.length < 10) {
+      showError(phoneInput, 'Please enter a valid 10-digit WhatsApp number.');
+      return null;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      showError(emailInput, 'Please enter a valid Email Address for license delivery.');
+      return null;
+    }
+
     const isAllBundle = window.selectedNichesState && window.selectedNichesState.includes('all');
+    const activeNiches = (window.selectedNichesState || []).filter(n => n !== 'all');
+    if (!isAllBundle && activeNiches.length === 0) {
+      showError(null, 'Please select at least one service category that you offer.');
+      return null;
+    }
+
+    return {
+      name,
+      phone: cleanPhone,
+      email,
+      isAllBundle
+    };
+  };
+
+  document.addEventListener('input', function(e) {
+    if (e && e.target && ['checkoutName', 'checkoutPhone', 'checkoutEmail'].includes(e.target.id)) {
+      e.target.classList.remove('!border-rose-500', 'ring-1', 'ring-rose-500');
+      const errBanner = document.getElementById('checkoutFormError');
+      if (errBanner) errBanner.classList.add('hidden');
+    }
+  });
+
+  // Founder Simulated Payment for Live Demo Testing
+  window.simulateTestCheckout = function() {
+    const valid = window.validateCheckoutForm();
+    if (!valid) {
+      return; // STRICT BLOCK: Cannot proceed to next step without entering all required details!
+    }
+
+    const name = valid.name;
+    const cleanPhone = valid.phone;
+    const email = valid.email;
+    const isAllBundle = valid.isAllBundle;
     const amountVal = isAllBundle ? 3200 : 1999;
     const planTierName = isAllBundle ? 'All Services Master Bundle (₹3,200)' : 'Custom Specialist Plan (₹1,999)';
     const nichesData = window.getSelectedNichesData ? window.getSelectedNichesData() : { ids: ['all'], displayString: 'All Industries (52+ Leads)', totalCount: 52 };
@@ -712,27 +778,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.startRazorpayPayment = function() {
-    const nameInput = document.getElementById('checkoutName');
-    const phoneInput = document.getElementById('checkoutPhone');
-    const emailInput = document.getElementById('checkoutEmail');
+    const valid = window.validateCheckoutForm();
+    if (!valid) {
+      return; // STRICT BLOCK: Cannot proceed to Razorpay without entering all required details!
+    }
+
+    const name = valid.name;
+    const cleanPhone = valid.phone;
+    const email = valid.email;
+    const isAllBundle = valid.isAllBundle;
     const payBtn = document.getElementById('btnRazorpayPay');
-
-    const name = nameInput ? nameInput.value.trim() : '';
-    const phone = phoneInput ? phoneInput.value.trim() : '';
-    const email = emailInput ? emailInput.value.trim() : '';
-
-    if (!name) {
-      alert('Please enter your Full Name.');
-      if (nameInput) nameInput.focus();
-      return;
-    }
-
-    const cleanPhone = phone.replace(/\D/g, '');
-    if (!cleanPhone || cleanPhone.length < 10) {
-      alert('Please enter a valid 10-digit WhatsApp number.');
-      if (phoneInput) phoneInput.focus();
-      return;
-    }
 
     if (typeof Razorpay === 'undefined') {
       alert('Payment gateway is loading. Please check your internet connection and try again in 2 seconds.');
@@ -748,7 +803,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const isLiveTestMode = window.isForced1RupeeTest || urlParams.get('test_pay') === '1' || urlParams.get('test') === 'live1';
 
-    const isAllBundle = window.selectedNichesState && window.selectedNichesState.includes('all');
     let paymentAmountPaise = isAllBundle ? 320000 : 199900;
     let paymentAmountDisplay = isAllBundle ? '₹3,200' : '₹1,999';
     let planTitle = isAllBundle ? 'Outreach Studio Pro (All Services Master Bundle)' : 'Outreach Studio Pro (Custom 3-Category Plan)';
