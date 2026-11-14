@@ -686,45 +686,121 @@
 
                 <!-- User Account Profile & Logout Dropdown -->
                 <div class="relative" id="userProfileDropdownContainer">
-                    <button type="button" onclick="toggleUserProfileDropdown(event)" class="flex items-center gap-2 p-1.5 pr-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs transition cursor-pointer select-none">
-                        <div id="userAvatar" class="w-7 h-7 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-md">
-                            VF
+                    <button type="button" onclick="toggleUserProfileDropdown(event)" class="group flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-slate-800/80 to-slate-900/90 hover:from-slate-800 hover:to-slate-800/90 border border-white/[0.1] hover:border-cyan-500/40 text-xs transition-all duration-200 cursor-pointer select-none shadow-lg shadow-black/20 hover:shadow-cyan-500/10 backdrop-blur-xl">
+                        <!-- Avatar with Live Cloud Pulse Indicator -->
+                        <div class="relative">
+                            <div id="userAvatar" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-blue-500/25 ring-1 ring-white/20">
+                                HA
+                            </div>
+                            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 border-2 border-slate-900 rounded-full shadow-sm animate-pulse" title="Cloud Sync Active"></span>
                         </div>
+                        <!-- User Name & Tier -->
                         <div class="text-left hidden md:block leading-tight">
-                            <div id="userNameDisplay" class="text-white font-bold text-xs truncate max-w-[110px]">Valued Founder</div>
-                            <div id="userTierDisplay" class="text-[9px] font-mono text-cyan-400">Pro License</div>
+                            <div class="flex items-center gap-1.5">
+                                <span id="userNameDisplay" class="text-white font-bold text-xs truncate max-w-[110px] tracking-tight">Hamza</span>
+                                <i class="fa-solid fa-circle-check text-blue-400 text-[10px]" title="Verified Licensee"></i>
+                            </div>
+                            <div class="flex items-center gap-1 mt-0.5">
+                                <span id="userTierDisplay" class="text-[9px] font-mono text-cyan-300 font-medium">Lifetime Commercial Pro</span>
+                            </div>
                         </div>
-                        <i id="userChevron" class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition duration-200"></i>
+                        <i id="userChevron" class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-cyan-400 transition-transform duration-300 ml-0.5"></i>
                     </button>
-                    <!-- Dropdown Panel -->
-                    <div id="userProfileMenu" class="hidden absolute right-0 top-full pt-1.5 z-50 w-60">
-                        <div class="bg-slate-900 border border-slate-700/90 rounded-2xl shadow-2xl p-2 text-xs backdrop-blur-xl">
-                            <div class="p-2.5 border-b border-slate-800">
-                                <div class="text-[10px] text-slate-500 uppercase tracking-wider font-mono font-bold">Active Workspace</div>
-                                <div id="userEmailDisplay" class="text-[11px] text-slate-200 truncate font-semibold mt-0.5">founder@agency.com</div>
-                                <div class="flex items-center justify-between gap-1 mt-1.5">
-                                    <span id="userKeyDisplay" class="text-[9px] font-mono text-emerald-400 truncate bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-500/20">OSP-PRO-ACTIVE</span>
-                                    <span class="text-[9px] text-slate-400 font-mono">Lifetime</span>
-                                </div>
-                                <div class="mt-1 text-[10px] text-slate-400 truncate">
-                                    <span class="text-slate-500">Service:</span> <span id="userNicheDisplay" class="text-cyan-300">All Services</span>
+
+                    <!-- Dropdown Panel (Sleek Executive Card) -->
+                    <div id="userProfileMenu" class="hidden absolute right-0 top-full pt-2 z-50 w-80 animate-in fade-in zoom-in-95 duration-150">
+                        <div class="bg-slate-950/95 border border-white/[0.12] rounded-3xl shadow-2xl shadow-black/80 p-3.5 backdrop-blur-2xl divide-y divide-white/[0.08]">
+                            
+                            <!-- Section 1: User Profile Header -->
+                            <div class="pb-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="relative">
+                                        <div id="dropdownAvatar" class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 text-white font-bold text-sm flex items-center justify-center shadow-lg shadow-blue-500/30 ring-2 ring-white/10">
+                                            HA
+                                        </div>
+                                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-950 rounded-full flex items-center justify-center">
+                                            <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                                        </span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center gap-1.5">
+                                            <div id="dropdownUserName" class="text-white font-bold text-sm truncate tracking-tight">Mohammad Hamza</div>
+                                            <i class="fa-solid fa-circle-check text-blue-400 text-xs flex-shrink-0" title="Verified License"></i>
+                                        </div>
+                                        <div id="userEmailDisplay" class="text-[11px] text-slate-400 truncate mt-0.5 font-mono">mohammadhamza2518@gmail.com</div>
+                                        <div class="flex items-center gap-1.5 mt-1.5">
+                                            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-mono bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-medium">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                                <span>MongoDB Atlas Synced</span>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="p-1 space-y-0.5">
-                                <button type="button" onclick="openSettingsModal('agency'); closeUserProfileMenu();" class="w-full flex items-center gap-2 px-2.5 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-xl transition text-left">
-                                    <i class="fa-solid fa-gear text-slate-400 text-xs"></i>
-                                    <span>Workspace Settings</span>
+
+                            <!-- Section 2: License Card -->
+                            <div class="py-3">
+                                <div class="p-2.5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-900/50 border border-white/[0.08] relative overflow-hidden group/lic">
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <div class="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                                            <i class="fa-solid fa-shield-halved text-amber-400"></i>
+                                            <span>License Credentials</span>
+                                        </div>
+                                        <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-300 font-semibold">
+                                            LIFETIME PRO
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-2 bg-slate-950/80 px-2.5 py-1.5 rounded-xl border border-white/[0.06]">
+                                        <span id="userKeyDisplay" class="text-[10px] font-mono text-cyan-300 truncate select-all tracking-wider font-semibold">OSP-PRO-HAMZA-9519998936-LIVE</span>
+                                        <button type="button" onclick="copyLicenseKey(event)" class="text-slate-400 hover:text-white transition p-1 hover:bg-white/10 rounded cursor-pointer" title="Copy License Key">
+                                            <i id="copyKeyIcon" class="fa-regular fa-copy text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="mt-2 flex items-center justify-between text-[10px] text-slate-400">
+                                        <span class="text-slate-500">Service:</span>
+                                        <span id="userNicheDisplay" class="text-slate-300 font-medium truncate max-w-[180px]">All Services / Full Agency</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 3: Navigation & Actions -->
+                            <div class="pt-2 pb-1 space-y-1">
+                                <button type="button" onclick="openSettingsModal('agency'); closeUserProfileMenu();" class="w-full flex items-center gap-3 px-3 py-2 text-slate-200 hover:text-white hover:bg-white/[0.07] rounded-xl transition text-left cursor-pointer group/item">
+                                    <div class="w-7 h-7 rounded-lg bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-blue-400 group-hover/item:bg-blue-500/25 transition">
+                                        <i class="fa-solid fa-sliders text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-xs font-semibold">Workspace Settings</div>
+                                        <div class="text-[10px] text-slate-400">API keys, sender identity & pacing</div>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600 group-hover/item:text-slate-400 transition"></i>
                                 </button>
-                                <button type="button" onclick="reRunOnboardingWizard(); closeUserProfileMenu();" class="w-full flex items-center gap-2 px-2.5 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-xl transition text-left">
-                                    <i class="fa-solid fa-wand-magic-sparkles text-cyan-400 text-xs"></i>
-                                    <span>Run Setup Wizard</span>
-                                </button>
-                                <div class="border-t border-slate-800 my-1"></div>
-                                <button type="button" onclick="handleLogout()" class="w-full flex items-center gap-2 px-2.5 py-2 text-rose-400 hover:bg-rose-500/10 rounded-xl transition text-left font-medium">
-                                    <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
-                                    <span>Logout & Lock CRM</span>
+
+                                <button type="button" onclick="reRunOnboardingWizard(); closeUserProfileMenu();" class="w-full flex items-center gap-3 px-3 py-2 text-slate-200 hover:text-white hover:bg-white/[0.07] rounded-xl transition text-left cursor-pointer group/item">
+                                    <div class="w-7 h-7 rounded-lg bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-purple-400 group-hover/item:bg-purple-500/25 transition">
+                                        <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-xs font-semibold">Run Setup Wizard</div>
+                                        <div class="text-[10px] text-slate-400">Re-connect AI copilot & services</div>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right text-[10px] text-slate-600 group-hover/item:text-slate-400 transition"></i>
                                 </button>
                             </div>
+
+                            <!-- Section 4: Logout & Lock -->
+                            <div class="pt-2">
+                                <button type="button" onclick="handleLogout()" class="w-full flex items-center gap-3 px-3 py-2 text-rose-400 hover:text-rose-300 hover:bg-rose-500/15 rounded-xl transition text-left cursor-pointer font-medium group/logout">
+                                    <div class="w-7 h-7 rounded-lg bg-rose-500/15 border border-rose-500/25 flex items-center justify-center text-rose-400 group-hover/logout:bg-rose-500/25 transition">
+                                        <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-xs font-semibold">Lock Session & Sign Out</div>
+                                        <div class="text-[10px] text-rose-400/70">Sync & protect your pipeline</div>
+                                    </div>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -2293,24 +2369,48 @@
 
             // Populate User Header Profile
             const nameEl = document.getElementById('userNameDisplay');
+            const dropdownNameEl = document.getElementById('dropdownUserName');
             const avatarEl = document.getElementById('userAvatar');
+            const dropdownAvatarEl = document.getElementById('dropdownAvatar');
             const emailEl = document.getElementById('userEmailDisplay');
             const keyEl = document.getElementById('userKeyDisplay');
             const tierEl = document.getElementById('userTierDisplay');
             const nicheEl = document.getElementById('userNicheDisplay');
 
-            if (nameEl) nameEl.textContent = currentUser.name || 'Valued Founder';
-            if (avatarEl) {
-                const parts = (currentUser.name || 'VF').trim().split(/\s+/);
-                const initials = parts.length > 1 ? (parts[0][0] + parts[1][0]).toUpperCase() : parts[0].substring(0, 2).toUpperCase();
-                avatarEl.textContent = initials || 'VF';
-            }
+            const displayName = currentUser.name || 'Valued Founder';
+            if (nameEl) nameEl.textContent = displayName;
+            if (dropdownNameEl) dropdownNameEl.textContent = displayName;
+
+            const parts = displayName.trim().split(/\s+/);
+            const initials = parts.length > 1 ? (parts[0][0] + parts[1][0]).toUpperCase() : displayName.substring(0, 2).toUpperCase();
+            if (avatarEl) avatarEl.textContent = initials || 'VF';
+            if (dropdownAvatarEl) dropdownAvatarEl.textContent = initials || 'VF';
+
             if (emailEl) emailEl.textContent = currentUser.email || 'founder@agency.com';
             if (keyEl) keyEl.textContent = currentUser.licenseKey || 'OSP-PRO-ACTIVE';
-            if (tierEl) tierEl.textContent = currentUser.tier || (currentUser.isDemo ? 'Demo Preview' : 'Pro License');
-            if (nicheEl) nicheEl.textContent = currentUser.targetNichesDisplay || 'All Services (Full Agency)';
+            if (tierEl) tierEl.textContent = currentUser.tier || (currentUser.isDemo ? 'Demo Preview' : 'Lifetime Commercial Pro');
+            if (nicheEl) nicheEl.textContent = currentUser.targetNichesDisplay || 'All Services / Full Agency';
 
             return true;
+        }
+
+        function copyLicenseKey(e) {
+            if (e) e.stopPropagation();
+            const key = currentUser?.licenseKey || document.getElementById('userKeyDisplay')?.textContent || '';
+            if (key) {
+                navigator.clipboard.writeText(key).then(() => {
+                    const icon = document.getElementById('copyKeyIcon');
+                    if (icon) {
+                        icon.className = 'fa-solid fa-check text-emerald-400 text-xs';
+                        setTimeout(() => { icon.className = 'fa-regular fa-copy text-xs'; }, 2000);
+                    }
+                    if (typeof showToast === 'function') {
+                        showToast('✅ License Key copied to clipboard!');
+                    }
+                }).catch(() => {
+                    if (typeof showToast === 'function') showToast('Key: ' + key);
+                });
+            }
         }
 
         function handleLogout() {
