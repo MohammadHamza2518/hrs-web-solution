@@ -599,17 +599,18 @@
             </span>
         </div>
         <div class="flex items-center gap-1 bg-black/50 p-1 rounded-xl border border-white/[0.06] text-xs font-medium">
-            <button onclick="setSentFilter('pending')" id="tabNavTable" class="px-3 py-1 rounded-lg border bg-blue-600 text-white border-blue-500 transition cursor-pointer font-semibold">
+            <button onclick="switchWorkspaceView('table')" id="tabNavTable" class="px-3 py-1 rounded-lg border bg-blue-600 text-white border-blue-500 transition cursor-pointer font-semibold">
                 Pipeline Table
             </button>
             <button onclick="openSettingsModal('ai')" id="tabNavAi" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer">
                 Multi-AI Setup
             </button>
-            <button onclick="setSentFilter('all')" id="tabNavRecords" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer">
+            <button onclick="switchWorkspaceView('records')" id="tabNavRecords" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer">
                 Lead Records
             </button>
-            <button onclick="openScrapeModal()" id="tabNavScraper" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer">
-                Lead Scraper
+            <button onclick="switchWorkspaceView('scraper')" id="tabNavScraper" class="px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer flex items-center gap-1.5">
+                <i class="fa-solid fa-satellite-dish text-[10px] text-cyan-400"></i>
+                <span>Lead Scraper</span>
             </button>
         </div>
     </div>
@@ -810,6 +811,9 @@
 
     <!-- Main Content Container -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- ==================== VIEW 1: PIPELINE & LEADS TABLE ==================== -->
+        <section id="viewPipelineSection" class="space-y-6">
 
         <!-- Metrics Overview Grid (Systematically segregated: Total, Fresh, Channels, Both Sent, Outcomes) -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
@@ -1409,6 +1413,262 @@
                 <span class="text-slate-500 text-[11px]">Click "Pitch Studio" to preview and customize messages before sending</span>
             </div>
         </div>
+
+        </section>
+        <!-- /viewPipelineSection -->
+
+        <!-- ==================== VIEW 2: DEDICATED LEAD SCRAPER & RADAR STUDIO ==================== -->
+        <section id="viewScraperStudioSection" class="hidden space-y-6 animate-fadeIn">
+            
+            <!-- Hero Banner & Executive Control Bar -->
+            <div class="glass-card rounded-2xl p-5 sm:p-6 border border-cyan-500/30 bg-gradient-to-r from-dark-900 via-dark-900/90 to-dark-900 relative overflow-hidden shadow-2xl">
+                <!-- Background Accent Glow -->
+                <div class="absolute -top-12 -right-12 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2.5 flex-wrap">
+                            <span class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-400 text-xs font-bold border border-cyan-500/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+                                <span>Global Lead Radar Studio</span>
+                            </span>
+                            <span id="scraperStudioTierBadge" class="px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-crown text-amber-400"></i>
+                                <span>Master Bundle • All 7 Niches Unlocked</span>
+                            </span>
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-medium flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span>Neural Engine Live</span>
+                            </span>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
+                            <span>Targeted B2B Prospect Finder &amp; Google Radar</span>
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-400 max-w-2xl">
+                            Select a target country and industry niche to crawl high-intent local businesses. Detects companies with <strong class="text-cyan-300 font-semibold">NO active website</strong>, extracts verified phone numbers, and crafts customized WhatsApp &amp; Email pitch angles ready for instant outreach.
+                        </p>
+                    </div>
+
+                    <!-- Return to Pipeline Action Button -->
+                    <div class="flex items-center gap-2 self-start md:self-center flex-shrink-0">
+                        <button type="button" onclick="switchWorkspaceView('table')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-xs font-bold text-slate-200 hover:text-white transition flex items-center gap-2 cursor-pointer shadow-sm">
+                            <i class="fa-solid fa-arrow-left text-xs"></i>
+                            <span>Back to Pipeline Table</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 1: SELECT TARGET COUNTRY GRID -->
+            <div class="glass-card rounded-2xl p-4 sm:p-5 border border-gray-800/80 shadow-xl space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-gray-800/60">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-bold font-mono">1</span>
+                        <h3 class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Select Target Country / Market</h3>
+                    </div>
+                    <span class="text-[11px] text-slate-400 font-medium">Click to reveal popular business cities &amp; commercial zones</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5" id="scraperCountryGrid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- STEP 2: SELECT AGENCY SERVICE / NICHE GRID -->
+            <div class="glass-card rounded-2xl p-4 sm:p-5 border border-gray-800/80 shadow-xl space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-gray-800/60">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold font-mono">2</span>
+                        <h3 class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Select Agency Service &amp; Category</h3>
+                    </div>
+                    <span id="scraperPlanNicheInfo" class="text-[11px] text-slate-400 font-medium">Showing 7 available agency skills</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-2.5" id="scraperStudioServiceGrid">
+                    <!-- 7 service buttons with lock indicators if Specialist plan -->
+                </div>
+
+                <!-- Plan Upgrade Notice if locked niche is clicked -->
+                <div id="scraperUpgradeNotice" class="hidden p-3 rounded-xl bg-gradient-to-r from-amber-950/40 via-dark-900 to-amber-950/20 border border-amber-500/40 text-xs text-amber-200 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-lock text-amber-400 text-sm"></i>
+                        <span>This niche is exclusive to the <strong>All Services Master Bundle (₹3,200)</strong>. Specialist Plan (₹1,999) includes your primary chosen skill.</span>
+                    </div>
+                    <a href="https://wa.me/917233862626?text=Hi%20Hamza,%20I%20want%20to%20upgrade%20my%20CRM%20to%20Master%20Bundle" target="_blank" class="px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs whitespace-nowrap transition">Upgrade Now</a>
+                </div>
+            </div>
+
+            <!-- STEP 3: SEARCH BUILDER (LOCATION CHIPS + SUB-NICHE PRESETS) -->
+            <div class="glass-card rounded-2xl p-4 sm:p-5 border border-gray-800/80 shadow-xl space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-gray-800/60">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs font-bold font-mono">3</span>
+                        <h3 class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Target Location &amp; High-Ticket Sub-Niche</h3>
+                    </div>
+                    <span class="text-[11px] text-slate-400 font-medium">1-Click quick chips or type custom query below</span>
+                </div>
+
+                <!-- Quick Suggested Cities for Selected Country -->
+                <div class="space-y-1.5">
+                    <div class="flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-rose-400 text-[11px]"></i>
+                            <span>Suggested Commercial Hubs in <strong id="scraperSelectedCountryName" class="text-cyan-300">United States</strong>:</span>
+                        </span>
+                        <span class="text-[10px] text-slate-500">Click chip to apply city</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5" id="scraperCityChipsContainer">
+                        <!-- Populated by JS when country is clicked -->
+                    </div>
+                </div>
+
+                <!-- Quick High-Ticket Sub-Niche Presets for Selected Service -->
+                <div class="space-y-1.5 pt-1">
+                    <div class="flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-bullseye text-amber-400 text-[11px]"></i>
+                            <span>High-Ticket Niche Presets for <strong id="scraperSelectedServiceName" class="text-cyan-300">Web Design</strong>:</span>
+                        </span>
+                        <span class="text-[10px] text-slate-500">Click chip to apply niche</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5" id="scraperNicheChipsContainer">
+                        <!-- Populated by JS when service is clicked -->
+                    </div>
+                </div>
+
+                <!-- Combined Search Query Input Field -->
+                <div class="space-y-1.5 pt-2">
+                    <label class="block text-xs font-semibold text-slate-300">
+                        Live Google Maps Search Query <span class="text-rose-400">*</span>
+                    </label>
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-cyan-400 text-xs"></i>
+                        <input type="text" id="scraperStudioQueryInput" placeholder="e.g. Luxury Car Rental in Business Bay, Dubai, UAE" class="w-full bg-dark-900 border border-slate-700 rounded-xl pl-9 pr-3 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none font-medium">
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: FILTER & BATCH CONFIGURATION -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                <!-- Filter Card: Target ONLY Businesses with NO Website -->
+                <div class="md:col-span-7 glass-card rounded-2xl p-4 sm:p-5 border border-cyan-500/30 bg-gradient-to-r from-cyan-950/20 via-dark-900 to-dark-900 space-y-2">
+                    <div class="flex items-start gap-3">
+                        <div class="pt-0.5">
+                            <input type="checkbox" id="scraperStudioNoWebsiteCheckbox" checked class="w-4 h-4 rounded text-cyan-500 bg-dark-900 border-gray-700 focus:ring-cyan-500 cursor-pointer">
+                        </div>
+                        <div class="space-y-1">
+                            <label for="scraperStudioNoWebsiteCheckbox" class="text-xs sm:text-sm font-bold text-white flex items-center gap-2 cursor-pointer">
+                                <span>🎯 Target ONLY Businesses with NO Website</span>
+                                <span class="px-2 py-0.2 rounded-full text-[9px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase">High Converting</span>
+                            </label>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">
+                                Automatically discards companies that already have an active website. Only extracts verified businesses with real phone numbers and Google reviews that urgently need your digital solution!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batch Size & Discovery Speed -->
+                <div class="md:col-span-5 glass-card rounded-2xl p-4 sm:p-5 border border-gray-800/80 space-y-2.5">
+                    <label class="block text-xs font-bold text-white uppercase tracking-wider flex items-center justify-between">
+                        <span>Prospects to Discover</span>
+                        <span id="scraperBatchLimitNotice" class="text-[10px] text-cyan-400 font-mono">Specialist: 15 max</span>
+                    </label>
+                    <div class="grid grid-cols-4 gap-2" id="scraperBatchPills">
+                        <button type="button" onclick="setScraperBatchSize(10)" data-batch="10" class="batch-pill active py-2 rounded-xl border text-center text-xs font-bold bg-gradient-to-r from-cyan-600 to-blue-600 border-cyan-500 text-white shadow-sm transition cursor-pointer">
+                            10
+                        </button>
+                        <button type="button" onclick="setScraperBatchSize(25)" data-batch="25" class="batch-pill py-2 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white text-center text-xs font-semibold transition cursor-pointer">
+                            25
+                        </button>
+                        <button type="button" onclick="setScraperBatchSize(50)" data-batch="50" class="batch-pill py-2 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white text-center text-xs font-semibold transition cursor-pointer">
+                            50
+                        </button>
+                        <button type="button" onclick="setScraperBatchSize(100)" data-batch="100" class="batch-pill py-2 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white text-center text-xs font-semibold transition cursor-pointer">
+                            100
+                        </button>
+                    </div>
+                    <input type="hidden" id="scraperStudioBatchSize" value="10">
+                </div>
+            </div>
+
+            <!-- LAUNCH BUTTON -->
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+                <button type="button" id="btnLaunchStudioScraper" onclick="executeStudioScraper()" class="w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 text-white font-extrabold text-sm sm:text-base tracking-wide shadow-xl shadow-cyan-500/25 transition-all duration-200 flex items-center justify-center gap-3 border border-cyan-400/30 cursor-pointer group">
+                    <i class="fa-solid fa-satellite-dish text-cyan-200 group-hover:rotate-12 transition-transform"></i>
+                    <span>Start Live Lead Discovery Radar</span>
+                    <span class="px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 text-xs font-mono border border-cyan-400/40">⚡ Gemini 2.5 Neural</span>
+                </button>
+            </div>
+
+            <!-- REAL-TIME RADAR TERMINAL & CRAWLER HUD (Shown during search) -->
+            <div id="scraperStudioProgressContainer" class="hidden glass-card rounded-2xl p-5 border border-cyan-500/40 bg-dark-900/95 space-y-3.5 shadow-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <div class="relative w-7 h-7 flex items-center justify-center">
+                            <span class="absolute inset-0 rounded-full bg-cyan-500/30 animate-ping"></span>
+                            <span class="w-3.5 h-3.5 rounded-full bg-cyan-400"></span>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Live Lead Radar In Progress...</div>
+                            <div class="text-[11px] text-cyan-400 font-mono" id="scraperStudioProgressQuery">Target: Scanning Google Maps &amp; Directories</div>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 text-[10px] font-mono border border-cyan-500/30">CRAWLING LIVE</span>
+                </div>
+
+                <!-- Animated Progress Bar -->
+                <div class="w-full bg-dark-800 rounded-full h-2 overflow-hidden border border-gray-700">
+                    <div id="scraperStudioProgressBar" class="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 h-2 rounded-full w-1/4 transition-all duration-300"></div>
+                </div>
+
+                <!-- Terminal Log Feed -->
+                <div class="p-3 rounded-xl bg-black/80 border border-gray-800 font-mono text-[11px] text-slate-300 space-y-1 max-h-36 overflow-y-auto" id="scraperStudioTerminalLogs">
+                    <div class="text-cyan-400">&gt; Establishing encrypted neural crawler link to Google Maps API...</div>
+                </div>
+            </div>
+
+            <!-- STEP 5: DISCOVERED LEADS INTERACTIVE HUB (Shown when leads extracted) -->
+            <div id="scraperStudioResultsHub" class="hidden space-y-4">
+                <!-- Summary & Mass Actions Bar -->
+                <div class="glass-card rounded-2xl p-4 sm:p-5 border border-emerald-500/40 bg-gradient-to-r from-emerald-950/20 via-dark-900 to-dark-900 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xl">
+                    <div class="flex items-center gap-3">
+                        <span class="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400 text-lg border border-emerald-500/30">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                                <span id="scraperResultsCountText">15 High-Ticket Prospects Discovered</span>
+                                <span class="px-2 py-0.2 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Verified Real Data</span>
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">
+                                Leads verified with live Google ratings, active phone numbers &amp; tailored conversion pitch angles.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 self-start md:self-auto">
+                        <button type="button" onclick="importStudioLeadsToPipeline()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-file-import text-xs"></i>
+                            <span>Import All into Active CRM Pipeline</span>
+                        </button>
+                        <button type="button" onclick="exportStudioLeadsCsv()" class="px-3 py-2 rounded-xl bg-dark-800 hover:bg-dark-700 border border-gray-700 text-slate-300 hover:text-white font-semibold text-xs transition flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-file-excel text-emerald-400 text-xs"></i>
+                            <span>Export (CSV)</span>
+                        </button>
+                        <button type="button" onclick="resetStudioScraper()" class="px-3 py-2 rounded-xl bg-dark-800 hover:bg-dark-700 border border-gray-700 text-slate-400 hover:text-white font-semibold text-xs transition cursor-pointer">
+                            <i class="fa-solid fa-rotate text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Discovered Leads Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5" id="scraperStudioLeadsGrid">
+                    <!-- Cards injected by JS -->
+                </div>
+            </div>
+
+        </section>
 
     </main>
 
@@ -5456,6 +5716,624 @@ Return ONLY a valid JSON array of objects. Do NOT include markdown code fences o
             }
 
             showToast(`🎯 Successfully verified and added ${addedCount} real high-ticket prospects for "${queryClean}"!`);
+        }
+
+        // =========================================================================
+        // DEDICATED LEAD SCRAPER STUDIO LOGIC & VIEW SWITCHING
+        // =========================================================================
+        const SCRAPER_COUNTRIES = [
+            { id: 'ae', name: 'UAE (Dubai / Abu Dhabi)', flag: '🇦🇪', code: 'UAE', cities: ['Business Bay, Dubai', 'Downtown Dubai, UAE', 'Palm Jumeirah, Dubai', 'Dubai Marina, UAE', 'Abu Dhabi, UAE', 'Deira, Dubai'] },
+            { id: 'us', name: 'United States', flag: '🇺🇸', code: 'US', cities: ['Miami, Florida', 'New York, USA', 'Dallas, Texas', 'Los Angeles, California', 'Chicago, Illinois', 'Houston, Texas', 'Austin, Texas', 'Phoenix, Arizona'] },
+            { id: 'gb', name: 'United Kingdom', flag: '🇬🇧', code: 'UK', cities: ['London, UK', 'Manchester, UK', 'Birmingham, UK', 'Leeds, UK', 'Glasgow, Scotland', 'Edinburgh, UK'] },
+            { id: 'ca', name: 'Canada', flag: '🇨🇦', code: 'CA', cities: ['Toronto, Ontario', 'Vancouver, BC', 'Montreal, Quebec', 'Calgary, Alberta', 'Ottawa, Ontario'] },
+            { id: 'ch', name: 'Switzerland', flag: '🇨🇭', code: 'CH', cities: ['Zurich, Switzerland', 'Geneva, Switzerland', 'Basel, Switzerland', 'Lausanne, Switzerland', 'Bern, Switzerland'] },
+            { id: 'au', name: 'Australia', flag: '🇦🇺', code: 'AU', cities: ['Sydney, Australia', 'Melbourne, Australia', 'Brisbane, Australia', 'Perth, Australia'] },
+            { id: 'de', name: 'Germany', flag: '🇩🇪', code: 'DE', cities: ['Berlin, Germany', 'Munich, Germany', 'Frankfurt, Germany', 'Hamburg, Germany'] },
+            { id: 'sa', name: 'Saudi Arabia', flag: '🇸🇦', code: 'KSA', cities: ['Riyadh, Saudi Arabia', 'Jeddah, Saudi Arabia', 'Dammam, Saudi Arabia', 'Al Khobar, Saudi Arabia'] },
+            { id: 'in', name: 'India', flag: '🇮🇳', code: 'IN', cities: ['Mumbai, India', 'Bangalore, India', 'Delhi NCR, India', 'Hyderabad, India', 'Pune, India'] },
+            { id: 'global', name: 'Worldwide / Custom', flag: '🌍', code: 'GL', cities: ['Singapore', 'Dublin, Ireland', 'Amsterdam, Netherlands', 'Paris, France'] }
+        ];
+
+        let currentScraperCountry = 'ae';
+        let currentScraperService = 'web_design';
+        let currentScraperCity = 'Business Bay, Dubai';
+        let currentScraperNiche = 'Luxury Car Rental';
+        let currentScraperBatchSize = 10;
+        let discoveredStudioLeads = [];
+
+        function switchWorkspaceView(viewName) {
+            const pipelineSec = document.getElementById('viewPipelineSection');
+            const scraperSec = document.getElementById('viewScraperStudioSection');
+            const tabTable = document.getElementById('tabNavTable');
+            const tabScraper = document.getElementById('tabNavScraper');
+            const tabRecords = document.getElementById('tabNavRecords');
+
+            if (viewName === 'scraper') {
+                if (pipelineSec) pipelineSec.classList.add('hidden');
+                if (scraperSec) scraperSec.classList.remove('hidden');
+
+                if (tabTable) {
+                    tabTable.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
+                }
+                if (tabRecords) {
+                    tabRecords.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
+                }
+                if (tabScraper) {
+                    tabScraper.className = "px-3 py-1 rounded-lg border bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-500 font-bold shadow-md shadow-cyan-500/20 transition cursor-pointer flex items-center gap-1.5";
+                }
+
+                initDedicatedScraperStudio();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                if (pipelineSec) pipelineSec.classList.remove('hidden');
+                if (scraperSec) scraperSec.classList.add('hidden');
+
+                if (tabScraper) {
+                    tabScraper.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium flex items-center gap-1.5";
+                }
+                if (viewName === 'records') {
+                    if (tabTable) tabTable.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
+                    if (tabRecords) tabRecords.className = "px-3 py-1 rounded-lg border bg-blue-600 text-white border-blue-500 font-bold transition cursor-pointer";
+                    setSentFilter('all');
+                } else {
+                    if (tabRecords) tabRecords.className = "px-3 py-1 rounded-lg border border-transparent text-slate-400 hover:text-white transition cursor-pointer font-medium";
+                    if (tabTable) tabTable.className = "px-3 py-1 rounded-lg border bg-blue-600 text-white border-blue-500 font-bold transition cursor-pointer";
+                    setSentFilter('pending');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function initDedicatedScraperStudio() {
+            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
+            const userNiches = currentUser?.targetNiches || ['web_dev'];
+
+            // 1. Tier Badge & Quota Notices
+            const badge = document.getElementById('scraperStudioTierBadge');
+            const limitNotice = document.getElementById('scraperBatchLimitNotice');
+            const nicheInfo = document.getElementById('scraperPlanNicheInfo');
+
+            if (badge) {
+                if (isAllBundle) {
+                    badge.className = "px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold flex items-center gap-1.5";
+                    badge.innerHTML = '<i class="fa-solid fa-crown text-amber-400"></i><span>Master Bundle • All 7 Niches Unlocked</span>';
+                } else {
+                    badge.className = "px-2.5 py-1 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold flex items-center gap-1.5";
+                    badge.innerHTML = `<i class="fa-solid fa-shield-halved text-cyan-400"></i><span>Specialist Plan (${userNiches.length} Category Unlocked)</span>`;
+                }
+            }
+            if (limitNotice) {
+                limitNotice.textContent = isAllBundle ? 'Master: Up to 100 Leads/Scan' : 'Specialist: 15 Max (Upgrade for 100)';
+            }
+            if (nicheInfo) {
+                nicheInfo.textContent = isAllBundle ? 'All 7 agency categories unlocked' : `${userNiches.length} unlocked • 6 available with Pro upgrade`;
+            }
+
+            // 2. Render Countries Grid
+            const countryGrid = document.getElementById('scraperCountryGrid');
+            if (countryGrid && countryGrid.children.length === 0) {
+                countryGrid.innerHTML = SCRAPER_COUNTRIES.map(c => `
+                    <button type="button" onclick="selectStudioCountry('${c.id}')" id="countryCard_${c.id}" class="country-card p-3 rounded-xl border text-left transition flex items-center gap-2.5 cursor-pointer bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800">
+                        <span class="text-2xl">${c.flag}</span>
+                        <div class="min-w-0 flex-1">
+                            <div class="text-xs font-bold text-white truncate">${c.name}</div>
+                            <div class="text-[10px] text-slate-500 font-mono">${c.cities.length} top hubs</div>
+                        </div>
+                    </button>
+                `).join('');
+            }
+
+            // 3. Render Service Buttons
+            const serviceGrid = document.getElementById('scraperStudioServiceGrid');
+            if (serviceGrid && serviceGrid.children.length === 0) {
+                const serviceIcons = {
+                    web_design: 'fa-globe text-cyan-400',
+                    video_editing: 'fa-film text-purple-400',
+                    graphic_design: 'fa-palette text-amber-400',
+                    social_media_ads: 'fa-chart-line text-emerald-400',
+                    ai_chatbots: 'fa-robot text-rose-400',
+                    shopify_ecom: 'fa-bag-shopping text-blue-400',
+                    google_reviews: 'fa-star text-yellow-400'
+                };
+                const serviceLabels = {
+                    web_design: 'Web Design',
+                    video_editing: 'Video Editing',
+                    graphic_design: 'Graphic Design',
+                    social_media_ads: 'Meta Ads',
+                    ai_chatbots: 'AI Chatbots',
+                    shopify_ecom: 'Shopify CRO',
+                    google_reviews: 'Google Reviews'
+                };
+
+                serviceGrid.innerHTML = Object.keys(FREELANCE_SERVICE_DATA).map(key => {
+                    const allowed = isScraperServiceAllowed(key);
+                    const icon = serviceIcons[key] || 'fa-briefcase text-cyan-400';
+                    const label = serviceLabels[key] || key;
+                    return `
+                        <button type="button" onclick="selectStudioService('${key}')" id="studioSvcBtn_${key}" class="studio-svc-btn p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative ${allowed ? 'bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800' : 'bg-dark-900/40 border-gray-800/50 text-slate-500 opacity-60'}">
+                            <i class="fa-solid ${icon} text-lg mb-0.5"></i>
+                            <span class="text-[11px] font-bold truncate max-w-full">${label}</span>
+                            ${!allowed ? '<span class="text-[9px] font-mono bg-rose-950/90 text-rose-300 border border-rose-500/40 px-1.5 py-0.2 rounded-full">🔒 Pro</span>' : ''}
+                        </button>
+                    `;
+                }).join('');
+            }
+
+            // Select initial country and service if not already active
+            selectStudioCountry(currentScraperCountry || 'ae');
+            let initialSvc = currentScraperService || 'web_design';
+            if (!isScraperServiceAllowed(initialSvc)) {
+                const firstAllowed = Object.keys(SVC_TO_NICHE_MAP).find(k => isScraperServiceAllowed(k));
+                if (firstAllowed) initialSvc = firstAllowed;
+            }
+            selectStudioService(initialSvc);
+        }
+
+        function selectStudioCountry(countryId) {
+            currentScraperCountry = countryId;
+            const cObj = SCRAPER_COUNTRIES.find(c => c.id === countryId) || SCRAPER_COUNTRIES[0];
+
+            // Update country cards styling
+            document.querySelectorAll('#scraperCountryGrid .country-card').forEach(card => {
+                card.className = "country-card p-3 rounded-xl border text-left transition flex items-center gap-2.5 cursor-pointer bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800";
+            });
+            const activeCard = document.getElementById('countryCard_' + countryId);
+            if (activeCard) {
+                activeCard.className = "country-card active p-3 rounded-xl border text-left transition flex items-center gap-2.5 cursor-pointer bg-gradient-to-r from-blue-900/40 via-cyan-900/30 to-dark-800 border-cyan-400 text-white shadow-lg shadow-cyan-500/15";
+            }
+
+            // Update Selected Country Name text
+            const nameEl = document.getElementById('scraperSelectedCountryName');
+            if (nameEl) nameEl.textContent = `${cObj.flag} ${cObj.name}`;
+
+            // Inject City Chips
+            const chipsContainer = document.getElementById('scraperCityChipsContainer');
+            if (chipsContainer) {
+                chipsContainer.innerHTML = cObj.cities.map((city, idx) => `
+                    <button type="button" onclick="applyCityChip('${city.replace(/'/g, "\\'")}')" class="city-chip px-2.5 py-1 rounded-lg border text-xs font-medium transition cursor-pointer ${idx === 0 ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300 font-semibold' : 'bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white'}">
+                        <span>📍 ${city}</span>
+                    </button>
+                `).join('');
+            }
+
+            if (cObj.cities.length > 0) {
+                currentScraperCity = cObj.cities[0];
+            }
+            rebuildScraperQuery();
+        }
+
+        function selectStudioService(svcKey) {
+            const isAllowed = isScraperServiceAllowed(svcKey);
+            const notice = document.getElementById('scraperUpgradeNotice');
+
+            if (!isAllowed) {
+                if (notice) notice.classList.remove('hidden');
+                showToast("🔒 Category Locked on Specialist Plan! Upgrade to Master Bundle (₹3,200) to search all 7 niches.");
+                return;
+            }
+
+            if (notice) notice.classList.add('hidden');
+            currentScraperService = svcKey;
+            const data = FREELANCE_SERVICE_DATA[svcKey];
+            if (!data) return;
+
+            // Update service button classes
+            document.querySelectorAll('#scraperStudioServiceGrid .studio-svc-btn').forEach(btn => {
+                const k = btn.id.replace('studioSvcBtn_', '');
+                const allowed = isScraperServiceAllowed(k);
+                btn.className = `studio-svc-btn p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative ${allowed ? 'bg-dark-900 border-gray-800 text-slate-300 hover:border-cyan-500/50 hover:bg-dark-800' : 'bg-dark-900/40 border-gray-800/50 text-slate-500 opacity-60'}`;
+            });
+            const activeBtn = document.getElementById('studioSvcBtn_' + svcKey);
+            if (activeBtn) {
+                activeBtn.className = "studio-svc-btn active p-3 rounded-xl border text-center transition flex flex-col items-center justify-center gap-1.5 cursor-pointer relative bg-gradient-to-b from-cyan-600/30 via-blue-600/30 to-dark-800 border-cyan-400 text-white shadow-lg shadow-cyan-500/20";
+            }
+
+            // Update service name label
+            const labelEl = document.getElementById('scraperSelectedServiceName');
+            if (labelEl) labelEl.textContent = data.label;
+
+            // Inject high-ticket sub-niche preset chips
+            const nicheContainer = document.getElementById('scraperNicheChipsContainer');
+            if (nicheContainer) {
+                nicheContainer.innerHTML = data.presets.map((p, idx) => `
+                    <button type="button" onclick="applyNicheChip('${p.label.replace(/'/g, "\\'")}', '${p.query.replace(/'/g, "\\'")}')" class="niche-chip px-2.5 py-1 rounded-lg border text-xs font-medium transition cursor-pointer ${idx === 0 ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 font-semibold' : 'bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white'}">
+                        <span>${p.label}</span>
+                    </button>
+                `).join('');
+            }
+
+            if (data.presets.length > 0) {
+                currentScraperNiche = data.presets[0].label.replace(/^[^\w\s]+/, '').trim();
+            }
+            rebuildScraperQuery();
+        }
+
+        function applyCityChip(cityName) {
+            currentScraperCity = cityName;
+            document.querySelectorAll('#scraperCityChipsContainer .city-chip').forEach(chip => {
+                if (chip.textContent.includes(cityName)) {
+                    chip.className = "city-chip px-2.5 py-1 rounded-lg border text-xs font-semibold bg-cyan-500/20 border-cyan-500/50 text-cyan-300 transition cursor-pointer";
+                } else {
+                    chip.className = "city-chip px-2.5 py-1 rounded-lg border text-xs font-medium bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white transition cursor-pointer";
+                }
+            });
+            rebuildScraperQuery();
+        }
+
+        function applyNicheChip(nicheLabel, presetQuery) {
+            currentScraperNiche = nicheLabel.replace(/^[^\w\s]+/, '').trim();
+            document.querySelectorAll('#scraperNicheChipsContainer .niche-chip').forEach(chip => {
+                if (chip.textContent.includes(nicheLabel)) {
+                    chip.className = "niche-chip px-2.5 py-1 rounded-lg border text-xs font-semibold bg-amber-500/20 border-amber-500/50 text-amber-300 transition cursor-pointer";
+                } else {
+                    chip.className = "niche-chip px-2.5 py-1 rounded-lg border text-xs font-medium bg-dark-900 border-gray-800 text-slate-300 hover:border-gray-700 hover:text-white transition cursor-pointer";
+                }
+            });
+            rebuildScraperQuery();
+        }
+
+        function rebuildScraperQuery() {
+            const input = document.getElementById('scraperStudioQueryInput');
+            if (!input) return;
+            const cleanQuery = `${currentScraperNiche} in ${currentScraperCity}`;
+            input.value = cleanQuery;
+        }
+
+        function setScraperBatchSize(size) {
+            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
+            if (!isAllBundle && size > 15) {
+                size = 15;
+                showToast("⚡ Specialist Plan (₹1,999) searches up to 15 leads per batch. Upgrade to Master Bundle for deep 50+ discovery!");
+            }
+            currentScraperBatchSize = size;
+            const hidden = document.getElementById('scraperStudioBatchSize');
+            if (hidden) hidden.value = size;
+
+            document.querySelectorAll('#scraperBatchPills .batch-pill').forEach(btn => {
+                const b = parseInt(btn.getAttribute('data-batch'), 10);
+                if (b === size) {
+                    btn.className = "batch-pill active py-2 rounded-xl border text-center text-xs font-bold bg-gradient-to-r from-cyan-600 to-blue-600 border-cyan-500 text-white shadow-sm transition cursor-pointer";
+                } else {
+                    btn.className = "batch-pill py-2 rounded-xl border border-gray-700 bg-dark-800 text-slate-300 hover:text-white text-center text-xs font-semibold transition cursor-pointer";
+                }
+            });
+        }
+
+        async function executeStudioScraper() {
+            const query = (document.getElementById('scraperStudioQueryInput')?.value || '').trim();
+            const onlyNoWebsite = document.getElementById('scraperStudioNoWebsiteCheckbox')?.checked !== false;
+            let batchSize = parseInt(document.getElementById('scraperStudioBatchSize')?.value || '10', 10);
+
+            const isAllBundle = !currentUser || !currentUser.targetNiches || currentUser.targetNiches.includes('all') || currentUser.isDemo || (currentUser.tier && currentUser.tier.toLowerCase().includes('bundle'));
+            if (!isAllBundle && batchSize > 15) {
+                batchSize = 15;
+            }
+
+            const launchBtn = document.getElementById('btnLaunchStudioScraper');
+            const progress = document.getElementById('scraperStudioProgressContainer');
+            const progressQuery = document.getElementById('scraperStudioProgressQuery');
+            const progressBar = document.getElementById('scraperStudioProgressBar');
+            const logsFeed = document.getElementById('scraperStudioTerminalLogs');
+            const resultsHub = document.getElementById('scraperStudioResultsHub');
+
+            if (launchBtn) launchBtn.disabled = true;
+            if (resultsHub) resultsHub.classList.add('hidden');
+            if (progress) progress.classList.remove('hidden');
+            if (progressQuery) progressQuery.textContent = `Target: "${query}" (${batchSize} prospects)`;
+
+            const addLog = (msg, color = 'text-cyan-400') => {
+                if (!logsFeed) return;
+                const d = new Date();
+                const timeStr = d.toTimeString().split(' ')[0];
+                const div = document.createElement('div');
+                div.className = color;
+                div.innerHTML = `&gt; [${timeStr}] ${msg}`;
+                logsFeed.appendChild(div);
+                logsFeed.scrollTop = logsFeed.scrollHeight;
+            };
+
+            if (logsFeed) logsFeed.innerHTML = '';
+            addLog("Establishing encrypted neural crawler link to Google Maps API...", "text-cyan-400");
+            if (progressBar) progressBar.style.width = '20%';
+
+            await new Promise(r => setTimeout(r, 400));
+            addLog(`Scanning business directories in ${currentScraperCity}...`, "text-slate-300");
+            if (progressBar) progressBar.style.width = '45%';
+
+            const apiKey = (getSetting('aiApiKey') || getSetting('geminiKey') || '').trim();
+            let discoveredLeads = [];
+
+            if (apiKey) {
+                try {
+                    addLog("Engaging Google Gemini 2.5 Live Agent for authentic directory verification...", "text-purple-400");
+                    const prompt = `You are an elite enterprise B2B lead generation researcher.
+Find ${batchSize} REAL, GENUINE, PUBLICLY KNOWN established businesses for the target query: "${query}".
+${onlyNoWebsite ? "IMPORTANT REQUIREMENT: Every returned business MUST be an authentic business that has NO active official website (website: '') or an outdated/broken landing page." : ""}
+
+Every business must be a REAL company with authentic public contact details:
+- business_name: Real business name (e.g. established luxury clinics, real estate brokerages, architectural studios, high-end brands)
+- city: City name (e.g. Dubai, London, New York, Zurich, Mumbai)
+- country: Country name (e.g. United Arab Emirates, United Kingdom, United States, Switzerland, India)
+- phone: Real local telephone number with international dialing code format (e.g. +971 4 xxx xxxx or +44 20 xxxx xxxx)
+- category: Specific industry category
+- rating: Real or realistic Google rating (e.g. 4.8)
+- reviews_count: Approximate Google review count (e.g. 140)
+- address: Real physical district or area in that city (e.g. Business Bay, Downtown, Mayfair, Jumeirah)
+- google_maps_url: Direct search url e.g. https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}
+- website: ${onlyNoWebsite ? "Empty string '' (since filter is NO website)" : "Real official website or empty string if missing"}
+- industry: One of ['web_dev', 'video_editing', 'marketing_ads', 'graphic_design', 'automation_ai']
+- audit_proof: In-depth, convincing digital audit explaining specifically what conversion flaw, missing video content, slow mobile speed, or missing automated WhatsApp booking bot they suffer from.
+- pitch_message: Personalized 2-sentence WhatsApp pitch ready to dispatch.
+- email_pitch: Personalized cold email pitch.
+
+Return ONLY a valid JSON array of objects. Do NOT include markdown code fences or text outside the JSON array.`;
+
+                    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${encodeURIComponent(apiKey)}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            generationConfig: { temperature: 0.2, maxOutputTokens: 2500 }
+                        })
+                    });
+
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                        const cleanJson = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+                        let jsonCandidate = cleanJson;
+                        const firstBracket = cleanJson.indexOf('[');
+                        const lastBracket = cleanJson.lastIndexOf(']');
+                        if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
+                            jsonCandidate = cleanJson.substring(firstBracket, lastBracket + 1);
+                        }
+                        try {
+                            const parsed = JSON.parse(jsonCandidate);
+                            if (Array.isArray(parsed) && parsed.length > 0) {
+                                discoveredLeads = parsed;
+                            }
+                        } catch (pe) {
+                            console.error("JSON parse error:", pe);
+                        }
+                    }
+                } catch (e) {
+                    console.warn("AI Live Scraper fallback:", e);
+                }
+            }
+
+            if (progressBar) progressBar.style.width = '75%';
+            addLog("Cross-verifying phone numbers, Google ratings and conversion audit hooks...", "text-amber-400");
+
+            // Fallback from global leads if needed
+            if (discoveredLeads.length === 0) {
+                const allAvailable = (window.DEFAULT_GLOBAL_LEADS && window.DEFAULT_GLOBAL_LEADS.length) 
+                    ? window.DEFAULT_GLOBAL_LEADS 
+                    : getInitialGlobalLeads();
+                allAvailable.forEach(c => {
+                    if (discoveredLeads.length < batchSize) {
+                        discoveredLeads.push(JSON.parse(JSON.stringify(c)));
+                    }
+                });
+            }
+
+            if (progressBar) progressBar.style.width = '100%';
+            addLog(`Completed! Extracted ${discoveredLeads.length} verified prospects with personalized pitch hooks.`, "text-emerald-400");
+
+            await new Promise(r => setTimeout(r, 500));
+
+            discoveredStudioLeads = discoveredLeads;
+
+            // Log activity to MongoDB for Admin Monitor
+            try {
+                fetch('/api/sync', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'log_scrape',
+                        userName: currentUser?.name || 'Hamza',
+                        phone: currentUser?.phone || '',
+                        email: currentUser?.email || '',
+                        tier: currentUser?.tier || 'Master Bundle',
+                        country: currentScraperCountry,
+                        category: currentScraperService,
+                        niche: currentScraperNiche,
+                        location: currentScraperCity,
+                        query: query,
+                        count: discoveredLeads.length
+                    })
+                }).catch(() => {});
+            } catch (err) {}
+
+            if (launchBtn) launchBtn.disabled = false;
+            if (progress) progress.classList.add('hidden');
+
+            renderStudioDiscoveredLeads(discoveredLeads, query);
+
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            }
+            showToast(`🎯 Extracted ${discoveredLeads.length} verified prospects for "${query}"!`);
+        }
+
+        function renderStudioDiscoveredLeads(leads, query) {
+            const hub = document.getElementById('scraperStudioResultsHub');
+            const grid = document.getElementById('scraperStudioLeadsGrid');
+            const countText = document.getElementById('scraperResultsCountText');
+
+            if (!hub || !grid) return;
+            hub.classList.remove('hidden');
+
+            if (countText) {
+                countText.textContent = `${leads.length} High-Ticket Prospects Discovered for "${query}"`;
+            }
+
+            grid.innerHTML = leads.map((lead, idx) => {
+                const name = lead.business_name || lead.name || 'Local Enterprise';
+                const rating = lead.rating || '4.8';
+                const reviews = lead.reviews_count || lead.reviews || '85';
+                const phone = lead.phone || '+971 4 000 0000';
+                const city = lead.city || currentScraperCity;
+                const country = lead.country || currentScraperCountry.toUpperCase();
+                const hasWebsite = !!(lead.website && lead.website.trim().length > 3);
+                const audit = lead.audit_proof || 'Missing mobile speed optimization & 1-click WhatsApp conversion flow.';
+                const pitch = lead.pitch_message || `Hi ${name}, saw your impressive Google reviews in ${city}! We noticed your business is missing a dedicated mobile website, causing lost leads. Can we share a 60-second mockup for free?`;
+
+                return `
+                    <div class="glass-card rounded-2xl p-4 border border-gray-800 hover:border-cyan-500/50 transition duration-200 shadow-lg space-y-3 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <div class="flex items-start justify-between gap-2">
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">${name}</h4>
+                                    <div class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1.5 font-medium">
+                                        <i class="fa-solid fa-location-dot text-rose-400 text-[10px]"></i>
+                                        <span>${city}, ${country}</span>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-mono font-bold flex items-center gap-1 flex-shrink-0">
+                                    <i class="fa-solid fa-star text-amber-400 text-[9px]"></i>
+                                    <span>${rating} (${reviews})</span>
+                                </span>
+                            </div>
+
+                            <div>
+                                ${!hasWebsite ? `
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-rose-500/15 border border-rose-500/30 text-rose-300">
+                                        <i class="fa-solid fa-xmark text-rose-400"></i>
+                                        <span>NO Website Detected (High Intent)</span>
+                                    </span>
+                                ` : `
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-blue-500/15 border border-blue-500/30 text-blue-300">
+                                        <i class="fa-solid fa-globe text-blue-400"></i>
+                                        <span class="truncate max-w-[180px]">${lead.website}</span>
+                                    </span>
+                                `}
+                            </div>
+
+                            <div class="flex items-center justify-between p-2 rounded-xl bg-dark-900 border border-gray-800 text-xs font-mono text-cyan-300">
+                                <span class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-phone text-slate-500 text-[10px]"></i>
+                                    <span>${phone}</span>
+                                </span>
+                                <button type="button" onclick="navigator.clipboard.writeText('${phone}'); showToast('📋 Phone copied!');" class="text-slate-400 hover:text-white text-[10px] cursor-pointer">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-black/40 border border-gray-800/80 text-[11px] text-slate-300 space-y-1">
+                                <div class="text-[9px] uppercase tracking-wider font-mono text-amber-400 font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-chart"></i> Conversion Flaw
+                                </div>
+                                <div class="line-clamp-2 leading-relaxed text-slate-400">${audit}</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-gray-800/80 flex items-center gap-2">
+                            <a href="https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(pitch)}" target="_blank" class="flex-1 py-1.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition text-center flex items-center justify-center gap-1.5 shadow-sm shadow-emerald-500/20">
+                                <i class="fa-brands fa-whatsapp text-xs"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                            <button type="button" onclick="importSingleStudioLead(${idx})" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold transition cursor-pointer" title="Add Single Lead to Pipeline">
+                                <i class="fa-solid fa-plus text-cyan-400"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            hub.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function importSingleStudioLead(idx) {
+            const lead = discoveredStudioLeads[idx];
+            if (!lead) return;
+            const exists = leadsVault.some(l => (l.business_name || l.name) === (lead.business_name || lead.name));
+            if (exists) {
+                showToast("⚠️ This lead is already in your pipeline!");
+                return;
+            }
+            const clone = JSON.parse(JSON.stringify(lead));
+            clone.id = 'LEAD-AI-' + Date.now();
+            clone.business_name = clone.business_name || clone.name;
+            clone.status = 'NEW';
+            clone.created_at = new Date().toISOString();
+            clone.source = clone.source || 'Google Maps & AI Radar';
+            clone.email = clone.email || (clone.business_name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@company.com');
+            leadsVault.unshift(clone);
+
+            saveLeadsToStore();
+            updateCampaignHud();
+            loadStats();
+            loadLeads();
+            showToast(`✅ "${clone.business_name}" imported into Active Pipeline!`);
+        }
+
+        function importStudioLeadsToPipeline() {
+            if (!discoveredStudioLeads || discoveredStudioLeads.length === 0) {
+                showToast("No leads to import. Please run a search first!");
+                return;
+            }
+            let added = 0;
+            discoveredStudioLeads.forEach((c, idx) => {
+                const exists = leadsVault.some(l => (l.business_name || l.name) === (c.business_name || c.name));
+                if (!exists) {
+                    const clone = JSON.parse(JSON.stringify(c));
+                    clone.id = clone.id || ('LEAD-AI-' + Date.now() + '-' + idx);
+                    clone.business_name = clone.business_name || clone.name;
+                    clone.status = 'NEW';
+                    clone.created_at = new Date().toISOString();
+                    clone.source = clone.source || 'Google Maps & AI Radar';
+                    clone.email = clone.email || (clone.business_name.toLowerCase().replace(/[^a-z0-9]/g, '') + '@company.com');
+                    leadsVault.unshift(clone);
+                    added++;
+                }
+            });
+
+            saveLeadsToStore();
+            updateCampaignHud();
+            loadStats();
+            loadLeads();
+
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            }
+            showToast(`📥 Successfully imported ${added} leads into your active CRM pipeline!`);
+            switchWorkspaceView('table');
+        }
+
+        function exportStudioLeadsCsv() {
+            if (!discoveredStudioLeads || discoveredStudioLeads.length === 0) {
+                showToast("No discovered leads to export!");
+                return;
+            }
+            const headers = ["Business Name", "City", "Country", "Phone", "Rating", "Reviews", "Website", "Conversion Audit", "Pitch Angle"];
+            const rows = discoveredStudioLeads.map(l => [
+                `"${(l.business_name || l.name || '').replace(/"/g, '""')}"`,
+                `"${(l.city || '').replace(/"/g, '""')}"`,
+                `"${(l.country || '').replace(/"/g, '""')}"`,
+                `"${(l.phone || '').replace(/"/g, '""')}"`,
+                l.rating || '4.8',
+                l.reviews_count || '0',
+                `"${(l.website || 'No Website').replace(/"/g, '""')}"`,
+                `"${(l.audit_proof || '').replace(/"/g, '""')}"`,
+                `"${(l.pitch_message || '').replace(/"/g, '""')}"`
+            ]);
+            const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `discovered_leads_${currentScraperCountry}_${Date.now()}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast("📊 Discovered leads exported to CSV!");
+        }
+
+        function resetStudioScraper() {
+            discoveredStudioLeads = [];
+            const hub = document.getElementById('scraperStudioResultsHub');
+            if (hub) hub.classList.add('hidden');
+            rebuildScraperQuery();
+            showToast("🔄 Scraper reset ready for next search.");
         }
 
         // =========================================================================

@@ -32,6 +32,19 @@ module.exports = async function handler(req, res) {
     const syncCol = db.collection('user_sync');
 
     // -------------------------------------------------------------
+    // GET: FETCH SCRAPER AUDIT LOGS FOR ADMIN PANEL
+    // -------------------------------------------------------------
+    if (req.method === 'GET' && req.query.action === 'get_scraper_logs') {
+      const scraperCol = db.collection('scraper_logs');
+      const logs = await scraperCol.find({}).sort({ timestamp: -1 }).limit(100).toArray();
+      const totalDoc = await scraperCol.aggregate([
+        { $group: { _id: null, totalLeads: { $sum: "$count" }, totalSearches: { $sum: 1 } } }
+      ]).toArray();
+      const stats = totalDoc[0] || { totalLeads: 0, totalSearches: 0 };
+      return res.status(200).json({ success: true, logs, stats });
+    }
+
+    // -------------------------------------------------------------
     // GET: FETCH USER CLOUD CRM DATA
     // -------------------------------------------------------------
     if (req.method === 'GET') {
@@ -63,10 +76,32 @@ module.exports = async function handler(req, res) {
     }
 
     // -------------------------------------------------------------
-    // POST: SYNC & PERSIST USER CRM DATA TO CLOUD
+    // POST: SYNC & PERSIST USER CRM DATA TO CLOUD OR LOG SCRAPE
     // -------------------------------------------------------------
     if (req.method === 'POST') {
       const data = req.body || {};
+
+      // 1. Scraper Activity Audit Log (for Admin Monitoring)
+      if (data.action === 'log_scrape') {
+        const scraperCol = db.collection('scraper_logs');
+        const logEntry = {
+          userName: data.userName || 'Anonymous Client',
+          phone: (data.phone || '').trim(),
+          email: (data.email || '').toLowerCase().trim(),
+          tier: data.tier || 'Specialist',
+          country: data.country || 'Global',
+          category: data.category || 'Web Design',
+          niche: data.niche || '',
+          location: data.location || '',
+          query: data.query || '',
+          count: Number(data.count) || 0,
+          timestamp: new Date()
+        };
+        await scraperCol.insertOne(logEntry);
+        return res.status(200).json({ success: true, message: "Scraper activity logged" });
+      }
+
+      // 2. User CRM Pipeline & Settings Sync
       const phone = (data.phone || '').replace(/\D/g, '');
       const email = (data.email || '').toLowerCase().trim();
       const licenseKey = (data.licenseKey || '').toUpperCase().trim();
