@@ -513,8 +513,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Founder Simulated Payment for Live Demo Testing
+  // Commercial Gatekeeper: Simulated Checkout Secured
   window.simulateTestCheckout = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('founder_secret') !== 'hamza7233') {
+      console.warn("Commercial Protection: Direct test checkout is disabled. Please pay via secure Razorpay gateway.");
+      if (typeof window.startRazorpayPayment === 'function') {
+        window.startRazorpayPayment();
+      }
+      return;
+    }
     const valid = window.validateCheckoutForm();
     if (!valid) {
       return; // STRICT BLOCK: Cannot proceed to next step without entering all required details!
